@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqji1bx4d1lbo"]
+
+[ext_resource type="PackedScene" uid="uid://1ggsq717qorl" path="res://model/beam_tuto.glb" id="1_0teqg"]
+
+[node name="beam_tuto" instance=ExtResource("1_0teqg")]

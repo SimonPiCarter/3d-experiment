@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://x54bsaaru4on"]
+
+[ext_resource type="PackedScene" uid="uid://dw7c8esc0nunr" path="res://scenes/test/beam_scene.tscn" id="1_c6mhb"]
+[ext_resource type="Script" uid="uid://cnei0islg0fq4" path="res://scenes/test/beam_tuto.gd" id="1_qeqmx"]
+
+[sub_resource type="Sky" id="Sky_7gp3u"]
+
+[sub_resource type="Environment" id="Environment_aaq80"]
+sky = SubResource("Sky_7gp3u")
+ambient_light_source = 2
+ambient_light_color = Color(0.6775041, 0.784652, 1, 1)
+ambient_light_energy = 0.05
+glow_enabled = true
+glow_blend_mode = 1
+
+[node name="BeamTuto" type="Node3D"]
+script = ExtResource("1_qeqmx")
+
+[node name="Node3D" parent="." instance=ExtResource("1_c6mhb")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_aaq80")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.8390221, -0.2637089, 0.47591963, 0, 0.8746959, 0.48467225, -0.5440973, -0.40665075, 0.73388916, 22.620836, 23.430233, 37.2483)
+projection = 1
+size = 20.0

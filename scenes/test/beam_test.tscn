@@ -1,0 +1,80 @@
+[gd_scene load_steps=12 format=3 uid="uid://jv42ro3bt1w8"]
+
+[ext_resource type="Shader" uid="uid://v4yvqg22vowk" path="res://scenes/test/beam_test.gdshader" id="1_44a00"]
+
+[sub_resource type="Curve3D" id="Curve3D_dwebl"]
+closed = true
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_44a00"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7cu05"]
+gradient = SubResource("Gradient_44a00")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_44a00"]
+frequency = 0.25
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7cu05"]
+width = 128
+height = 32
+noise = SubResource("FastNoiseLite_44a00")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7cu05"]
+render_priority = 0
+shader = ExtResource("1_44a00")
+shader_parameter/prgoress = 0.698000033155
+shader_parameter/width = 0.542000025745
+shader_parameter/overlay_color = Color(0.2, 1, 0.2, 1)
+shader_parameter/fill_dir = Vector2(1, 0)
+shader_parameter/alpha_cutoff = 0.01
+shader_parameter/albedo_texture = SubResource("GradientTexture1D_7cu05")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_7cu05")
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_44a00"]
+size = Vector2(512, 32)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dwebl"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_44a00"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_dwebl"]
+height = 24.222
+radial_segments = 8
+rings = 0
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Path3D" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6835921, 1.3578181, 0)
+curve = SubResource("Curve3D_dwebl")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.9763036, 0.21640553, 0, -0.21640553, 0.9763036, 0, 0.27612114, -0.15292692)
+material_override = SubResource("ShaderMaterial_7cu05")
+cast_shadow = 0
+texture = SubResource("PlaceholderTexture2D_44a00")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.9522467, -7.094791e-09, -0.3053297, 0.10061907, 0.9441408, 0.3138056, 0.28827423, -0.32954234, 0.899055, -8.355534, 4.1763973, 4.650989)
+projection = 1
+size = 20.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.4820766, 0, 0)
+mesh = SubResource("BoxMesh_dwebl")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.381268, 0, 0)
+mesh = SubResource("BoxMesh_44a00")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.013473504, 0.9999092, 0, -0.9999092, -0.013473504, 0, 0, 0, 1, -11.473596, -0.6387434, 0)
+mesh = SubResource("CylinderMesh_dwebl")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.9006072, 0, 0.43463388, 0, 1, 0, -0.43463388, 0, 0.9006072, 9.057539, 11.2497425, 14.663099)

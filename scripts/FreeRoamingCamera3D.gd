@@ -1,0 +1,50 @@
+class_name FreeRoamingCamera3D extends Camera3D
+
+
+var left = false
+var right = false
+var up = false
+var down = false
+var zoom_in = false
+var zoom_out = false
+const MOUSE_SENSITIVITY := 0.002
+
+@export var move_speed : float = 20.
+@export var rotation_speed : float = 1.
+
+func _process(delta):
+	var zoom = 0
+	var dir = Vector3.ZERO
+	if left:
+		dir.x = -1
+	if right:
+		dir.x = +1
+	if up:
+		dir.y = +1
+	if down:
+		dir.y = -1
+	if zoom_in:
+		zoom = -1
+	if zoom_out:
+		zoom = +1
+
+	translate(dir * move_speed * delta)
+	size = clamp(size+zoom, 5, 50)
+
+func _input(event):
+	if event is InputEventKey:
+		if event.keycode == KEY_Q:
+			left = event.pressed
+		if event.keycode == KEY_D:
+			right = event.pressed
+		if event.keycode == KEY_Z:
+			up = event.pressed
+		if event.keycode == KEY_S:
+			down = event.pressed
+		if event.keycode == KEY_R:
+			zoom_in = event.pressed
+		if event.keycode == KEY_F:
+			zoom_out = event.pressed
+	#if event is InputEventMouseMotion:
+	#	rotate_x(-event.relative.y * MOUSE_SENSITIVITY)
+	#	rotation.x = clamp(rotation.x, -PI/2, PI/2)

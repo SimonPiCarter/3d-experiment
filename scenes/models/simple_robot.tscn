@@ -1,0 +1,115 @@
+[gd_scene load_steps=13 format=3 uid="uid://bgmgmigu7s8k6"]
+
+[ext_resource type="PackedScene" uid="uid://lf6p81kkvxyd" path="res://model/simple_robot1.glb" id="1_iicvt"]
+[ext_resource type="Script" uid="uid://cssyvtlm806gc" path="res://scripts/ik/ik_auto_start.gd" id="2_ayw8u"]
+[ext_resource type="Script" uid="uid://b6g8yt8ck3bkc" path="res://scripts/ik/ik_quad_object.gd" id="2_g4ofc"]
+[ext_resource type="Shader" uid="uid://b687w880fw13c" path="res://shaders/edge_shader/pass2.gdshader" id="3_lbww1"]
+[ext_resource type="Shader" uid="uid://bjolak3qhj1ad" path="res://shaders/edge_shader/pass1.gdshader" id="4_u716b"]
+[ext_resource type="Material" uid="uid://dbvrbutpdxmye" path="res://scenes/models/materials/simple_robot/body.tres" id="6_u716b"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eq3wd"]
+render_priority = 0
+shader = ExtResource("3_lbww1")
+shader_parameter/albedo = Color(0.24313726, 0.20784314, 0.27450982, 1)
+shader_parameter/specular = 0.0
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 0.0
+shader_parameter/edge_strength = 0.2
+shader_parameter/edge_color = Color(0.4887147, 0.43218887, 0.53950846, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_shhoi"]
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_eq3wd")
+shader = ExtResource("4_u716b")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qeouw"]
+render_priority = 0
+shader = ExtResource("3_lbww1")
+shader_parameter/albedo = Color(0.7019608, 0.21960784, 0.19215687, 1)
+shader_parameter/specular = 0.0
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 0.0
+shader_parameter/edge_strength = 0.2
+shader_parameter/edge_color = Color(0.9583977, 0.53947407, 0.49259442, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_caskw"]
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_qeouw")
+shader = ExtResource("4_u716b")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xl28h"]
+render_priority = 0
+shader = ExtResource("3_lbww1")
+shader_parameter/albedo = Color(0.60784316, 0.67058825, 0.69803923, 1)
+shader_parameter/specular = 0.0
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 0.0
+shader_parameter/edge_strength = 0.2
+shader_parameter/edge_color = Color(0.20297918, 0.24136853, 0.2580142, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_myq46"]
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_xl28h")
+shader = ExtResource("4_u716b")
+
+[node name="SimpleRobot" node_paths=PackedStringArray("FrontLeftLeg", "FrontRightLeg", "BackLeftLeg", "BackRightLeg", "Armature") instance=ExtResource("1_iicvt")]
+script = ExtResource("2_g4ofc")
+FrontLeftLeg = NodePath("Armature/Skeleton3D/FrontLeft")
+FrontRightLeg = NodePath("Armature/Skeleton3D/FrontRight")
+BackLeftLeg = NodePath("Armature/Skeleton3D/BackLeft")
+BackRightLeg = NodePath("Armature/Skeleton3D/BackRight")
+Armature = NodePath("Armature")
+
+[node name="Cube" parent="Armature" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_shhoi")
+
+[node name="OuterEye" parent="Armature" index="1"]
+surface_material_override/0 = SubResource("ShaderMaterial_caskw")
+
+[node name="FrontLeft" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="0"]
+top_level = true
+root_bone = &"FrontLeft0"
+tip_bone = &"FrontLeft1.002"
+use_magnet = true
+magnet = Vector3(0, 10, 0)
+script = ExtResource("2_ayw8u")
+metadata/_custom_type_script = "uid://cssyvtlm806gc"
+
+[node name="FrontRight" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="1"]
+top_level = true
+root_bone = &"FrontRight0"
+tip_bone = &"FrontRight1.001"
+use_magnet = true
+magnet = Vector3(0, 10, 0)
+script = ExtResource("2_ayw8u")
+metadata/_custom_type_script = "uid://cssyvtlm806gc"
+
+[node name="BackLeft" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="2"]
+top_level = true
+root_bone = &"BackLeft0"
+tip_bone = &"BackLeft1.001"
+use_magnet = true
+magnet = Vector3(0, 10, 0)
+script = ExtResource("2_ayw8u")
+metadata/_custom_type_script = "uid://cssyvtlm806gc"
+
+[node name="BackRight" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="3"]
+top_level = true
+root_bone = &"BackRight0"
+tip_bone = &"BackRight1.001"
+use_magnet = true
+magnet = Vector3(0, 10, 0)
+script = ExtResource("2_ayw8u")
+metadata/_custom_type_script = "uid://cssyvtlm806gc"
+
+[node name="Arms" parent="Armature/Skeleton3D" index="4"]
+surface_material_override/0 = ExtResource("6_u716b")
+
+[node name="Body" parent="Armature/Skeleton3D" index="5"]
+surface_material_override/0 = ExtResource("6_u716b")
+
+[node name="Head" parent="Armature/Skeleton3D" index="6"]
+surface_material_override/0 = ExtResource("6_u716b")
+
+[node name="Legs" parent="Armature/Skeleton3D" index="7"]
+surface_material_override/0 = SubResource("ShaderMaterial_myq46")

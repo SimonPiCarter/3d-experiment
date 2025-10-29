@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://ctvcm56dg48c"]
+
+[ext_resource type="PackedScene" uid="uid://dwfivcym0skda" path="res://scenes/entity/QuadEntity.tscn" id="2_bxfid"]
+
+[sub_resource type="Environment" id="Environment_ebdkv"]
+ambient_light_color = Color(0.68307734, 0.6830774, 0.68307734, 1)
+
+[node name="QuadObjectTest" type="Node3D"]
+
+[node name="Entity" parent="." instance=ExtResource("2_bxfid")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.87978137, -0.19923282, 0.4316145, 0, 0.9079385, 0.41910353, -0.47537854, -0.36871946, 0.79878736, 2.0368614, 6.3511353, 12.5873375)
+current = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ebdkv")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.87978137, -0.19923282, 0.4316145, -1.2490259e-08, 0.9079385, 0.41910353, -0.47537857, -0.3687195, 0.79878736, 5.631567, 4.7997456, 7.981739)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]

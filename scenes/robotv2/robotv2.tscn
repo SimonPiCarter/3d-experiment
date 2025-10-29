@@ -1,0 +1,137 @@
+[gd_scene load_steps=10 format=3 uid="uid://c4dptlryb3lgj"]
+
+[ext_resource type="PackedScene" uid="uid://b3f80bk57v26b" path="res://model/spider_bot_model.gltf" id="1_f0fcl"]
+[ext_resource type="Script" uid="uid://cjyppr2owxvjq" path="res://scenes/robotv2/robotv_2.gd" id="2_gd6b5"]
+[ext_resource type="Script" uid="uid://cssyvtlm806gc" path="res://scripts/ik/ik_auto_start.gd" id="3_6s0y1"]
+[ext_resource type="Script" uid="uid://bo2tjvybxxgfg" path="res://scripts/ik/ik_target.gd" id="4_fjqrn"]
+[ext_resource type="Script" uid="uid://burwyoipe0s80" path="res://scripts/ik/ik_marker.gd" id="4_jcumm"]
+[ext_resource type="Script" uid="uid://brupvo5tidu6o" path="res://scripts/ik/ik_target_container.gd" id="5_n201k"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gny6e"]
+diffuse_mode = 3
+albedo_color = Color(0.712129, 0.71212953, 0.71212935, 1)
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 16.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8eh1l"]
+diffuse_mode = 3
+albedo_color = Color(1, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n201k"]
+diffuse_mode = 3
+albedo_color = Color(0.8047426, 0.8047426, 0.8047427, 1)
+
+[node name="RobotV2" instance=ExtResource("1_f0fcl")]
+script = ExtResource("2_gd6b5")
+
+[node name="Armature" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Body" parent="Armature/Skeleton3D/Body_2" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_gny6e")
+
+[node name="Cylinder" parent="Armature/Skeleton3D/Body_2" index="1"]
+material_override = SubResource("StandardMaterial3D_8eh1l")
+
+[node name="Leg" parent="Armature/Skeleton3D" index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_n201k")
+
+[node name="FrontLeft" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="2"]
+process_priority = 1
+root_bone = &"leg1FrontLeft"
+tip_bone = &"Foot IKFrontLeft"
+use_magnet = true
+magnet = Vector3(0, 10, 0)
+target_node = NodePath("../../../TargetContainer/FrontLeftIKTarget")
+script = ExtResource("3_6s0y1")
+
+[node name="FrontRight" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="3"]
+process_priority = 1
+root_bone = &"leg1FrontRight"
+tip_bone = &"Foot IKFrontRight"
+use_magnet = true
+magnet = Vector3(0, 10, 0)
+target_node = NodePath("../../../TargetContainer/FrontRightIKTarget")
+script = ExtResource("3_6s0y1")
+
+[node name="BackLeft" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="4"]
+process_priority = 1
+root_bone = &"leg1BackLeft"
+tip_bone = &"Foot IKBackLeft"
+use_magnet = true
+magnet = Vector3(0, 10, 0)
+target_node = NodePath("../../../TargetContainer/BackLeftIKTarget")
+script = ExtResource("3_6s0y1")
+
+[node name="BackRight" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="5"]
+process_priority = 1
+root_bone = &"leg1BackRight"
+tip_bone = &"Foot IKBackRight"
+use_magnet = true
+magnet = Vector3(0, 10, 0)
+target_node = NodePath("../../../TargetContainer/BackRightIKTarget")
+script = ExtResource("3_6s0y1")
+
+[node name="MarkerContainer" type="Node3D" parent="." index="1"]
+
+[node name="FrontLeftIKMarker" type="Marker3D" parent="MarkerContainer" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.15, -0.35, -1)
+script = ExtResource("4_jcumm")
+metadata/_custom_type_script = "uid://burwyoipe0s80"
+
+[node name="FrontRightIKMarker" type="Marker3D" parent="MarkerContainer" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15, -0.35, -1)
+script = ExtResource("4_jcumm")
+metadata/_custom_type_script = "uid://burwyoipe0s80"
+
+[node name="BackLeftIKMarker" type="Marker3D" parent="MarkerContainer" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.15, -0.35, 1)
+script = ExtResource("4_jcumm")
+metadata/_custom_type_script = "uid://burwyoipe0s80"
+
+[node name="BackRightIKMarker" type="Marker3D" parent="MarkerContainer" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15, -0.35, 1)
+script = ExtResource("4_jcumm")
+metadata/_custom_type_script = "uid://burwyoipe0s80"
+
+[node name="TargetContainer" type="Node3D" parent="." index="2"]
+script = ExtResource("5_n201k")
+
+[node name="FrontLeftIKTarget" type="Marker3D" parent="TargetContainer" index="0" node_paths=PackedStringArray("step_marker", "adjacent_target", "opposite_target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.15, -0.35, -1)
+top_level = true
+script = ExtResource("4_fjqrn")
+step_marker = NodePath("../../MarkerContainer/FrontLeftIKMarker")
+adjacent_target = NodePath("../BackLeftIKTarget")
+opposite_target = NodePath("../BackRightIKTarget")
+metadata/_custom_type_script = "uid://bo2tjvybxxgfg"
+
+[node name="FrontRightIKTarget" type="Marker3D" parent="TargetContainer" index="1" node_paths=PackedStringArray("step_marker", "adjacent_target", "opposite_target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15, -0.35, -1)
+top_level = true
+script = ExtResource("4_fjqrn")
+step_marker = NodePath("../../MarkerContainer/FrontRightIKMarker")
+adjacent_target = NodePath("../BackRightIKTarget")
+opposite_target = NodePath("../BackLeftIKTarget")
+metadata/_custom_type_script = "uid://bo2tjvybxxgfg"
+
+[node name="BackLeftIKTarget" type="Marker3D" parent="TargetContainer" index="2" node_paths=PackedStringArray("step_marker", "adjacent_target", "opposite_target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.15, -0.35, 1)
+top_level = true
+script = ExtResource("4_fjqrn")
+step_marker = NodePath("../../MarkerContainer/BackLeftIKMarker")
+adjacent_target = NodePath("../FrontLeftIKTarget")
+opposite_target = NodePath("../FrontRightIKTarget")
+metadata/_custom_type_script = "uid://bo2tjvybxxgfg"
+
+[node name="BackRightIKTarget" type="Marker3D" parent="TargetContainer" index="3" node_paths=PackedStringArray("step_marker", "adjacent_target", "opposite_target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15, -0.35, 1)
+top_level = true
+script = ExtResource("4_fjqrn")
+step_marker = NodePath("../../MarkerContainer/BackRightIKMarker")
+adjacent_target = NodePath("../FrontRightIKTarget")
+opposite_target = NodePath("../FrontLeftIKTarget")
+metadata/_custom_type_script = "uid://bo2tjvybxxgfg"

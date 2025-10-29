@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://dn1klp2pqvhgl"]
+
+[ext_resource type="PackedScene" uid="uid://dwfivcym0skda" path="res://scenes/entity/QuadEntity.tscn" id="1_u5uwj"]
+
+[node name="QuadEntity" instance=ExtResource("1_u5uwj")]

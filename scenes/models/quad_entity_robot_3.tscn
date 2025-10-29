@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=3 uid="uid://dccijlgfscbxi"]
+
+[ext_resource type="PackedScene" uid="uid://dwfivcym0skda" path="res://scenes/entity/QuadEntity.tscn" id="1_h84w8"]
+[ext_resource type="PackedScene" uid="uid://cobr225vkbh0b" path="res://scenes/models/robot_3.tscn" id="2_h84w8"]
+
+[node name="QuadEntity" instance=ExtResource("1_h84w8")]
+move_speed = 7.5
+step_offset = 0.5
+
+[node name="IKQuadContainer" parent="." index="0" node_paths=PackedStringArray("quad_object")]
+quad_object = NodePath("../robot3")
+step_distance = 0.1
+step_time = 0.04
+
+[node name="FrontLeftIKMarker" parent="IKQuadContainer/MarkerContainer" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3331652, -0.29845905, 1.3538384)
+
+[node name="FrontRightIKMarker" parent="IKQuadContainer/MarkerContainer" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2440919, -0.6090472, 1.3727729)
+
+[node name="BackLeftIKMarker" parent="IKQuadContainer/MarkerContainer" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3149648, -0.55274844, -0.9550772)
+
+[node name="BackRightIKMarker" parent="IKQuadContainer/MarkerContainer" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2666082, -0.55274844, -0.9341467)
+
+[node name="FrontLeftIKTarget" parent="IKQuadContainer/TargetContainer" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.9908314, -2.437, 11.906335)
+step_time = 0.075
+
+[node name="FrontRightIKTarget" parent="IKQuadContainer/TargetContainer" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.525082, -2.6912894, 10.786005)
+step_time = 0.075
+
+[node name="BackLeftIKTarget" parent="IKQuadContainer/TargetContainer" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.870854, -2.6912894, 5.5008254)
+step_time = 0.075
+
+[node name="BackRightIKTarget" parent="IKQuadContainer/TargetContainer" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.72844, -2.6912894, 3.749795)
+step_time = 0.075
+
+[node name="robot3" parent="." index="1" instance=ExtResource("2_h84w8")]

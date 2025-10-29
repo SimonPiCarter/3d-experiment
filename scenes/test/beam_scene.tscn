@@ -1,0 +1,111 @@
+[gd_scene load_steps=20 format=3 uid="uid://dw7c8esc0nunr"]
+
+[ext_resource type="Script" uid="uid://dy1yywnmgux4k" path="res://scenes/test/beam_scene.gd" id="1_mfx3r"]
+[ext_resource type="Shader" uid="uid://cpe57p8f0me5q" path="res://scenes/test/s_dynamic_beam_tuto.tres" id="1_wt0nf"]
+[ext_resource type="Texture2D" uid="uid://c8wa5jnlsftda" path="res://textures/T_VFX_Noise_9.PNG" id="2_mfx3r"]
+[ext_resource type="ArrayMesh" uid="uid://cdxi0scud5tpy" path="res://model/beam_tuto.obj" id="3_gtanl"]
+[ext_resource type="Texture2D" uid="uid://cqvpfu3kuuvkb" path="res://textures/T_VFX_Noise_4.PNG" id="4_jca8c"]
+[ext_resource type="ArrayMesh" uid="uid://3dpxl03lxk68" path="res://model/beam_tuto_base.obj" id="5_l62ag"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aaq80"]
+render_priority = 0
+shader = ExtResource("1_wt0nf")
+shader_parameter/Speed = Vector2(2, 1)
+shader_parameter/NoiseTexture = ExtResource("2_mfx3r")
+shader_parameter/Power = 1.3
+shader_parameter/EnableGradient = false
+shader_parameter/Gradient_power = 1.0
+
+[sub_resource type="Curve" id="Curve_c6mhb"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_qeqmx"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_aaq80"]
+_limits = [0.0, 8.0, 0.0, 1.0]
+_data = [Vector2(0, 0.4494381), 0.0, 0.0, 0, 0, Vector2(0.20000002, 8), 0.0, 0.0, 0, 0, Vector2(1, 8), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_fhw8c"]
+curve_x = SubResource("Curve_c6mhb")
+curve_y = SubResource("Curve_qeqmx")
+curve_z = SubResource("Curve_aaq80")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bq3h6"]
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveXYZTexture_fhw8c")
+color = Color(1.3314443, 0.8144079, 1.9608799, 1)
+
+[sub_resource type="Curve" id="Curve_somej"]
+_data = [Vector2(0.019999996, 0.32584274), 0.0, 0.0, 0, 0, Vector2(1, 0.30337083), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_5tkp0"]
+_data = [Vector2(0, 0.3146068), 0.0, 0.0, 0, 0, Vector2(0.99333334, 0.3146068), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_gjili"]
+_limits = [0.0, 8.0, 0.0, 1.0]
+_data = [Vector2(0, 0.4494381), 0.0, 0.0, 0, 0, Vector2(0.20000002, 8), 0.0, 0.0, 0, 0, Vector2(1, 8), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_dmmbs"]
+curve_x = SubResource("Curve_somej")
+curve_y = SubResource("Curve_5tkp0")
+curve_z = SubResource("Curve_gjili")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mob2b"]
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveXYZTexture_dmmbs")
+color = Color(3.7715254, 2.3461084, 5.5101075, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gjili"]
+render_priority = 0
+shader = ExtResource("1_wt0nf")
+shader_parameter/Speed = Vector2(1.5, 2)
+shader_parameter/NoiseTexture = ExtResource("4_jca8c")
+shader_parameter/Power = 1.5
+shader_parameter/EnableGradient = true
+shader_parameter/Gradient_power = 3.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dmmbs"]
+gravity = Vector3(0, 0, 0)
+color = Color(1.3050534, 0.7712037, 1.8782027, 1)
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_mfx3r")
+
+[node name="MainBeam" type="GPUParticles3D" parent="."]
+material_override = SubResource("ShaderMaterial_aaq80")
+extra_cull_margin = 16384.0
+amount = 1
+lifetime = 1.5
+explosiveness = 1.0
+visibility_aabb = AABB(-2500, -2500, -2500, 5000, 5000, 5000)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_bq3h6")
+draw_pass_1 = ExtResource("3_gtanl")
+
+[node name="SmallBeam" type="GPUParticles3D" parent="."]
+material_override = SubResource("ShaderMaterial_aaq80")
+extra_cull_margin = 16384.0
+amount = 1
+lifetime = 1.5
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_mob2b")
+draw_pass_1 = ExtResource("3_gtanl")
+
+[node name="Splash" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.08942413)
+material_override = SubResource("ShaderMaterial_gjili")
+extra_cull_margin = 16384.0
+ignore_occlusion_culling = true
+amount = 1
+lifetime = 1.5
+explosiveness = 1.0
+visibility_aabb = AABB(-2500, -2500, -2500, 5000, 5000, 5000)
+process_material = SubResource("ParticleProcessMaterial_dmmbs")
+draw_pass_1 = ExtResource("5_l62ag")

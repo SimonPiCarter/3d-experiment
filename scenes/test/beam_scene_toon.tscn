@@ -1,0 +1,227 @@
+[gd_scene load_steps=25 format=3 uid="uid://clyldab622dhi"]
+
+[ext_resource type="Script" uid="uid://dy1yywnmgux4k" path="res://scenes/test/beam_scene.gd" id="1_0ey5v"]
+[ext_resource type="Shader" uid="uid://calar4atqvgti" path="res://scenes/test/beam_scene_toon.gdshader" id="2_0ey5v"]
+[ext_resource type="ArrayMesh" uid="uid://cdxi0scud5tpy" path="res://model/beam_tuto.obj" id="4_tgees"]
+[ext_resource type="Shader" uid="uid://bh3faid0llwjd" path="res://beam_outline_test_next_pass.gdshader" id="5_0ey5v"]
+[ext_resource type="ArrayMesh" uid="uid://b0v38kkoqxrxx" path="res://model/beam_base_filled.obj" id="5_qgiju"]
+[ext_resource type="ArrayMesh" uid="uid://3dpxl03lxk68" path="res://model/beam_tuto_base.obj" id="6_bq5f6"]
+
+[sub_resource type="Curve" id="Curve_c6mhb"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_qeqmx"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_aaq80"]
+_limits = [0.0, 8.0, 0.0, 1.0]
+_data = [Vector2(0, 0.4494381), 0.0, 0.0, 0, 0, Vector2(0.20000002, 8), 0.0, 0.0, 0, 0, Vector2(1, 8), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_fhw8c"]
+curve_x = SubResource("Curve_c6mhb")
+curve_y = SubResource("Curve_qeqmx")
+curve_z = SubResource("Curve_aaq80")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bq3h6"]
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveXYZTexture_fhw8c")
+color = Color(1.3314443, 0.8144079, 1.9608799, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0eq22"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_268ww"]
+render_priority = 0
+shader = ExtResource("2_0ey5v")
+shader_parameter/outline_color = Color(0.27058825, 0.11764706, 0.48235294, 1)
+shader_parameter/outline_width = 1.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dmmbs"]
+gravity = Vector3(0, 0, 0)
+color = Color(1.3050534, 0.7712037, 1.8782027, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qgiju"]
+shading_mode = 0
+albedo_color = Color(1.1503047, 0.85127234, 1.1638972, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q7gmu"]
+render_priority = 0
+shader = ExtResource("5_0ey5v")
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_width = 1.0
+shader_parameter/constant_width = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tgees"]
+next_pass = SubResource("ShaderMaterial_q7gmu")
+shading_mode = 0
+grow_amount = 1.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_qgiju"]
+top_radius = 0.1
+bottom_radius = 0.1
+
+[sub_resource type="Environment" id="Environment_qgiju"]
+glow_enabled = true
+
+[sub_resource type="Animation" id="Animation_0ey5v"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../MeshInstance3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 8.707659)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2, 2, 2)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../projectile:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(4.5412235, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_qgiju"]
+resource_name = "fire"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../MeshInstance3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.19999999),
+"transitions": PackedFloat32Array(1, -2),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1, 1, 9)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, -2),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(2, 2, 2)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../projectile:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.16666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(4.5412235, 0, 0), Vector3(4.541, 0, 20)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_268ww"]
+_data = {
+&"RESET": SubResource("Animation_0ey5v"),
+&"fire": SubResource("Animation_qgiju")
+}
+
+[sub_resource type="BoxMesh" id="BoxMesh_0ey5v"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0ey5v"]
+shading_mode = 0
+albedo_color = Color(1, 0.6862745, 1, 1)
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_0ey5v")
+
+[node name="MainBeam" type="GPUParticles3D" parent="."]
+visible = false
+amount = 1
+lifetime = 1.5
+explosiveness = 1.0
+visibility_aabb = AABB(-2500, -2500, -2500, 5000, 5000, 5000)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_bq3h6")
+draw_pass_1 = ExtResource("4_tgees")
+
+[node name="Splash" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09239817, 0, 0.08942413)
+visible = false
+material_override = SubResource("StandardMaterial3D_0eq22")
+material_overlay = SubResource("ShaderMaterial_268ww")
+ignore_occlusion_culling = true
+amount = 1
+lifetime = 1.5
+explosiveness = 1.0
+visibility_aabb = AABB(-2500, -2500, -2500, 5000, 5000, 5000)
+process_material = SubResource("ParticleProcessMaterial_dmmbs")
+draw_pass_1 = ExtResource("6_bq5f6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 8.707659, -0.1341486, 0, 0)
+material_override = SubResource("StandardMaterial3D_qgiju")
+material_overlay = SubResource("ShaderMaterial_268ww")
+mesh = ExtResource("4_tgees")
+skeleton = NodePath("../MainBeam")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 9, 3.5023203, 2.6150742, -0.008090973)
+material_override = SubResource("StandardMaterial3D_tgees")
+mesh = ExtResource("4_tgees")
+skeleton = NodePath("../MainBeam")
+
+[node name="projectile" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 4.5412235, 0, 0)
+material_override = SubResource("StandardMaterial3D_qgiju")
+material_overlay = SubResource("ShaderMaterial_268ww")
+mesh = SubResource("CylinderMesh_qgiju")
+skeleton = NodePath("../MainBeam")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-2, 0, 3.019916e-07, 0, 2, 0, -3.019916e-07, 0, -2, -0.17370224, 0, 0.97642326)
+visible = false
+material_override = SubResource("StandardMaterial3D_qgiju")
+material_overlay = SubResource("ShaderMaterial_268ww")
+mesh = ExtResource("5_qgiju")
+skeleton = NodePath("../MainBeam")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.8780665, -0.25461307, 0.40518072, 0, 0.8467043, 0.5320638, -0.47853863, -0.46718737, 0.7434627, 3.1292, 8.837339, 18.188366)
+environment = SubResource("Environment_qgiju")
+projection = 1
+size = 20.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../MeshInstance3D2")
+libraries = {
+&"": SubResource("AnimationLibrary_268ww")
+}
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8244, 2.651643, 18.251453)
+mesh = SubResource("BoxMesh_0ey5v")
+surface_material_override/0 = SubResource("StandardMaterial3D_0ey5v")

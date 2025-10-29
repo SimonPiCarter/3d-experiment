@@ -1,0 +1,83 @@
+[gd_scene load_steps=6 format=3 uid="uid://dwfivcym0skda"]
+
+[ext_resource type="Script" uid="uid://xqdeok8kyc7q" path="res://scenes/entity/quad_entity.gd" id="1_y8n6e"]
+[ext_resource type="Script" uid="uid://cwbvx8yscly3j" path="res://scripts/controler/quad_controller.gd" id="2_y8n6e"]
+[ext_resource type="Script" uid="uid://burwyoipe0s80" path="res://scripts/ik/ik_marker.gd" id="3_pks74"]
+[ext_resource type="Script" uid="uid://brupvo5tidu6o" path="res://scripts/ik/ik_target_container.gd" id="4_xth7o"]
+[ext_resource type="Script" uid="uid://bo2tjvybxxgfg" path="res://scripts/ik/ik_target.gd" id="5_unnlu"]
+
+[node name="QuadEntity" type="Node3D"]
+script = ExtResource("1_y8n6e")
+
+[node name="IKQuadContainer" type="Node3D" parent="."]
+script = ExtResource("2_y8n6e")
+step_distance = 0.5
+
+[node name="MarkerContainer" type="Node3D" parent="IKQuadContainer"]
+
+[node name="FrontLeftIKMarker" type="Marker3D" parent="IKQuadContainer/MarkerContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15, -1.3, 1.5)
+script = ExtResource("3_pks74")
+metadata/_custom_type_script = "uid://burwyoipe0s80"
+
+[node name="FrontRightIKMarker" type="Marker3D" parent="IKQuadContainer/MarkerContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.15, -1.3, 1.5)
+script = ExtResource("3_pks74")
+metadata/_custom_type_script = "uid://burwyoipe0s80"
+
+[node name="BackLeftIKMarker" type="Marker3D" parent="IKQuadContainer/MarkerContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15, -1.3, -1.5)
+script = ExtResource("3_pks74")
+metadata/_custom_type_script = "uid://burwyoipe0s80"
+
+[node name="BackRightIKMarker" type="Marker3D" parent="IKQuadContainer/MarkerContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.15, -1.3, -1.5)
+script = ExtResource("3_pks74")
+metadata/_custom_type_script = "uid://burwyoipe0s80"
+
+[node name="TargetContainer" type="Node3D" parent="IKQuadContainer"]
+script = ExtResource("4_xth7o")
+
+[node name="FrontLeftIKTarget" type="Marker3D" parent="IKQuadContainer/TargetContainer" node_paths=PackedStringArray("step_marker", "adjacent_target", "opposite_target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15, -1.3, 1.5)
+top_level = true
+script = ExtResource("5_unnlu")
+step_marker = NodePath("../../MarkerContainer/FrontLeftIKMarker")
+step_distance = 0.5
+step_time = null
+adjacent_target = NodePath("../BackLeftIKTarget")
+opposite_target = NodePath("../BackRightIKTarget")
+metadata/_custom_type_script = "uid://bo2tjvybxxgfg"
+
+[node name="FrontRightIKTarget" type="Marker3D" parent="IKQuadContainer/TargetContainer" node_paths=PackedStringArray("step_marker", "adjacent_target", "opposite_target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.15, -1.3, 1.5)
+top_level = true
+script = ExtResource("5_unnlu")
+step_marker = NodePath("../../MarkerContainer/FrontRightIKMarker")
+step_distance = 0.5
+step_time = null
+adjacent_target = NodePath("../BackRightIKTarget")
+opposite_target = NodePath("../BackLeftIKTarget")
+metadata/_custom_type_script = "uid://bo2tjvybxxgfg"
+
+[node name="BackLeftIKTarget" type="Marker3D" parent="IKQuadContainer/TargetContainer" node_paths=PackedStringArray("step_marker", "adjacent_target", "opposite_target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15, -1.3, -1.5)
+top_level = true
+script = ExtResource("5_unnlu")
+step_marker = NodePath("../../MarkerContainer/BackLeftIKMarker")
+step_distance = 0.5
+step_time = null
+adjacent_target = NodePath("../FrontLeftIKTarget")
+opposite_target = NodePath("../FrontRightIKTarget")
+metadata/_custom_type_script = "uid://bo2tjvybxxgfg"
+
+[node name="BackRightIKTarget" type="Marker3D" parent="IKQuadContainer/TargetContainer" node_paths=PackedStringArray("step_marker", "adjacent_target", "opposite_target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.15, -1.3, -1.5)
+top_level = true
+script = ExtResource("5_unnlu")
+step_marker = NodePath("../../MarkerContainer/BackRightIKMarker")
+step_distance = 0.5
+step_time = null
+adjacent_target = NodePath("../FrontRightIKTarget")
+opposite_target = NodePath("../FrontLeftIKTarget")
+metadata/_custom_type_script = "uid://bo2tjvybxxgfg"

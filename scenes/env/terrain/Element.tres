@@ -1,0 +1,23 @@
+[gd_resource type="BoxMesh" load_steps=5 format=3 uid="uid://dga3q1vfy3ub1"]
+
+[ext_resource type="Shader" uid="uid://b687w880fw13c" path="res://shaders/edge_shader/pass2.gdshader" id="1_kad0g"]
+[ext_resource type="Shader" uid="uid://bjolak3qhj1ad" path="res://shaders/edge_shader/pass1.gdshader" id="2_rkbac"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gmpjx"]
+render_priority = 0
+shader = ExtResource("1_kad0g")
+shader_parameter/albedo = Color(0.18039216, 0.13333334, 0.18431373, 1)
+shader_parameter/specular = 0.0
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 0.0
+shader_parameter/edge_strength = 0.2
+shader_parameter/edge_color = Color(0.5494468, 0.4453786, 0.5578568, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iyvqo"]
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_gmpjx")
+shader = ExtResource("2_rkbac")
+
+[resource]
+material = SubResource("ShaderMaterial_iyvqo")
+size = Vector3(1, 10, 1)

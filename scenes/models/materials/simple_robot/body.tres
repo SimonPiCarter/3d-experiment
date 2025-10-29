@@ -1,0 +1,19 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://dbvrbutpdxmye"]
+
+[ext_resource type="Shader" uid="uid://b687w880fw13c" path="res://shaders/edge_shader/pass2.gdshader" id="1_3gp1y"]
+[ext_resource type="Shader" uid="uid://bjolak3qhj1ad" path="res://shaders/edge_shader/pass1.gdshader" id="2_hnbjj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lc84v"]
+render_priority = 0
+shader = ExtResource("1_3gp1y")
+shader_parameter/albedo = Color(0.78039217, 0.8627451, 0.8156863, 1)
+shader_parameter/specular = 0.0
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 0.0
+shader_parameter/edge_strength = 0.2
+shader_parameter/edge_color = Color(0.20518237, 0.27982426, 0.2392537, 1)
+
+[resource]
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_lc84v")
+shader = ExtResource("2_hnbjj")
