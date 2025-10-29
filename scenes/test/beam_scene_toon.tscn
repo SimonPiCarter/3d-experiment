@@ -52,13 +52,6 @@ shader = ExtResource("5_0ey5v")
 shader_parameter/outline_color = Color(0, 0, 0, 1)
 shader_parameter/outline_width = 1.0
 shader_parameter/constant_width = true
-shader_parameter/depth_threshold = 0.05
-shader_parameter/reverse_depth_threshold = 0.25
-shader_parameter/normal_threshold = 0.6
-shader_parameter/darken_amount = 0.0
-shader_parameter/lighten_amount = 0.0
-shader_parameter/normal_edge_bias = Vector3(1, 1, 1)
-shader_parameter/light_direction = Vector3(-0.96, -0.18, 0.2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tgees"]
 next_pass = SubResource("ShaderMaterial_q7gmu")
@@ -159,8 +152,9 @@ _data = {
 [sub_resource type="BoxMesh" id="BoxMesh_0ey5v"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0ey5v"]
+transparency = 1
 shading_mode = 0
-albedo_color = Color(1, 0.6862745, 1, 1)
+albedo_color = Color(1, 0.6862745, 1, 0.49019608)
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_0ey5v")
@@ -196,7 +190,7 @@ mesh = ExtResource("4_tgees")
 skeleton = NodePath("../MainBeam")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 9, 3.5023203, 2.6150742, -0.008090973)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 9, 3.3507767, 2.6150742, 1.3747244)
 material_override = SubResource("StandardMaterial3D_tgees")
 mesh = ExtResource("4_tgees")
 skeleton = NodePath("../MainBeam")
@@ -229,6 +223,6 @@ libraries = {
 }
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.7039553, 0.55509126, -0.44308117, -0.46978167, 0.83178943, 0.29568842, 0.5326843, 0, 0.8463143, 1.6388366, 2.651643, 17.940289)
+transform = Transform3D(0.7039553, 0.55509126, -0.44308117, -0.46978167, 0.83178943, 0.29568842, 0.5326843, 0, 0.8463143, 2.2520914, 3.0138257, 17.215055)
 mesh = SubResource("BoxMesh_0ey5v")
 surface_material_override/0 = SubResource("StandardMaterial3D_0ey5v")
