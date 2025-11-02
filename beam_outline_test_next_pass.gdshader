@@ -5,6 +5,7 @@ render_mode unshaded;
 
 uniform sampler2D SCREEN_TEXTURE : hint_screen_texture;
 uniform sampler2D depth_texture : source_color, hint_depth_texture, filter_nearest;
+uniform vec4 shape_color : source_color;
 uniform vec4 outline_color : source_color;
 uniform float outline_width = 2.0;
 uniform bool constant_width = true;
@@ -23,6 +24,7 @@ void fragment() {
 	vec3 old_albedo = ALBEDO;
 	ALBEDO = pixelatedtext.rgb;
 	float depth_ref = get_depth(SCREEN_UV, INV_PROJECTION_MATRIX);
+	bool is_edge = false;
 	for(int y = -1*int(outline_width); y <= 1*int(outline_width); y++)
 	for(int x = -1*int(outline_width); x <= 1*int(outline_width); x++)
 	{
@@ -35,9 +37,14 @@ void fragment() {
 		SCREEN_UV.y + float(y) * pixel_size.y < 1.0 &&
 		SCREEN_UV.y + float(y) * pixel_size.y > 0.0)
 		{
-			ALBEDO = outline_color.rgb;
-			ALPHA = 1.0;
+			is_edge = true;
 		}
+	}
+	if(is_edge) {
+		ALBEDO = outline_color.rgb;
+		ALPHA = 1.0;
+	} else {
+		ALBEDO = shape_color.rgb;
 	}
 
 }

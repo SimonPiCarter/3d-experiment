@@ -49,6 +49,7 @@ albedo_color = Color(1.1503047, 0.85127234, 1.1638972, 1)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q7gmu"]
 render_priority = 0
 shader = ExtResource("5_0ey5v")
+shader_parameter/shape_color = Color(0.77254903, 0, 0, 1)
 shader_parameter/outline_color = Color(0, 0, 0, 1)
 shader_parameter/outline_width = 1.0
 shader_parameter/constant_width = true
