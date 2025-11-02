@@ -1,0 +1,616 @@
+[gd_scene load_steps=56 format=3 uid="uid://qh5rsepmhpax"]
+
+[ext_resource type="Shader" uid="uid://d3p2wo0h7klds" path="res://shaders/outline_color.gdshader" id="1_dvxnj"]
+[ext_resource type="Script" path="res://scenes/test/shader_test.gd" id="1_lesf7"]
+[ext_resource type="Texture2D" uid="uid://ope5kfms8u5g" path="res://icon.svg" id="2_3abjt"]
+[ext_resource type="PackedScene" uid="uid://v7x76lnh135e" path="res://scenes/test/power_ring/PowerRing.tscn" id="4_fpjiy"]
+[ext_resource type="PackedScene" uid="uid://vg4v25l817yt" path="res://scenes/test/exocube/exocube.tscn" id="4_ps0cu"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_3abjt"]
+size = Vector2(0.1, 0.02)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fpjiy"]
+render_priority = 0
+shader = ExtResource("1_dvxnj")
+shader_parameter/original_color = Color(1, 0.8666667, 0.3764706, 1)
+shader_parameter/high_shape_color = Color(0.627451, 1, 0.91764706, 1)
+shader_parameter/low_shape_color = Color(0.75686276, 0.15686275, 0, 1)
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_width = 1.0
+shader_parameter/glow_width = 1.0
+shader_parameter/constant_width = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ps0cu"]
+next_pass = SubResource("ShaderMaterial_fpjiy")
+shading_mode = 0
+albedo_color = Color(1, 0.8666667, 0.3764706, 1)
+
+[sub_resource type="Animation" id="Animation_lesf7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.20688534, 0.47540665, 0.2496438)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.9999998, 1.0000005, 0.99999976)]
+}
+
+[sub_resource type="Animation" id="Animation_3abjt"]
+resource_name = "fire"
+length = 0.50000167
+step = 0.016666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.20688534, 0.47540665, 0.2496438), Vector3(2, 0.475, 0.25)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.20000003, 0.23333333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.9999998, 1.0000005, 0.99999976), Vector3(0.9999998, 1.0000005, 0.99999976), Vector3(0, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lesf7"]
+_data = {
+&"RESET": SubResource("Animation_lesf7"),
+&"fire": SubResource("Animation_3abjt")
+}
+
+[sub_resource type="SphereMesh" id="SphereMesh_lesf7"]
+radius = 0.2
+height = 0.4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mb1q2"]
+render_priority = 0
+shader = ExtResource("1_dvxnj")
+shader_parameter/original_color = Color(1, 0.8666667, 0.3764706, 1)
+shader_parameter/high_shape_color = Color(0.627451, 1, 0.91764706, 1)
+shader_parameter/low_shape_color = Color(0.75686276, 0.15686275, 0, 1)
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_width = 1.0
+shader_parameter/glow_width = 1.0
+shader_parameter/constant_width = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_imguq"]
+next_pass = SubResource("ShaderMaterial_mb1q2")
+shading_mode = 0
+albedo_color = Color(1, 0.8666667, 0.3764706, 1)
+
+[sub_resource type="Animation" id="Animation_ps0cu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.9999999, 1.0000005, 0.9999999)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_fpjiy"]
+resource_name = "fire"
+length = 0.50000167
+step = 0.016666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.16944449, 0.17916669, 0.28333333, 0.43611112),
+"transitions": PackedFloat32Array(1, -2, -2, -2),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1, 1, 1), Vector3(1, 1, 1), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_wr8xe"]
+resource_name = "fire2"
+step = 0.016666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.23333333, 0.36666667, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ps0cu"]
+_data = {
+&"RESET": SubResource("Animation_ps0cu"),
+&"fire": SubResource("Animation_fpjiy"),
+&"fire2": SubResource("Animation_wr8xe")
+}
+
+[sub_resource type="Environment" id="Environment_lesf7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lesf7"]
+render_priority = 0
+shader = ExtResource("1_dvxnj")
+shader_parameter/original_color = Color(0, 0, 0, 1)
+shader_parameter/high_shape_color = Color(0.69803923, 0.7294118, 0.5647059, 1)
+shader_parameter/low_shape_color = Color(0.39688927, 0.39688927, 0.39688924, 1)
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_width = 1.0
+shader_parameter/glow_width = 1.0
+shader_parameter/constant_width = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fpjiy"]
+next_pass = SubResource("ShaderMaterial_lesf7")
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_dvxnj"]
+height = 10.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ps0cu"]
+render_priority = 0
+shader = ExtResource("1_dvxnj")
+shader_parameter/original_color = Color(1, 0.85882354, 0.38431373, 1)
+shader_parameter/high_shape_color = Color(0.68235296, 0.13725491, 0.20392157, 1)
+shader_parameter/low_shape_color = Color(0.7877397, 0.3346289, 0.8880773, 1)
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_width = 1.0
+shader_parameter/glow_width = 1.0
+shader_parameter/constant_width = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3abjt"]
+next_pass = SubResource("ShaderMaterial_ps0cu")
+shading_mode = 0
+albedo_color = Color(1, 0.85882354, 0.38431373, 1)
+
+[sub_resource type="Animation" id="Animation_mb1q2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PowerRing3:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.006350994, 2.1603208, 0.013381004)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PowerRing4:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.006350994, 3.4189363, 0.013381004)]
+}
+
+[sub_resource type="Animation" id="Animation_gs3fw"]
+resource_name = "new_animation"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PowerRing3:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector3(-0.006350994, 2.1603208, 0.013381004), Vector3(-0.006, 3.419, 0.013)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PowerRing4:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector3(-0.006350994, 3.4189363, 0.013381004), Vector3(-0.006, 2.16, 0.013)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mb1q2"]
+_data = {
+&"RESET": SubResource("Animation_mb1q2"),
+&"pingpong": SubResource("Animation_gs3fw")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gs3fw"]
+render_priority = 0
+shader = ExtResource("1_dvxnj")
+shader_parameter/original_color = Color(0.99607843, 0.85882354, 0.38431373, 1)
+shader_parameter/high_shape_color = Color(0.38431373, 0.33333334, 0.39607844, 1)
+shader_parameter/low_shape_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+shader_parameter/outline_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+shader_parameter/outline_width = 1.0
+shader_parameter/glow_width = 1.0
+shader_parameter/constant_width = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mb1q2"]
+next_pass = SubResource("ShaderMaterial_gs3fw")
+shading_mode = 0
+albedo_color = Color(0.99607843, 0.85882354, 0.38431373, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_lesf7"]
+size = Vector2(50, 50)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jpn0x"]
+render_priority = 0
+shader = ExtResource("1_dvxnj")
+shader_parameter/original_color = Color(1, 0.85490197, 0.38431373, 1)
+shader_parameter/high_shape_color = Color(0.24313726, 0.20784314, 0.27450982, 1)
+shader_parameter/low_shape_color = Color(0.75686276, 0.15686275, 0, 1)
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_width = 1.0
+shader_parameter/glow_width = 1.0
+shader_parameter/constant_width = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wr8xe"]
+next_pass = SubResource("ShaderMaterial_jpn0x")
+shading_mode = 0
+albedo_color = Color(1, 0.85490197, 0.38431373, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_tloep"]
+size = Vector3(20, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3abjt"]
+render_priority = 0
+shader = ExtResource("1_dvxnj")
+shader_parameter/original_color = Color(1, 0.8666667, 0.38431373, 1)
+shader_parameter/high_shape_color = Color(0.38431373, 0.33333334, 0.39607844, 1)
+shader_parameter/low_shape_color = Color(0.75686276, 0.15686275, 0, 1)
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_width = 1.0
+shader_parameter/glow_width = 1.0
+shader_parameter/constant_width = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tloep"]
+next_pass = SubResource("ShaderMaterial_3abjt")
+shading_mode = 0
+albedo_color = Color(1, 0.8666667, 0.38431373, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wr8xe"]
+render_priority = 0
+shader = ExtResource("1_dvxnj")
+shader_parameter/original_color = Color(1, 0.8509804, 0.38431373, 1)
+shader_parameter/high_shape_color = Color(0.99215686, 0.79607844, 0.6901961, 1)
+shader_parameter/low_shape_color = Color(0.75686276, 0.15686275, 0, 1)
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_width = 1.0
+shader_parameter/glow_width = 1.0
+shader_parameter/constant_width = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gs3fw"]
+next_pass = SubResource("ShaderMaterial_wr8xe")
+shading_mode = 0
+albedo_color = Color(1, 0.8509804, 0.38431373, 1)
+
+[sub_resource type="Curve" id="Curve_lesf7"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.14000002, 1), 0.0, 0.0, 0, 0, Vector2(0.48666665, 1), 0.0, 0.0, 0, 0, Vector2(0.9866667, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_qyno7"]
+curve = SubResource("Curve_lesf7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lesf7"]
+emission_shape = 1
+emission_sphere_radius = 0.25
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -1.0700022
+radial_accel_max = -1.0700022
+scale_curve = SubResource("CurveTexture_qyno7")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_imguq"]
+render_priority = 0
+shader = ExtResource("1_dvxnj")
+shader_parameter/original_color = Color(1, 0.8666667, 0.23529412, 1)
+shader_parameter/high_shape_color = Color(0.56078434, 0.827451, 1, 1)
+shader_parameter/low_shape_color = Color(0.07347823, 0.3634404, 0.4281735, 1)
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_width = 1.0
+shader_parameter/glow_width = 0.01
+shader_parameter/constant_width = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b6qof"]
+next_pass = SubResource("ShaderMaterial_imguq")
+shading_mode = 0
+albedo_color = Color(1, 0.8666667, 0.23529412, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_suc28"]
+material = SubResource("StandardMaterial3D_b6qof")
+radius = 0.2
+height = 0.4
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fpjiy"]
+emission_shape = 1
+emission_sphere_radius = 0.25
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 3.0
+initial_velocity_max = 3.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -5.000002
+linear_accel_max = -5.000002
+radial_accel_min = -1.0700022
+radial_accel_max = -1.0700022
+scale_curve = SubResource("CurveTexture_qyno7")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0plqt"]
+render_priority = 0
+shader = ExtResource("1_dvxnj")
+shader_parameter/original_color = Color(1, 0.8666667, 0.23529412, 1)
+shader_parameter/high_shape_color = Color(1, 1, 1, 1)
+shader_parameter/low_shape_color = Color(0, 0, 0, 1)
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_width = 1.0
+shader_parameter/glow_width = 5.0
+shader_parameter/constant_width = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l1j2e"]
+next_pass = SubResource("ShaderMaterial_0plqt")
+shading_mode = 0
+albedo_color = Color(1, 0.8666667, 0.23529412, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_jpn0x"]
+material = SubResource("StandardMaterial3D_l1j2e")
+radius = 0.2
+height = 0.4
+
+[sub_resource type="Curve" id="Curve_fpjiy"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1e-05, 1), 0.0, 0.0, 0, 0, Vector2(0.9866667, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_u2t0a"]
+curve = SubResource("Curve_fpjiy")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wr8xe"]
+emission_shape = 1
+emission_sphere_radius = 0.25
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -5.000002
+linear_accel_max = -5.000002
+radial_accel_min = -1.0700022
+radial_accel_max = -1.0700022
+scale_curve = SubResource("CurveTexture_u2t0a")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_suc28"]
+render_priority = 0
+shader = ExtResource("1_dvxnj")
+shader_parameter/original_color = Color(1, 0.8666667, 0.23529412, 1)
+shader_parameter/high_shape_color = Color(0.43137255, 0.15294118, 0.15294118, 1)
+shader_parameter/low_shape_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+shader_parameter/outline_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+shader_parameter/outline_width = 1.0
+shader_parameter/glow_width = 5.0
+shader_parameter/constant_width = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_avbmd"]
+next_pass = SubResource("ShaderMaterial_suc28")
+shading_mode = 0
+albedo_color = Color(1, 0.8666667, 0.23529412, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_qyno7"]
+material = SubResource("StandardMaterial3D_avbmd")
+radius = 0.2
+height = 0.4
+radial_segments = 16
+rings = 8
+
+[sub_resource type="Curve" id="Curve_ps0cu"]
+_data = [Vector2(0, 0.29213488), 0.0, 0.0, 0, 0, Vector2(0.27227724, 1), 0.0, 0.0, 0, 0, Vector2(0.8019802, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.29213488), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Curve" id="Curve_wr8xe"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.6881188, 0.37078655), 0.0, 0.0, 0, 0, Vector2(0.85643566, 0.37078655), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_lesf7")
+
+[node name="projectile" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.9543895, 0.29263335, 0.059213012, -0.036951438, 0.31257427, -0.94917417, -0.29626834, 0.9036946, 0.30913067, 0.20688534, 0.47540665, 0.2496438)
+mesh = SubResource("PlaneMesh_3abjt")
+skeleton = NodePath("../Sprite3D")
+surface_material_override/0 = SubResource("StandardMaterial3D_ps0cu")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="projectile"]
+libraries = {
+&"": SubResource("AnimationLibrary_lesf7")
+}
+
+[node name="sphere" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, 3.3223107, -0.0939312, -1.0165191)
+visible = false
+mesh = SubResource("SphereMesh_lesf7")
+skeleton = NodePath("../pylones/MeshInstance3D6")
+surface_material_override/0 = SubResource("StandardMaterial3D_imguq")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="sphere"]
+libraries = {
+&"": SubResource("AnimationLibrary_ps0cu")
+}
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.9337367, 0.35796058, 0, -0.35796058, 0.9337367, 0, 5.314536, 10.541532)
+environment = SubResource("Environment_lesf7")
+projection = 1
+size = 10.0
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(-0.07327074, 0.9902261, 0.118677735, -0.9748786, -0.096211, 0.20088623, 0.21034102, -0.1009773, 0.97239906, -1.7380102, -0.9163982, 0.2595418)
+material_override = SubResource("StandardMaterial3D_fpjiy")
+billboard = 1
+no_depth_test = true
+texture = ExtResource("2_3abjt")
+
+[node name="pylones" type="Node3D" parent="."]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="pylones"]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, -0.8551922, -2.1603217, -3.8042)
+mesh = SubResource("CapsuleMesh_dvxnj")
+skeleton = NodePath("../../Camera3D")
+surface_material_override/0 = SubResource("StandardMaterial3D_3abjt")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="pylones"]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, -5.843649, -2.1603217, 0.236619)
+mesh = SubResource("CapsuleMesh_dvxnj")
+skeleton = NodePath("../../Camera3D")
+surface_material_override/0 = SubResource("StandardMaterial3D_3abjt")
+
+[node name="PowerRing3" parent="pylones/MeshInstance3D5" instance=ExtResource("4_fpjiy")]
+transform = Transform3D(0.50000006, 0, 0, 0, -2.1855683e-08, -0.49999976, 0, 0.50000006, -2.1855696e-08, -0.006350994, 2.1603208, 0.013381004)
+
+[node name="PowerRing4" parent="pylones/MeshInstance3D5" instance=ExtResource("4_fpjiy")]
+transform = Transform3D(0.3535534, 0.3535534, -1.5454312e-08, 0, -2.1855683e-08, -0.49999976, -0.3535534, 0.3535534, -1.5454312e-08, -0.006350994, 3.4189363, 0.013381004)
+clockwise = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="pylones/MeshInstance3D5"]
+libraries = {
+&"": SubResource("AnimationLibrary_mb1q2")
+}
+autoplay = "pingpong"
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="pylones"]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, -2.9073567, -2.2715473, -1.4980474)
+mesh = SubResource("CapsuleMesh_dvxnj")
+skeleton = NodePath("../../Camera3D")
+surface_material_override/0 = SubResource("StandardMaterial3D_mb1q2")
+
+[node name="Background" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6157643, -1.8438361, -1.4914751)
+mesh = SubResource("PlaneMesh_lesf7")
+skeleton = NodePath("../Sprite3D")
+surface_material_override/0 = SubResource("StandardMaterial3D_wr8xe")
+
+[node name="cubes" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="cubes"]
+transform = Transform3D(0.19544965, 0.98065877, -0.010389638, -2.4924807e-10, -0.010593953, -0.9999438, -0.98071384, 0.19543871, -0.0020705848, 0, -1.0365486, 0.5221896)
+mesh = SubResource("BoxMesh_tloep")
+skeleton = NodePath("../../Camera3D")
+surface_material_override/0 = SubResource("StandardMaterial3D_tloep")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="cubes"]
+transform = Transform3D(0.19544965, 0.98065877, -0.010389638, -2.4924807e-10, -0.010593953, -0.9999438, -0.98071384, 0.19543871, -0.0020705848, 1.1688557, -1.0365486, 0.5221896)
+mesh = SubResource("BoxMesh_tloep")
+skeleton = NodePath("../../Camera3D")
+surface_material_override/0 = SubResource("StandardMaterial3D_tloep")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="cubes"]
+transform = Transform3D(0.19544965, 0.98065877, -0.010389638, -2.4924807e-10, -0.010593953, -0.9999438, -0.98071384, 0.19543871, -0.0020705848, 2.4094934, -0.9974766, 0.5417266)
+mesh = SubResource("BoxMesh_tloep")
+skeleton = NodePath("../../Camera3D")
+surface_material_override/0 = SubResource("StandardMaterial3D_gs3fw")
+
+[node name="blue_boom" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6154016, 0.35500586, 0)
+lifetime = 0.5
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_lesf7")
+draw_pass_1 = SubResource("SphereMesh_suc28")
+
+[node name="cloudy_explosion" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.188851, 0.35500586, -0.81153584)
+lifetime = 0.5
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_fpjiy")
+draw_pass_1 = SubResource("SphereMesh_jpn0x")
+
+[node name="entity_moving" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6026468, 0.35500586, 0.8643813)
+amount = 32
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_wr8xe")
+draw_pass_1 = SubResource("SphereMesh_qyno7")
+
+[node name="Exocube" parent="." instance=ExtResource("4_ps0cu")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0.062497616, 0.35500586, 1.9077075)
+
+[node name="PowerRing" parent="." instance=ExtResource("4_fpjiy")]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, -0.5, 0, 0.5, -2.1855694e-08, -2.953394, 0, -1.4407839)
+deg_speed = 720.0
+speed_curve = SubResource("Curve_ps0cu")
+scale_curve = SubResource("Curve_wr8xe")
+
+[node name="PowerRing2" parent="." instance=ExtResource("4_fpjiy")]
+transform = Transform3D(0.35355338, 0.35355338, -1.545431e-08, 0, -2.1855694e-08, -0.5, -0.35355338, 0.35355338, -1.545431e-08, -2.953394, 1.2586161, -1.4407839)
+clockwise = false

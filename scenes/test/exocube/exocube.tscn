@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://vg4v25l817yt"]
+
+[ext_resource type="Script" uid="uid://d2v1nhb3xe6sj" path="res://scenes/test/exocube/exocube.gd" id="1_ain03"]
+[ext_resource type="Shader" uid="uid://d3p2wo0h7klds" path="res://shaders/outline_color.gdshader" id="1_xp770"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_80sc3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ain03"]
+render_priority = 0
+shader = ExtResource("1_xp770")
+shader_parameter/original_color = Color(0, 0, 0.007843138, 1)
+shader_parameter/high_shape_color = Color(0.61960787, 0.27058825, 0.22352941, 1)
+shader_parameter/low_shape_color = Color(0, 0, 0, 1)
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_width = 1.0
+shader_parameter/glow_width = 5.0
+shader_parameter/constant_width = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xp770"]
+next_pass = SubResource("ShaderMaterial_ain03")
+shading_mode = 0
+albedo_color = Color(0, 0, 0.007843138, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_ain03"]
+radius = 0.75
+height = 1.5
+
+[node name="Exocube" type="Node3D"]
+script = ExtResource("1_ain03")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.9826437, -0.18636054, 0, 0.18636054, 0.9826437, 0, 0, 0)
+mesh = SubResource("BoxMesh_80sc3")
+surface_material_override/0 = SubResource("StandardMaterial3D_xp770")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.563063, 0.5845078, 0.58448213, 0, 0.7071067, -0.70708627, -0.8266143, 0.3981565, 0.3981398, 0, 0, 0)
+mesh = SubResource("BoxMesh_80sc3")
+surface_material_override/0 = SubResource("StandardMaterial3D_xp770")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.9826557, -0.18636787, 0, 0.18636173, 0.9826686, 0, 0, 0, 0.9999861, 0, 0, 0)
+mesh = SubResource("BoxMesh_80sc3")
+surface_material_override/0 = SubResource("StandardMaterial3D_xp770")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.52383447, 0.60235196, 0.60233283, 0, 0.7071067, -0.70708627, -0.8518303, 0.3704211, 0.37040734, 0, 0, 0)
+mesh = SubResource("SphereMesh_ain03")
+surface_material_override/0 = SubResource("StandardMaterial3D_xp770")

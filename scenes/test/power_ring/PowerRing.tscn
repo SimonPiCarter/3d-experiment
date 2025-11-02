@@ -1,0 +1,61 @@
+[gd_scene load_steps=6 format=3 uid="uid://v7x76lnh135e"]
+
+[ext_resource type="Shader" uid="uid://d3p2wo0h7klds" path="res://shaders/outline_color.gdshader" id="1_1jdte"]
+[ext_resource type="Script" uid="uid://b5s0nbcqaamha" path="res://scenes/test/power_ring/power_ring.gd" id="1_5dbit"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_rebmp"]
+radial_segments = 16
+rings = 16
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5dbit"]
+render_priority = 0
+shader = ExtResource("1_1jdte")
+shader_parameter/original_color = Color(0, 0, 0.003921569, 1)
+shader_parameter/high_shape_color = Color(0.08627451, 0.3529412, 0.29803923, 1)
+shader_parameter/low_shape_color = Color(0, 0, 0, 1)
+shader_parameter/outline_color = Color(0.19215687, 0.21176471, 0.21960784, 1)
+shader_parameter/outline_width = 1.0
+shader_parameter/glow_width = 0.1
+shader_parameter/constant_width = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rebmp"]
+next_pass = SubResource("ShaderMaterial_5dbit")
+shading_mode = 0
+albedo_color = Color(0, 0, 0.003921569, 1)
+
+[node name="PowerRing" type="Node3D"]
+script = ExtResource("1_5dbit")
+deg_speed = 90.0
+
+[node name="Ring" type="Node3D" parent="."]
+transform = Transform3D(0.8658935, 0.5002269, 0, -0.5002269, 0.8658935, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ring"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9994488, 0, 0)
+mesh = SubResource("SphereMesh_rebmp")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_rebmp")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Ring"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+mesh = SubResource("SphereMesh_rebmp")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_rebmp")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Ring"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+mesh = SubResource("SphereMesh_rebmp")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_rebmp")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Ring"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+mesh = SubResource("SphereMesh_rebmp")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_rebmp")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Ring"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+mesh = SubResource("SphereMesh_rebmp")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_rebmp")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://cnw1n1nonv4kl"]
+[gd_scene load_steps=78 format=3 uid="uid://cnw1n1nonv4kl"]
 
 [ext_resource type="Texture2D" uid="uid://ope5kfms8u5g" path="res://icon.svg" id="1_cybhl"]
 [ext_resource type="Script" uid="uid://d1sgp5r4tsu3l" path="res://scripts/FreeRoamingCamera3D.gd" id="1_vrp6w"]
@@ -11,6 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://dw7c8esc0nunr" path="res://scenes/test/beam_scene.tscn" id="8_hwmkj"]
 [ext_resource type="PackedScene" uid="uid://dccijlgfscbxi" path="res://scenes/models/quad_entity_robot_3.tscn" id="8_ttdhd"]
 [ext_resource type="Script" uid="uid://dq480ed1eshn2" path="res://scenes/laser_cylinder.gd" id="9_ckagc"]
+[ext_resource type="PackedScene" uid="uid://v7x76lnh135e" path="res://scenes/test/power_ring/PowerRing.tscn" id="12_bome6"]
+[ext_resource type="PackedScene" uid="uid://vg4v25l817yt" path="res://scenes/test/exocube/exocube.tscn" id="13_f7ssd"]
+[ext_resource type="Shader" uid="uid://d3p2wo0h7klds" path="res://shaders/outline_color.gdshader" id="14_f7ssd"]
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_rmv6m"]
 dof_blur_far_distance = 15.0
@@ -100,8 +103,8 @@ specular_mode = 2
 emission = Color(1, 0, 0, 1)
 emission_energy_multiplier = 6.5
 
-[sub_resource type="BoxMesh" id="BoxMesh_vrp6w"]
-size = Vector3(50, 0.2, 0.2)
+[sub_resource type="BoxMesh" id="BoxMesh_8hd41"]
+size = Vector3(0.25, 0.25, 0.25)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rmv6m"]
 diffuse_mode = 3
@@ -109,19 +112,6 @@ albedo_color = Color(0.7019608, 0.21960784, 0.19215687, 1)
 emission_enabled = true
 emission = Color(0.7019608, 0.21960784, 0.19215687, 1)
 emission_energy_multiplier = 16.0
-
-[sub_resource type="BoxMesh" id="BoxMesh_ckagc"]
-size = Vector3(0.2, 10, 0.2)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ttdhd"]
-diffuse_mode = 3
-albedo_color = Color(0.5686275, 0.85882354, 0.4117647, 1)
-emission_enabled = true
-emission = Color(0.5686275, 0.85882354, 0.4117647, 1)
-emission_energy_multiplier = 16.0
-
-[sub_resource type="BoxMesh" id="BoxMesh_8hd41"]
-size = Vector3(0.25, 0.25, 0.25)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cybhl"]
 diffuse_mode = 3
@@ -233,6 +223,252 @@ _data = {
 &"RESET": SubResource("Animation_ckagc"),
 &"fire": SubResource("Animation_hwmkj")
 }
+
+[sub_resource type="Curve" id="Curve_ahtvx"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.14000002, 1), 0.0, 0.0, 0, 0, Vector2(0.48666665, 1), 0.0, 0.0, 0, 0, Vector2(0.9866667, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_fpjiy"]
+curve = SubResource("Curve_ahtvx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_48pke"]
+emission_shape = 1
+emission_sphere_radius = 0.25
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -1.0700022
+radial_accel_max = -1.0700022
+scale_curve = SubResource("CurveTexture_fpjiy")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o73tt"]
+render_priority = 0
+shader = ExtResource("14_f7ssd")
+shader_parameter/original_color = Color(1, 0.8666667, 0.23529412, 1)
+shader_parameter/high_shape_color = Color(0.56078434, 0.827451, 1, 1)
+shader_parameter/low_shape_color = Color(0.07347823, 0.3634404, 0.4281735, 1)
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_width = 1.0
+shader_parameter/glow_width = 0.01
+shader_parameter/constant_width = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0plqt"]
+next_pass = SubResource("ShaderMaterial_o73tt")
+shading_mode = 0
+albedo_color = Color(1, 0.8666667, 0.23529412, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_q5mio"]
+material = SubResource("StandardMaterial3D_0plqt")
+radius = 0.2
+height = 0.4
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_em08d"]
+emission_shape = 1
+emission_sphere_radius = 0.25
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 3.0
+initial_velocity_max = 3.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -5.000002
+linear_accel_max = -5.000002
+radial_accel_min = -1.0700022
+radial_accel_max = -1.0700022
+scale_curve = SubResource("CurveTexture_fpjiy")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xnn52"]
+render_priority = 0
+shader = ExtResource("14_f7ssd")
+shader_parameter/original_color = Color(1, 0.8666667, 0.23529412, 1)
+shader_parameter/high_shape_color = Color(1, 1, 1, 1)
+shader_parameter/low_shape_color = Color(0, 0, 0, 1)
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_width = 1.0
+shader_parameter/glow_width = 5.0
+shader_parameter/constant_width = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_suc28"]
+next_pass = SubResource("ShaderMaterial_xnn52")
+shading_mode = 0
+albedo_color = Color(1, 0.8666667, 0.23529412, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_5upta"]
+material = SubResource("StandardMaterial3D_suc28")
+radius = 0.2
+height = 0.4
+
+[sub_resource type="Curve" id="Curve_mpahi"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1e-05, 1), 0.0, 0.0, 0, 0, Vector2(0.9866667, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ps0cu"]
+curve = SubResource("Curve_mpahi")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wccig"]
+emission_shape = 1
+emission_sphere_radius = 0.25
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -5.000002
+linear_accel_max = -5.000002
+radial_accel_min = -1.0700022
+radial_accel_max = -1.0700022
+scale_curve = SubResource("CurveTexture_ps0cu")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hur3k"]
+render_priority = 0
+shader = ExtResource("14_f7ssd")
+shader_parameter/original_color = Color(1, 0.8666667, 0.23529412, 1)
+shader_parameter/high_shape_color = Color(0.43137255, 0.15294118, 0.15294118, 1)
+shader_parameter/low_shape_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+shader_parameter/outline_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+shader_parameter/outline_width = 1.0
+shader_parameter/glow_width = 5.0
+shader_parameter/constant_width = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jpn0x"]
+next_pass = SubResource("ShaderMaterial_hur3k")
+shading_mode = 0
+albedo_color = Color(1, 0.8666667, 0.23529412, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_olbwg"]
+material = SubResource("StandardMaterial3D_jpn0x")
+radius = 0.2
+height = 0.4
+radial_segments = 16
+rings = 8
+
+[sub_resource type="BoxMesh" id="BoxMesh_vrp6w"]
+size = Vector3(50, 0.2, 0.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ckagc"]
+size = Vector3(0.2, 10, 0.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ttdhd"]
+diffuse_mode = 3
+albedo_color = Color(0.5686275, 0.85882354, 0.4117647, 1)
+emission_enabled = true
+emission = Color(0.5686275, 0.85882354, 0.4117647, 1)
+emission_energy_multiplier = 16.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_f7ssd"]
+size = Vector2(50, 50)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ps0cu"]
+render_priority = 0
+shader = ExtResource("14_f7ssd")
+shader_parameter/original_color = Color(1, 0.85490197, 0.38431373, 1)
+shader_parameter/high_shape_color = Color(0.24313726, 0.20784314, 0.27450982, 1)
+shader_parameter/low_shape_color = Color(0.75686276, 0.15686275, 0, 1)
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_width = 1.0
+shader_parameter/glow_width = 1.0
+shader_parameter/constant_width = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ahtvx"]
+next_pass = SubResource("ShaderMaterial_ps0cu")
+shading_mode = 0
+albedo_color = Color(1, 0.85490197, 0.38431373, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_f7ssd"]
+height = 10.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dvxnj"]
+render_priority = 0
+shader = ExtResource("14_f7ssd")
+shader_parameter/original_color = Color(1, 0.85882354, 0.38431373, 1)
+shader_parameter/high_shape_color = Color(0.68235296, 0.13725491, 0.20392157, 1)
+shader_parameter/low_shape_color = Color(0.7877397, 0.3346289, 0.8880773, 1)
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_width = 1.0
+shader_parameter/glow_width = 1.0
+shader_parameter/constant_width = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_48pke"]
+next_pass = SubResource("ShaderMaterial_dvxnj")
+shading_mode = 0
+albedo_color = Color(1, 0.85882354, 0.38431373, 1)
+
+[sub_resource type="Animation" id="Animation_mb1q2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PowerRing3:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.006350994, 2.1603208, 0.013381004)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PowerRing4:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.006350994, 3.4189363, 0.013381004)]
+}
+
+[sub_resource type="Animation" id="Animation_gs3fw"]
+resource_name = "new_animation"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PowerRing3:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector3(-0.006350994, 2.1603208, 0.013381004), Vector3(-0.006, 3.419, 0.013)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PowerRing4:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector3(-0.006350994, 3.4189363, 0.013381004), Vector3(-0.006, 2.16, 0.013)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mb1q2"]
+_data = {
+&"RESET": SubResource("Animation_mb1q2"),
+&"pingpong": SubResource("Animation_gs3fw")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gs3fw"]
+render_priority = 0
+shader = ExtResource("14_f7ssd")
+shader_parameter/original_color = Color(0.99607843, 0.85882354, 0.38431373, 1)
+shader_parameter/high_shape_color = Color(0.38431373, 0.33333334, 0.39607844, 1)
+shader_parameter/low_shape_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+shader_parameter/outline_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+shader_parameter/outline_width = 1.0
+shader_parameter/glow_width = 1.0
+shader_parameter/constant_width = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o73tt"]
+next_pass = SubResource("ShaderMaterial_gs3fw")
+shading_mode = 0
+albedo_color = Color(0.99607843, 0.85882354, 0.38431373, 1)
+
+[sub_resource type="Curve" id="Curve_q5mio"]
+_data = [Vector2(0, 0.29213488), 0.0, 0.0, 0, 0, Vector2(0.27227724, 1), 0.0, 0.0, 0, 0, Vector2(0.8019802, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.29213488), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Curve" id="Curve_em08d"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.6881188, 0.37078655), 0.0, 0.0, 0, 0, Vector2(0.85643566, 0.37078655), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
 
 [node name="Node3D" type="Node3D"]
 
@@ -1011,26 +1247,6 @@ script = ExtResource("3_rmv6m")
 beam = NodePath(".")
 boom = NodePath("../Boom")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport"]
-transform = Transform3D(-1, 0, -1.6755498e-08, 0, 1, 0, 8.742278e-08, 0, -0.19166057, 10.11685, -8.397673, 6.940932)
-mesh = SubResource("BoxMesh_vrp6w")
-surface_material_override/0 = SubResource("StandardMaterial3D_rmv6m")
-
-[node name="MeshInstance3D10" type="MeshInstance3D" parent="SubViewportContainer/SubViewport"]
-transform = Transform3D(-1, 0, -1.6755498e-08, 0, 1, 0, 8.742278e-08, 0, -0.19166057, 13.542535, -7.14843, -1.4538288)
-mesh = SubResource("BoxMesh_ckagc")
-surface_material_override/0 = SubResource("StandardMaterial3D_rmv6m")
-
-[node name="MeshInstance3D8" type="MeshInstance3D" parent="SubViewportContainer/SubViewport"]
-transform = Transform3D(-1, 0, -1.6755498e-08, 0, 1, 0, 8.742278e-08, 0, -0.19166057, 10.11685, -8.397673, 12.197506)
-mesh = SubResource("BoxMesh_vrp6w")
-surface_material_override/0 = SubResource("StandardMaterial3D_rmv6m")
-
-[node name="MeshInstance3D9" type="MeshInstance3D" parent="SubViewportContainer/SubViewport"]
-transform = Transform3D(-1, 0, -1.6755498e-08, 0, 1, 0, 8.742278e-08, 0, -0.19166057, 10.11685, -8.413136, 18.49606)
-mesh = SubResource("BoxMesh_vrp6w")
-surface_material_override/0 = SubResource("StandardMaterial3D_ttdhd")
-
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(-0.7563332, 0, -0.6541866, 0, 1, 0, 0.6541866, 0, -0.7563332, 4.098645, -5.0859947, 5.3812256)
 visible = false
@@ -1083,7 +1299,7 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 5.55758, -6.9363513, -0.8250799)
 visible = false
 mesh = SubResource("CylinderMesh_hwmkj")
-skeleton = NodePath("../Terrain")
+skeleton = NodePath("../Env/Terrain")
 surface_material_override/0 = SubResource("StandardMaterial3D_xapww")
 script = ExtResource("9_ckagc")
 
@@ -1092,11 +1308,114 @@ libraries = {
 &"": SubResource("AnimationLibrary_ckagc")
 }
 
-[node name="Terrain" parent="SubViewportContainer/SubViewport" instance=ExtResource("5_gtj16")]
+[node name="VFX" type="Node3D" parent="SubViewportContainer/SubViewport"]
+
+[node name="PowerRing" parent="SubViewportContainer/SubViewport/VFX" instance=ExtResource("12_bome6")]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, -0.5, 0, 0.5, -2.1855694e-08, 0, 0, 11.678955)
+
+[node name="Exocube" parent="SubViewportContainer/SubViewport/VFX" instance=ExtResource("13_f7ssd")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -9.18103, 0.9238281, 6.0964355)
+
+[node name="blue_boom" type="GPUParticles3D" parent="SubViewportContainer/SubViewport/VFX"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.6591344, 0.35500586, 15.315918)
+lifetime = 0.5
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_48pke")
+draw_pass_1 = SubResource("SphereMesh_q5mio")
+
+[node name="cloudy_explosion" type="GPUParticles3D" parent="SubViewportContainer/SubViewport/VFX"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.085685, 0.35500586, 14.504382)
+lifetime = 0.5
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_em08d")
+draw_pass_1 = SubResource("SphereMesh_5upta")
+
+[node name="entity_moving" type="GPUParticles3D" parent="SubViewportContainer/SubViewport/VFX"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.6718893, 0.35500586, 16.1803)
+amount = 32
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_wccig")
+draw_pass_1 = SubResource("SphereMesh_olbwg")
+
+[node name="Env" type="Node3D" parent="SubViewportContainer/SubViewport"]
+visible = false
+
+[node name="Terrain" parent="SubViewportContainer/SubViewport/Env" instance=ExtResource("5_gtj16")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.382041, -8.370346, -25.08486)
 x = 50
 y = 50
 init = true
 
-[node name="Terrain2" parent="SubViewportContainer/SubViewport" instance=ExtResource("5_gtj16")]
+[node name="Terrain2" parent="SubViewportContainer/SubViewport/Env" instance=ExtResource("5_gtj16")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.975226, -2.1051388, -6.179715)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Env"]
+transform = Transform3D(-1, 0, -1.6755498e-08, 0, 1, 0, 8.742278e-08, 0, -0.19166057, 10.11685, -8.397673, 6.940932)
+mesh = SubResource("BoxMesh_vrp6w")
+surface_material_override/0 = SubResource("StandardMaterial3D_rmv6m")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Env"]
+transform = Transform3D(-1, 0, -1.6755498e-08, 0, 1, 0, 8.742278e-08, 0, -0.19166057, 13.542535, -7.14843, -1.4538288)
+mesh = SubResource("BoxMesh_ckagc")
+surface_material_override/0 = SubResource("StandardMaterial3D_rmv6m")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Env"]
+transform = Transform3D(-1, 0, -1.6755498e-08, 0, 1, 0, 8.742278e-08, 0, -0.19166057, 10.11685, -8.397673, 12.197506)
+mesh = SubResource("BoxMesh_vrp6w")
+surface_material_override/0 = SubResource("StandardMaterial3D_rmv6m")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Env"]
+transform = Transform3D(-1, 0, -1.6755498e-08, 0, 1, 0, 8.742278e-08, 0, -0.19166057, 10.11685, -8.413136, 18.49606)
+mesh = SubResource("BoxMesh_vrp6w")
+surface_material_override/0 = SubResource("StandardMaterial3D_ttdhd")
+
+[node name="Env2" type="Node3D" parent="SubViewportContainer/SubViewport"]
+
+[node name="Background" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Env2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6157643, -8.9265995, -1.4914751)
+mesh = SubResource("PlaneMesh_f7ssd")
+skeleton = NodePath("../Sprite3D")
+surface_material_override/0 = SubResource("StandardMaterial3D_ahtvx")
+
+[node name="pylones" type="Node3D" parent="SubViewportContainer/SubViewport/Env2"]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Env2/pylones"]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, -1.7953777, -9.281599, -5.708497)
+mesh = SubResource("CapsuleMesh_f7ssd")
+skeleton = NodePath("../../Camera3D")
+surface_material_override/0 = SubResource("StandardMaterial3D_48pke")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Env2/pylones"]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, -6.7838345, -9.281599, -1.6676779)
+mesh = SubResource("CapsuleMesh_f7ssd")
+skeleton = NodePath("../../Camera3D")
+surface_material_override/0 = SubResource("StandardMaterial3D_48pke")
+
+[node name="PowerRing3" parent="SubViewportContainer/SubViewport/Env2/pylones/MeshInstance3D5" instance=ExtResource("12_bome6")]
+transform = Transform3D(0.50000006, 0, 0, 0, -2.1855683e-08, -0.49999976, 0, 0.50000006, -2.1855696e-08, -0.006350994, 2.1603208, 0.013381004)
+
+[node name="PowerRing4" parent="SubViewportContainer/SubViewport/Env2/pylones/MeshInstance3D5" instance=ExtResource("12_bome6")]
+transform = Transform3D(0.3535534, 0.3535534, -1.5454312e-08, 0, -2.1855683e-08, -0.49999976, -0.3535534, 0.3535534, -1.5454312e-08, -0.006350994, 3.4189363, 0.013381004)
+clockwise = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewportContainer/SubViewport/Env2/pylones/MeshInstance3D5"]
+libraries = {
+&"": SubResource("AnimationLibrary_mb1q2")
+}
+autoplay = "pingpong"
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Env2/pylones"]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, -3.8475423, -9.392824, -3.4023442)
+mesh = SubResource("CapsuleMesh_f7ssd")
+skeleton = NodePath("../../Camera3D")
+surface_material_override/0 = SubResource("StandardMaterial3D_o73tt")
+
+[node name="PowerRing" parent="SubViewportContainer/SubViewport/Env2/pylones" instance=ExtResource("12_bome6")]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, -0.5, 0, 0.5, -2.1855694e-08, -3.8935795, -7.121277, -3.3450809)
+deg_speed = 720.0
+speed_curve = SubResource("Curve_q5mio")
+scale_curve = SubResource("Curve_em08d")
+
+[node name="PowerRing2" parent="SubViewportContainer/SubViewport/Env2/pylones" instance=ExtResource("12_bome6")]
+transform = Transform3D(0.35355338, 0.35355338, -1.545431e-08, 0, -2.1855694e-08, -0.5, -0.35355338, 0.35355338, -1.545431e-08, -3.8935795, -5.862661, -3.3450809)
+clockwise = false
