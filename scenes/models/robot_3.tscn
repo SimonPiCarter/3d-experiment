@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cobr225vkbh0b"]
+[gd_scene load_steps=7 format=3 uid="uid://cobr225vkbh0b"]
 
 [ext_resource type="PackedScene" uid="uid://u80ueucf1jqc" path="res://model/robot3.glb" id="1_dt103"]
 [ext_resource type="Material" uid="uid://bgjcx0rrclmkt" path="res://scenes/models/materials/robot_3/body.tres" id="2_f8hnv"]
 [ext_resource type="Script" uid="uid://b6g8yt8ck3bkc" path="res://scripts/ik/ik_quad_object.gd" id="2_sb8qu"]
 [ext_resource type="Material" uid="uid://degsq1lx35gtv" path="res://scenes/models/materials/robot_3/legs.tres" id="3_b2b2s"]
+[ext_resource type="PackedScene" uid="uid://vg4v25l817yt" path="res://scenes/test/exocube/exocube.tscn" id="3_mqb12"]
 [ext_resource type="Script" uid="uid://cssyvtlm806gc" path="res://scripts/ik/ik_auto_start.gd" id="5_eek0y"]
 
 [node name="robot3" node_paths=PackedStringArray("FrontLeftLeg", "FrontRightLeg", "BackLeftLeg", "BackRightLeg", "Armature") instance=ExtResource("1_dt103")]
@@ -14,13 +15,16 @@ BackLeftLeg = NodePath("Armature/Skeleton3D/BackLeft")
 BackRightLeg = NodePath("Armature/Skeleton3D/BackRight")
 Armature = NodePath("Armature")
 
-[node name="Body" parent="Armature/Skeleton3D" index="0"]
+[node name="Exocube" parent="Armature/Skeleton3D" index="0" instance=ExtResource("3_mqb12")]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 1.7428589, 0)
+
+[node name="Body" parent="Armature/Skeleton3D" index="1"]
 surface_material_override/0 = ExtResource("2_f8hnv")
 
-[node name="Legs" parent="Armature/Skeleton3D" index="1"]
+[node name="Legs" parent="Armature/Skeleton3D" index="2"]
 surface_material_override/0 = ExtResource("3_b2b2s")
 
-[node name="FrontLeft" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="2"]
+[node name="FrontLeft" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="3"]
 process_priority = 1
 top_level = true
 root_bone = &"LegFrontLeft.001"
@@ -30,7 +34,7 @@ magnet = Vector3(0, 1, 0)
 script = ExtResource("5_eek0y")
 metadata/_custom_type_script = "uid://cssyvtlm806gc"
 
-[node name="FrontRight" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="3"]
+[node name="FrontRight" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="4"]
 process_priority = 1
 top_level = true
 root_bone = &"LegFrontRight.001"
@@ -40,7 +44,7 @@ magnet = Vector3(0, 10, 0)
 script = ExtResource("5_eek0y")
 metadata/_custom_type_script = "uid://cssyvtlm806gc"
 
-[node name="BackLeft" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="4"]
+[node name="BackLeft" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="5"]
 top_level = true
 root_bone = &"LegBackLeft.001"
 tip_bone = &"LegBackLeft.003"
@@ -49,7 +53,7 @@ magnet = Vector3(0, 10, 0)
 script = ExtResource("5_eek0y")
 metadata/_custom_type_script = "uid://cssyvtlm806gc"
 
-[node name="BackRight" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="5"]
+[node name="BackRight" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="6"]
 top_level = true
 root_bone = &"LegBackRight.001"
 tip_bone = &"LegBackRight.003"

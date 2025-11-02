@@ -6,7 +6,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lc84v"]
 render_priority = 0
 shader = ExtResource("1_2c5l1")
-shader_parameter/albedo = Color(0.49803922, 0.4392157, 0.5411765, 1)
+shader_parameter/albedo = Color(0.6751288, 0.6165068, 0.71574646, 1)
 shader_parameter/specular = 0.0
 shader_parameter/metallic = 0.0
 shader_parameter/roughness = 0.0
