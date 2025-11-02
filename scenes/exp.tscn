@@ -1283,10 +1283,10 @@ visible = false
 move_speed = 4.9
 
 [node name="Robot2" parent="SubViewportContainer/SubViewport" instance=ExtResource("6_hwmkj")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 4.745391, -7.485548, -2.7533588)
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 4.745391, -6.9849987, -2.7533588)
 
 [node name="SimpleRobot" parent="SubViewportContainer/SubViewport" instance=ExtResource("6_g10jr")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 8.249321, -7.755291, -2.7533588)
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 8.249321, -7.3703423, -2.7533588)
 
 [node name="Robot3" parent="SubViewportContainer/SubViewport" instance=ExtResource("8_ttdhd")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 6.6495895, -7.755291, -2.7533588)
@@ -1372,7 +1372,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_ttdhd")
 [node name="Env2" type="Node3D" parent="SubViewportContainer/SubViewport"]
 
 [node name="Background" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Env2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6157643, -8.9265995, -1.4914751)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6157643, -8.079676, -1.4914751)
 mesh = SubResource("PlaneMesh_f7ssd")
 skeleton = NodePath("../Sprite3D")
 surface_material_override/0 = SubResource("StandardMaterial3D_ahtvx")
