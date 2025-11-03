@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bgmgmigu7s8k6"]
+[gd_scene load_steps=17 format=3 uid="uid://bgmgmigu7s8k6"]
 
 [ext_resource type="PackedScene" uid="uid://lf6p81kkvxyd" path="res://model/simple_robot1.glb" id="1_iicvt"]
 [ext_resource type="Script" uid="uid://cssyvtlm806gc" path="res://scripts/ik/ik_auto_start.gd" id="2_ayw8u"]
@@ -38,10 +38,6 @@ shader_parameter/constant_width = true
 next_pass = SubResource("ShaderMaterial_qeouw")
 shading_mode = 0
 albedo_color = Color(0, 0.05882353, 0, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_u716b"]
-radius = 0.25
-height = 0.5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lc84v"]
 render_priority = 0
@@ -141,9 +137,6 @@ surface_material_override/0 = ExtResource("6_u716b")
 [node name="Marker3D" type="Marker3D" parent="Armature/Skeleton3D/Arms" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0567794, 1.4247084, 2.2526388)
 gizmo_extents = 0.5
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Armature/Skeleton3D/Arms/Marker3D" index="0"]
-mesh = SubResource("SphereMesh_u716b")
 
 [node name="Body" parent="Armature/Skeleton3D" index="5"]
 surface_material_override/0 = SubResource("StandardMaterial3D_u8sut")

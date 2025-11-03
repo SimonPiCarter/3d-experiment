@@ -1,29 +1,119 @@
-[gd_scene load_steps=6 format=3 uid="uid://c045ke0kgeqlu"]
+[gd_scene load_steps=13 format=3 uid="uid://c045ke0kgeqlu"]
 
 [ext_resource type="Shader" uid="uid://bin0mbe7q4t6" path="res://shaders/outline_color_nodepth.gdshader" id="1_e3hoj"]
+[ext_resource type="Script" uid="uid://co10ktuctvx8a" path="res://scenes/test/test_no_depth.gd" id="1_vpkiw"]
 [ext_resource type="Shader" uid="uid://ujdtalvvduyo" path="res://shaders/outline_color_pass1.gdshader" id="2_w1hoy"]
+[ext_resource type="Shader" uid="uid://g3txdvnd7rsh" path="res://shaders/2d/pixel_outline.gdshader" id="3_w1hoy"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_vpkiw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1c5xl"]
-render_priority = 1
+render_priority = 6
 shader = ExtResource("1_e3hoj")
 shader_parameter/original_color = Color(0.56078434, 0, 0, 1)
 shader_parameter/high_shape_color = Color(0.56078434, 0.972549, 0.8862745, 1)
-shader_parameter/low_shape_color = Color(0, 0, 0, 1)
+shader_parameter/low_shape_color = Color(0.61745477, 0.61745477, 0.6174547, 1)
 shader_parameter/outline_color = Color(0, 0, 0, 1)
 shader_parameter/outline_width = 1.0
 shader_parameter/glow_width = 1.0
 shader_parameter/constant_width = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ii0a3"]
-render_priority = 0
+render_priority = 5
 next_pass = SubResource("ShaderMaterial_1c5xl")
 shader = ExtResource("2_w1hoy")
 shader_parameter/original_color = Color(0.56078434, 0, 0, 1)
 
+[sub_resource type="BoxMesh" id="BoxMesh_e3hoj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e3hoj"]
+render_priority = 0
+shader = ExtResource("2_w1hoy")
+shader_parameter/original_color = Color(0.9137255, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w1hoy"]
+render_priority = 0
+shader = ExtResource("2_w1hoy")
+shader_parameter/original_color = Color(0.19918373, 0.149187, 0.64703053, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vpkiw"]
+shader = ExtResource("3_w1hoy")
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_width = 1.0
+shader_parameter/type = 1
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_e3hoj"]
+viewport_path = NodePath("SubViewportContainer/SubViewport")
+
 [node name="Node3D" type="Node3D"]
+script = ExtResource("1_vpkiw")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("SphereMesh_vpkiw")
 surface_material_override/0 = SubResource("ShaderMaterial_ii0a3")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.9005921, 0.43466532, 0, -0.43466532, 0.9005921, 0, 1.8265381, 4.4420776)
+cull_mask = 1048573
+current = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Camera3D"]
+transform = Transform3D(0.5819668, 0.35347527, -0.73237276, -0.35347524, 0.9210194, 0.16364166, 0.73237276, 0.16364166, 0.6609475, -4.1007614, 0, 0)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.043156624, 0.5258944, 0.799984)
+mesh = SubResource("BoxMesh_e3hoj")
+skeleton = NodePath("../MeshInstance3D")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+layers = 2
+mesh = SubResource("SphereMesh_vpkiw")
+skeleton = NodePath("../SubViewportContainer/SubViewport")
+surface_material_override/0 = SubResource("ShaderMaterial_e3hoj")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.67785645, 0, 0)
+layers = 2
+mesh = SubResource("SphereMesh_vpkiw")
+skeleton = NodePath("../SubViewportContainer/SubViewport")
+surface_material_override/0 = SubResource("ShaderMaterial_e3hoj")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.67785645, 0.73010254, 0)
+layers = 2
+mesh = SubResource("SphereMesh_vpkiw")
+skeleton = NodePath("../SubViewportContainer/SubViewport")
+surface_material_override/0 = SubResource("ShaderMaterial_w1hoy")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1152, 648)
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.9005921, 0.43466532, 0, -0.43466532, 0.9005921, 0, 1.8265381, 4.4420776)
+cull_mask = 1048574
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_vpkiw")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_e3hoj")
+expand_mode = 3
+stretch_mode = 4

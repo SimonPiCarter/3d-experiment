@@ -4,7 +4,7 @@ render_mode diffuse_toon, specular_toon, shadows_disabled;
 render_mode unshaded;
 #endif
 #ifdef NODEPTH
-render_mode depth_test_disabled;
+render_mode depth_draw_opaque, depth_test_disabled;
 #endif
 
 uniform sampler2D SCREEN_TEXTURE : hint_screen_texture;

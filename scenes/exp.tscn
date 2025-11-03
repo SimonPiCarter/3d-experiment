@@ -18,12 +18,6 @@
 [ext_resource type="Shader" uid="uid://cudieiuuu8p2o" path="res://shaders/outline_color_shaded.gdshader" id="15_ahtvx"]
 [ext_resource type="PackedScene" uid="uid://dk45ay0rdt3g6" path="res://scenes/projectile/basic_round/basic_round_projectile.tscn" id="16_48pke"]
 
-[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_rmv6m"]
-dof_blur_far_distance = 15.0
-dof_blur_far_transition = 50.0
-dof_blur_near_distance = 5.0
-dof_blur_near_transition = 50.0
-
 [sub_resource type="QuadMesh" id="QuadMesh_rmv6m"]
 lightmap_size_hint = Vector2i(12, 12)
 flip_faces = true
@@ -85,11 +79,20 @@ glow_enabled = true
 radial_segments = 16
 rings = 6
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ckagc"]
-diffuse_mode = 3
-emission_enabled = true
-emission = Color(1, 0, 0, 1)
-emission_energy_multiplier = 3.0
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q5mio"]
+render_priority = 0
+shader = ExtResource("14_f7ssd")
+shader_parameter/original_color = Color(1, 1, 1, 1)
+shader_parameter/high_shape_color = Color(1, 1, 1, 1)
+shader_parameter/low_shape_color = Color(0.78039217, 0.8627451, 0.8156863, 1)
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_width = 1.0
+shader_parameter/glow_width = 5.0
+shader_parameter/constant_width = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xnn52"]
+next_pass = SubResource("ShaderMaterial_q5mio")
+shading_mode = 0
 
 [sub_resource type="SphereMesh" id="SphereMesh_cybhl"]
 radius = 0.2
@@ -97,14 +100,14 @@ height = 0.4
 radial_segments = 16
 rings = 6
 
-[sub_resource type="QuadMesh" id="QuadMesh_cybhl"]
-size = Vector2(10, 0.2)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hwmkj"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ckagc"]
 diffuse_mode = 3
-specular_mode = 2
+emission_enabled = true
 emission = Color(1, 0, 0, 1)
-emission_energy_multiplier = 6.5
+emission_energy_multiplier = 3.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_o73tt"]
+size = Vector3(10, 0.1, 0.1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_8hd41"]
 size = Vector3(0.25, 0.25, 0.25)
@@ -522,7 +525,7 @@ texture = ExtResource("1_cybhl")
 
 [node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(0.59677106, 0.4980588, -0.6291278, -0.00085518067, 0.78444064, 0.6202034, 0.80241114, -0.3695814, 0.4685574, -12.499483, 3.0586882, 21.255123)
-attributes = SubResource("CameraAttributesPractical_rmv6m")
+cull_mask = 1048573
 projection = 1
 current = true
 size = 25.0
@@ -1248,10 +1251,9 @@ transform = Transform3D(1, 0, 0, 0, 0.16723329, 0.98591745, 0, -0.98591745, 0.16
 
 [node name="Boom" type="MeshInstance3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(-0.027939059, 0, 0.99960965, 0, 0.9999999, 0, -0.9996095, 0, -0.027939064, 7.916659, -7.1704416, 8.964963)
-visible = false
 mesh = SubResource("SphereMesh_rmv6m")
 skeleton = NodePath("../Beam")
-surface_material_override/0 = SubResource("StandardMaterial3D_ckagc")
+surface_material_override/0 = SubResource("StandardMaterial3D_xnn52")
 
 [node name="Boom2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(-0.027939059, 0, 0.99960965, 0, 0.9999999, 0, -0.9996095, 0, -0.027939064, 7.916658, -7.5102654, -1.7250199)
@@ -1262,10 +1264,9 @@ surface_material_override/0 = SubResource("StandardMaterial3D_ckagc")
 
 [node name="Beam" type="MeshInstance3D" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("beam", "boom")]
 transform = Transform3D(-0.027939064, -0.99960965, -4.3694325e-08, 0, -4.371139e-08, 1, -0.99960965, 0.027939064, 1.2212553e-09, 7.737021, -7.1704416, 3.623322)
-visible = false
-mesh = SubResource("QuadMesh_cybhl")
+mesh = SubResource("BoxMesh_o73tt")
 skeleton = NodePath("")
-surface_material_override/0 = SubResource("StandardMaterial3D_hwmkj")
+surface_material_override/0 = SubResource("StandardMaterial3D_xnn52")
 script = ExtResource("3_rmv6m")
 beam = NodePath(".")
 boom = NodePath("../Boom")
@@ -1571,3 +1572,26 @@ scale_curve = SubResource("Curve_em08d")
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
 end_pos = Vector3(0, 0, 20)
 speed = 40.0
+
+[node name="SubViewportContainer2" type="SubViewportContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer2"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer2/SubViewport"]
+transform = Transform3D(0.59677106, 0.4980588, -0.6291278, -0.00085518067, 0.78444064, 0.6202034, 0.80241114, -0.3695814, 0.4685574, -12.499483, 3.0586882, 21.255123)
+cull_mask = 2
+projection = 1
+current = true
+size = 25.0
+far = 100.0
+script = ExtResource("1_vrp6w")

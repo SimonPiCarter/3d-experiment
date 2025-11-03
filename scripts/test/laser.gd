@@ -12,16 +12,17 @@ func _ready() -> void:
 func fire() -> void:
 	beam.scale = Vector3(1.,0,0)
 	beam.show()
+	boom.show()
 	var t = get_tree().create_tween()
 	t.tween_property(beam, "scale", Vector3.ONE, 0.075)
 	t.tween_property(beam, "scale", Vector3(1.,0,0), 0.075)
 	t.tween_callback(func(): beam.hide())
 
-	boom.scale = Vector3.ONE
 	t = get_tree().create_tween()
-	t.tween_interval(0.075)
-	t.tween_callback(func(): boom.show())
+	t.tween_interval(0.05)
+	t.tween_property(boom, "scale", Vector3.ONE, 0.025)
 	t.tween_interval(0.025)
+	t.tween_property(boom, "scale", Vector3.ZERO, 0.125)
 	t.tween_callback(func(): boom.hide())
 
 func _input(event: InputEvent) -> void:
