@@ -1,6 +1,7 @@
-[gd_scene load_steps=77 format=3 uid="uid://cnw1n1nonv4kl"]
+[gd_scene load_steps=86 format=3 uid="uid://cnw1n1nonv4kl"]
 
 [ext_resource type="Texture2D" uid="uid://ope5kfms8u5g" path="res://icon.svg" id="1_cybhl"]
+[ext_resource type="Script" uid="uid://vwf0d6uy0hnp" path="res://scenes/exp.gd" id="1_o73tt"]
 [ext_resource type="Script" uid="uid://d1sgp5r4tsu3l" path="res://scripts/FreeRoamingCamera3D.gd" id="1_vrp6w"]
 [ext_resource type="PackedScene" uid="uid://c4dptlryb3lgj" path="res://scenes/robotv2/robotv2.tscn" id="2_7gp3u"]
 [ext_resource type="Shader" uid="uid://55a2ytl3m1b8" path="res://shaders/edge_detection.gdshader" id="2_8hd41"]
@@ -14,6 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://v7x76lnh135e" path="res://scenes/test/power_ring/PowerRing.tscn" id="12_bome6"]
 [ext_resource type="PackedScene" uid="uid://vg4v25l817yt" path="res://scenes/test/exocube/exocube.tscn" id="13_f7ssd"]
 [ext_resource type="Shader" uid="uid://d3p2wo0h7klds" path="res://shaders/outline_color.gdshader" id="14_f7ssd"]
+[ext_resource type="Shader" uid="uid://cudieiuuu8p2o" path="res://shaders/outline_color_shaded.gdshader" id="15_ahtvx"]
+[ext_resource type="PackedScene" uid="uid://dk45ay0rdt3g6" path="res://scenes/projectile/basic_round/basic_round_projectile.tscn" id="16_48pke"]
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_rmv6m"]
 dof_blur_far_distance = 15.0
@@ -228,7 +231,7 @@ _data = {
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.14000002, 1), 0.0, 0.0, 0, 0, Vector2(0.48666665, 1), 0.0, 0.0, 0, 0, Vector2(0.9866667, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
-[sub_resource type="CurveTexture" id="CurveTexture_fpjiy"]
+[sub_resource type="CurveTexture" id="CurveTexture_o73tt"]
 curve = SubResource("Curve_ahtvx")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_48pke"]
@@ -237,7 +240,7 @@ emission_sphere_radius = 0.25
 gravity = Vector3(0, 0, 0)
 radial_accel_min = -1.0700022
 radial_accel_max = -1.0700022
-scale_curve = SubResource("CurveTexture_fpjiy")
+scale_curve = SubResource("CurveTexture_o73tt")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_o73tt"]
 render_priority = 1
@@ -250,16 +253,23 @@ shader_parameter/outline_width = 1.0
 shader_parameter/glow_width = 0.01
 shader_parameter/constant_width = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0plqt"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_em08d"]
 render_priority = 1
 next_pass = SubResource("ShaderMaterial_o73tt")
 shading_mode = 0
 albedo_color = Color(1, 0.8666667, 0.23529412, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_q5mio"]
-material = SubResource("StandardMaterial3D_0plqt")
+material = SubResource("StandardMaterial3D_em08d")
 radius = 0.2
 height = 0.4
+
+[sub_resource type="Curve" id="Curve_5bx06"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.14000002, 1), 0.0, 0.0, 0, 0, Vector2(0.48666665, 1), 0.0, 0.0, 0, 0, Vector2(0.9866667, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_fpjiy"]
+curve = SubResource("Curve_5bx06")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_em08d"]
 emission_shape = 1
@@ -353,7 +363,8 @@ size = Vector2(50, 50)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ahtvx"]
 diffuse_mode = 3
-albedo_color = Color(0.99215686, 0.79607844, 0.6901961, 1)
+specular_mode = 1
+albedo_color = Color(0.9775606, 0.621065, 0.41716826, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_f7ssd"]
 height = 10.0
@@ -435,9 +446,12 @@ _data = {
 &"pingpong": SubResource("Animation_gs3fw")
 }
 
+[sub_resource type="BoxMesh" id="BoxMesh_48pke"]
+size = Vector3(1, 10, 1)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gs3fw"]
 render_priority = 0
-shader = ExtResource("14_f7ssd")
+shader = ExtResource("15_ahtvx")
 shader_parameter/original_color = Color(0.99607843, 0.85882354, 0.38431373, 1)
 shader_parameter/high_shape_color = Color(0.78039217, 0.8627451, 0.8156863, 1)
 shader_parameter/low_shape_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
@@ -451,6 +465,25 @@ next_pass = SubResource("ShaderMaterial_gs3fw")
 shading_mode = 0
 albedo_color = Color(0.99607843, 0.85882354, 0.38431373, 1)
 
+[sub_resource type="BoxMesh" id="BoxMesh_ahtvx"]
+size = Vector3(1, 20, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ahtvx"]
+render_priority = 0
+shader = ExtResource("15_ahtvx")
+shader_parameter/original_color = Color(0.99607843, 0.85882354, 0.38431373, 1)
+shader_parameter/high_shape_color = Color(0.24313726, 0.20784314, 0.27450982, 1)
+shader_parameter/low_shape_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_width = 1.0
+shader_parameter/glow_width = 1.0
+shader_parameter/constant_width = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q5mio"]
+next_pass = SubResource("ShaderMaterial_ahtvx")
+shading_mode = 0
+albedo_color = Color(0.99607843, 0.85882354, 0.38431373, 1)
+
 [sub_resource type="Curve" id="Curve_q5mio"]
 _data = [Vector2(0, 0.29213488), 0.0, 0.0, 0, 0, Vector2(0.27227724, 1), 0.0, 0.0, 0, 0, Vector2(0.8019802, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.29213488), 0.0, 0.0, 0, 0]
 point_count = 4
@@ -460,6 +493,7 @@ _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.6881188, 0.37078655), 0.0, 0.0
 point_count = 4
 
 [node name="Node3D" type="Node3D"]
+script = ExtResource("1_o73tt")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 texture_filter = 1
@@ -1278,7 +1312,94 @@ transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 4.745391, -6.9849987, -
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 8.249, -7.3, -2.753)
 
 [node name="Robot3" parent="SubViewportContainer/SubViewport" instance=ExtResource("8_ttdhd")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 6.6495895, -7.755291, -2.7533588)
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 6.6495895, -7.6396294, -2.7533588)
+
+[node name="Robot4" parent="SubViewportContainer/SubViewport" instance=ExtResource("8_ttdhd")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 7.6495895, -7.6396294, -2.7533588)
+
+[node name="Robot5" parent="SubViewportContainer/SubViewport" instance=ExtResource("8_ttdhd")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 8.64959, -7.6396294, -2.7533588)
+
+[node name="Robot6" parent="SubViewportContainer/SubViewport" instance=ExtResource("8_ttdhd")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 9.64959, -7.6396294, -2.7533588)
+
+[node name="Robot7" parent="SubViewportContainer/SubViewport" instance=ExtResource("8_ttdhd")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 10.64959, -7.6396294, -2.7533588)
+
+[node name="Robot8" parent="SubViewportContainer/SubViewport" instance=ExtResource("8_ttdhd")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 6.6495895, -7.6396294, -1.7533588)
+
+[node name="Robot9" parent="SubViewportContainer/SubViewport" instance=ExtResource("8_ttdhd")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 7.6495895, -7.6396294, -1.7533588)
+
+[node name="Robot10" parent="SubViewportContainer/SubViewport" instance=ExtResource("8_ttdhd")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 8.64959, -7.6396294, -1.7533588)
+
+[node name="Robot11" parent="SubViewportContainer/SubViewport" instance=ExtResource("8_ttdhd")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 9.64959, -7.6396294, -1.7533588)
+
+[node name="Robot12" parent="SubViewportContainer/SubViewport" instance=ExtResource("8_ttdhd")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 10.64959, -7.6396294, -1.7533588)
+
+[node name="Robot13" parent="SubViewportContainer/SubViewport" instance=ExtResource("8_ttdhd")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 6.6495895, -7.6396294, -0.75335884)
+
+[node name="Robot14" parent="SubViewportContainer/SubViewport" instance=ExtResource("8_ttdhd")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 7.6495895, -7.6396294, -0.75335884)
+
+[node name="Robot15" parent="SubViewportContainer/SubViewport" instance=ExtResource("8_ttdhd")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 8.64959, -7.6396294, -0.75335884)
+
+[node name="Robot16" parent="SubViewportContainer/SubViewport" instance=ExtResource("8_ttdhd")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 9.64959, -7.6396294, -0.75335884)
+
+[node name="Robot17" parent="SubViewportContainer/SubViewport" instance=ExtResource("8_ttdhd")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 10.64959, -7.6396294, -0.75335884)
+
+[node name="Robot18" parent="SubViewportContainer/SubViewport" instance=ExtResource("8_ttdhd")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 6.6495895, -7.6396294, 0.24664116)
+
+[node name="Robot19" parent="SubViewportContainer/SubViewport" instance=ExtResource("8_ttdhd")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 7.6495895, -7.6396294, 0.24664116)
+
+[node name="Robot20" parent="SubViewportContainer/SubViewport" instance=ExtResource("8_ttdhd")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 8.64959, -7.6396294, 0.24664116)
+
+[node name="Robot21" parent="SubViewportContainer/SubViewport" instance=ExtResource("8_ttdhd")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 9.64959, -7.6396294, 0.24664116)
+
+[node name="Robot22" parent="SubViewportContainer/SubViewport" instance=ExtResource("8_ttdhd")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 10.64959, -7.6396294, 0.24664116)
+
+[node name="Robot23" parent="SubViewportContainer/SubViewport" instance=ExtResource("8_ttdhd")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 6.6495895, -7.6396294, 1.2466412)
+
+[node name="Robot24" parent="SubViewportContainer/SubViewport" instance=ExtResource("8_ttdhd")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 7.6495895, -7.6396294, 1.2466412)
+
+[node name="Robot25" parent="SubViewportContainer/SubViewport" instance=ExtResource("8_ttdhd")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 8.64959, -7.6396294, 1.2466412)
+
+[node name="Robot26" parent="SubViewportContainer/SubViewport" instance=ExtResource("8_ttdhd")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 9.64959, -7.6396294, 1.2466412)
+
+[node name="Robot27" parent="SubViewportContainer/SubViewport" instance=ExtResource("8_ttdhd")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 10.64959, -7.6396294, 1.2466412)
+
+[node name="Robot28" parent="SubViewportContainer/SubViewport" instance=ExtResource("8_ttdhd")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 6.6495895, -7.6396294, 2.2466412)
+
+[node name="Robot29" parent="SubViewportContainer/SubViewport" instance=ExtResource("8_ttdhd")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 7.6495895, -7.6396294, 2.2466412)
+
+[node name="Robot30" parent="SubViewportContainer/SubViewport" instance=ExtResource("8_ttdhd")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 8.64959, -7.6396294, 2.2466412)
+
+[node name="Robot31" parent="SubViewportContainer/SubViewport" instance=ExtResource("8_ttdhd")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 9.64959, -7.6396294, 2.2466412)
+
+[node name="Robot32" parent="SubViewportContainer/SubViewport" instance=ExtResource("8_ttdhd")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 10.64959, -7.6396294, 2.2466412)
 
 [node name="Node3D2" parent="SubViewportContainer/SubViewport" instance=ExtResource("8_hwmkj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1643801, -6.0603228, -7.202877)
@@ -1361,7 +1482,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_ttdhd")
 [node name="Env2" type="Node3D" parent="SubViewportContainer/SubViewport"]
 
 [node name="Background" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Env2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.616, -7.8, -1.491)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5906705, -7.8, -1.5078458)
 mesh = SubResource("PlaneMesh_f7ssd")
 skeleton = NodePath("../Sprite3D")
 surface_material_override/0 = SubResource("StandardMaterial3D_ahtvx")
@@ -1395,9 +1516,39 @@ autoplay = "pingpong"
 
 [node name="MeshInstance3D6" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Env2/pylones"]
 transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, -3.8475423, -9.392824, -3.4023442)
-mesh = SubResource("CapsuleMesh_f7ssd")
+mesh = SubResource("BoxMesh_48pke")
 skeleton = NodePath("../../Camera3D")
 surface_material_override/0 = SubResource("StandardMaterial3D_o73tt")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Env2/pylones"]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, -1.5968709, -13.439455, -0.8608403)
+mesh = SubResource("BoxMesh_ahtvx")
+skeleton = NodePath("../../Camera3D")
+surface_material_override/0 = SubResource("StandardMaterial3D_q5mio")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Env2/pylones"]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, -2.3862996, -14.680666, 0.15722609)
+mesh = SubResource("BoxMesh_ahtvx")
+skeleton = NodePath("../../Camera3D")
+surface_material_override/0 = SubResource("StandardMaterial3D_q5mio")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Env2/pylones"]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, -1.7882771, -13.97925, 0.039428234)
+mesh = SubResource("BoxMesh_ahtvx")
+skeleton = NodePath("../../Camera3D")
+surface_material_override/0 = SubResource("StandardMaterial3D_q5mio")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Env2/pylones"]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, -2.651009, -14.410952, -0.40319872)
+mesh = SubResource("BoxMesh_ahtvx")
+skeleton = NodePath("../../Camera3D")
+surface_material_override/0 = SubResource("StandardMaterial3D_q5mio")
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Env2/pylones"]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, -1.8614583, -15.706057, 0.7611079)
+mesh = SubResource("BoxMesh_ahtvx")
+skeleton = NodePath("../../Camera3D")
+surface_material_override/0 = SubResource("StandardMaterial3D_q5mio")
 
 [node name="PowerRing" parent="SubViewportContainer/SubViewport/Env2/pylones" instance=ExtResource("12_bome6")]
 transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, -0.5, 0, 0.5, -2.1855694e-08, -3.8935795, -7.121277, -3.3450809)
@@ -1415,3 +1566,8 @@ transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, -0.5, 0, 0.5, -2.1855694e-
 deg_speed = 720.0
 speed_curve = SubResource("Curve_q5mio")
 scale_curve = SubResource("Curve_em08d")
+
+[node name="BasicRoundProjectile" parent="SubViewportContainer/SubViewport/Env2" instance=ExtResource("16_48pke")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+end_pos = Vector3(0, 0, 20)
+speed = 40.0

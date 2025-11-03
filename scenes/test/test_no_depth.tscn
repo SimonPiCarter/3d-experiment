@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://c045ke0kgeqlu"]
+
+[ext_resource type="Shader" uid="uid://bin0mbe7q4t6" path="res://shaders/outline_color_nodepth.gdshader" id="1_e3hoj"]
+[ext_resource type="Shader" uid="uid://ujdtalvvduyo" path="res://shaders/outline_color_pass1.gdshader" id="2_w1hoy"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_vpkiw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1c5xl"]
+render_priority = 1
+shader = ExtResource("1_e3hoj")
+shader_parameter/original_color = Color(0.56078434, 0, 0, 1)
+shader_parameter/high_shape_color = Color(0.56078434, 0.972549, 0.8862745, 1)
+shader_parameter/low_shape_color = Color(0, 0, 0, 1)
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_width = 1.0
+shader_parameter/glow_width = 1.0
+shader_parameter/constant_width = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ii0a3"]
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_1c5xl")
+shader = ExtResource("2_w1hoy")
+shader_parameter/original_color = Color(0.56078434, 0, 0, 1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_vpkiw")
+surface_material_override/0 = SubResource("ShaderMaterial_ii0a3")

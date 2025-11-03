@@ -1,7 +1,6 @@
 @tool
 extends Node3D
 
-@onready var mesh_instance_3d_4: MeshInstance3D = $MeshInstance3D4
 const ELEMENT = preload("uid://dga3q1vfy3ub1")
 
 @export var x : int = 10

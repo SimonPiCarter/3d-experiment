@@ -10,8 +10,8 @@ shader_parameter/albedo = Color(0.8063221, 0.72777075, 0.63988394, 1)
 shader_parameter/specular = 0.0
 shader_parameter/metallic = 0.0
 shader_parameter/roughness = 0.0
-shader_parameter/edge_strength = 0.2
-shader_parameter/edge_color = Color(0.35245943, 0.29179478, 0.22255409, 1)
+shader_parameter/edge_strength = 0.890000042275
+shader_parameter/edge_color = Color(0, 0, 0, 1)
 
 [resource]
 render_priority = 0
