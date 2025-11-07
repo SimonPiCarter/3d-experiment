@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=3 uid="uid://dmo3l7pikx1mo"]
+
+[ext_resource type="Shader" uid="uid://cdb1i5cl1qemj" path="res://scenes/test/sphere/sphere_effect.tres" id="1_3g0rj"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_kehbw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m77fv"]
+render_priority = 0
+shader = ExtResource("1_3g0rj")
+shader_parameter/Threshold = 0.6770000321575
+shader_parameter/ColorLow = Color(0.9098039, 0.23137255, 0.23137255, 0.78431374)
+shader_parameter/ColorHigh = Color(0.96862745, 0.5882353, 0.09019608, 0.78431374)
+
+[sub_resource type="Environment" id="Environment_3g0rj"]
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_3g0rj"]
+size = Vector2(10, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3g0rj"]
+albedo_color = Color(1, 0.6096469, 0.45372838, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3g0rj"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="sphere" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_kehbw")
+surface_material_override/0 = SubResource("ShaderMaterial_m77fv")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.8682161, 0.49618623, 0, -0.49618623, 0.8682161, 0, 1.3148193, 2.295044)
+environment = SubResource("Environment_3g0rj")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6751709, 0)
+mesh = SubResource("PlaneMesh_3g0rj")
+skeleton = NodePath("../Camera3D")
+surface_material_override/0 = SubResource("StandardMaterial3D_3g0rj")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7061157, -1.2746582)
+mesh = SubResource("BoxMesh_3g0rj")
