@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=3 uid="uid://cnw1n1nonv4kl"]
+[gd_scene load_steps=101 format=3 uid="uid://cnw1n1nonv4kl"]
 
 [ext_resource type="Texture2D" uid="uid://ope5kfms8u5g" path="res://icon.svg" id="1_cybhl"]
 [ext_resource type="Script" uid="uid://vwf0d6uy0hnp" path="res://scenes/exp.gd" id="1_o73tt"]
@@ -17,6 +17,9 @@
 [ext_resource type="Shader" uid="uid://d3p2wo0h7klds" path="res://shaders/outline_color.gdshader" id="14_f7ssd"]
 [ext_resource type="Shader" uid="uid://cudieiuuu8p2o" path="res://shaders/outline_color_shaded.gdshader" id="15_ahtvx"]
 [ext_resource type="PackedScene" uid="uid://dk45ay0rdt3g6" path="res://scenes/projectile/basic_round/basic_round_projectile.tscn" id="16_48pke"]
+[ext_resource type="Shader" uid="uid://cm3uwk25hi3fy" path="res://scenes/test/sphere/depth_only.gdshader" id="16_xnn52"]
+[ext_resource type="PackedScene" uid="uid://cvyhsdynhh21x" path="res://scenes/VFX/Sphere/sphere.tscn" id="17_q5mio"]
+[ext_resource type="Shader" uid="uid://g3txdvnd7rsh" path="res://shaders/2d/pixel_outline.gdshader" id="19_em08d"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_rmv6m"]
 lightmap_size_hint = Vector2i(12, 12)
@@ -364,10 +367,23 @@ emission_energy_multiplier = 16.0
 [sub_resource type="PlaneMesh" id="PlaneMesh_f7ssd"]
 size = Vector2(50, 50)
 
+[sub_resource type="Gradient" id="Gradient_o73tt"]
+colors = PackedColorArray(0.9764706, 0.61960787, 0.41568628, 1, 0.9476287, 0.52065206, 0.25580785, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_q5mio"]
+gradient = SubResource("Gradient_o73tt")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mpahi"]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ahtvx"]
+next_pass = SubResource("ShaderMaterial_mpahi")
 diffuse_mode = 3
 specular_mode = 1
-albedo_color = Color(0.9775606, 0.621065, 0.41716826, 1)
+albedo_texture = SubResource("GradientTexture1D_q5mio")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wccig"]
+render_priority = 0
+shader = ExtResource("16_xnn52")
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_f7ssd"]
 height = 10.0
@@ -494,6 +510,77 @@ point_count = 4
 [sub_resource type="Curve" id="Curve_em08d"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.6881188, 0.37078655), 0.0, 0.0, 0, 0, Vector2(0.85643566, 0.37078655), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ujovj"]
+noise_type = 4
+frequency = 0.015
+fractal_octaves = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_em08d"]
+noise = SubResource("FastNoiseLite_ujovj")
+seamless = true
+
+[sub_resource type="Animation" id="Animation_ujovj"]
+resource_name = "test"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:threshold")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [0.8, 0.79]
+}
+
+[sub_resource type="Animation" id="Animation_i74qf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:threshold")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.8]
+}
+
+[sub_resource type="Animation" id="Animation_qhuvf"]
+resource_name = "test2"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:threshold")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.53333336),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i74qf"]
+_data = {
+&"RESET": SubResource("Animation_i74qf"),
+&"test": SubResource("Animation_ujovj"),
+&"test2": SubResource("Animation_qhuvf")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5upta"]
+shader = ExtResource("19_em08d")
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_width = 0.5
+shader_parameter/type = 1
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_mpahi"]
+viewport_path = NodePath("ViewportAlphaEffects/SubViewport")
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_o73tt")
@@ -1483,10 +1570,17 @@ surface_material_override/0 = SubResource("StandardMaterial3D_ttdhd")
 [node name="Env2" type="Node3D" parent="SubViewportContainer/SubViewport"]
 
 [node name="Background" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Env2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5906705, -7.8, -1.5078458)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6004361, -7.773633, -1.5166348)
 mesh = SubResource("PlaneMesh_f7ssd")
 skeleton = NodePath("../Sprite3D")
 surface_material_override/0 = SubResource("StandardMaterial3D_ahtvx")
+
+[node name="BackgroundDepth" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Env2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6004361, -7.773633, -1.5166348)
+layers = 4
+mesh = SubResource("PlaneMesh_f7ssd")
+skeleton = NodePath("../Sprite3D")
+surface_material_override/0 = SubResource("ShaderMaterial_wccig")
 
 [node name="pylones" type="Node3D" parent="SubViewportContainer/SubViewport/Env2"]
 
@@ -1568,12 +1662,24 @@ deg_speed = 720.0
 speed_curve = SubResource("Curve_q5mio")
 scale_curve = SubResource("Curve_em08d")
 
+[node name="SphereVFX" parent="SubViewportContainer/SubViewport/Env2" instance=ExtResource("17_q5mio")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.0004272461, -7.6469173, 11.921265)
+color_high = Color(0.68235296, 0.13725491, 0.20392157, 1)
+color_low = Color(0.96862745, 0.5882353, 0.09019608, 1)
+noise = SubResource("NoiseTexture2D_em08d")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewportContainer/SubViewport/Env2/SphereVFX"]
+libraries = {
+&"": SubResource("AnimationLibrary_i74qf")
+}
+autoplay = "test"
+
 [node name="BasicRoundProjectile" parent="SubViewportContainer/SubViewport/Env2" instance=ExtResource("16_48pke")]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
 end_pos = Vector3(0, 0, 20)
 speed = 40.0
 
-[node name="SubViewportContainer2" type="SubViewportContainer" parent="."]
+[node name="FrontRendering" type="SubViewportContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -1581,13 +1687,13 @@ grow_horizontal = 2
 grow_vertical = 2
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer2"]
+[node name="SubViewport" type="SubViewport" parent="FrontRendering"]
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
-[node name="Camera3D" type="Camera3D" parent="SubViewportContainer2/SubViewport"]
+[node name="Camera3D" type="Camera3D" parent="FrontRendering/SubViewport"]
 transform = Transform3D(0.59677106, 0.4980588, -0.6291278, -0.00085518067, 0.78444064, 0.6202034, 0.80241114, -0.3695814, 0.4685574, -12.499483, 3.0586882, 21.255123)
 cull_mask = 2
 projection = 1
@@ -1595,3 +1701,39 @@ current = true
 size = 25.0
 far = 100.0
 script = ExtResource("1_vrp6w")
+
+[node name="ViewportAlphaEffects" type="SubViewportContainer" parent="."]
+visibility_layer = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="ViewportAlphaEffects"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="ViewportAlphaEffects/SubViewport"]
+transform = Transform3D(0.59677106, 0.4980588, -0.6291278, -0.00085518067, 0.78444064, 0.6202034, 0.80241114, -0.3695814, 0.4685574, -12.499483, 3.0586882, 21.255123)
+cull_mask = 4
+projection = 1
+current = true
+size = 25.0
+far = 100.0
+script = ExtResource("1_vrp6w")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_5upta")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_mpahi")

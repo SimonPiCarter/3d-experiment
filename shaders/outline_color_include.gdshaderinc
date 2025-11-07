@@ -30,6 +30,10 @@ float get_depth(vec2 screen_uv, mat4 inv_projection_matrix) {
 #endif
 
 void fragment() {
+	if((CAMERA_VISIBLE_LAYERS & 1u) != 1u
+	&& (CAMERA_VISIBLE_LAYERS & 2u) != 2u) {
+		discard;
+	}
 	vec4 pixelatedtext = texture(SCREEN_TEXTURE, SCREEN_UV);
 	vec2 pixel_size = 1.0 / VIEWPORT_SIZE;
 	vec3 old_albedo = ALBEDO;

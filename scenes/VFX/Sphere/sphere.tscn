@@ -1,0 +1,185 @@
+[gd_scene load_steps=21 format=3 uid="uid://cvyhsdynhh21x"]
+
+[ext_resource type="Script" uid="uid://q0v8803ja1hd" path="res://scenes/VFX/Sphere/sphere.gd" id="1_11gdu"]
+[ext_resource type="Shader" uid="uid://cdb1i5cl1qemj" path="res://scenes/test/sphere/sphere_effect.tres" id="1_fibcu"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_11gdu"]
+noise_type = 4
+frequency = 0.015
+fractal_octaves = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8a028"]
+noise = SubResource("FastNoiseLite_11gdu")
+
+[sub_resource type="SphereMesh" id="SphereMesh_11gdu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6h5wy"]
+render_priority = 0
+shader = ExtResource("1_fibcu")
+shader_parameter/Threshold = 0.8
+shader_parameter/Noise = SubResource("NoiseTexture2D_8a028")
+shader_parameter/ColorLow = Color(1, 0, 0, 0.5)
+shader_parameter/ColorHigh = Color(0, 0, 1, 0.5)
+
+[sub_resource type="SphereMesh" id="SphereMesh_pwc1s"]
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_h3ow8"]
+default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(0, 0, 0, 0)]
+op_type = 2
+
+[sub_resource type="VisualShaderNodeVectorDecompose" id="VisualShaderNodeVectorDecompose_ujovj"]
+default_input_values = [0, Quaternion(0, 0, 0, 0)]
+op_type = 2
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_i74qf"]
+parameter_name = "Noise"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_qhuvf"]
+expanded_output_ports = [0]
+source = 5
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_w5lh8"]
+parameter_name = "ColorLow"
+
+[sub_resource type="VisualShaderNodeStep" id="VisualShaderNodeStep_7hj6l"]
+default_input_values = [0, 0.5, 1, 0.0]
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_b66sy"]
+parameter_name = "Threshold"
+hint = 1
+default_value_enabled = true
+default_value = 0.5
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_t81q7"]
+parameter_name = "ColorHigh"
+
+[sub_resource type="VisualShaderNodeFloatFunc" id="VisualShaderNodeFloatFunc_q5tw7"]
+function = 31
+
+[sub_resource type="VisualShaderNodeMultiplyAdd" id="VisualShaderNodeMultiplyAdd_2c7b8"]
+default_input_values = [0, Vector4(0, 0, 0, 0), 1, Vector4(1, 1, 1, 1), 2, Vector4(0, 0, 0, 0)]
+op_type = 3
+
+[sub_resource type="VisualShaderNodeMultiplyAdd" id="VisualShaderNodeMultiplyAdd_ml8yf"]
+default_input_values = [0, Vector4(0, 0, 0, 0), 1, Vector4(1, 1, 1, 1), 2, Vector4(0, 0, 0, 0)]
+op_type = 3
+
+[sub_resource type="VisualShader" id="VisualShader_ipffa"]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, depth_test_default, cull_back, diffuse_lambert, specular_schlick_ggx, unshaded;
+
+uniform float Threshold : hint_range(0.0, 1.0) = 0.5;
+uniform sampler2D Noise;
+uniform vec4 ColorLow : source_color;
+uniform vec4 ColorHigh : source_color;
+
+
+
+void fragment() {
+// FloatParameter:5
+	float n_out5p0 = Threshold;
+
+
+	vec4 n_out2p0;
+// Texture2D:2
+	n_out2p0 = texture(Noise, UV);
+	float n_out2p1 = n_out2p0.r;
+
+
+// Step:4
+	float n_out4p0 = step(n_out5p0, n_out2p1);
+
+
+// ColorParameter:3
+	vec4 n_out3p0 = ColorLow;
+
+
+// MultiplyAdd:8
+	vec4 n_in8p2 = vec4(0.00000, 0.00000, 0.00000, 0.00000);
+	vec4 n_out8p0 = fma(vec4(n_out4p0), n_out3p0, n_in8p2);
+
+
+// FloatFunc:7
+	float n_out7p0 = 1.0 - n_out4p0;
+
+
+// ColorParameter:6
+	vec4 n_out6p0 = ColorHigh;
+
+
+// MultiplyAdd:9
+	vec4 n_in9p2 = vec4(0.00000, 0.00000, 0.00000, 0.00000);
+	vec4 n_out9p0 = fma(vec4(n_out7p0), n_out6p0, n_in9p2);
+
+
+// VectorOp:10
+	vec4 n_out10p0 = n_out8p0 + n_out9p0;
+
+
+// VectorDecompose:11
+	float n_out11p0 = n_out10p0.x;
+	float n_out11p1 = n_out10p0.y;
+	float n_out11p2 = n_out10p0.z;
+	float n_out11p3 = n_out10p0.w;
+
+
+// Output:0
+	ALBEDO = vec3(n_out10p0.xyz);
+	ALPHA = n_out11p3;
+
+
+}
+"
+flags/unshaded = true
+nodes/fragment/0/position = Vector2(880, 320)
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_qhuvf")
+nodes/fragment/2/position = Vector2(-420, 640)
+nodes/fragment/3/node = SubResource("VisualShaderNodeColorParameter_w5lh8")
+nodes/fragment/3/position = Vector2(-120, 0)
+nodes/fragment/4/node = SubResource("VisualShaderNodeStep_7hj6l")
+nodes/fragment/4/position = Vector2(60, 440)
+nodes/fragment/5/node = SubResource("VisualShaderNodeFloatParameter_b66sy")
+nodes/fragment/5/position = Vector2(-300, 280)
+nodes/fragment/6/node = SubResource("VisualShaderNodeColorParameter_t81q7")
+nodes/fragment/6/position = Vector2(80, 200)
+nodes/fragment/7/node = SubResource("VisualShaderNodeFloatFunc_q5tw7")
+nodes/fragment/7/position = Vector2(260, 400)
+nodes/fragment/8/node = SubResource("VisualShaderNodeMultiplyAdd_2c7b8")
+nodes/fragment/8/position = Vector2(520, 80)
+nodes/fragment/9/node = SubResource("VisualShaderNodeMultiplyAdd_ml8yf")
+nodes/fragment/9/position = Vector2(500, 280)
+nodes/fragment/10/node = SubResource("VisualShaderNodeVectorOp_h3ow8")
+nodes/fragment/10/position = Vector2(780, 100)
+nodes/fragment/11/node = SubResource("VisualShaderNodeVectorDecompose_ujovj")
+nodes/fragment/11/position = Vector2(520, 520)
+nodes/fragment/12/node = SubResource("VisualShaderNodeTexture2DParameter_i74qf")
+nodes/fragment/12/position = Vector2(-760, 540)
+nodes/fragment/connections = PackedInt32Array(2, 1, 4, 1, 5, 0, 4, 0, 4, 0, 7, 0, 4, 0, 8, 0, 3, 0, 8, 1, 7, 0, 9, 0, 6, 0, 9, 1, 8, 0, 10, 0, 9, 0, 10, 1, 10, 0, 0, 0, 10, 0, 11, 0, 12, 0, 2, 2, 11, 3, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7p3ru"]
+render_priority = 1
+shader = SubResource("VisualShader_ipffa")
+shader_parameter/Threshold = 0.8
+shader_parameter/Noise = SubResource("NoiseTexture2D_8a028")
+shader_parameter/ColorLow = Color(1, 0, 0, 1)
+shader_parameter/ColorHigh = Color(0, 0, 1, 0)
+
+[node name="SphereVFX" type="Node3D"]
+script = ExtResource("1_11gdu")
+alpha = 0.5
+noise = SubResource("NoiseTexture2D_8a028")
+is_dirty = false
+
+[node name="sphere" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.0000001, 0, 0, 0, 0.9999998, 0, 0, 0, 1, 0, 0, 0)
+layers = 4
+mesh = SubResource("SphereMesh_11gdu")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_6h5wy")
+
+[node name="sphere2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.0000001, 0, 0, 0, 0.9999998, 0, 0, 0, 1, 0, 0, 0)
+layers = 4
+mesh = SubResource("SphereMesh_pwc1s")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_7p3ru")

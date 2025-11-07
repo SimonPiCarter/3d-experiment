@@ -1,10 +1,18 @@
 shader_type spatial;
-render_mode unshaded, depth_draw_opaque, depth_test_disabled;
+render_mode unshaded;
+
+const uint mask_layer_val = 1u;
 
 uniform vec4 original_color : source_color;
 
+void vertex() {
+	// Called for every vertex the material is visible on.
+}
+
 void fragment() {
-	ALBEDO = original_color.rgb;
-	ALPHA_HASH_SCALE = 1.0;
-	ALPHA = 1.0;
+	if((CAMERA_VISIBLE_LAYERS & mask_layer_val) == mask_layer_val) {
+		ALBEDO = original_color.rgb;
+	} else {
+		discard;
+	}
 }

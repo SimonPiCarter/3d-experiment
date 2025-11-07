@@ -35,7 +35,8 @@ float check_color(sampler2D tex, vec2 from, vec2 size) {
 		vec4 color = texture(tex, from + DIRECTIONS[i] * size * outline_width);
 		float diff_color = abs(color.r - ref_color.r)
 						 + abs(color.g - ref_color.g)
-						 + abs(color.b - ref_color.b);
+						 + abs(color.b - ref_color.b)
+						 + abs(color.a - ref_color.a);
 		float val_color = color.r+color.g+color.b;
 		float diff = ref_val_color - val_color;
 		float abs_diff = abs(diff);
