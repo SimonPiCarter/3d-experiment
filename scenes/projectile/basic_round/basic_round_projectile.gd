@@ -6,6 +6,12 @@ extends Node3D
 @onready var mesh_instance_3d: MeshInstance3D = $MeshInstance3D
 
 var done = true
+
+func _ready():
+	mesh_instance_3d.scale = Vector3.ZERO
+	for children in $Explosions.get_children():
+		children.scale = Vector3.ZERO
+
 func start() -> void:
 	if !done:
 		return

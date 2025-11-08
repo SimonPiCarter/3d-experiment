@@ -28,7 +28,7 @@ script = ExtResource("1_5dbit")
 deg_speed = 90.0
 
 [node name="Ring" type="Node3D" parent="."]
-transform = Transform3D(0.8658935, 0.5002269, 0, -0.5002269, 0.8658935, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(0.77234626, -0.63520116, 0, 0.63520116, 0.77234626, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ring"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9994488, 0, 0)

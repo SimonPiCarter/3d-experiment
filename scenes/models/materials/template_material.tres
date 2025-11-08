@@ -1,0 +1,27 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://foplxmniw6hv"]
+
+[ext_resource type="Shader" uid="uid://cm3uwk25hi3fy" path="res://scenes/test/sphere/depth_only.gdshader" id="1_61ku7"]
+[ext_resource type="Shader" uid="uid://d3p2wo0h7klds" path="res://shaders/outline_color.gdshader" id="2_ghemy"]
+[ext_resource type="Shader" uid="uid://ujdtalvvduyo" path="res://shaders/outline_color_pass1.gdshader" id="3_ayhqb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4h0bf"]
+render_priority = 0
+shader = ExtResource("1_61ku7")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_krmdn"]
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_4h0bf")
+shader = ExtResource("2_ghemy")
+shader_parameter/original_color = Color(0, 0, 0, 1)
+shader_parameter/high_shape_color = Color(0.40747654, 0.9300462, 0.36237338, 1)
+shader_parameter/low_shape_color = Color(0, 0, 0, 1)
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_width = 1.0
+shader_parameter/glow_width = 0.5
+shader_parameter/constant_width = true
+
+[resource]
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_krmdn")
+shader = ExtResource("3_ayhqb")
+shader_parameter/original_color = Color(0, 0, 0, 1)

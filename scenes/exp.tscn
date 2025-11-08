@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://dk45ay0rdt3g6" path="res://scenes/projectile/basic_round/basic_round_projectile.tscn" id="16_48pke"]
 [ext_resource type="Shader" uid="uid://cm3uwk25hi3fy" path="res://scenes/test/sphere/depth_only.gdshader" id="16_xnn52"]
 [ext_resource type="PackedScene" uid="uid://cvyhsdynhh21x" path="res://scenes/VFX/Sphere/sphere.tscn" id="17_q5mio"]
+[ext_resource type="Script" uid="uid://cslr07kprh2cn" path="res://scripts/vfx/explosion/sphere_animator.gd" id="19_5upta"]
 [ext_resource type="Shader" uid="uid://g3txdvnd7rsh" path="res://shaders/2d/pixel_outline.gdshader" id="19_em08d"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_rmv6m"]
@@ -520,7 +521,7 @@ fractal_octaves = 1
 noise = SubResource("FastNoiseLite_ujovj")
 seamless = true
 
-[sub_resource type="Animation" id="Animation_ujovj"]
+[sub_resource type="Animation" id="Animation_xnn52"]
 resource_name = "test"
 loop_mode = 2
 tracks/0/type = "value"
@@ -530,13 +531,13 @@ tracks/0/path = NodePath(".:threshold")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(-2, -2),
+"times": PackedFloat32Array(0, 0.93333334),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.8, 0.79]
 }
 
-[sub_resource type="Animation" id="Animation_i74qf"]
+[sub_resource type="Animation" id="Animation_5upta"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -548,29 +549,13 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.8]
+"values": [0.0]
 }
 
-[sub_resource type="Animation" id="Animation_qhuvf"]
-resource_name = "test2"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:threshold")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.53333336),
-"transitions": PackedFloat32Array(-2, -2),
-"update": 0,
-"values": [0.0, 1.0]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_i74qf"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mpahi"]
 _data = {
-&"RESET": SubResource("Animation_i74qf"),
-&"test": SubResource("Animation_ujovj"),
-&"test2": SubResource("Animation_qhuvf")
+&"RESET": SubResource("Animation_5upta"),
+&"test": SubResource("Animation_xnn52")
 }
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5upta"]
@@ -1665,14 +1650,42 @@ scale_curve = SubResource("Curve_em08d")
 [node name="SphereVFX" parent="SubViewportContainer/SubViewport/Env2" instance=ExtResource("17_q5mio")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.0004272461, -7.6469173, 11.921265)
 color_high = Color(0.68235296, 0.13725491, 0.20392157, 1)
-color_low = Color(0.96862745, 0.5882353, 0.09019608, 1)
+color_low = Color(0.9607843, 0.49019608, 0.2901961, 1)
+threshold = 0.0
 noise = SubResource("NoiseTexture2D_em08d")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewportContainer/SubViewport/Env2/SphereVFX"]
 libraries = {
-&"": SubResource("AnimationLibrary_i74qf")
+&"": SubResource("AnimationLibrary_mpahi")
 }
 autoplay = "test"
+
+[node name="SphereVFX2" parent="SubViewportContainer/SubViewport/Env2" instance=ExtResource("17_q5mio")]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, -0.0004272461, -7.6469173, 5.6568604)
+color_high = Color(0.56078434, 0.972549, 0.8862745, 1)
+color_low = Color(0.56078434, 0.972549, 0.8862745, 1)
+noise = SubResource("NoiseTexture2D_em08d")
+
+[node name="SphereAnimator" type="Node3D" parent="SubViewportContainer/SubViewport/Env2/SphereVFX2" node_paths=PackedStringArray("sphere")]
+script = ExtResource("19_5upta")
+lowering_start = 0.0
+lowering_time = 5.0
+vanishing_start = 4.0
+vanishing_time = 5.0
+sphere = NodePath("..")
+
+[node name="SphereVFX3" parent="SubViewportContainer/SubViewport/Env2" instance=ExtResource("17_q5mio")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -8.531189, -7.6469173, 5.6568604)
+color_high = Color(1, 1, 1, 1)
+color_low = Color(0.56078434, 0.827451, 1, 1)
+noise = SubResource("NoiseTexture2D_em08d")
+
+[node name="SphereAnimator" type="Node3D" parent="SubViewportContainer/SubViewport/Env2/SphereVFX3" node_paths=PackedStringArray("sphere")]
+script = ExtResource("19_5upta")
+lowering_time = -1.0
+vanishing_start = 0.2
+vanishing_time = 0.3
+sphere = NodePath("..")
 
 [node name="BasicRoundProjectile" parent="SubViewportContainer/SubViewport/Env2" instance=ExtResource("16_48pke")]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
