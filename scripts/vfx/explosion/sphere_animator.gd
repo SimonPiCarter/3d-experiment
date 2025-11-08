@@ -10,8 +10,12 @@ class_name SphereAnimator extends Node3D
 @export var loop_wait_time : float = 1.
 @export var sphere : SphereVFX = null
 
+@export var running = false
 var elapsed = -1.
+
 func _process(delta):
+	if not running:
+		return
 	if not sphere:
 		return
 	var time = max(lowering_start +lowering_time, vanishing_start + vanishing_time)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=101 format=3 uid="uid://cnw1n1nonv4kl"]
+[gd_scene load_steps=103 format=3 uid="uid://cnw1n1nonv4kl"]
 
 [ext_resource type="Texture2D" uid="uid://ope5kfms8u5g" path="res://icon.svg" id="1_cybhl"]
 [ext_resource type="Script" uid="uid://vwf0d6uy0hnp" path="res://scenes/exp.gd" id="1_o73tt"]
@@ -21,6 +21,8 @@
 [ext_resource type="PackedScene" uid="uid://cvyhsdynhh21x" path="res://scenes/VFX/Sphere/sphere.tscn" id="17_q5mio"]
 [ext_resource type="Script" uid="uid://cslr07kprh2cn" path="res://scripts/vfx/explosion/sphere_animator.gd" id="19_5upta"]
 [ext_resource type="Shader" uid="uid://g3txdvnd7rsh" path="res://shaders/2d/pixel_outline.gdshader" id="19_em08d"]
+[ext_resource type="PackedScene" uid="uid://bu0o6b85leql7" path="res://scenes/VFX/Explosion/explosions.tscn" id="21_mpahi"]
+[ext_resource type="PackedScene" uid="uid://sh6uw0xli20u" path="res://scenes/VFX/Explosion/sphere_explosion.tscn" id="22_wccig"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_rmv6m"]
 lightmap_size_hint = Vector2i(12, 12)
@@ -512,13 +514,13 @@ point_count = 4
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.6881188, 0.37078655), 0.0, 0.0, 0, 0, Vector2(0.85643566, 0.37078655), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_ujovj"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_mpahi"]
 noise_type = 4
 frequency = 0.015
 fractal_octaves = 1
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_em08d"]
-noise = SubResource("FastNoiseLite_ujovj")
+noise = SubResource("FastNoiseLite_mpahi")
 seamless = true
 
 [sub_resource type="Animation" id="Animation_xnn52"]
@@ -1673,6 +1675,7 @@ lowering_time = 5.0
 vanishing_start = 4.0
 vanishing_time = 5.0
 sphere = NodePath("..")
+running = true
 
 [node name="SphereVFX3" parent="SubViewportContainer/SubViewport/Env2" instance=ExtResource("17_q5mio")]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -8.531189, -7.6469173, 5.6568604)
@@ -1686,11 +1689,23 @@ lowering_time = -1.0
 vanishing_start = 0.2
 vanishing_time = 0.3
 sphere = NodePath("..")
+running = true
 
-[node name="BasicRoundProjectile" parent="SubViewportContainer/SubViewport/Env2" instance=ExtResource("16_48pke")]
+[node name="BasicRoundProjectileExplo" parent="SubViewportContainer/SubViewport/Env2" node_paths=PackedStringArray("explosion") instance=ExtResource("16_48pke")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+speed = 40.0
+explosion = NodePath("Explosions")
+
+[node name="Explosions" parent="SubViewportContainer/SubViewport/Env2/BasicRoundProjectileExplo" instance=ExtResource("21_mpahi")]
+
+[node name="BasicRoundProjectile" parent="SubViewportContainer/SubViewport/Env2" node_paths=PackedStringArray("explosion") instance=ExtResource("16_48pke")]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
 end_pos = Vector3(0, 0, 20)
 speed = 40.0
+explosion = NodePath("SphereExplosion")
+
+[node name="SphereExplosion" parent="SubViewportContainer/SubViewport/Env2/BasicRoundProjectile" instance=ExtResource("22_wccig")]
+transform = Transform3D(16, 0, 0, 0, 16, 0, 0, 0, 16, 0, 0, 0)
 
 [node name="FrontRendering" type="SubViewportContainer" parent="."]
 anchors_preset = 15
