@@ -10,7 +10,7 @@ class_name PowerRing extends Node3D
 
 func _ready():
 	for children in $Ring.get_children():
-		children.get_surface_override_material(0).next_pass.set_shader_parameter("high_shape_color", color)
+		children.get_surface_override_material(0).set_shader_parameter("original_color", color)
 
 
 var elapsed = 0.

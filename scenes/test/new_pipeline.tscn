@@ -1,0 +1,483 @@
+[gd_scene load_steps=42 format=3 uid="uid://boqtgauorybyx"]
+
+[ext_resource type="Shader" uid="uid://cw4s5m23hur31" path="res://shaders/primal/circle_from_plane.gdshader" id="1_gvkf4"]
+[ext_resource type="PackedScene" uid="uid://cvyhsdynhh21x" path="res://scenes/VFX/Sphere/sphere.tscn" id="1_m8x48"]
+[ext_resource type="Shader" uid="uid://cc18tpomiri80" path="res://shaders/new_pipeline/outline_new_pipeline_unshaded.gdshader" id="2_ap201"]
+[ext_resource type="PackedScene" uid="uid://dd7pumxmee75o" path="res://scenes/models/quad_entity_robot_2.tscn" id="3_ap201"]
+[ext_resource type="Shader" uid="uid://c4njs3466gxfy" path="res://shaders/2d/pixel_outline_v2.gdshader" id="3_iosng"]
+[ext_resource type="Script" uid="uid://cslr07kprh2cn" path="res://scripts/vfx/explosion/sphere_animator.gd" id="4_ltf4q"]
+[ext_resource type="PackedScene" uid="uid://dccijlgfscbxi" path="res://scenes/models/quad_entity_robot_3.tscn" id="4_rijnb"]
+[ext_resource type="Script" uid="uid://d1sgp5r4tsu3l" path="res://scripts/FreeRoamingCamera3D.gd" id="6_1u752"]
+[ext_resource type="PackedScene" uid="uid://v7x76lnh135e" path="res://scenes/test/power_ring/PowerRing.tscn" id="8_6n3pg"]
+[ext_resource type="Shader" uid="uid://cv4deawtx0pb3" path="res://shaders/new_pipeline/outline_new_pipeline_shaded.gdshader" id="9_rijnb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_olbwg"]
+render_priority = -1
+shader = ExtResource("1_gvkf4")
+shader_parameter/ray = 0.4
+shader_parameter/width = 0.005
+shader_parameter/outline = 0.0
+shader_parameter/color = Color(0.2, 1, 0.2, 0.58431375)
+shader_parameter/ouline_color = Color(0.7555181, 0.077867486, 0.3136828, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_iosng"]
+material = SubResource("ShaderMaterial_olbwg")
+size = Vector2(10, 10)
+subdivide_width = 2
+
+[sub_resource type="Animation" id="Animation_olbwg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:mesh:material:shader_parameter/ray")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.4]
+}
+
+[sub_resource type="Animation" id="Animation_hur3k"]
+resource_name = "test"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:mesh:material:shader_parameter/ray")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [0.1, 0.4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_67yr2"]
+_data = {
+&"RESET": SubResource("Animation_olbwg"),
+&"test": SubResource("Animation_hur3k")
+}
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_gvkf4"]
+size = Vector2(50, 50)
+
+[sub_resource type="Gradient" id="Gradient_74qp2"]
+colors = PackedColorArray(0.9764706, 0.61960787, 0.41568628, 1, 0.9476287, 0.52065206, 0.25580785, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rijnb"]
+gradient = SubResource("Gradient_74qp2")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4raox"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = SubResource("GradientTexture1D_rijnb")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6n3pg"]
+render_priority = 0
+shader = ExtResource("2_ap201")
+shader_parameter/original_color = Color(0, 0, 0, 1)
+shader_parameter/outline_color = Color(0, 0, 0.007843138, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_rv1hs"]
+height = 10.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rijnb"]
+render_priority = 0
+shader = ExtResource("2_ap201")
+shader_parameter/original_color = Color(1, 0.28627452, 0.2784314, 1)
+shader_parameter/outline_color = Color(0, 0, 0.003921569, 1)
+
+[sub_resource type="Animation" id="Animation_mb1q2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PowerRing3:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.006350994, 2.1603208, 0.013381004)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PowerRing4:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.006350994, 3.4189363, 0.013381004)]
+}
+
+[sub_resource type="Animation" id="Animation_gs3fw"]
+resource_name = "new_animation"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PowerRing3:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector3(-0.006350994, 2.1603208, 0.013381004), Vector3(-0.006, 3.419, 0.013)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PowerRing4:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector3(-0.006350994, 3.4189363, 0.013381004), Vector3(-0.006, 2.16, 0.013)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mb1q2"]
+_data = {
+&"RESET": SubResource("Animation_mb1q2"),
+&"pingpong": SubResource("Animation_gs3fw")
+}
+
+[sub_resource type="BoxMesh" id="BoxMesh_0k3ve"]
+size = Vector3(1, 10, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_74qp2"]
+render_priority = 0
+shader = ExtResource("9_rijnb")
+shader_parameter/original_color = Color(0.78039217, 0.8627451, 0.8156863, 1)
+shader_parameter/outline_color = Color(0, 0, 0.007843138, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_e07xg"]
+size = Vector3(1, 20, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4raox"]
+render_priority = 0
+shader = ExtResource("9_rijnb")
+shader_parameter/original_color = Color(0.24313726, 0.20784314, 0.27450982, 1)
+shader_parameter/outline_color = Color(0, 0.29803923, 0.10980392, 1)
+
+[sub_resource type="Curve" id="Curve_meuj1"]
+_data = [Vector2(0, 0.29213488), 0.0, 0.0, 0, 0, Vector2(0.27227724, 1), 0.0, 0.0, 0, 0, Vector2(0.8019802, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.29213488), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Curve" id="Curve_voo7p"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.6881188, 0.37078655), 0.0, 0.0, 0, 0, Vector2(0.85643566, 0.37078655), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Sky" id="Sky_ckagc"]
+
+[sub_resource type="Environment" id="Environment_rijnb"]
+sky = SubResource("Sky_ckagc")
+ambient_light_source = 2
+ambient_light_color = Color(0.6775041, 0.784652, 1, 1)
+ambient_light_energy = 0.05
+glow_enabled = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_mpahi"]
+noise_type = 4
+frequency = 0.015
+fractal_octaves = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_74qp2"]
+noise = SubResource("FastNoiseLite_mpahi")
+seamless = true
+
+[sub_resource type="Animation" id="Animation_5upta"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:threshold")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_xnn52"]
+resource_name = "test"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:threshold")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.93333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.8, 0.79]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mpahi"]
+_data = {
+&"RESET": SubResource("Animation_5upta"),
+&"test": SubResource("Animation_xnn52")
+}
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_gvkf4"]
+viewport_path = NodePath("MainViewport/SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m8x48"]
+shader = ExtResource("3_iosng")
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_width = 1.0
+shader_parameter/type = 2
+shader_parameter/active = 1
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_vwlc3"]
+viewport_path = NodePath("OutlineViewport/SubViewport")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MainViewport" type="SubViewportContainer" parent="."]
+visibility_layer = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="MainViewport"]
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="circle" type="MeshInstance3D" parent="MainViewport/SubViewport"]
+layers = 17
+mesh = SubResource("PlaneMesh_iosng")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MainViewport/SubViewport/circle"]
+libraries = {
+&"": SubResource("AnimationLibrary_67yr2")
+}
+autoplay = "test"
+
+[node name="Background" type="MeshInstance3D" parent="MainViewport/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6004361, -0.15586472, -1.5166348)
+mesh = SubResource("PlaneMesh_gvkf4")
+skeleton = NodePath("../Sprite3D")
+surface_material_override/0 = SubResource("StandardMaterial3D_4raox")
+
+[node name="BackgroundCheck" type="MeshInstance3D" parent="MainViewport/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6004361, -0.15586472, -1.5166348)
+layers = 16
+mesh = SubResource("PlaneMesh_gvkf4")
+skeleton = NodePath("../Sprite3D")
+surface_material_override/0 = SubResource("ShaderMaterial_6n3pg")
+
+[node name="HealerBot" parent="MainViewport/SubViewport" instance=ExtResource("3_ap201")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -5.0878887, 0.8005185, -4.269994)
+
+[node name="SmallBot" parent="MainViewport/SubViewport" instance=ExtResource("4_rijnb")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.6380758, -0.016079545, 5.0515814)
+
+[node name="Camera3D" type="Camera3D" parent="MainViewport/SubViewport"]
+transform = Transform3D(0.59677106, 0.4980588, -0.6291278, -0.00085518067, 0.78444064, 0.6202034, 0.80241114, -0.3695814, 0.4685574, -6.326, 20, 6.01)
+cull_mask = 1
+projection = 1
+current = true
+size = 25.0
+far = 100.0
+script = ExtResource("6_1u752")
+
+[node name="pylones" type="Node3D" parent="MainViewport/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.219317, 0)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MainViewport/SubViewport/pylones"]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, -1.7953777, -9.281599, -5.708497)
+layers = 17
+mesh = SubResource("CapsuleMesh_rv1hs")
+skeleton = NodePath("../../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_rijnb")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="MainViewport/SubViewport/pylones"]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, -6.7838345, -9.281599, -1.6676779)
+layers = 17
+mesh = SubResource("CapsuleMesh_rv1hs")
+skeleton = NodePath("../../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_rijnb")
+
+[node name="PowerRing3" parent="MainViewport/SubViewport/pylones/MeshInstance3D5" instance=ExtResource("8_6n3pg")]
+transform = Transform3D(0.50000006, 0, 0, 0, -2.1855683e-08, -0.49999976, 0, 0.50000006, -2.1855696e-08, -0.006350994, 2.1603208, 0.013381004)
+
+[node name="PowerRing4" parent="MainViewport/SubViewport/pylones/MeshInstance3D5" instance=ExtResource("8_6n3pg")]
+transform = Transform3D(0.3535534, 0.3535534, -1.5454312e-08, 0, -2.1855683e-08, -0.49999976, -0.3535534, 0.3535534, -1.5454312e-08, -0.006350994, 3.4189363, 0.013381004)
+clockwise = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MainViewport/SubViewport/pylones/MeshInstance3D5"]
+libraries = {
+&"": SubResource("AnimationLibrary_mb1q2")
+}
+autoplay = "pingpong"
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="MainViewport/SubViewport/pylones"]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, -3.8475423, -9.392824, -3.4023442)
+layers = 17
+mesh = SubResource("BoxMesh_0k3ve")
+skeleton = NodePath("../../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_74qp2")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="MainViewport/SubViewport/pylones"]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, -1.5968709, -13.439455, -0.8608403)
+layers = 17
+mesh = SubResource("BoxMesh_e07xg")
+skeleton = NodePath("../../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_4raox")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="MainViewport/SubViewport/pylones"]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, -2.3862996, -14.680666, 0.15722609)
+layers = 17
+mesh = SubResource("BoxMesh_e07xg")
+skeleton = NodePath("../../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_4raox")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="MainViewport/SubViewport/pylones"]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, -1.7882771, -13.97925, 0.039428234)
+layers = 17
+mesh = SubResource("BoxMesh_e07xg")
+skeleton = NodePath("../../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_4raox")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="MainViewport/SubViewport/pylones"]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, -2.651009, -14.410952, -0.40319872)
+layers = 17
+mesh = SubResource("BoxMesh_e07xg")
+skeleton = NodePath("../../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_4raox")
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="MainViewport/SubViewport/pylones"]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, -1.8614583, -15.706057, 0.7611079)
+layers = 17
+mesh = SubResource("BoxMesh_e07xg")
+skeleton = NodePath("../../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_4raox")
+
+[node name="PowerRing" parent="MainViewport/SubViewport/pylones" instance=ExtResource("8_6n3pg")]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, -0.5, 0, 0.5, -2.1855694e-08, -3.8935795, -7.121277, -3.3450809)
+deg_speed = 720.0
+speed_curve = SubResource("Curve_meuj1")
+scale_curve = SubResource("Curve_voo7p")
+
+[node name="PowerRing2" parent="MainViewport/SubViewport/pylones" instance=ExtResource("8_6n3pg")]
+transform = Transform3D(0.35355338, 0.35355338, -1.545431e-08, 0, -2.1855694e-08, -0.5, -0.35355338, 0.35355338, -1.545431e-08, -3.8935795, -5.862661, -3.3450809)
+clockwise = false
+color = Color(0.1962552, 0.68664235, 0.58633333, 1)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="MainViewport/SubViewport"]
+environment = SubResource("Environment_rijnb")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="MainViewport/SubViewport"]
+transform = Transform3D(0.95441765, -0.10836294, 0.27810884, -0.11621561, 0.72331774, 0.6806655, -0.27491996, -0.6819597, 0.6777537, 2.5636919, 3.3113484, -1.9355414)
+shadow_enabled = true
+sky_mode = 1
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="MainViewport/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.16723329, 0.98591745, 0, -0.98591745, 0.16723329, 0, 8.906378, 11.516099)
+
+[node name="SphereVFX2" parent="MainViewport/SubViewport" instance=ExtResource("1_m8x48")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.0004272461, 0, 11.921265)
+color_high = Color(0.68235296, 0.13725491, 0.20392157, 1)
+color_low = Color(0.9607843, 0.49019608, 0.2901961, 1)
+threshold = 0.0
+noise = SubResource("NoiseTexture2D_74qp2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MainViewport/SubViewport/SphereVFX2"]
+root_node = NodePath("../../SphereVFX2")
+libraries = {
+&"": SubResource("AnimationLibrary_mpahi")
+}
+autoplay = "test"
+
+[node name="SphereVFX3" parent="MainViewport/SubViewport" instance=ExtResource("1_m8x48")]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, -0.0004272461, 0, 5.6568604)
+color_high = Color(0.56078434, 0.972549, 0.8862745, 1)
+color_low = Color(0.56078434, 0.972549, 0.8862745, 1)
+noise = SubResource("NoiseTexture2D_74qp2")
+
+[node name="SphereAnimator" type="Node3D" parent="MainViewport/SubViewport/SphereVFX3" node_paths=PackedStringArray("sphere")]
+script = ExtResource("4_ltf4q")
+lowering_start = 0.0
+lowering_time = 5.0
+vanishing_start = 4.0
+vanishing_time = 5.0
+sphere = NodePath("..")
+running = true
+
+[node name="SphereVFX4" parent="MainViewport/SubViewport" instance=ExtResource("1_m8x48")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -8.531189, 0, 5.6568604)
+color_high = Color(1, 1, 1, 1)
+color_low = Color(0.56078434, 0.827451, 1, 1)
+noise = SubResource("NoiseTexture2D_74qp2")
+
+[node name="SphereAnimator" type="Node3D" parent="MainViewport/SubViewport/SphereVFX4" node_paths=PackedStringArray("sphere")]
+script = ExtResource("4_ltf4q")
+lowering_time = -1.0
+vanishing_start = 0.2
+vanishing_time = 0.3
+sphere = NodePath("..")
+running = true
+
+[node name="OutlineViewport" type="SubViewportContainer" parent="."]
+visibility_layer = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="OutlineViewport"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="OutlineViewport/SubViewport"]
+transform = Transform3D(0.59677106, 0.4980588, -0.6291278, -0.00085518067, 0.78444064, 0.6202034, 0.80241114, -0.3695814, 0.4685574, -6.326, 20, 6.01)
+cull_mask = 16
+projection = 1
+current = true
+size = 25.0
+far = 100.0
+script = ExtResource("6_1u752")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MainView" type="TextureRect" parent="CanvasLayer"]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_gvkf4")
+
+[node name="OutlineView" type="TextureRect" parent="CanvasLayer"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_m8x48")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_vwlc3")

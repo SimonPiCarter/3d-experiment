@@ -6,6 +6,7 @@ render_mode unshaded;
 #ifdef NODEPTH
 render_mode depth_draw_opaque, depth_test_disabled;
 #endif
+stencil_mode read, compare_equal;
 
 uniform sampler2D SCREEN_TEXTURE : hint_screen_texture;
 #ifndef NODEPTH

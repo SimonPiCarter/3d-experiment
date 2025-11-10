@@ -1,56 +1,22 @@
-[gd_scene load_steps=14 format=3 uid="uid://bpf2yq0qibfvi"]
+[gd_scene load_steps=8 format=3 uid="uid://bpf2yq0qibfvi"]
 
 [ext_resource type="PackedScene" uid="uid://dp5d6xpbviyh6" path="res://model/robot2.glb" id="1_fcyj1"]
 [ext_resource type="Script" uid="uid://b6g8yt8ck3bkc" path="res://scripts/ik/ik_quad_object.gd" id="2_2q834"]
 [ext_resource type="Script" uid="uid://cssyvtlm806gc" path="res://scripts/ik/ik_auto_start.gd" id="2_a8m4m"]
-[ext_resource type="Shader" uid="uid://d3p2wo0h7klds" path="res://shaders/outline_color.gdshader" id="3_flht3"]
-[ext_resource type="Shader" uid="uid://cm3uwk25hi3fy" path="res://scenes/test/sphere/depth_only.gdshader" id="3_g76fm"]
-[ext_resource type="Shader" uid="uid://cudieiuuu8p2o" path="res://shaders/outline_color_shaded.gdshader" id="3_obp05"]
-[ext_resource type="Shader" uid="uid://ujdtalvvduyo" path="res://shaders/outline_color_pass1.gdshader" id="4_obp05"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1nqg0"]
-render_priority = 0
-shader = ExtResource("3_g76fm")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_obp05"]
-render_priority = 0
-next_pass = SubResource("ShaderMaterial_1nqg0")
-shader = ExtResource("3_obp05")
-shader_parameter/original_color = Color(0, 0, 0, 1)
-shader_parameter/high_shape_color = Color(0.67058825, 0.5803922, 0.47843137, 1)
-shader_parameter/low_shape_color = Color(0, 0, 0, 1)
-shader_parameter/outline_color = Color(0, 0, 0, 1)
-shader_parameter/outline_width = 1.0
-shader_parameter/glow_width = 1.0
-shader_parameter/constant_width = true
+[ext_resource type="Shader" uid="uid://cc18tpomiri80" path="res://shaders/new_pipeline/outline_new_pipeline_unshaded.gdshader" id="4_krmdn"]
+[ext_resource type="Shader" uid="uid://cv4deawtx0pb3" path="res://shaders/new_pipeline/outline_new_pipeline_shaded.gdshader" id="5_obp05"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g76fm"]
 render_priority = 0
-next_pass = SubResource("ShaderMaterial_obp05")
-shader = ExtResource("4_obp05")
-shader_parameter/original_color = Color(0, 0, 0, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4h0bf"]
-render_priority = 0
-shader = ExtResource("3_g76fm")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_icg18"]
-render_priority = 0
-next_pass = SubResource("ShaderMaterial_4h0bf")
-shader = ExtResource("3_flht3")
-shader_parameter/original_color = Color(0.003921569, 0.039215688, 0.003921569, 1)
-shader_parameter/high_shape_color = Color(0.40747654, 0.9300462, 0.36237338, 1)
-shader_parameter/low_shape_color = Color(0, 0, 0, 1)
-shader_parameter/outline_color = Color(0, 0, 0, 1)
-shader_parameter/outline_width = 1.0
-shader_parameter/glow_width = 3.0
-shader_parameter/constant_width = true
+shader = ExtResource("5_obp05")
+shader_parameter/original_color = Color(0.67058825, 0.5803922, 0.47843137, 1)
+shader_parameter/outline_color = Color(0.59607846, 0, 0, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wfoq8"]
 render_priority = 0
-next_pass = SubResource("ShaderMaterial_icg18")
-shader = ExtResource("4_obp05")
-shader_parameter/original_color = Color(0.003921569, 0.039215688, 0.003921569, 1)
+shader = ExtResource("4_krmdn")
+shader_parameter/original_color = Color(0.40784314, 0.92941177, 0.36078432, 1)
+shader_parameter/outline_color = Color(0.003921569, 0.58431375, 0.003921569, 1)
 
 [node name="robot2" node_paths=PackedStringArray("FrontLeftLeg", "FrontRightLeg", "BackLeftLeg", "BackRightLeg", "Armature") instance=ExtResource("1_fcyj1")]
 script = ExtResource("2_2q834")
@@ -65,11 +31,11 @@ layers = 1021
 surface_material_override/0 = SubResource("ShaderMaterial_g76fm")
 
 [node name="Icosphere" parent="Armature/Skeleton3D" index="1"]
-layers = 5
+layers = 29
 surface_material_override/0 = SubResource("ShaderMaterial_wfoq8")
 
 [node name="Legs" parent="Armature/Skeleton3D" index="2"]
-layers = 5
+layers = 29
 surface_material_override/0 = SubResource("ShaderMaterial_g76fm")
 
 [node name="FrontLeft" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="3"]

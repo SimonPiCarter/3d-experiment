@@ -3,6 +3,7 @@ shader_type canvas_item;
 uniform vec4 outline_color : source_color;
 uniform float outline_width = 1.0;
 uniform int type : hint_range(0, 2) = 2;
+uniform int active : hint_range(0,1) = 1;
 
 const vec2[8] DIRECTIONS = {
 	vec2(1.0, 0.0),
@@ -38,12 +39,14 @@ float check_color(sampler2D tex, vec2 from, vec2 size) {
 		float val_color = color.r+color.g+color.b;
 		float diff = ref_val_color - val_color;
 		float abs_diff = abs(diff);
-		result += diff_color * (abs_diff - diff + 1.-color.a);
+		result += gtz(diff_color) * gtz(abs_diff - diff);
 	}
 	return result * ref_color.a;
 }
 
 void fragment() {
-	COLOR = mix( COLOR, outline_color,
-		check_color(TEXTURE, UV, TEXTURE_PIXEL_SIZE));
+	if (active > 0) {
+		COLOR.rgb = outline_color.rgb;
+		COLOR.a = check_color(TEXTURE, UV, TEXTURE_PIXEL_SIZE);
+	}
 }

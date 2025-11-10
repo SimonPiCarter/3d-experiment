@@ -1,11 +1,11 @@
 shader_type spatial;
-render_mode unshaded;
+render_mode diffuse_toon, specular_toon, shadows_disabled;
 
 const uint mask_layer_val = 1u;
 const uint outline_layer_val = 1u>>5u;
 
 uniform vec4 original_color : source_color;
-uniform vec4 outline_color : source_color;
+uniform vec4 outline_color : source_color = vec4(0.5,0.5,0.5,1.);
 
 void vertex() {
 	// Called for every vertex the material is visible on.
