@@ -11,7 +11,7 @@ class_name TargetContainer extends Node3D
 # last set
 var last_set_ik_target : Array[IKTarget] = []
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	# first check set 1
 	for ik_target in set_ik_target_1:
 		if ik_target.should_step():

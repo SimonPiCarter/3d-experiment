@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://boqtgauorybyx"]
+[gd_scene load_steps=43 format=3 uid="uid://boqtgauorybyx"]
 
 [ext_resource type="Shader" uid="uid://cw4s5m23hur31" path="res://shaders/primal/circle_from_plane.gdshader" id="1_gvkf4"]
 [ext_resource type="PackedScene" uid="uid://cvyhsdynhh21x" path="res://scenes/VFX/Sphere/sphere.tscn" id="1_m8x48"]
@@ -7,6 +7,7 @@
 [ext_resource type="Shader" uid="uid://c4njs3466gxfy" path="res://shaders/2d/pixel_outline_v2.gdshader" id="3_iosng"]
 [ext_resource type="Script" uid="uid://cslr07kprh2cn" path="res://scripts/vfx/explosion/sphere_animator.gd" id="4_ltf4q"]
 [ext_resource type="PackedScene" uid="uid://dccijlgfscbxi" path="res://scenes/models/quad_entity_robot_3.tscn" id="4_rijnb"]
+[ext_resource type="PackedScene" uid="uid://dwd16khdfntj7" path="res://scenes/models/quad_entity_simpl_robot.tscn" id="5_6n3pg"]
 [ext_resource type="Script" uid="uid://d1sgp5r4tsu3l" path="res://scripts/FreeRoamingCamera3D.gd" id="6_1u752"]
 [ext_resource type="PackedScene" uid="uid://v7x76lnh135e" path="res://scenes/test/power_ring/PowerRing.tscn" id="8_6n3pg"]
 [ext_resource type="Shader" uid="uid://cv4deawtx0pb3" path="res://shaders/new_pipeline/outline_new_pipeline_shaded.gdshader" id="9_rijnb"]
@@ -152,15 +153,6 @@ _data = {
 &"pingpong": SubResource("Animation_gs3fw")
 }
 
-[sub_resource type="BoxMesh" id="BoxMesh_0k3ve"]
-size = Vector3(1, 10, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_74qp2"]
-render_priority = 0
-shader = ExtResource("9_rijnb")
-shader_parameter/original_color = Color(0.78039217, 0.8627451, 0.8156863, 1)
-shader_parameter/outline_color = Color(0, 0, 0.007843138, 1)
-
 [sub_resource type="BoxMesh" id="BoxMesh_e07xg"]
 size = Vector3(1, 20, 1)
 
@@ -169,6 +161,15 @@ render_priority = 0
 shader = ExtResource("9_rijnb")
 shader_parameter/original_color = Color(0.24313726, 0.20784314, 0.27450982, 1)
 shader_parameter/outline_color = Color(0, 0.29803923, 0.10980392, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0k3ve"]
+size = Vector3(1, 10, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_74qp2"]
+render_priority = 0
+shader = ExtResource("9_rijnb")
+shader_parameter/original_color = Color(0.78039217, 0.8627451, 0.8156863, 1)
+shader_parameter/outline_color = Color(0, 0, 0.007843138, 1)
 
 [sub_resource type="Curve" id="Curve_meuj1"]
 _data = [Vector2(0, 0.29213488), 0.0, 0.0, 0, 0, Vector2(0.27227724, 1), 0.0, 0.0, 0, 0, Vector2(0.8019802, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.29213488), 0.0, 0.0, 0, 0]
@@ -286,10 +287,13 @@ skeleton = NodePath("../Sprite3D")
 surface_material_override/0 = SubResource("ShaderMaterial_6n3pg")
 
 [node name="HealerBot" parent="MainViewport/SubViewport" instance=ExtResource("3_ap201")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -5.0878887, 0.8005185, -4.269994)
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -5.0878887, 0.62210655, -4.269994)
 
 [node name="SmallBot" parent="MainViewport/SubViewport" instance=ExtResource("4_rijnb")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.6380758, -0.016079545, 5.0515814)
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.6380758, -0.04581499, 5.0515814)
+
+[node name="SimpleRobot" parent="MainViewport/SubViewport" instance=ExtResource("5_6n3pg")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 8.249, 0.3043263, -2.753)
 
 [node name="Camera3D" type="Camera3D" parent="MainViewport/SubViewport"]
 transform = Transform3D(0.59677106, 0.4980588, -0.6291278, -0.00085518067, 0.78444064, 0.6202034, 0.80241114, -0.3695814, 0.4685574, -6.326, 20, 6.01)
@@ -303,83 +307,86 @@ script = ExtResource("6_1u752")
 [node name="pylones" type="Node3D" parent="MainViewport/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.219317, 0)
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="MainViewport/SubViewport/pylones"]
+[node name="Pylone1" type="MeshInstance3D" parent="MainViewport/SubViewport/pylones"]
 transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, -1.7953777, -9.281599, -5.708497)
 layers = 17
 mesh = SubResource("CapsuleMesh_rv1hs")
 skeleton = NodePath("../../Camera3D")
 surface_material_override/0 = SubResource("ShaderMaterial_rijnb")
 
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="MainViewport/SubViewport/pylones"]
+[node name="Pylone2" type="MeshInstance3D" parent="MainViewport/SubViewport/pylones"]
 transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, -6.7838345, -9.281599, -1.6676779)
 layers = 17
 mesh = SubResource("CapsuleMesh_rv1hs")
 skeleton = NodePath("../../Camera3D")
 surface_material_override/0 = SubResource("ShaderMaterial_rijnb")
 
-[node name="PowerRing3" parent="MainViewport/SubViewport/pylones/MeshInstance3D5" instance=ExtResource("8_6n3pg")]
+[node name="PowerRing3" parent="MainViewport/SubViewport/pylones/Pylone2" instance=ExtResource("8_6n3pg")]
 transform = Transform3D(0.50000006, 0, 0, 0, -2.1855683e-08, -0.49999976, 0, 0.50000006, -2.1855696e-08, -0.006350994, 2.1603208, 0.013381004)
 
-[node name="PowerRing4" parent="MainViewport/SubViewport/pylones/MeshInstance3D5" instance=ExtResource("8_6n3pg")]
+[node name="PowerRing4" parent="MainViewport/SubViewport/pylones/Pylone2" instance=ExtResource("8_6n3pg")]
 transform = Transform3D(0.3535534, 0.3535534, -1.5454312e-08, 0, -2.1855683e-08, -0.49999976, -0.3535534, 0.3535534, -1.5454312e-08, -0.006350994, 3.4189363, 0.013381004)
 clockwise = false
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="MainViewport/SubViewport/pylones/MeshInstance3D5"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MainViewport/SubViewport/pylones/Pylone2"]
 libraries = {
 &"": SubResource("AnimationLibrary_mb1q2")
 }
 autoplay = "pingpong"
 
-[node name="MeshInstance3D6" type="MeshInstance3D" parent="MainViewport/SubViewport/pylones"]
+[node name="Cubes" type="Node3D" parent="MainViewport/SubViewport/pylones"]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, -3.847542, -9.392824, -3.4023442)
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="MainViewport/SubViewport/pylones/Cubes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2506714, -4.046629, 2.5415044)
+layers = 17
+mesh = SubResource("BoxMesh_e07xg")
+skeleton = NodePath("../../../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_4raox")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="MainViewport/SubViewport/pylones/Cubes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4612427, -5.2878394, 3.5595708)
+layers = 17
+mesh = SubResource("BoxMesh_e07xg")
+skeleton = NodePath("../../../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_4raox")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="MainViewport/SubViewport/pylones/Cubes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0592651, -4.5864234, 3.441773)
+layers = 17
+mesh = SubResource("BoxMesh_e07xg")
+skeleton = NodePath("../../../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_4raox")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="MainViewport/SubViewport/pylones/Cubes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1965332, -5.018125, 2.999146)
+layers = 17
+mesh = SubResource("BoxMesh_e07xg")
+skeleton = NodePath("../../../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_4raox")
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="MainViewport/SubViewport/pylones/Cubes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.986084, -6.3132296, 4.1634526)
+layers = 17
+mesh = SubResource("BoxMesh_e07xg")
+skeleton = NodePath("../../../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_4raox")
+
+[node name="Pylone3" type="MeshInstance3D" parent="MainViewport/SubViewport/pylones"]
 transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, -3.8475423, -9.392824, -3.4023442)
 layers = 17
 mesh = SubResource("BoxMesh_0k3ve")
 skeleton = NodePath("../../Camera3D")
 surface_material_override/0 = SubResource("ShaderMaterial_74qp2")
 
-[node name="MeshInstance3D7" type="MeshInstance3D" parent="MainViewport/SubViewport/pylones"]
-transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, -1.5968709, -13.439455, -0.8608403)
-layers = 17
-mesh = SubResource("BoxMesh_e07xg")
-skeleton = NodePath("../../Camera3D")
-surface_material_override/0 = SubResource("ShaderMaterial_4raox")
-
-[node name="MeshInstance3D8" type="MeshInstance3D" parent="MainViewport/SubViewport/pylones"]
-transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, -2.3862996, -14.680666, 0.15722609)
-layers = 17
-mesh = SubResource("BoxMesh_e07xg")
-skeleton = NodePath("../../Camera3D")
-surface_material_override/0 = SubResource("ShaderMaterial_4raox")
-
-[node name="MeshInstance3D9" type="MeshInstance3D" parent="MainViewport/SubViewport/pylones"]
-transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, -1.7882771, -13.97925, 0.039428234)
-layers = 17
-mesh = SubResource("BoxMesh_e07xg")
-skeleton = NodePath("../../Camera3D")
-surface_material_override/0 = SubResource("ShaderMaterial_4raox")
-
-[node name="MeshInstance3D10" type="MeshInstance3D" parent="MainViewport/SubViewport/pylones"]
-transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, -2.651009, -14.410952, -0.40319872)
-layers = 17
-mesh = SubResource("BoxMesh_e07xg")
-skeleton = NodePath("../../Camera3D")
-surface_material_override/0 = SubResource("ShaderMaterial_4raox")
-
-[node name="MeshInstance3D11" type="MeshInstance3D" parent="MainViewport/SubViewport/pylones"]
-transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, -1.8614583, -15.706057, 0.7611079)
-layers = 17
-mesh = SubResource("BoxMesh_e07xg")
-skeleton = NodePath("../../Camera3D")
-surface_material_override/0 = SubResource("ShaderMaterial_4raox")
-
-[node name="PowerRing" parent="MainViewport/SubViewport/pylones" instance=ExtResource("8_6n3pg")]
-transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, -0.5, 0, 0.5, -2.1855694e-08, -3.8935795, -7.121277, -3.3450809)
+[node name="PowerRing" parent="MainViewport/SubViewport/pylones/Pylone3" instance=ExtResource("8_6n3pg")]
+transform = Transform3D(0.50000006, 0, 0, 0, -2.1855683e-08, -0.49999976, 0, 0.50000006, -2.1855696e-08, -0.046037197, 2.2715464, 0.057263374)
 deg_speed = 720.0
 speed_curve = SubResource("Curve_meuj1")
 scale_curve = SubResource("Curve_voo7p")
 
-[node name="PowerRing2" parent="MainViewport/SubViewport/pylones" instance=ExtResource("8_6n3pg")]
-transform = Transform3D(0.35355338, 0.35355338, -1.545431e-08, 0, -2.1855694e-08, -0.5, -0.35355338, 0.35355338, -1.545431e-08, -3.8935795, -5.862661, -3.3450809)
+[node name="PowerRing2" parent="MainViewport/SubViewport/pylones/Pylone3" instance=ExtResource("8_6n3pg")]
+transform = Transform3D(0.3535534, 0.3535534, -1.5454312e-08, 0, -2.1855683e-08, -0.49999976, -0.3535534, 0.3535534, -1.5454312e-08, -0.046037197, 3.5301614, 0.057263374)
 clockwise = false
 color = Color(0.1962552, 0.68664235, 0.58633333, 1)
 

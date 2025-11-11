@@ -1,85 +1,33 @@
-[gd_scene load_steps=17 format=3 uid="uid://bgmgmigu7s8k6"]
+[gd_scene load_steps=9 format=3 uid="uid://bgmgmigu7s8k6"]
 
 [ext_resource type="PackedScene" uid="uid://lf6p81kkvxyd" path="res://model/simple_robot1.glb" id="1_iicvt"]
 [ext_resource type="Script" uid="uid://cssyvtlm806gc" path="res://scripts/ik/ik_auto_start.gd" id="2_ayw8u"]
 [ext_resource type="Script" uid="uid://c3mo76km5qekk" path="res://scenes/models/simple_robot.gd" id="2_u716b"]
-[ext_resource type="Shader" uid="uid://cudieiuuu8p2o" path="res://shaders/outline_color_shaded.gdshader" id="3_u716b"]
-[ext_resource type="Shader" uid="uid://bjolak3qhj1ad" path="res://shaders/edge_shader/pass1.gdshader" id="4_u716b"]
-[ext_resource type="Material" uid="uid://dbvrbutpdxmye" path="res://scenes/models/materials/simple_robot/body.tres" id="6_u716b"]
+[ext_resource type="Shader" uid="uid://cv4deawtx0pb3" path="res://shaders/new_pipeline/outline_new_pipeline_shaded.gdshader" id="5_u716b"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_eq3wd"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_boslc"]
 render_priority = 0
-shader = ExtResource("3_u716b")
-shader_parameter/original_color = Color(0, 0.05882353, 0, 1)
-shader_parameter/high_shape_color = Color(0.38431373, 0.33333334, 0.39607844, 1)
-shader_parameter/low_shape_color = Color(0, 0, 0, 1)
-shader_parameter/outline_color = Color(0, 0, 0, 1)
-shader_parameter/outline_width = 1.0
-shader_parameter/glow_width = 1.0
-shader_parameter/constant_width = true
+shader = ExtResource("5_u716b")
+shader_parameter/original_color = Color(0.38431373, 0.33333334, 0.39607844, 1)
+shader_parameter/outline_color = Color(0.5176471, 0.5019608, 0.5019608, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_shhoi"]
-next_pass = SubResource("ShaderMaterial_eq3wd")
-shading_mode = 0
-albedo_color = Color(0, 0.05882353, 0, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qeouw"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u716b"]
 render_priority = 0
-shader = ExtResource("3_u716b")
-shader_parameter/original_color = Color(0, 0.05882353, 0, 1)
-shader_parameter/high_shape_color = Color(0.68235296, 0.13725491, 0.20392157, 1)
-shader_parameter/low_shape_color = Color(0, 0, 0, 1)
-shader_parameter/outline_color = Color(0, 0, 0, 1)
-shader_parameter/outline_width = 1.0
-shader_parameter/glow_width = 1.0
-shader_parameter/constant_width = true
+shader = ExtResource("5_u716b")
+shader_parameter/original_color = Color(0.68235296, 0.13725491, 0.20392157, 1)
+shader_parameter/outline_color = Color(0.5137255, 0.5019608, 0.5019608, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_caskw"]
-next_pass = SubResource("ShaderMaterial_qeouw")
-shading_mode = 0
-albedo_color = Color(0, 0.05882353, 0, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lc84v"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_shhoi"]
 render_priority = 0
-shader = ExtResource("3_u716b")
-shader_parameter/original_color = Color(0, 0.05882353, 0, 1)
-shader_parameter/high_shape_color = Color(0.78039217, 0.8627451, 0.8156863, 1)
-shader_parameter/low_shape_color = Color(0, 0, 0, 1)
-shader_parameter/outline_color = Color(0, 0, 0, 1)
-shader_parameter/outline_width = 1.0
-shader_parameter/glow_width = 1.0
-shader_parameter/constant_width = true
+shader = ExtResource("5_u716b")
+shader_parameter/original_color = Color(0.78039217, 0.8627451, 0.8156863, 1)
+shader_parameter/outline_color = Color(0.5058824, 0.5019608, 0.5019608, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u8sut"]
-next_pass = SubResource("ShaderMaterial_lc84v")
-shading_mode = 0
-albedo_color = Color(0, 0.05882353, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bijeo"]
-next_pass = SubResource("ShaderMaterial_lc84v")
-shading_mode = 0
-albedo_color = Color(0, 0.05882353, 0, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pwvdn"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lbww1"]
 render_priority = 0
-shader = ExtResource("3_u716b")
-shader_parameter/original_color = Color(0, 0, 0, 1)
-shader_parameter/high_shape_color = Color(0.60784316, 0.67058825, 0.69803923, 1)
-shader_parameter/low_shape_color = Color(0, 0, 0, 1)
-shader_parameter/outline_color = Color(0, 0, 0, 1)
-shader_parameter/outline_width = 1.0
-shader_parameter/glow_width = 1.0
-shader_parameter/constant_width = true
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_slvlj"]
-next_pass = SubResource("ShaderMaterial_pwvdn")
-shading_mode = 0
-albedo_color = Color(0, 0, 0, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_myq46"]
-render_priority = 0
-next_pass = SubResource("StandardMaterial3D_slvlj")
-shader = ExtResource("4_u716b")
+shader = ExtResource("5_u716b")
+shader_parameter/original_color = Color(0.60784316, 0.67058825, 0.69803923, 1)
+shader_parameter/outline_color = Color(0.50980395, 0.5019608, 0.5019608, 1)
 
 [node name="SimpleRobot" node_paths=PackedStringArray("FrontLeftLeg", "FrontRightLeg", "BackLeftLeg", "BackRightLeg", "Armature") instance=ExtResource("1_iicvt")]
 script = ExtResource("2_u716b")
@@ -90,10 +38,12 @@ BackRightLeg = NodePath("Armature/Skeleton3D/BackRight")
 Armature = NodePath("Armature")
 
 [node name="Cube" parent="Armature" index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_shhoi")
+layers = 17
+surface_material_override/0 = SubResource("ShaderMaterial_boslc")
 
 [node name="OuterEye" parent="Armature" index="1"]
-surface_material_override/0 = SubResource("StandardMaterial3D_caskw")
+layers = 17
+surface_material_override/0 = SubResource("ShaderMaterial_u716b")
 
 [node name="FrontLeft" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="0"]
 top_level = true
@@ -132,17 +82,21 @@ script = ExtResource("2_ayw8u")
 metadata/_custom_type_script = "uid://cssyvtlm806gc"
 
 [node name="Arms" parent="Armature/Skeleton3D" index="4"]
-surface_material_override/0 = ExtResource("6_u716b")
+layers = 17
+surface_material_override/0 = SubResource("ShaderMaterial_shhoi")
 
 [node name="Marker3D" type="Marker3D" parent="Armature/Skeleton3D/Arms" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0567794, 1.4247084, 2.2526388)
 gizmo_extents = 0.5
 
 [node name="Body" parent="Armature/Skeleton3D" index="5"]
-surface_material_override/0 = SubResource("StandardMaterial3D_u8sut")
+layers = 17
+surface_material_override/0 = SubResource("ShaderMaterial_shhoi")
 
 [node name="Head" parent="Armature/Skeleton3D" index="6"]
-surface_material_override/0 = SubResource("StandardMaterial3D_bijeo")
+layers = 17
+surface_material_override/0 = SubResource("ShaderMaterial_shhoi")
 
 [node name="Legs" parent="Armature/Skeleton3D" index="7"]
-surface_material_override/0 = SubResource("ShaderMaterial_myq46")
+layers = 17
+surface_material_override/0 = SubResource("ShaderMaterial_lbww1")

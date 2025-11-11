@@ -33,7 +33,7 @@ func _ready():
 	set_up_shaders(sphere_2, true)
 	is_dirty = false
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	set_up_shaders(sphere, false)
 	set_up_shaders(sphere_2, true)
 	if is_dirty:
