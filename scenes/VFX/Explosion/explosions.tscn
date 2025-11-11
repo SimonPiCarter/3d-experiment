@@ -1,83 +1,71 @@
-[gd_scene load_steps=6 format=3 uid="uid://bu0o6b85leql7"]
+[gd_scene load_steps=5 format=3 uid="uid://bu0o6b85leql7"]
 
 [ext_resource type="Script" uid="uid://cg7udqbldtad" path="res://scenes/VFX/Explosion/explosions.gd" id="1_r6wtb"]
-[ext_resource type="Shader" uid="uid://d3p2wo0h7klds" path="res://shaders/outline_color.gdshader" id="1_r27hn"]
+[ext_resource type="Shader" uid="uid://dd6boqhuquhr8" path="res://shaders/new_pipeline/outline_new_pipeline_nodepth.gdshader" id="2_r6wtb"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_5bx06"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qkdhv"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_agiue"]
 render_priority = 0
-shader = ExtResource("1_r27hn")
-shader_parameter/original_color = Color(0.078431375, 0, 0, 1)
-shader_parameter/high_shape_color = Color(0.56078434, 0.972549, 0.8862745, 1)
-shader_parameter/low_shape_color = Color(0, 0, 0, 1)
-shader_parameter/outline_color = Color(0, 0, 0, 1)
-shader_parameter/outline_width = 1.0
-shader_parameter/glow_width = 1.0
-shader_parameter/constant_width = true
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vgh7r"]
-render_priority = 1
-next_pass = SubResource("ShaderMaterial_qkdhv")
-shading_mode = 0
-albedo_color = Color(0.078431375, 0, 0, 1)
-grow_amount = 16.0
+shader = ExtResource("2_r6wtb")
+shader_parameter/original_color = Color(0.56078434, 0.972549, 0.8862745, 1)
+shader_parameter/outline_color = Color(0.5019608, 0.3254902, 0.5019608, 1)
 
 [node name="Explosions" type="Node3D"]
 script = ExtResource("1_r6wtb")
 
 [node name="Explo1" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.47912598, -0.1315918, -0.01965332)
-layers = 2
+layers = 17
 mesh = SubResource("SphereMesh_5bx06")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_vgh7r")
+surface_material_override/0 = SubResource("ShaderMaterial_agiue")
 
 [node name="Explo2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65582275, 0, 0.7095947)
-layers = 2
+layers = 17
 mesh = SubResource("SphereMesh_5bx06")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_vgh7r")
+surface_material_override/0 = SubResource("ShaderMaterial_agiue")
 
 [node name="Explo3" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6213379, 0, 0.670166)
-layers = 2
+layers = 17
 mesh = SubResource("SphereMesh_5bx06")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_vgh7r")
+surface_material_override/0 = SubResource("ShaderMaterial_agiue")
 
 [node name="Explo4" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4755249, 0, -0.8699951)
-layers = 2
+layers = 17
 mesh = SubResource("SphereMesh_5bx06")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_vgh7r")
+surface_material_override/0 = SubResource("ShaderMaterial_agiue")
 
 [node name="Explo5" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.47558594, 1.3432617, 0.73669434)
-layers = 2
+layers = 17
 mesh = SubResource("SphereMesh_5bx06")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_vgh7r")
+surface_material_override/0 = SubResource("ShaderMaterial_agiue")
 
 [node name="Explo6" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.40734863, 0.4312744, 1.2366943)
-layers = 2
+layers = 17
 mesh = SubResource("SphereMesh_5bx06")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_vgh7r")
+surface_material_override/0 = SubResource("ShaderMaterial_agiue")
 
 [node name="Explo7" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.93725586, -0.4489746, -0.024536133)
-layers = 2
+layers = 17
 mesh = SubResource("SphereMesh_5bx06")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_vgh7r")
+surface_material_override/0 = SubResource("ShaderMaterial_agiue")
 
 [node name="Explo8" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2694092, -0.4489746, -0.6497803)
-layers = 2
+layers = 17
 mesh = SubResource("SphereMesh_5bx06")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_vgh7r")
+surface_material_override/0 = SubResource("ShaderMaterial_agiue")

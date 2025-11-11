@@ -1,5 +1,6 @@
-[gd_scene load_steps=43 format=3 uid="uid://boqtgauorybyx"]
+[gd_scene load_steps=69 format=3 uid="uid://boqtgauorybyx"]
 
+[ext_resource type="Script" uid="uid://nje6tyvvpq8b" path="res://scenes/test/new_pipeline.gd" id="1_e07xg"]
 [ext_resource type="Shader" uid="uid://cw4s5m23hur31" path="res://shaders/primal/circle_from_plane.gdshader" id="1_gvkf4"]
 [ext_resource type="PackedScene" uid="uid://cvyhsdynhh21x" path="res://scenes/VFX/Sphere/sphere.tscn" id="1_m8x48"]
 [ext_resource type="Shader" uid="uid://cc18tpomiri80" path="res://shaders/new_pipeline/outline_new_pipeline_unshaded.gdshader" id="2_ap201"]
@@ -11,6 +12,11 @@
 [ext_resource type="Script" uid="uid://d1sgp5r4tsu3l" path="res://scripts/FreeRoamingCamera3D.gd" id="6_1u752"]
 [ext_resource type="PackedScene" uid="uid://v7x76lnh135e" path="res://scenes/test/power_ring/PowerRing.tscn" id="8_6n3pg"]
 [ext_resource type="Shader" uid="uid://cv4deawtx0pb3" path="res://shaders/new_pipeline/outline_new_pipeline_shaded.gdshader" id="9_rijnb"]
+[ext_resource type="PackedScene" uid="uid://dk45ay0rdt3g6" path="res://scenes/projectile/basic_round/basic_round_projectile.tscn" id="11_gp3m0"]
+[ext_resource type="PackedScene" uid="uid://vg4v25l817yt" path="res://scenes/test/exocube/exocube.tscn" id="11_rv1hs"]
+[ext_resource type="PackedScene" uid="uid://bu0o6b85leql7" path="res://scenes/VFX/Explosion/explosions.tscn" id="12_e07xg"]
+[ext_resource type="Shader" uid="uid://d3p2wo0h7klds" path="res://shaders/outline_color.gdshader" id="12_igudv"]
+[ext_resource type="PackedScene" uid="uid://sh6uw0xli20u" path="res://scenes/VFX/Explosion/sphere_explosion.tscn" id="13_xnfcr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_olbwg"]
 render_priority = -1
@@ -234,6 +240,132 @@ _data = {
 &"test": SubResource("Animation_xnn52")
 }
 
+[sub_resource type="Curve" id="Curve_0k3ve"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.14000002, 1), 0.0, 0.0, 0, 0, Vector2(0.48666665, 1), 0.0, 0.0, 0, 0, Vector2(0.9866667, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_o73tt"]
+curve = SubResource("Curve_0k3ve")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gp3m0"]
+emission_shape = 1
+emission_sphere_radius = 0.25
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -1.0700022
+radial_accel_max = -1.0700022
+scale_curve = SubResource("CurveTexture_o73tt")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e07xg"]
+render_priority = 1
+shader = ExtResource("12_igudv")
+shader_parameter/original_color = Color(1, 0.8666667, 0.23529412, 1)
+shader_parameter/high_shape_color = Color(0.56078434, 0.827451, 1, 1)
+shader_parameter/low_shape_color = Color(0.07347823, 0.3634404, 0.4281735, 1)
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_width = 1.0
+shader_parameter/glow_width = 0.01
+shader_parameter/constant_width = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_em08d"]
+render_priority = 1
+next_pass = SubResource("ShaderMaterial_e07xg")
+shading_mode = 0
+albedo_color = Color(1, 0.8666667, 0.23529412, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_xnfcr"]
+material = SubResource("StandardMaterial3D_em08d")
+radius = 0.2
+height = 0.4
+
+[sub_resource type="Curve" id="Curve_6in2w"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.14000002, 1), 0.0, 0.0, 0, 0, Vector2(0.48666665, 1), 0.0, 0.0, 0, 0, Vector2(0.9866667, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_fpjiy"]
+curve = SubResource("Curve_6in2w")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ioc36"]
+emission_shape = 1
+emission_sphere_radius = 0.25
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 3.0
+initial_velocity_max = 3.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -5.000002
+linear_accel_max = -5.000002
+radial_accel_min = -1.0700022
+radial_accel_max = -1.0700022
+scale_curve = SubResource("CurveTexture_fpjiy")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_atw0o"]
+render_priority = 0
+shader = ExtResource("12_igudv")
+shader_parameter/original_color = Color(1, 0.8666667, 0.23529412, 1)
+shader_parameter/high_shape_color = Color(1, 1, 1, 1)
+shader_parameter/low_shape_color = Color(0, 0, 0, 1)
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_width = 1.0
+shader_parameter/glow_width = 5.0
+shader_parameter/constant_width = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_suc28"]
+next_pass = SubResource("ShaderMaterial_atw0o")
+shading_mode = 0
+albedo_color = Color(1, 0.8666667, 0.23529412, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_740d2"]
+material = SubResource("StandardMaterial3D_suc28")
+radius = 0.2
+height = 0.4
+
+[sub_resource type="Curve" id="Curve_mgpox"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1e-05, 1), 0.0, 0.0, 0, 0, Vector2(0.9866667, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ps0cu"]
+curve = SubResource("Curve_mgpox")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_aas4t"]
+emission_shape = 1
+emission_sphere_radius = 0.25
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -5.000002
+linear_accel_max = -5.000002
+radial_accel_min = -1.0700022
+radial_accel_max = -1.0700022
+scale_curve = SubResource("CurveTexture_ps0cu")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lcv6h"]
+render_priority = 0
+shader = ExtResource("12_igudv")
+shader_parameter/original_color = Color(1, 0.8666667, 0.23529412, 1)
+shader_parameter/high_shape_color = Color(0.43137255, 0.15294118, 0.15294118, 1)
+shader_parameter/low_shape_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+shader_parameter/outline_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
+shader_parameter/outline_width = 1.0
+shader_parameter/glow_width = 5.0
+shader_parameter/constant_width = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jpn0x"]
+next_pass = SubResource("ShaderMaterial_lcv6h")
+shading_mode = 0
+albedo_color = Color(1, 0.8666667, 0.23529412, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_s2vcg"]
+material = SubResource("StandardMaterial3D_jpn0x")
+radius = 0.2
+height = 0.4
+radial_segments = 16
+rings = 8
+
+[sub_resource type="Curve" id="Curve_rv1hs"]
+_data = [Vector2(0, 0.29213488), 0.0, 0.0, 0, 0, Vector2(0.27227724, 1), 0.0, 0.0, 0, 0, Vector2(0.8019802, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.29213488), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Curve" id="Curve_igudv"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.6881188, 0.37078655), 0.0, 0.0, 0, 0, Vector2(0.85643566, 0.37078655), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
 [sub_resource type="ViewportTexture" id="ViewportTexture_gvkf4"]
 viewport_path = NodePath("MainViewport/SubViewport")
 
@@ -248,6 +380,7 @@ shader_parameter/active = 1
 viewport_path = NodePath("OutlineViewport/SubViewport")
 
 [node name="Node3D" type="Node3D"]
+script = ExtResource("1_e07xg")
 
 [node name="MainViewport" type="SubViewportContainer" parent="."]
 visibility_layer = 0
@@ -264,6 +397,7 @@ size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
 [node name="circle" type="MeshInstance3D" parent="MainViewport/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.155, 0)
 layers = 17
 mesh = SubResource("PlaneMesh_iosng")
 
@@ -443,6 +577,60 @@ vanishing_start = 0.2
 vanishing_time = 0.3
 sphere = NodePath("..")
 running = true
+
+[node name="Projectiles" type="Node3D" parent="MainViewport/SubViewport"]
+
+[node name="BasicRoundProjectileExplo" parent="MainViewport/SubViewport/Projectiles" node_paths=PackedStringArray("explosion") instance=ExtResource("11_gp3m0")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+speed = 40.0
+explosion = NodePath("Explosions")
+
+[node name="Explosions" parent="MainViewport/SubViewport/Projectiles/BasicRoundProjectileExplo" instance=ExtResource("12_e07xg")]
+
+[node name="BasicRoundProjectile" parent="MainViewport/SubViewport/Projectiles" node_paths=PackedStringArray("explosion") instance=ExtResource("11_gp3m0")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+end_pos = Vector3(0, 0, 20)
+speed = 40.0
+explosion = NodePath("SphereExplosion")
+
+[node name="SphereExplosion" parent="MainViewport/SubViewport/Projectiles/BasicRoundProjectile" instance=ExtResource("13_xnfcr")]
+transform = Transform3D(16, 0, 0, 0, 16, 0, 0, 0, 16, 0, 0, 0)
+
+[node name="VFX" type="Node3D" parent="MainViewport/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.972229, 5.5879517)
+
+[node name="PowerRing" parent="MainViewport/SubViewport/VFX" instance=ExtResource("8_6n3pg")]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, -0.5, 0, 0.5, -2.1855694e-08, 10.296143, -7.1986084, 8.547607)
+
+[node name="Exocube" parent="MainViewport/SubViewport/VFX" instance=ExtResource("11_rv1hs")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.92907715, -6.428406, 1.8096924)
+
+[node name="blue_boom" type="GPUParticles3D" parent="MainViewport/SubViewport/VFX"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0303502, -7.151159, 7.305786)
+lifetime = 0.5
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_gp3m0")
+draw_pass_1 = SubResource("SphereMesh_xnfcr")
+
+[node name="cloudy_explosion" type="GPUParticles3D" parent="MainViewport/SubViewport/VFX"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.745248, -7.189855, 4.299304)
+lifetime = 0.5
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_ioc36")
+draw_pass_1 = SubResource("SphereMesh_740d2")
+
+[node name="entity_moving" type="GPUParticles3D" parent="MainViewport/SubViewport/VFX"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5962992, -6.0734, 6.47278)
+amount = 32
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_aas4t")
+draw_pass_1 = SubResource("SphereMesh_s2vcg")
+
+[node name="PowerRing3" parent="MainViewport/SubViewport/VFX" instance=ExtResource("8_6n3pg")]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, -0.5, 0, 0.5, -2.1855694e-08, 5.124731, -7.121277, 9.43269)
+deg_speed = 720.0
+speed_curve = SubResource("Curve_rv1hs")
+scale_curve = SubResource("Curve_igudv")
 
 [node name="OutlineViewport" type="SubViewportContainer" parent="."]
 visibility_layer = 0

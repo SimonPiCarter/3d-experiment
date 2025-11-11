@@ -241,7 +241,7 @@ _data = {
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.14000002, 1), 0.0, 0.0, 0, 0, Vector2(0.48666665, 1), 0.0, 0.0, 0, 0, Vector2(0.9866667, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
-[sub_resource type="CurveTexture" id="CurveTexture_o73tt"]
+[sub_resource type="CurveTexture" id="CurveTexture_hur3k"]
 curve = SubResource("Curve_ahtvx")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_48pke"]
@@ -250,7 +250,7 @@ emission_sphere_radius = 0.25
 gravity = Vector3(0, 0, 0)
 radial_accel_min = -1.0700022
 radial_accel_max = -1.0700022
-scale_curve = SubResource("CurveTexture_o73tt")
+scale_curve = SubResource("CurveTexture_hur3k")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_o73tt"]
 render_priority = 1
@@ -263,14 +263,14 @@ shader_parameter/outline_width = 1.0
 shader_parameter/glow_width = 0.01
 shader_parameter/constant_width = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_em08d"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_olbwg"]
 render_priority = 1
 next_pass = SubResource("ShaderMaterial_o73tt")
 shading_mode = 0
 albedo_color = Color(1, 0.8666667, 0.23529412, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_q5mio"]
-material = SubResource("StandardMaterial3D_em08d")
+material = SubResource("StandardMaterial3D_olbwg")
 radius = 0.2
 height = 0.4
 
@@ -278,7 +278,7 @@ height = 0.4
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.14000002, 1), 0.0, 0.0, 0, 0, Vector2(0.48666665, 1), 0.0, 0.0, 0, 0, Vector2(0.9866667, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
-[sub_resource type="CurveTexture" id="CurveTexture_fpjiy"]
+[sub_resource type="CurveTexture" id="CurveTexture_67yr2"]
 curve = SubResource("Curve_5bx06")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_em08d"]
@@ -292,7 +292,7 @@ linear_accel_min = -5.000002
 linear_accel_max = -5.000002
 radial_accel_min = -1.0700022
 radial_accel_max = -1.0700022
-scale_curve = SubResource("CurveTexture_fpjiy")
+scale_curve = SubResource("CurveTexture_67yr2")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xnn52"]
 render_priority = 0
@@ -305,13 +305,13 @@ shader_parameter/outline_width = 1.0
 shader_parameter/glow_width = 5.0
 shader_parameter/constant_width = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_suc28"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bh6ti"]
 next_pass = SubResource("ShaderMaterial_xnn52")
 shading_mode = 0
 albedo_color = Color(1, 0.8666667, 0.23529412, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_5upta"]
-material = SubResource("StandardMaterial3D_suc28")
+material = SubResource("StandardMaterial3D_bh6ti")
 radius = 0.2
 height = 0.4
 
@@ -319,7 +319,7 @@ height = 0.4
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1e-05, 1), 0.0, 0.0, 0, 0, Vector2(0.9866667, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_ps0cu"]
+[sub_resource type="CurveTexture" id="CurveTexture_gel2y"]
 curve = SubResource("Curve_mpahi")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wccig"]
@@ -330,7 +330,7 @@ linear_accel_min = -5.000002
 linear_accel_max = -5.000002
 radial_accel_min = -1.0700022
 radial_accel_max = -1.0700022
-scale_curve = SubResource("CurveTexture_ps0cu")
+scale_curve = SubResource("CurveTexture_gel2y")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hur3k"]
 render_priority = 0
@@ -343,13 +343,13 @@ shader_parameter/outline_width = 1.0
 shader_parameter/glow_width = 5.0
 shader_parameter/constant_width = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jpn0x"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tl1h0"]
 next_pass = SubResource("ShaderMaterial_hur3k")
 shading_mode = 0
 albedo_color = Color(1, 0.8666667, 0.23529412, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_olbwg"]
-material = SubResource("StandardMaterial3D_jpn0x")
+material = SubResource("StandardMaterial3D_tl1h0")
 radius = 0.2
 height = 0.4
 radial_segments = 16
@@ -515,13 +515,13 @@ point_count = 4
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.6881188, 0.37078655), 0.0, 0.0, 0, 0, Vector2(0.85643566, 0.37078655), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_hur3k"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_h3cgq"]
 noise_type = 4
 frequency = 0.015
 fractal_octaves = 1
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_em08d"]
-noise = SubResource("FastNoiseLite_hur3k")
+noise = SubResource("FastNoiseLite_h3cgq")
 seamless = true
 
 [sub_resource type="Animation" id="Animation_5upta"]
@@ -654,7 +654,7 @@ double_sided = false
 texture = ExtResource("1_cybhl")
 
 [node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
-transform = Transform3D(0.59677106, 0.4980588, -0.6291278, -0.00085518067, 0.78444064, 0.6202034, 0.80241114, -0.3695814, 0.4685574, -12.499483, 3.0586882, 21.255123)
+transform = Transform3D(0.59677106, 0.4980588, -0.6291278, -0.00085518067, 0.78444064, 0.6202034, 0.80241114, -0.3695814, 0.4685574, -12.499483, 3.0586882, 21.487423)
 cull_mask = 1048573
 projection = 1
 current = true
@@ -1701,13 +1701,13 @@ clockwise = false
 color = Color(0.1962552, 0.68664235, 0.58633333, 1)
 
 [node name="PowerRing3" parent="SubViewportContainer/SubViewport/Env2" instance=ExtResource("12_bome6")]
-transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, -0.5, 0, 0.5, -2.1855694e-08, 5.124731, -7.121277, 8.967785)
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, -0.5, 0, 0.5, -2.1855694e-08, 5.124731, -7.121277, 9.43269)
 deg_speed = 720.0
 speed_curve = SubResource("Curve_q5mio")
 scale_curve = SubResource("Curve_em08d")
 
 [node name="SphereVFX" parent="SubViewportContainer/SubViewport/Env2" instance=ExtResource("17_q5mio")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.0004272461, -7.6469173, 11.921265)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.0004272461, -7.6469173, 12.153564)
 color_high = Color(0.68235296, 0.13725491, 0.20392157, 1)
 color_low = Color(0.9607843, 0.49019608, 0.2901961, 1)
 threshold = 0.0
@@ -1789,7 +1789,7 @@ size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="FrontRendering/SubViewport"]
-transform = Transform3D(0.59677106, 0.4980588, -0.6291278, -0.00085518067, 0.78444064, 0.6202034, 0.80241114, -0.3695814, 0.4685574, -12.499483, 3.0586882, 21.255123)
+transform = Transform3D(0.59677106, 0.4980588, -0.6291278, -0.00085518067, 0.78444064, 0.6202034, 0.80241114, -0.3695814, 0.4685574, -12.499483, 3.0586882, 21.487423)
 cull_mask = 2
 projection = 1
 current = true
@@ -1813,7 +1813,7 @@ size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="ViewportAlphaEffects/SubViewport"]
-transform = Transform3D(0.59677106, 0.4980588, -0.6291278, -0.00085518067, 0.78444064, 0.6202034, 0.80241114, -0.3695814, 0.4685574, -12.499483, 3.0586882, 21.255123)
+transform = Transform3D(0.59677106, 0.4980588, -0.6291278, -0.00085518067, 0.78444064, 0.6202034, 0.80241114, -0.3695814, 0.4685574, -12.499483, 3.0586882, 21.487423)
 cull_mask = 4
 projection = 1
 current = true

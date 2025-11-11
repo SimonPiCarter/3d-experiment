@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://c5prcmcvee0qw"]
+
+[ext_resource type="PackedScene" uid="uid://cd6pjtn3lh2x3" path="res://model/twad.glb" id="1_owjbl"]
+[ext_resource type="Script" uid="uid://cnfk6x5m7spgd" path="res://scripts/ik/ik_twad_object.gd" id="2_liqgo"]
+[ext_resource type="Shader" uid="uid://cv4deawtx0pb3" path="res://shaders/new_pipeline/outline_new_pipeline_shaded.gdshader" id="3_afdqu"]
+[ext_resource type="Script" uid="uid://cssyvtlm806gc" path="res://scripts/ik/ik_auto_start.gd" id="3_un78q"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vc5h8"]
+render_priority = 0
+shader = ExtResource("3_afdqu")
+shader_parameter/original_color = Color(0.34781694, 0.34781697, 0.3478169, 1)
+shader_parameter/outline_color = Color(0.5019608, 0.5019608, 0.49411765, 1)
+
+[node name="twad" node_paths=PackedStringArray("LeftLeg", "RightLeg", "Armature") instance=ExtResource("1_owjbl")]
+script = ExtResource("2_liqgo")
+LeftLeg = NodePath("Armature/Skeleton3D/LeftLeg")
+RightLeg = NodePath("Armature/Skeleton3D/RightLeg")
+Armature = NodePath("Armature")
+
+[node name="Legs" parent="Armature/Skeleton3D" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_vc5h8")
+
+[node name="LeftLeg" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="1"]
+root_bone = &"LeftLeg.001"
+tip_bone = &"LeftLeg.004"
+use_magnet = true
+magnet = Vector3(0, 10, 0)
+script = ExtResource("3_un78q")
+metadata/_custom_type_script = "uid://cssyvtlm806gc"
+
+[node name="RightLeg" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="2"]
+root_bone = &"RightLeg.001"
+tip_bone = &"RightLeg.004"
+use_magnet = true
+magnet = Vector3(0, 10, 0)
+script = ExtResource("3_un78q")
+metadata/_custom_type_script = "uid://cssyvtlm806gc"

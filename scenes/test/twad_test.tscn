@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://diiv0inemdwej"]
+
+[ext_resource type="Script" uid="uid://k2wcxelpxbm0" path="res://scenes/test/twad_test.gd" id="1_2fiyw"]
+[ext_resource type="PackedScene" uid="uid://bu0oy87ktyn3p" path="res://scenes/models/twad_entity_legs.tscn" id="1_82prj"]
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_2fiyw")
+
+[node name="Node3D" parent="." instance=ExtResource("1_82prj")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.8330468, 0.55320257, 0, -0.55320257, 0.8330468, 4.2993774, 5.6710815, 7.6815186)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75354004, 0)

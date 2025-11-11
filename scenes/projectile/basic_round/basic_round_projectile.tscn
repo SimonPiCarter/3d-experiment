@@ -1,29 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://dk45ay0rdt3g6"]
+[gd_scene load_steps=5 format=3 uid="uid://dk45ay0rdt3g6"]
 
 [ext_resource type="Script" uid="uid://ciigqun3213v8" path="res://scenes/projectile/basic_round/basic_round_projectile.gd" id="1_vgh7r"]
-[ext_resource type="Shader" uid="uid://d3p2wo0h7klds" path="res://shaders/outline_color.gdshader" id="2_5bx06"]
+[ext_resource type="Shader" uid="uid://cc18tpomiri80" path="res://shaders/new_pipeline/outline_new_pipeline_unshaded.gdshader" id="2_5bx06"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_vgh7r"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5bx06"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nuqfc"]
 render_priority = 0
 shader = ExtResource("2_5bx06")
-shader_parameter/original_color = Color(0.078431375, 0, 0, 1)
-shader_parameter/high_shape_color = Color(0.56078434, 0.972549, 0.8862745, 1)
-shader_parameter/low_shape_color = Color(0, 0, 0, 1)
-shader_parameter/outline_color = Color(0, 0, 0, 1)
-shader_parameter/outline_width = 1.0
-shader_parameter/glow_width = 1.0
-shader_parameter/constant_width = true
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nuqfc"]
-next_pass = SubResource("ShaderMaterial_5bx06")
-shading_mode = 0
-albedo_color = Color(0.078431375, 0, 0, 1)
+shader_parameter/original_color = Color(0.56078434, 0.972549, 0.8862745, 1)
+shader_parameter/outline_color = Color(0.5019608, 0.49019608, 0.5019608, 1)
 
 [node name="BasicRoundProjectile" type="Node3D"]
 script = ExtResource("1_vgh7r")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+layers = 17
 mesh = SubResource("SphereMesh_vgh7r")
-surface_material_override/0 = SubResource("StandardMaterial3D_nuqfc")
+surface_material_override/0 = SubResource("ShaderMaterial_nuqfc")

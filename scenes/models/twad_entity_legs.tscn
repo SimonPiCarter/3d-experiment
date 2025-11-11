@@ -1,0 +1,61 @@
+[gd_scene load_steps=8 format=3 uid="uid://bu0oy87ktyn3p"]
+
+[ext_resource type="PackedScene" uid="uid://d32toa3sindlr" path="res://scenes/entity/TwadEntity.tscn" id="1_sr2b0"]
+[ext_resource type="PackedScene" uid="uid://c5prcmcvee0qw" path="res://scenes/models/twad_legs.tscn" id="1_vpt4n"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sr2b0"]
+albedo_color = Color(1, 0.26666668, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_cwpsj"]
+material = SubResource("StandardMaterial3D_sr2b0")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cwpsj"]
+albedo_color = Color(0.34901962, 0.26666668, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_ype0m"]
+material = SubResource("StandardMaterial3D_cwpsj")
+
+[sub_resource type="SphereMesh" id="SphereMesh_sr2b0"]
+material = SubResource("StandardMaterial3D_cwpsj")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="TwadEntity" parent="." node_paths=PackedStringArray("twad_object") instance=ExtResource("1_sr2b0")]
+twad_object = NodePath("../twad_legs")
+
+[node name="LeftIKMarker" parent="TwadEntity/MarkerContainer" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0019074678, -1.3, -4.5)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TwadEntity/MarkerContainer/LeftIKMarker" index="0"]
+visible = false
+mesh = SubResource("SphereMesh_cwpsj")
+
+[node name="RightIKMarker" parent="TwadEntity/MarkerContainer" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.015963912, -1.3, 4.5)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="TwadEntity/MarkerContainer/RightIKMarker" index="0"]
+visible = false
+mesh = SubResource("SphereMesh_cwpsj")
+skeleton = NodePath("../../LeftIKMarker")
+
+[node name="LeftIKTarget" parent="TwadEntity/TargetContainerTwad" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0019074678, -1.3, -4.5)
+adjusted_target = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="TwadEntity/TargetContainerTwad/LeftIKTarget" index="0"]
+visible = false
+mesh = SubResource("SphereMesh_ype0m")
+skeleton = NodePath("../../../MarkerContainer/LeftIKMarker")
+
+[node name="RightIKTarget" parent="TwadEntity/TargetContainerTwad" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.015963912, -1.3, 4.5)
+adjusted_target = true
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="TwadEntity/TargetContainerTwad/RightIKTarget" index="0"]
+visible = false
+mesh = SubResource("SphereMesh_sr2b0")
+skeleton = NodePath("../../../MarkerContainer/LeftIKMarker")
+
+[node name="twad_legs" parent="." instance=ExtResource("1_vpt4n")]
+
+[editable path="TwadEntity"]
