@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://b12sxh8hols1l"]
+
+[ext_resource type="PackedScene" uid="uid://cfhygm4f3yy26" path="res://model/cube_uv.glb" id="1_26yx1"]
+[ext_resource type="Shader" uid="uid://cv4deawtx0pb3" path="res://shaders/new_pipeline/outline_new_pipeline_shaded.gdshader" id="2_6i5mj"]
+[ext_resource type="Texture2D" uid="uid://bkfo5sla5xvng" path="res://textures/offset_outline_mask.png" id="3_6i5mj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m3iyc"]
+render_priority = 0
+shader = ExtResource("2_6i5mj")
+shader_parameter/original_color = Color(0.9764706, 0.61960787, 0.41568628, 1)
+shader_parameter/outline_color = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/outline_mask = ExtResource("3_6i5mj")
+shader_parameter/use_mask = true
+
+[node name="cube_uv" instance=ExtResource("1_26yx1")]
+
+[node name="Cube" parent="." index="0"]
+layers = 17
+surface_material_override/0 = SubResource("ShaderMaterial_m3iyc")

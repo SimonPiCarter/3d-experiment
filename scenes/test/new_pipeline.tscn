@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://boqtgauorybyx"]
+[gd_scene load_steps=71 format=3 uid="uid://boqtgauorybyx"]
 
 [ext_resource type="Script" uid="uid://nje6tyvvpq8b" path="res://scenes/test/new_pipeline.gd" id="1_e07xg"]
 [ext_resource type="Shader" uid="uid://cw4s5m23hur31" path="res://shaders/primal/circle_from_plane.gdshader" id="1_gvkf4"]
@@ -10,13 +10,16 @@
 [ext_resource type="PackedScene" uid="uid://dccijlgfscbxi" path="res://scenes/models/quad_entity_robot_3.tscn" id="4_rijnb"]
 [ext_resource type="PackedScene" uid="uid://dwd16khdfntj7" path="res://scenes/models/quad_entity_simpl_robot.tscn" id="5_6n3pg"]
 [ext_resource type="Script" uid="uid://d1sgp5r4tsu3l" path="res://scripts/FreeRoamingCamera3D.gd" id="6_1u752"]
+[ext_resource type="PackedScene" uid="uid://bngmh3npf8b1v" path="res://scenes/models/segmented_twad_robot.tscn" id="6_meuj1"]
+[ext_resource type="PackedScene" uid="uid://b4iuas1jqhse3" path="res://scenes/VFX/Etherals/circling_etheral.tscn" id="7_xnfcr"]
 [ext_resource type="PackedScene" uid="uid://v7x76lnh135e" path="res://scenes/test/power_ring/PowerRing.tscn" id="8_6n3pg"]
 [ext_resource type="Shader" uid="uid://cv4deawtx0pb3" path="res://shaders/new_pipeline/outline_new_pipeline_shaded.gdshader" id="9_rijnb"]
 [ext_resource type="PackedScene" uid="uid://dk45ay0rdt3g6" path="res://scenes/projectile/basic_round/basic_round_projectile.tscn" id="11_gp3m0"]
 [ext_resource type="PackedScene" uid="uid://vg4v25l817yt" path="res://scenes/test/exocube/exocube.tscn" id="11_rv1hs"]
 [ext_resource type="PackedScene" uid="uid://bu0o6b85leql7" path="res://scenes/VFX/Explosion/explosions.tscn" id="12_e07xg"]
-[ext_resource type="Shader" uid="uid://d3p2wo0h7klds" path="res://shaders/outline_color.gdshader" id="12_igudv"]
 [ext_resource type="PackedScene" uid="uid://sh6uw0xli20u" path="res://scenes/VFX/Explosion/sphere_explosion.tscn" id="13_xnfcr"]
+[ext_resource type="PackedScene" uid="uid://b12sxh8hols1l" path="res://scenes/models/cube_uv.tscn" id="19_voo7p"]
+[ext_resource type="PackedScene" uid="uid://qfg6ip0muxgn" path="res://scenes/models/cup_uv.tscn" id="20_6in2w"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_olbwg"]
 render_priority = -1
@@ -70,7 +73,7 @@ _data = {
 }
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_gvkf4"]
-size = Vector2(50, 50)
+size = Vector2(200, 200)
 
 [sub_resource type="Gradient" id="Gradient_74qp2"]
 colors = PackedColorArray(0.9764706, 0.61960787, 0.41568628, 1, 0.9476287, 0.52065206, 0.25580785, 1)
@@ -88,6 +91,15 @@ render_priority = 0
 shader = ExtResource("2_ap201")
 shader_parameter/original_color = Color(0, 0, 0, 1)
 shader_parameter/outline_color = Color(0, 0, 0.007843138, 1)
+shader_parameter/use_mask = false
+
+[sub_resource type="Curve3D" id="Curve3D_xnfcr"]
+closed = true
+_data = {
+"points": PackedVector3Array(-1, 0, 1, 1, 0, -1, 0, 0, 0, -1, 0, -1, 1, 0, 1, 4, 0, 0, 1, 0, -1, -1, 0, 1, 4, 0, 4, 1, 0, 1, -1, 0, -1, 0, 0, 4, -1, 0, 1, 1, 0, -1, 0, 0, 0, 1, 0, 1, -1, 0, -1, 0, 0, -4, 1, 0, -1, -1, 0, 1, -4, 0, -4, -1, 0, -1, 1, 0, 1, -4, 0, 0),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 8
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_rv1hs"]
 height = 10.0
@@ -96,7 +108,8 @@ height = 10.0
 render_priority = 0
 shader = ExtResource("2_ap201")
 shader_parameter/original_color = Color(1, 0.28627452, 0.2784314, 1)
-shader_parameter/outline_color = Color(0, 0, 0.003921569, 1)
+shader_parameter/outline_color = Color(0, 0.1764706, 0.003921569, 1)
+shader_parameter/use_mask = false
 
 [sub_resource type="Animation" id="Animation_mb1q2"]
 length = 0.001
@@ -166,7 +179,15 @@ size = Vector3(1, 20, 1)
 render_priority = 0
 shader = ExtResource("9_rijnb")
 shader_parameter/original_color = Color(0.24313726, 0.20784314, 0.27450982, 1)
-shader_parameter/outline_color = Color(0, 0.29803923, 0.10980392, 1)
+shader_parameter/outline_color = Color(0.93333334, 0.5411765, 0.10980392, 1)
+shader_parameter/use_mask = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_atw0o"]
+render_priority = 0
+shader = ExtResource("9_rijnb")
+shader_parameter/original_color = Color(0.5882353, 0.42352942, 0.42352942, 1)
+shader_parameter/outline_color = Color(0.93333334, 0.5411765, 0.10980392, 1)
+shader_parameter/use_mask = false
 
 [sub_resource type="BoxMesh" id="BoxMesh_0k3ve"]
 size = Vector3(1, 10, 1)
@@ -176,6 +197,7 @@ render_priority = 0
 shader = ExtResource("9_rijnb")
 shader_parameter/original_color = Color(0.78039217, 0.8627451, 0.8156863, 1)
 shader_parameter/outline_color = Color(0, 0, 0.007843138, 1)
+shader_parameter/use_mask = false
 
 [sub_resource type="Curve" id="Curve_meuj1"]
 _data = [Vector2(0, 0.29213488), 0.0, 0.0, 0, 0, Vector2(0.27227724, 1), 0.0, 0.0, 0, 0, Vector2(0.8019802, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.29213488), 0.0, 0.0, 0, 0]
@@ -188,6 +210,8 @@ point_count = 4
 [sub_resource type="Sky" id="Sky_ckagc"]
 
 [sub_resource type="Environment" id="Environment_rijnb"]
+background_mode = 1
+background_color = Color(0.3019608, 0.60784316, 0.9019608, 1)
 sky = SubResource("Sky_ckagc")
 ambient_light_source = 2
 ambient_light_color = Color(0.6775041, 0.784652, 1, 1)
@@ -255,25 +279,15 @@ radial_accel_min = -1.0700022
 radial_accel_max = -1.0700022
 scale_curve = SubResource("CurveTexture_o73tt")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_e07xg"]
-render_priority = 1
-shader = ExtResource("12_igudv")
-shader_parameter/original_color = Color(1, 0.8666667, 0.23529412, 1)
-shader_parameter/high_shape_color = Color(0.56078434, 0.827451, 1, 1)
-shader_parameter/low_shape_color = Color(0.07347823, 0.3634404, 0.4281735, 1)
-shader_parameter/outline_color = Color(0, 0, 0, 1)
-shader_parameter/outline_width = 1.0
-shader_parameter/glow_width = 0.01
-shader_parameter/constant_width = true
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_em08d"]
-render_priority = 1
-next_pass = SubResource("ShaderMaterial_e07xg")
-shading_mode = 0
-albedo_color = Color(1, 0.8666667, 0.23529412, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ioc36"]
+render_priority = 0
+shader = ExtResource("2_ap201")
+shader_parameter/original_color = Color(0.56078434, 0.827451, 1, 1)
+shader_parameter/outline_color = Color(0.5019608, 0.827451, 0.5019608, 1)
+shader_parameter/use_mask = false
 
 [sub_resource type="SphereMesh" id="SphereMesh_xnfcr"]
-material = SubResource("StandardMaterial3D_em08d")
+material = SubResource("ShaderMaterial_ioc36")
 radius = 0.2
 height = 0.4
 
@@ -297,24 +311,15 @@ radial_accel_min = -1.0700022
 radial_accel_max = -1.0700022
 scale_curve = SubResource("CurveTexture_fpjiy")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_atw0o"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_voo7p"]
 render_priority = 0
-shader = ExtResource("12_igudv")
-shader_parameter/original_color = Color(1, 0.8666667, 0.23529412, 1)
-shader_parameter/high_shape_color = Color(1, 1, 1, 1)
-shader_parameter/low_shape_color = Color(0, 0, 0, 1)
-shader_parameter/outline_color = Color(0, 0, 0, 1)
-shader_parameter/outline_width = 1.0
-shader_parameter/glow_width = 5.0
-shader_parameter/constant_width = true
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_suc28"]
-next_pass = SubResource("ShaderMaterial_atw0o")
-shading_mode = 0
-albedo_color = Color(1, 0.8666667, 0.23529412, 1)
+shader = ExtResource("2_ap201")
+shader_parameter/original_color = Color(1, 1, 1, 1)
+shader_parameter/outline_color = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/use_mask = false
 
 [sub_resource type="SphereMesh" id="SphereMesh_740d2"]
-material = SubResource("StandardMaterial3D_suc28")
+material = SubResource("ShaderMaterial_voo7p")
 radius = 0.2
 height = 0.4
 
@@ -335,24 +340,15 @@ radial_accel_min = -1.0700022
 radial_accel_max = -1.0700022
 scale_curve = SubResource("CurveTexture_ps0cu")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lcv6h"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6in2w"]
 render_priority = 0
-shader = ExtResource("12_igudv")
-shader_parameter/original_color = Color(1, 0.8666667, 0.23529412, 1)
-shader_parameter/high_shape_color = Color(0.43137255, 0.15294118, 0.15294118, 1)
-shader_parameter/low_shape_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
-shader_parameter/outline_color = Color(0.18039216, 0.13333334, 0.18431373, 1)
-shader_parameter/outline_width = 1.0
-shader_parameter/glow_width = 5.0
-shader_parameter/constant_width = true
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jpn0x"]
-next_pass = SubResource("ShaderMaterial_lcv6h")
-shading_mode = 0
-albedo_color = Color(1, 0.8666667, 0.23529412, 1)
+shader = ExtResource("2_ap201")
+shader_parameter/original_color = Color(0.43137255, 0.15294118, 0.15294118, 1)
+shader_parameter/outline_color = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/use_mask = false
 
 [sub_resource type="SphereMesh" id="SphereMesh_s2vcg"]
-material = SubResource("StandardMaterial3D_jpn0x")
+material = SubResource("ShaderMaterial_6in2w")
 radius = 0.2
 height = 0.4
 radial_segments = 16
@@ -373,7 +369,7 @@ viewport_path = NodePath("MainViewport/SubViewport")
 shader = ExtResource("3_iosng")
 shader_parameter/outline_color = Color(0, 0, 0, 1)
 shader_parameter/outline_width = 1.0
-shader_parameter/type = 2
+shader_parameter/type = 1
 shader_parameter/active = 1
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_vwlc3"]
@@ -397,7 +393,7 @@ size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
 [node name="circle" type="MeshInstance3D" parent="MainViewport/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.155, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2824707, -0.155, -27.085876)
 layers = 17
 mesh = SubResource("PlaneMesh_iosng")
 
@@ -426,14 +422,36 @@ transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -5.0878887, 0.62210655,
 [node name="SmallBot" parent="MainViewport/SubViewport" instance=ExtResource("4_rijnb")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.6380758, -0.04581499, 5.0515814)
 
+[node name="TwoSegmentObject" parent="MainViewport/SubViewport" instance=ExtResource("6_meuj1")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 8.249, 0.3043263, 4.8904324)
+speed = 20.0
+
 [node name="SimpleRobot" parent="MainViewport/SubViewport" instance=ExtResource("5_6n3pg")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 8.249, 0.3043263, -2.753)
 
+[node name="EtheritySegments" parent="MainViewport/SubViewport" instance=ExtResource("7_xnfcr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.700666, 1.8968132, 29.55603)
+radius = 2.0
+
+[node name="EtheritySegments2" parent="MainViewport/SubViewport" node_paths=PackedStringArray("path") instance=ExtResource("7_xnfcr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.7832203, 1.8968132, -29.295593)
+radius = 2.0
+speed = 15.0
+path = NodePath("Path3D2/PathFollow3D")
+distance = 0.05
+
+[node name="Path3D2" type="Path3D" parent="MainViewport/SubViewport/EtheritySegments2"]
+curve = SubResource("Curve3D_xnfcr")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="MainViewport/SubViewport/EtheritySegments2/Path3D2"]
+transform = Transform3D(0.7071064, 0, -0.7071063, 0, 1, 0, 0.7071063, 0, 0.7071064, 0, 0, 0)
+
 [node name="Camera3D" type="Camera3D" parent="MainViewport/SubViewport"]
-transform = Transform3D(0.59677106, 0.4980588, -0.6291278, -0.00085518067, 0.78444064, 0.6202034, 0.80241114, -0.3695814, 0.4685574, -6.326, 20, 6.01)
+transform = Transform3D(0.7071068, 0.35355338, -0.61237246, 2.1855696e-08, 0.8660254, 0.50000006, 0.7071068, -0.35355338, 0.61237246, -31.931957, 28.372437, 32.13317)
 cull_mask = 1
 projection = 1
 current = true
+fov = 45.0
 size = 25.0
 far = 100.0
 script = ExtResource("6_1u752")
@@ -442,14 +460,14 @@ script = ExtResource("6_1u752")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.219317, 0)
 
 [node name="Pylone1" type="MeshInstance3D" parent="MainViewport/SubViewport/pylones"]
-transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, -1.7953777, -9.281599, -5.708497)
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, -2.1616497, -10.001204, -15.221681)
 layers = 17
 mesh = SubResource("CapsuleMesh_rv1hs")
 skeleton = NodePath("../../Camera3D")
 surface_material_override/0 = SubResource("ShaderMaterial_rijnb")
 
 [node name="Pylone2" type="MeshInstance3D" parent="MainViewport/SubViewport/pylones"]
-transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, -6.7838345, -9.281599, -1.6676779)
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, -20.243917, -9.281599, -11.911208)
 layers = 17
 mesh = SubResource("CapsuleMesh_rv1hs")
 skeleton = NodePath("../../Camera3D")
@@ -469,7 +487,7 @@ libraries = {
 autoplay = "pingpong"
 
 [node name="Cubes" type="Node3D" parent="MainViewport/SubViewport/pylones"]
-transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, -3.847542, -9.392824, -3.4023442)
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, -3.847542, 2.961668, -3.4023442)
 
 [node name="MeshInstance3D7" type="MeshInstance3D" parent="MainViewport/SubViewport/pylones/Cubes"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2506714, -4.046629, 2.5415044)
@@ -506,8 +524,15 @@ mesh = SubResource("BoxMesh_e07xg")
 skeleton = NodePath("../../../Camera3D")
 surface_material_override/0 = SubResource("ShaderMaterial_4raox")
 
+[node name="MeshInstance3D12" type="MeshInstance3D" parent="MainViewport/SubViewport/pylones/Cubes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.289247, -20.283981, 3.870789)
+layers = 17
+mesh = SubResource("BoxMesh_e07xg")
+skeleton = NodePath("../../../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_atw0o")
+
 [node name="Pylone3" type="MeshInstance3D" parent="MainViewport/SubViewport/pylones"]
-transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, -3.8475423, -9.392824, -3.4023442)
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, 5.816093, -9.392824, 28.990417)
 layers = 17
 mesh = SubResource("BoxMesh_0k3ve")
 skeleton = NodePath("../../Camera3D")
@@ -536,7 +561,7 @@ sky_mode = 1
 transform = Transform3D(1, 0, 0, 0, 0.16723329, 0.98591745, 0, -0.98591745, 0.16723329, 0, 8.906378, 11.516099)
 
 [node name="SphereVFX2" parent="MainViewport/SubViewport" instance=ExtResource("1_m8x48")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.0004272461, 0, 11.921265)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -8.275635, 0, 28.214539)
 color_high = Color(0.68235296, 0.13725491, 0.20392157, 1)
 color_low = Color(0.9607843, 0.49019608, 0.2901961, 1)
 threshold = 0.0
@@ -550,7 +575,7 @@ libraries = {
 autoplay = "test"
 
 [node name="SphereVFX3" parent="MainViewport/SubViewport" instance=ExtResource("1_m8x48")]
-transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, -0.0004272461, 0, 5.6568604)
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, -1.2666016, 0, -16.22937)
 color_high = Color(0.56078434, 0.972549, 0.8862745, 1)
 color_low = Color(0.56078434, 0.972549, 0.8862745, 1)
 noise = SubResource("NoiseTexture2D_74qp2")
@@ -565,7 +590,7 @@ sphere = NodePath("..")
 running = true
 
 [node name="SphereVFX4" parent="MainViewport/SubViewport" instance=ExtResource("1_m8x48")]
-transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -8.531189, 0, 5.6568604)
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -33.98065, 0, -2.296753)
 color_high = Color(1, 1, 1, 1)
 color_low = Color(0.56078434, 0.827451, 1, 1)
 noise = SubResource("NoiseTexture2D_74qp2")
@@ -596,31 +621,52 @@ explosion = NodePath("SphereExplosion")
 [node name="SphereExplosion" parent="MainViewport/SubViewport/Projectiles/BasicRoundProjectile" instance=ExtResource("13_xnfcr")]
 transform = Transform3D(16, 0, 0, 0, 16, 0, 0, 0, 16, 0, 0, 0)
 
+[node name="Env" type="Node3D" parent="MainViewport/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.972229, 5.5879517)
+
+[node name="cube_uv" parent="MainViewport/SubViewport/Env" instance=ExtResource("19_voo7p")]
+transform = Transform3D(36.944534, 33.691265, 1.004078e-06, -30.213917, 33.131405, 22.123047, 14.907068, -16.346512, 44.83939, 59.917114, -60.12744, -18.956848)
+
+[node name="cube_uv2" parent="MainViewport/SubViewport/Env" instance=ExtResource("19_voo7p")]
+transform = Transform3D(0.80000424, 0.5748231, 0.17196411, -0.5242864, 0.5303673, 0.66620886, 0.29174808, -0.62312835, 0.7256681, 6.3186245, -8.910034, -20.614325)
+
+[node name="cube_uv3" parent="MainViewport/SubViewport/Env" instance=ExtResource("19_voo7p")]
+transform = Transform3D(0.80000424, 0.5748231, 0.17196411, -0.5242864, 0.5303673, 0.66620886, 0.29174808, -0.62312835, 0.7256681, 6.324574, -8.910034, -49.711468)
+
+[node name="cube_uv4" parent="MainViewport/SubViewport/Env" instance=ExtResource("19_voo7p")]
+transform = Transform3D(0.80000424, 0.5748231, 0.17196411, -0.5242864, 0.5303673, 0.66620886, 0.29174808, -0.62312835, 0.7256681, -9.965954, -8.910034, -44.357067)
+
+[node name="cup_uv" parent="MainViewport/SubViewport/Env" instance=ExtResource("20_6in2w")]
+transform = Transform3D(1, 0, 0, 0, 0.6655952, -0.746313, 0, 0.746313, 0.6655952, -13.832886, -6.609436, -1.2610474)
+
 [node name="VFX" type="Node3D" parent="MainViewport/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.972229, 5.5879517)
 
 [node name="PowerRing" parent="MainViewport/SubViewport/VFX" instance=ExtResource("8_6n3pg")]
-transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, -0.5, 0, 0.5, -2.1855694e-08, 10.296143, -7.1986084, 8.547607)
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, -0.5, 0, 0.5, -2.1855694e-08, 5.930237, -7.1987305, -20.312805)
 
 [node name="Exocube" parent="MainViewport/SubViewport/VFX" instance=ExtResource("11_rv1hs")]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.92907715, -6.428406, 1.8096924)
 
 [node name="blue_boom" type="GPUParticles3D" parent="MainViewport/SubViewport/VFX"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0303502, -7.151159, 7.305786)
+layers = 17
 lifetime = 0.5
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_gp3m0")
 draw_pass_1 = SubResource("SphereMesh_xnfcr")
 
 [node name="cloudy_explosion" type="GPUParticles3D" parent="MainViewport/SubViewport/VFX"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.745248, -7.189855, 4.299304)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.605171, -7.189855, -1.9609499)
+layers = 17
 lifetime = 0.5
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_ioc36")
 draw_pass_1 = SubResource("SphereMesh_740d2")
 
 [node name="entity_moving" type="GPUParticles3D" parent="MainViewport/SubViewport/VFX"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5962992, -6.0734, 6.47278)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.097355, -6.575475, -5.0299854)
+layers = 17
 amount = 32
 lifetime = 2.0
 process_material = SubResource("ParticleProcessMaterial_aas4t")
@@ -647,14 +693,16 @@ handle_input_locally = false
 size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
-[node name="Camera3D" type="Camera3D" parent="OutlineViewport/SubViewport"]
-transform = Transform3D(0.59677106, 0.4980588, -0.6291278, -0.00085518067, 0.78444064, 0.6202034, 0.80241114, -0.3695814, 0.4685574, -6.326, 20, 6.01)
+[node name="Camera3D" type="Camera3D" parent="OutlineViewport/SubViewport" node_paths=PackedStringArray("ref_camera")]
+transform = Transform3D(0.67880076, -0.7343225, 0, 0.7343225, 0.67880076, 0, 0, 0, 1, -6.326, 20, 6.01)
 cull_mask = 16
 projection = 1
 current = true
+fov = 45.0
 size = 25.0
 far = 100.0
 script = ExtResource("6_1u752")
+ref_camera = NodePath("../../../MainViewport/SubViewport/Camera3D")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

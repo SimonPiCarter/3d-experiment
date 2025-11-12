@@ -1,0 +1,142 @@
+[gd_scene load_steps=10 format=3 uid="uid://b4iuas1jqhse3"]
+
+[ext_resource type="Script" uid="uid://denpyefrjswaw" path="res://scripts/vfx/circling_etheral/circling_etheral.gd" id="1_cvykm"]
+[ext_resource type="Script" uid="uid://dl8uwo5fs1cro" path="res://scenes/test/ik/anchor_dynamic.gd" id="2_ed172"]
+[ext_resource type="Shader" uid="uid://cc18tpomiri80" path="res://shaders/new_pipeline/outline_new_pipeline_unshaded.gdshader" id="3_g3j22"]
+
+[sub_resource type="Curve" id="Curve_cvykm"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.033707857), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ed172"]
+curve = SubResource("Curve_cvykm")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cvykm"]
+emission_shape = 1
+emission_sphere_radius = 0.25
+gravity = Vector3(0, 0, 0)
+scale_min = 0.75
+scale_curve = SubResource("CurveTexture_ed172")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nr7yg"]
+render_priority = 0
+shader = ExtResource("3_g3j22")
+shader_parameter/original_color = Color(0.43137255, 0.15294118, 0.15294118, 1)
+shader_parameter/outline_color = Color(0.5019608, 0.4745098, 0.5019608, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_ed172"]
+material = SubResource("ShaderMaterial_nr7yg")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_4bybw"]
+material = SubResource("ShaderMaterial_nr7yg")
+
+[node name="EtheritySegments" type="Node3D" node_paths=PackedStringArray("segments")]
+script = ExtResource("1_cvykm")
+segments = [NodePath("AnchorDynamic"), NodePath("AnchorDynamic2"), NodePath("AnchorDynamic3"), NodePath("AnchorDynamic4"), NodePath("AnchorDynamic5")]
+
+[node name="AnchorDynamic" type="Node3D" parent="." node_paths=PackedStringArray("anchor_1", "anchor_2")]
+script = ExtResource("2_ed172")
+anchor_1 = NodePath("MeshInstance3D")
+anchor_2 = NodePath("MeshInstance3D2")
+min_distance = 0.7
+max_distance = 0.8
+metadata/_custom_type_script = "uid://dl8uwo5fs1cro"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="AnchorDynamic"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.3630371, 0, 0)
+layers = 17
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="AnchorDynamic/MeshInstance3D"]
+layers = 17
+amount = 16
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_cvykm")
+draw_pass_1 = SubResource("SphereMesh_ed172")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="AnchorDynamic"]
+transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, -0.69714355, 0, 0)
+visible = false
+layers = 17
+mesh = SubResource("SphereMesh_4bybw")
+
+[node name="AnchorDynamic2" type="Node3D" parent="." node_paths=PackedStringArray("anchor_1", "anchor_2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.298584, 0, 0)
+visible = false
+script = ExtResource("2_ed172")
+anchor_1 = NodePath("MeshInstance3D")
+anchor_2 = NodePath("MeshInstance3D2")
+min_distance = 0.5
+max_distance = 0.6
+metadata/_custom_type_script = "uid://dl8uwo5fs1cro"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="AnchorDynamic2"]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -1.3630371, 0, 0)
+layers = 17
+mesh = SubResource("SphereMesh_4bybw")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="AnchorDynamic2"]
+transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, -0.69714355, 0, 0)
+layers = 17
+mesh = SubResource("SphereMesh_4bybw")
+
+[node name="AnchorDynamic3" type="Node3D" parent="." node_paths=PackedStringArray("anchor_1", "anchor_2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.390747, 0, 0)
+visible = false
+script = ExtResource("2_ed172")
+anchor_1 = NodePath("MeshInstance3D")
+anchor_2 = NodePath("MeshInstance3D2")
+min_distance = 0.5
+max_distance = 0.6
+metadata/_custom_type_script = "uid://dl8uwo5fs1cro"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="AnchorDynamic3"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -1.3630371, 0, 0)
+layers = 17
+mesh = SubResource("SphereMesh_4bybw")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="AnchorDynamic3"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.69714355, 0, 0)
+layers = 17
+mesh = SubResource("SphereMesh_4bybw")
+
+[node name="AnchorDynamic4" type="Node3D" parent="." node_paths=PackedStringArray("anchor_1", "anchor_2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.390747, 0, 0)
+visible = false
+script = ExtResource("2_ed172")
+anchor_1 = NodePath("MeshInstance3D")
+anchor_2 = NodePath("MeshInstance3D2")
+min_distance = 0.5
+max_distance = 0.6
+metadata/_custom_type_script = "uid://dl8uwo5fs1cro"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="AnchorDynamic4"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -1.3630371, 0, 0)
+layers = 17
+mesh = SubResource("SphereMesh_4bybw")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="AnchorDynamic4"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.69714355, 0, 0)
+layers = 17
+mesh = SubResource("SphereMesh_4bybw")
+
+[node name="AnchorDynamic5" type="Node3D" parent="." node_paths=PackedStringArray("anchor_1", "anchor_2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.390747, 0, 0)
+visible = false
+script = ExtResource("2_ed172")
+anchor_1 = NodePath("MeshInstance3D")
+anchor_2 = NodePath("MeshInstance3D2")
+min_distance = 0.5
+max_distance = 0.6
+metadata/_custom_type_script = "uid://dl8uwo5fs1cro"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="AnchorDynamic5"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -1.3630371, 0, 0)
+layers = 17
+mesh = SubResource("SphereMesh_4bybw")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="AnchorDynamic5"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.69714355, 0, 0)
+layers = 17
+mesh = SubResource("SphereMesh_4bybw")

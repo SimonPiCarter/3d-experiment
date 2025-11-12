@@ -1,0 +1,132 @@
+[gd_scene load_steps=6 format=3 uid="uid://bngmh3npf8b1v"]
+
+[ext_resource type="Script" uid="uid://be0cda2uwueju" path="res://scenes/models/segmented_twad_robot.gd" id="1_31yx2"]
+[ext_resource type="Script" uid="uid://dl8uwo5fs1cro" path="res://scenes/test/ik/anchor_dynamic.gd" id="2_ha0qk"]
+[ext_resource type="PackedScene" uid="uid://bu0oy87ktyn3p" path="res://scenes/models/twad_entity_legs.tscn" id="3_17flo"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_aioih"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_hnb13"]
+size = Vector3(0.9, 0.9, 0.9)
+
+[node name="TwoSegmentObject" type="Node3D" node_paths=PackedStringArray("segments")]
+script = ExtResource("1_31yx2")
+segments = [NodePath("AnchorDynamic"), NodePath("AnchorDynamic2"), NodePath("AnchorDynamic3"), NodePath("AnchorDynamic4"), NodePath("AnchorDynamic5")]
+
+[node name="AnchorDynamic" type="Node3D" parent="." node_paths=PackedStringArray("anchor_1", "anchor_2", "body")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.668004, 0, 0)
+script = ExtResource("2_ha0qk")
+anchor_1 = NodePath("Segment7")
+anchor_2 = NodePath("Segment8")
+body = NodePath("Body")
+metadata/_custom_type_script = "uid://dl8uwo5fs1cro"
+
+[node name="Segment7" type="MeshInstance3D" parent="AnchorDynamic"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+mesh = SubResource("BoxMesh_aioih")
+
+[node name="Segment8" type="MeshInstance3D" parent="AnchorDynamic"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 1, 0, 0)
+mesh = SubResource("BoxMesh_aioih")
+
+[node name="Body" type="MeshInstance3D" parent="AnchorDynamic"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.50024796, 0, 0)
+mesh = SubResource("BoxMesh_hnb13")
+skeleton = NodePath("../../..")
+
+[node name="Node3D3" parent="AnchorDynamic/Body" instance=ExtResource("3_17flo")]
+transform = Transform3D(0.00204201, 0, 0.9999979, 0, 1, 0, -0.9999979, 0, 0.00204201, 0, 0, 0)
+
+[node name="AnchorDynamic2" type="Node3D" parent="." node_paths=PackedStringArray("anchor_1", "anchor_2", "body")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.42097282, 0, 0)
+script = ExtResource("2_ha0qk")
+anchor_1 = NodePath("Segment7")
+anchor_2 = NodePath("Segment8")
+body = NodePath("Body")
+
+[node name="Segment7" type="MeshInstance3D" parent="AnchorDynamic2"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+mesh = SubResource("BoxMesh_aioih")
+
+[node name="Segment8" type="MeshInstance3D" parent="AnchorDynamic2"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 1, 0, 0)
+mesh = SubResource("BoxMesh_aioih")
+
+[node name="Body" type="MeshInstance3D" parent="AnchorDynamic2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.50024796, 0, 0)
+mesh = SubResource("BoxMesh_hnb13")
+skeleton = NodePath("../../..")
+
+[node name="Node3D3" parent="AnchorDynamic2/Body" instance=ExtResource("3_17flo")]
+transform = Transform3D(0.00204201, 0, 0.9999979, 0, 1, 0, -0.9999979, 0, 0.00204201, 0, 0, 0)
+visible = false
+
+[node name="AnchorDynamic3" type="Node3D" parent="." node_paths=PackedStringArray("anchor_1", "anchor_2", "body")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.73946, 0, 0)
+script = ExtResource("2_ha0qk")
+anchor_1 = NodePath("Segment7")
+anchor_2 = NodePath("Segment8")
+body = NodePath("Body")
+
+[node name="Segment7" type="MeshInstance3D" parent="AnchorDynamic3"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+mesh = SubResource("BoxMesh_aioih")
+
+[node name="Segment8" type="MeshInstance3D" parent="AnchorDynamic3"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 1, 0, 0)
+mesh = SubResource("BoxMesh_aioih")
+
+[node name="Body" type="MeshInstance3D" parent="AnchorDynamic3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.50024796, 0, 0)
+mesh = SubResource("BoxMesh_hnb13")
+skeleton = NodePath("../../..")
+
+[node name="Node3D3" parent="AnchorDynamic3/Body" instance=ExtResource("3_17flo")]
+transform = Transform3D(0.00204201, 0, 0.9999979, 0, 1, 0, -0.9999979, 0, 0.00204201, 0, 0, 0)
+
+[node name="AnchorDynamic4" type="Node3D" parent="." node_paths=PackedStringArray("anchor_1", "anchor_2", "body")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9518518, 0, 0)
+script = ExtResource("2_ha0qk")
+anchor_1 = NodePath("Segment7")
+anchor_2 = NodePath("Segment8")
+body = NodePath("Body")
+
+[node name="Segment7" type="MeshInstance3D" parent="AnchorDynamic4"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+mesh = SubResource("BoxMesh_aioih")
+
+[node name="Segment8" type="MeshInstance3D" parent="AnchorDynamic4"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 1, 0, 0)
+mesh = SubResource("BoxMesh_aioih")
+
+[node name="Body" type="MeshInstance3D" parent="AnchorDynamic4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.50024796, 0, 0)
+mesh = SubResource("BoxMesh_hnb13")
+skeleton = NodePath("../../..")
+
+[node name="Node3D2" parent="AnchorDynamic4/Body" instance=ExtResource("3_17flo")]
+transform = Transform3D(0.00204201, 0, 0.9999979, 0, 1, 0, -0.9999979, 0, 0.00204201, 0, 0, 0)
+visible = false
+
+[node name="AnchorDynamic5" type="Node3D" parent="." node_paths=PackedStringArray("anchor_1", "anchor_2", "body")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2681618, 0, 0)
+script = ExtResource("2_ha0qk")
+anchor_1 = NodePath("Segment7")
+anchor_2 = NodePath("Segment8")
+body = NodePath("Body")
+
+[node name="Segment7" type="MeshInstance3D" parent="AnchorDynamic5"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+mesh = SubResource("BoxMesh_aioih")
+
+[node name="Segment8" type="MeshInstance3D" parent="AnchorDynamic5"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 1, 0, 0)
+mesh = SubResource("BoxMesh_aioih")
+
+[node name="Body" type="MeshInstance3D" parent="AnchorDynamic5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.50024796, 0, 0)
+mesh = SubResource("BoxMesh_hnb13")
+skeleton = NodePath("../../..")
+
+[node name="Node3D" parent="AnchorDynamic5/Body" instance=ExtResource("3_17flo")]
+transform = Transform3D(0.00204201, 0, 0.9999979, 0, 1, 0, -0.9999979, 0, 0.00204201, 0, 0, 0)

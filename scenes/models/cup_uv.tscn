@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://qfg6ip0muxgn"]
+
+[ext_resource type="PackedScene" uid="uid://b8138wlldm6e" path="res://model/cup_uv.glb" id="1_od1gp"]
+[ext_resource type="Shader" uid="uid://cc18tpomiri80" path="res://shaders/new_pipeline/outline_new_pipeline_unshaded.gdshader" id="2_1mi4d"]
+[ext_resource type="Texture2D" uid="uid://bkfo5sla5xvng" path="res://textures/offset_outline_mask.png" id="3_1mi4d"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1mi4d"]
+render_priority = 0
+shader = ExtResource("2_1mi4d")
+shader_parameter/original_color = Color(0, 0.8926722, 0, 1)
+shader_parameter/outline_color = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/outline_mask = ExtResource("3_1mi4d")
+shader_parameter/use_mask = true
+
+[node name="cup_uv" instance=ExtResource("1_od1gp")]
+
+[node name="Sphere" parent="." index="0"]
+layers = 17
+surface_material_override/0 = SubResource("ShaderMaterial_1mi4d")

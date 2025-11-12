@@ -11,25 +11,31 @@ const MOUSE_SENSITIVITY := 0.002
 
 @export var move_speed : float = 20.
 @export var rotation_speed : float = 1.
+@export var ref_camera : Camera3D = null
 
 func _process(delta):
-	var zoom = 0
-	var dir = Vector3.ZERO
-	if left:
-		dir.x = -1
-	if right:
-		dir.x = +1
-	if up:
-		dir.y = +1
-	if down:
-		dir.y = -1
-	if zoom_in:
-		zoom = -1
-	if zoom_out:
-		zoom = +1
+	if ref_camera:
+		position = ref_camera.position
+		rotation = ref_camera.rotation
+		size = ref_camera.size
+	else:
+		var zoom = 0
+		var dir = Vector3.ZERO
+		if left:
+			dir.x = -1
+		if right:
+			dir.x = +1
+		if up:
+			dir.y = +1
+		if down:
+			dir.y = -1
+		if zoom_in:
+			zoom = -1
+		if zoom_out:
+			zoom = +1
 
-	translate(dir * move_speed * delta)
-	size = clamp(size+zoom, 5, 50)
+		translate(dir * move_speed * delta)
+		size = clamp(size+zoom, 5, 50)
 
 func _input(event):
 	if event is InputEventKey:
