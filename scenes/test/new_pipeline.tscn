@@ -403,7 +403,7 @@ skeleton = NodePath("../Sprite3D")
 surface_material_override/0 = SubResource("StandardMaterial3D_4raox")
 
 [node name="BackgroundCheck" type="MeshInstance3D" parent="MainViewport/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6004361, -0.15586472, -1.5166348)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6004361, -0.15586472, -1.516634)
 layers = 16
 mesh = SubResource("PlaneMesh_gvkf4")
 skeleton = NodePath("../Sprite3D")
@@ -562,6 +562,7 @@ autoplay = "test"
 
 [node name="SphereVFX3" parent="MainViewport/SubViewport" instance=ExtResource("1_m8x48")]
 transform = Transform3D(32, 0, 0, 0, 32, 0, 0, 0, 32, -1.2666016, 0, -16.22937)
+visible = false
 color_high = Color(0.56078434, 0.972549, 0.8862745, 1)
 color_low = Color(0.56078434, 0.972549, 0.8862745, 1)
 noise = SubResource("NoiseTexture2D_74qp2")

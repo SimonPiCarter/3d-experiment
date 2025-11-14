@@ -1,25 +1,245 @@
-[gd_scene load_steps=8 format=3 uid="uid://bpf2yq0qibfvi"]
+[gd_scene load_steps=17 format=4 uid="uid://bpf2yq0qibfvi"]
 
 [ext_resource type="PackedScene" uid="uid://dp5d6xpbviyh6" path="res://model/robot2.glb" id="1_fcyj1"]
-[ext_resource type="Script" uid="uid://b6g8yt8ck3bkc" path="res://scripts/ik/ik_quad_object.gd" id="2_2q834"]
 [ext_resource type="Script" uid="uid://cssyvtlm806gc" path="res://scripts/ik/ik_auto_start.gd" id="2_a8m4m"]
+[ext_resource type="Script" uid="uid://bgcgl5qwsw28r" path="res://scenes/models/robot_2.gd" id="2_flht3"]
 [ext_resource type="Shader" uid="uid://cc18tpomiri80" path="res://shaders/new_pipeline/outline_new_pipeline_unshaded.gdshader" id="4_krmdn"]
+[ext_resource type="Shader" uid="uid://dhrgs41dp44l7" path="res://shaders/new_pipeline/outline_new_pipeline_alpha.gdshader" id="5_flht3"]
 [ext_resource type="Shader" uid="uid://cv4deawtx0pb3" path="res://shaders/new_pipeline/outline_new_pipeline_shaded.gdshader" id="5_obp05"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g76fm"]
 render_priority = 0
 shader = ExtResource("5_obp05")
 shader_parameter/original_color = Color(0.67058825, 0.5803922, 0.47843137, 1)
-shader_parameter/outline_color = Color(0.59607846, 0, 0, 1)
+shader_parameter/outline_color = Color(0.59607846, 0.25490198, 0.3137255, 1)
+shader_parameter/use_mask = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wfoq8"]
 render_priority = 0
 shader = ExtResource("4_krmdn")
 shader_parameter/original_color = Color(0.40784314, 0.92941177, 0.36078432, 1)
-shader_parameter/outline_color = Color(0.003921569, 0.58431375, 0.003921569, 1)
+shader_parameter/outline_color = Color(0.48235294, 0.58431375, 0.42745098, 1)
+shader_parameter/use_mask = false
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_njuye"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_dgado"]
+resource_name = "robot2_Icosphere"
+_surfaces = [{
+"aabb": AABB(-0.894425, 0.39318252, -0.85064, 1.78885, 2, 1.70128),
+"attribute_data": PackedByteArray("wy46PgAAgD8GL7o9o7BXPwGjiz6jsFc/AaOLPqOwVz9Buug+o7BXP6Euuj4AAIA/MLpoPwAAgD9gdFE/o7BXPwAAgD+jsFc/kC46PwAAgD/A6CI/o7BXP2B0UT+jsFc/8KILPwAAgD9Buug+o7BXP8DoIj+jsFc/AaOLPqOwVz+hLro+VmEvP0G66D6jsFc/Bi+6PaOwVz/DLjo+VmEvPwGjiz6jsFc/YHRRP6OwVz8wumg/VmEvPwAAgD+jsFc/wOgiP6OwVz+QLjo/VmEvP2B0UT+jsFc/QbroPqOwVz/wogs/VmEvP8DoIj+jsFc/AaOLPqOwVz/DLjo+VmEvP6Euuj5WYS8/Bi+6PaOwVz8AAAAAVmEvP8MuOj5WYS8/YHRRP6OwVz+QLjo/VmEvPzC6aD9WYS8/wOgiP6OwVz/wogs/VmEvP5AuOj9WYS8/QbroPqOwVz+hLro+VmEvP/CiCz9WYS8/wy46PlZhLz8Bo4s++REHP6Euuj5WYS8/AAAAAFZhLz8GL7o9+REHP8MuOj5WYS8/kC46P1ZhLz9gdFE/+REHPzC6aD9WYS8/8KILP1ZhLz/A6CI/+REHP5AuOj9WYS8/oS66PlZhLz9Buug++REHP/CiCz9WYS8/"),
+"bone_aabbs": [AABB(0, 0, 0, -1, -1, -1), AABB(0, 0, 0, -1, -1, -1), AABB(-0.894425, 0.39318252, -0.85064, 1.78885, 2, 1.70128)],
+"format": 34359745559,
+"index_count": 60,
+"index_data": PackedByteArray("AAABAAIAAwAEAAUABgAHAAgACQAKAAsADAANAA4ADwAQABEAEgATABQAFQAWABcAGAAZABoAGwAcAB0AHgAfACAAIQAiACMAJAAlACYAJwAoACkAKgArACwALQAuAC8AMAAxADIAMwA0ADUANgA3ADgAOQA6ADsA"),
+"material": SubResource("StandardMaterial3D_njuye"),
+"primitive": 3,
+"skin_data": PackedByteArray("AgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAACAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAACAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAACAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAACAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAACAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAACAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAACAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAACAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAACAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAACAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAACAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAACAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAACAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAACAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAACAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAACAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAACAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAACAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAACAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAACAAAAAAAAAP//AAAAAAAA"),
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 60,
+"vertex_data": PackedByteArray("AAAAADhPyT4AAACAVoKNvu4qcj+Lw1k/2T05P+4qcj+WlQY/2T05P+4qcj+WlQY/2T05P+4qcj+WlQa/AAAAADhPyT4AAACAAAAAADhPyT4AAACACflkv+4qcj8AAACAVoKNvu4qcj+Lw1k/AAAAADhPyT4AAACAVoKNvu4qcj+Lw1m/Cflkv+4qcj8AAACAAAAAADhPyT4AAACA2T05P+4qcj+WlQa/VoKNvu4qcj+Lw1m/2T05P+4qcj+WlQY/CflkPyWS6z8AAACA2T05P+4qcj+WlQa/VoKNvu4qcj+Lw1k/VoKNPiWS6z+Lw1k/2T05P+4qcj+WlQY/Cflkv+4qcj8AAACA2T05vyWS6z+WlQY/VoKNvu4qcj+Lw1k/VoKNvu4qcj+Lw1m/2T05vyWS6z+WlQa/Cflkv+4qcj8AAACA2T05P+4qcj+WlQa/VoKNPiWS6z+Lw1m/VoKNvu4qcj+Lw1m/2T05P+4qcj+WlQY/VoKNPiWS6z+Lw1k/CflkPyWS6z8AAACAVoKNvu4qcj+Lw1k/2T05vyWS6z+WlQY/VoKNPiWS6z+Lw1k/Cflkv+4qcj8AAACA2T05vyWS6z+WlQa/2T05vyWS6z+WlQY/VoKNvu4qcj+Lw1m/VoKNPiWS6z+Lw1m/2T05vyWS6z+WlQa/2T05P+4qcj+WlQa/CflkPyWS6z8AAACAVoKNPiWS6z+Lw1m/VoKNPiWS6z+Lw1k/AAAAAOcpGUAAAACACflkPyWS6z8AAACA2T05vyWS6z+WlQY/AAAAAOcpGUAAAACAVoKNPiWS6z+Lw1k/2T05vyWS6z+WlQa/AAAAAOcpGUAAAACA2T05vyWS6z+WlQY/VoKNPiWS6z+Lw1m/AAAAAOcpGUAAAACA2T05vyWS6z+WlQa/CflkPyWS6z8AAACAAAAAAOcpGUAAAACAVoKNPiWS6z+Lw1m/ZI/HPv7/TbBkj8c+/v9NsGSPxz7+/02wbrdvN/////9ut283/////263bzf/////ulkSQty1/7+6WRJC3LX/v7pZEkLctf+/7T1EJiJK/7/tPUQmIkr/v+09RCYiSv+/x75lDwAAsc/HvmUPAACxz8e+ZQ8AALHPeOt4a/////9463hr/////3jreGv/////QJsmb/7/TbBAmyZv/v9NsECbJm/+/02wyD6ZcN21/7/IPplw3bX/v8g+mXDdtf+/ZQ82QSFK/79lDzZBIUr/v2UPNkEhSv+/Ju9BGwAAsM8m70EbAACwzybvQRsAALDPNsFlj/7/EOU2wWWP/v8Q5TbBZY/+/xDlvmTYkJvg/7++ZNiQm+D/v75k2JCb4P+/hhSGlP9//7+GFIaU/3//v4YUhpT/f/+/2BC95GMf/7/YEL3kYx//v9gQveRjH/+/mfDIvgAA7pqZ8Mi+AADumpnwyL4AAO6aRKbsvf7/7ZpEpuy9/v/tmkSm7L3+/+2amnA3wZvg/7+acDfBm+D/v5pwN8Gb4P+/kEiPyP9//7+QSI/I/3//v5BIj8j/f/+/N0GZ8GMf/783QZnwYx//vzdBmfBjH/+/EcK62QAAEOURwrrZAAAQ5RHCutkAABDl")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="Skin" id="Skin_qbhfo"]
+resource_name = "Skin"
+bind_count = 24
+bind/0/name = &"Root"
+bind/0/bone = -1
+bind/0/pose = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+bind/1/name = &"Body_2"
+bind/1/bone = -1
+bind/1/pose = Transform3D(1, 0, -2.3841858e-07, 0, 1, 0, 2.3841858e-07, 0, 1, 0, -0.09087175, 0)
+bind/2/name = &"Sphere"
+bind/2/bone = -1
+bind/2/pose = Transform3D(1, 0, -2.3841858e-07, 0, 1, 0, 2.3841858e-07, 0, 1, 0, -0.46179476, 0)
+bind/3/name = &"BaseLeg"
+bind/3/bone = -1
+bind/3/pose = Transform3D(4.371139e-08, 0, -1, 0, -1.0000001, 0, -1, 0, -4.371139e-08, 0, 0.09087176, 0)
+bind/4/name = &"FrontRightLeg"
+bind/4/bone = -1
+bind/4/pose = Transform3D(-0.42998603, -0.7001401, -0.5700141, -0.7001402, -0.14002822, 0.7001401, -0.57001394, 0.70014024, -0.42998594, -0.21643308, -0.043286674, 0.21643311)
+bind/5/name = &"FrontRightLeg.001"
+bind/5/bone = -1
+bind/5/pose = Transform3D(-0.49999994, -0.7071069, -0.5, -0.7071068, -1.7881398e-07, 0.7071069, -0.50000006, 0.7071069, -0.5, -0.360008, -1.4142137, 0.36000803)
+bind/6/name = &"FrontRightLeg.002"
+bind/6/bone = -1
+bind/6/pose = Transform3D(-0.5, -0.7071068, -0.5, -0.70710695, -1.4901165e-07, 0.70710695, -0.49999997, 0.70710695, -0.49999997, -0.36000806, -2.969849, 0.36000818)
+bind/7/name = &"FrontRightLeg.003"
+bind/7/bone = -1
+bind/7/pose = Transform3D(-0.49999994, -0.7071068, -0.49999994, -0.70710695, -1.78814e-07, 0.70710695, -0.5, 0.7071069, -0.5, -0.36000812, -4.6669064, 0.36000815)
+bind/8/name = &"FrontRightLeg.004"
+bind/8/bone = -1
+bind/8/pose = Transform3D(-0.55215776, -0.7071069, -0.4417259, -0.624695, -2.2351749e-07, 0.7808691, -0.55215776, 0.707107, -0.4417259, -0.8569516, -6.3250394, -0.13693517)
+bind/9/name = &"BackLeftLeg"
+bind/9/bone = -1
+bind/9/pose = Transform3D(0.71208286, 0.002845266, 0.7020898, 0.69606215, -0.13367845, -0.7054275, 0.091847025, 0.9910208, -0.09717065, 0.00087955437, -0.04132378, 0.3063525)
+bind/10/name = &"BackLeftLeg.001"
+bind/10/bone = -1
+bind/10/pose = Transform3D(0.7071067, 0, 0.7071067, 0.7071069, -6.322028e-08, -0.7071068, -8.9068145e-08, 1, -6.799472e-08, 0.009908021, -1.4826666, 0.50912815)
+bind/11/name = &"BackLeftLeg.002"
+bind/11/bone = -1
+bind/11/pose = Transform3D(0.7071067, 0, 0.7071067, 0.7071069, -7.812144e-08, -0.7071068, -7.853143e-08, 1, -7.853143e-08, 0.009907962, -3.1797237, 0.50912815)
+bind/12/name = &"BackLeftLeg.003"
+bind/12/bone = -1
+bind/12/pose = Transform3D(0.7071067, -3.5527145e-15, 0.7071068, 0.707107, -7.812146e-08, -0.7071068, -7.853142e-08, 1, -7.8531436e-08, 0.009908201, -4.87678, 0.5091282)
+bind/13/name = &"BackLeftLeg.004"
+bind/13/bone = -1
+bind/13/pose = Transform3D(0.6782802, -3.552714e-15, 0.73480326, 0.73480344, -8.249786e-08, -0.6782803, -7.3151924e-08, 1, -7.924789e-08, 0.2669895, -6.426879, 0.5091281)
+bind/14/name = &"FrontLeftLeg"
+bind/14/bone = -1
+bind/14/pose = Transform3D(-0.5001883, -0.80946255, 0.30754152, 0.6666667, -0.13333333, 0.7333331, -0.5526002, 0.5718326, 0.6063333, -0.237723, -0.057883825, 0.19058464)
+bind/15/name = &"FrontLeftLeg.001"
+bind/15/bone = -1
+bind/15/pose = Transform3D(-0.49999982, -0.7071066, 0.49999982, 0.7071068, 5.9604616e-08, 0.70710653, -0.49999982, 0.7071067, 0.49999982, -0.39750797, -1.5026017, 0.322508)
+bind/16/name = &"FrontLeftLeg.002"
+bind/16/bone = -1
+bind/16/pose = Transform3D(-0.4999997, -0.7071067, 0.49999988, 0.7071068, 8.9406925e-08, 0.7071065, -0.49999976, 0.70710665, 0.49999994, -0.3975085, -3.0582366, 0.32250756)
+bind/17/name = &"FrontLeftLeg.003"
+bind/17/bone = -1
+bind/17/pose = Transform3D(-0.49999988, -0.7071067, 0.49999988, 0.7071068, 8.940694e-08, 0.70710677, -0.49999988, 0.7071068, 0.49999988, -0.3975081, -4.755293, 0.32250822)
+bind/18/name = &"FrontLeftLeg.004"
+bind/18/bone = -1
+bind/18/pose = Transform3D(-0.37962797, -0.70710665, 0.5965587, 0.8436616, 7.450577e-08, 0.5368752, -0.379628, 0.7071067, 0.59655875, -1.3863616, -6.287195, -0.6663456)
+bind/19/name = &"BackRightLeg"
+bind/19/bone = -1
+bind/19/pose = Transform3D(-0.46119836, 0.8158154, 0.34891465, -0.73271465, -0.1283891, -0.6683153, -0.50042516, -0.5638809, 0.6569727, 0.26091474, -0.05639629, -0.15788692)
+bind/20/name = &"BackRightLeg.001"
+bind/20/bone = -1
+bind/20/pose = Transform3D(0.63513494, -0.43955308, -0.6351353, -0.70710677, 2.9802326e-08, -0.70710653, 0.3108109, 0.89821684, -0.31081098, -0.17595191, -1.5609214, 0.48071727)
+bind/21/name = &"BackRightLeg.002"
+bind/21/bone = -1
+bind/21/pose = Transform3D(-0.6380713, -0.43096438, 0.6380713, -0.70710665, -2.980233e-08, -0.70710677, 0.3047378, -0.90236914, -0.3047378, -0.26747495, -3.1165564, -0.43646914)
+bind/22/name = &"BackRightLeg.003"
+bind/22/bone = -1
+bind/22/pose = Transform3D(-0.63807124, -0.4309644, 0.63807136, -0.7071068, -1.4901167e-08, -0.7071067, 0.3047378, -0.90236926, -0.30473784, -0.2674745, -4.8136125, -0.43646938)
+bind/23/name = &"BackRightLeg.004"
+bind/23/bone = -1
+bind/23/pose = Transform3D(-0.71228695, -0.43096408, 0.5540014, -0.6139407, 1.4901165e-08, -0.789352, 0.34018227, -0.9023693, -0.26458645, -0.9958091, -6.4537864, -0.08862313)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_krmdn"]
+render_priority = 0
+shader = ExtResource("5_flht3")
+shader_parameter/original_color = Color(0.40784314, 0.92941177, 0.36078432, 0.6117647)
+shader_parameter/outline_color = Color(0.043137256, 0.16078432, 0.003921569, 1)
+shader_parameter/use_mask = false
+
+[sub_resource type="Animation" id="Animation_krmdn"]
+resource_name = "attack"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Armature/Skeleton3D/Icosphere:surface_material_override/0:shader_parameter/original_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.23333333, 0.4),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [Color(0.40784314, 0.92941177, 0.36078432, 1), Color(0.08627451, 0.3529412, 0.29803923, 1), Color(0.40784314, 0.92941177, 0.36078432, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_flht3"]
+resource_name = "power"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Armature/Skeleton3D/Icosphere2:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.19999999, 0.25833333),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(4, 4, 4), Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Armature/Skeleton3D/Icosphere2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.19999999, 0.25833333),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -3, 0), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Armature/Skeleton3D/Icosphere2:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.26666668),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_obp05"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Armature/Skeleton3D/Icosphere2:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Armature/Skeleton3D/Icosphere2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Armature/Skeleton3D/Icosphere:surface_material_override/0:shader_parameter/original_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.40784314, 0.92941177, 0.36078432, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Armature/Skeleton3D/Icosphere2:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_obp05"]
+_data = {
+&"RESET": SubResource("Animation_obp05"),
+&"attack": SubResource("Animation_krmdn"),
+&"power": SubResource("Animation_flht3")
+}
 
 [node name="robot2" node_paths=PackedStringArray("FrontLeftLeg", "FrontRightLeg", "BackLeftLeg", "BackRightLeg", "Armature") instance=ExtResource("1_fcyj1")]
-script = ExtResource("2_2q834")
+script = ExtResource("2_flht3")
 FrontLeftLeg = NodePath("Armature/Skeleton3D/FrontLeft")
 FrontRightLeg = NodePath("Armature/Skeleton3D/FrontRight")
 BackLeftLeg = NodePath("Armature/Skeleton3D/BackLeft")
@@ -34,11 +254,21 @@ surface_material_override/0 = SubResource("ShaderMaterial_g76fm")
 layers = 29
 surface_material_override/0 = SubResource("ShaderMaterial_wfoq8")
 
-[node name="Legs" parent="Armature/Skeleton3D" index="2"]
+[node name="Marker3D" type="Marker3D" parent="Armature/Skeleton3D/Icosphere" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3930969, 0)
+
+[node name="Icosphere2" type="MeshInstance3D" parent="Armature/Skeleton3D" index="2"]
+visible = false
+layers = 29
+mesh = SubResource("ArrayMesh_dgado")
+skin = SubResource("Skin_qbhfo")
+surface_material_override/0 = SubResource("ShaderMaterial_krmdn")
+
+[node name="Legs" parent="Armature/Skeleton3D" index="3"]
 layers = 29
 surface_material_override/0 = SubResource("ShaderMaterial_g76fm")
 
-[node name="FrontLeft" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="3"]
+[node name="FrontLeft" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="4"]
 process_priority = 1
 top_level = true
 root_bone = &"FrontLeftLeg.001"
@@ -48,7 +278,7 @@ magnet = Vector3(0, 10, 0)
 script = ExtResource("2_a8m4m")
 metadata/_custom_type_script = "uid://cssyvtlm806gc"
 
-[node name="FrontRight" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="4"]
+[node name="FrontRight" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="5"]
 top_level = true
 root_bone = &"FrontRightLeg.001"
 tip_bone = &"FrontRightLeg.004"
@@ -57,7 +287,7 @@ magnet = Vector3(0, 10, 0)
 script = ExtResource("2_a8m4m")
 metadata/_custom_type_script = "uid://cssyvtlm806gc"
 
-[node name="BackLeft" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="5"]
+[node name="BackLeft" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="6"]
 top_level = true
 root_bone = &"BackLeftLeg.001"
 tip_bone = &"BackLeftLeg.004"
@@ -66,7 +296,7 @@ magnet = Vector3(0, 10, 0)
 script = ExtResource("2_a8m4m")
 metadata/_custom_type_script = "uid://cssyvtlm806gc"
 
-[node name="BackRight" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="6"]
+[node name="BackRight" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="7"]
 top_level = true
 root_bone = &"BackRightLeg.001"
 tip_bone = &"BackRightLeg.004"
@@ -74,3 +304,8 @@ use_magnet = true
 magnet = Vector3(0, 10, 0)
 script = ExtResource("2_a8m4m")
 metadata/_custom_type_script = "uid://cssyvtlm806gc"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
+libraries = {
+&"": SubResource("AnimationLibrary_obp05")
+}
