@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bgmgmigu7s8k6" path="res://scenes/models/simple_robot.tscn" id="2_q0imc"]
 
 [node name="QuadEntity" instance=ExtResource("1_6swe3")]
+step_offset = 0.3
 
 [node name="SimpleRobot" parent="." index="0" instance=ExtResource("2_q0imc")]
 
@@ -12,15 +13,3 @@ quad_object = NodePath("../SimpleRobot")
 
 [node name="FrontLeftIKMarker" parent="IKQuadContainer/MarkerContainer" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1508622, -1.3, 1.5)
-
-[node name="FrontLeftIKTarget" parent="IKQuadContainer/TargetContainer" index="0"]
-step_time = 0.075
-
-[node name="FrontRightIKTarget" parent="IKQuadContainer/TargetContainer" index="1"]
-step_time = 0.075
-
-[node name="BackLeftIKTarget" parent="IKQuadContainer/TargetContainer" index="2"]
-step_time = 0.075
-
-[node name="BackRightIKTarget" parent="IKQuadContainer/TargetContainer" index="3"]
-step_time = 0.075
