@@ -1,27 +1,15 @@
 extends TwoSegmentObject
-@export var speed : float = 5.
 
-var direction : Array[bool] = [false,false,false,false]
+@export var move_speed : float = 5.
+@export var turn_speed : float = 3.
 
-func _process(delta):
-	if direction[0]:
-		self.segments[0].anchor_1.position.x -= speed*delta
-	if direction[1]:
-		self.segments[0].anchor_1.position.x += speed*delta
-	if direction[2]:
-		self.segments[0].anchor_1.position.z -= speed*delta
-	if direction[3]:
-		self.segments[0].anchor_1.position.z += speed*delta
-	super._process(delta)
+func _physics_process(delta: float) -> void:
+	_handle_movement(delta)
 
+func _handle_movement(delta):
+	var dir = Input.get_axis('ui_down', 'ui_up')
+	self.segments[0].anchor_1.translate(Vector3(0, 0, dir) * move_speed * delta)
+	self.segments[0].anchor_1.translate(Vector3(0, 0, dir) * move_speed * delta)
 
-func _input(event):
-	if event is InputEventKey:
-		if event.keycode == KEY_LEFT:
-			direction[0] = event.is_pressed()
-		if event.keycode == KEY_RIGHT:
-			direction[1] = event.is_pressed()
-		if event.keycode == KEY_UP:
-			direction[2] = event.is_pressed()
-		if event.keycode == KEY_DOWN:
-			direction[3] = event.is_pressed()
+	var a_dir = Input.get_axis('ui_right', 'ui_left')
+	self.segments[0].anchor_1.rotate_object_local(Vector3.UP, a_dir * turn_speed * delta)

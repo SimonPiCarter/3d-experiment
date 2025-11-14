@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://boqtgauorybyx"]
+[gd_scene load_steps=70 format=3 uid="uid://boqtgauorybyx"]
 
 [ext_resource type="Script" uid="uid://nje6tyvvpq8b" path="res://scenes/test/new_pipeline.gd" id="1_e07xg"]
 [ext_resource type="Shader" uid="uid://cw4s5m23hur31" path="res://shaders/primal/circle_from_plane.gdshader" id="1_gvkf4"]
@@ -179,13 +179,6 @@ size = Vector3(1, 20, 1)
 render_priority = 0
 shader = ExtResource("9_rijnb")
 shader_parameter/original_color = Color(0.24313726, 0.20784314, 0.27450982, 1)
-shader_parameter/outline_color = Color(0.93333334, 0.5411765, 0.10980392, 1)
-shader_parameter/use_mask = false
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_atw0o"]
-render_priority = 0
-shader = ExtResource("9_rijnb")
-shader_parameter/original_color = Color(0.5882353, 0.42352942, 0.42352942, 1)
 shader_parameter/outline_color = Color(0.93333334, 0.5411765, 0.10980392, 1)
 shader_parameter/use_mask = false
 
@@ -424,7 +417,7 @@ transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.6380758, -0.04581499
 
 [node name="TwoSegmentObject" parent="MainViewport/SubViewport" instance=ExtResource("6_meuj1")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 8.249, 0.3043263, 4.8904324)
-speed = 20.0
+move_speed = 60.0
 
 [node name="SimpleRobot" parent="MainViewport/SubViewport" instance=ExtResource("5_6n3pg")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 8.249, 0.3043263, -2.753)
@@ -524,13 +517,6 @@ mesh = SubResource("BoxMesh_e07xg")
 skeleton = NodePath("../../../Camera3D")
 surface_material_override/0 = SubResource("ShaderMaterial_4raox")
 
-[node name="MeshInstance3D12" type="MeshInstance3D" parent="MainViewport/SubViewport/pylones/Cubes"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.289247, -20.283981, 3.870789)
-layers = 17
-mesh = SubResource("BoxMesh_e07xg")
-skeleton = NodePath("../../../Camera3D")
-surface_material_override/0 = SubResource("ShaderMaterial_atw0o")
-
 [node name="Pylone3" type="MeshInstance3D" parent="MainViewport/SubViewport/pylones"]
 transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, 5.816093, -9.392824, 28.990417)
 layers = 17
@@ -575,7 +561,7 @@ libraries = {
 autoplay = "test"
 
 [node name="SphereVFX3" parent="MainViewport/SubViewport" instance=ExtResource("1_m8x48")]
-transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, -1.2666016, 0, -16.22937)
+transform = Transform3D(32, 0, 0, 0, 32, 0, 0, 0, 32, -1.2666016, 0, -16.22937)
 color_high = Color(0.56078434, 0.972549, 0.8862745, 1)
 color_low = Color(0.56078434, 0.972549, 0.8862745, 1)
 noise = SubResource("NoiseTexture2D_74qp2")
@@ -636,6 +622,9 @@ transform = Transform3D(0.80000424, 0.5748231, 0.17196411, -0.5242864, 0.5303673
 [node name="cube_uv4" parent="MainViewport/SubViewport/Env" instance=ExtResource("19_voo7p")]
 transform = Transform3D(0.80000424, 0.5748231, 0.17196411, -0.5242864, 0.5303673, 0.66620886, 0.29174808, -0.62312835, 0.7256681, -9.965954, -8.910034, -44.357067)
 
+[node name="cube_uv5" parent="MainViewport/SubViewport/Env" instance=ExtResource("19_voo7p")]
+transform = Transform3D(0.80000424, 0.5748231, 0.17196411, -0.5242864, 0.5303673, 0.66620886, 0.29174808, -0.62312835, 0.7256681, -22.176342, -8.910034, -2.4550285)
+
 [node name="cup_uv" parent="MainViewport/SubViewport/Env" instance=ExtResource("20_6in2w")]
 transform = Transform3D(1, 0, 0, 0, 0.6655952, -0.746313, 0, 0.746313, 0.6655952, -13.832886, -6.609436, -1.2610474)
 
@@ -665,7 +654,7 @@ process_material = SubResource("ParticleProcessMaterial_ioc36")
 draw_pass_1 = SubResource("SphereMesh_740d2")
 
 [node name="entity_moving" type="GPUParticles3D" parent="MainViewport/SubViewport/VFX"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.097355, -6.575475, -5.0299854)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.223576, -6.542177, -2.4844332)
 layers = 17
 amount = 32
 lifetime = 2.0
