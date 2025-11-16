@@ -14,3 +14,4 @@ func fire(delay:float) -> void:
 	sphere_vfx.rotate_y(randf_range(0.,2.*PI))
 	var tw = get_tree().create_tween().set_trans(Tween.TRANS_CUBIC)
 	tw.tween_property(sphere_vfx, "scale", Vector3.ONE, 0.1).set_delay(delay+0.1)
+	tw.tween_callback(func(): explosion_finished.emit()).set_delay(1.)

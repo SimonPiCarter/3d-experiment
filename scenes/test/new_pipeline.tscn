@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://boqtgauorybyx"]
+[gd_scene load_steps=71 format=3 uid="uid://boqtgauorybyx"]
 
 [ext_resource type="Script" uid="uid://nje6tyvvpq8b" path="res://scenes/test/new_pipeline.gd" id="1_e07xg"]
 [ext_resource type="Shader" uid="uid://cw4s5m23hur31" path="res://shaders/primal/circle_from_plane.gdshader" id="1_gvkf4"]
@@ -9,15 +9,14 @@
 [ext_resource type="Script" uid="uid://cslr07kprh2cn" path="res://scripts/vfx/explosion/sphere_animator.gd" id="4_ltf4q"]
 [ext_resource type="PackedScene" uid="uid://dccijlgfscbxi" path="res://scenes/models/quad_entity_robot_3.tscn" id="4_rijnb"]
 [ext_resource type="PackedScene" uid="uid://dwd16khdfntj7" path="res://scenes/models/quad_entity_simpl_robot.tscn" id="5_6n3pg"]
+[ext_resource type="Script" uid="uid://c0ydmpenhown0" path="res://scripts/logic/weapon/basic_weapon.gd" id="5_voo7p"]
 [ext_resource type="Script" uid="uid://d1sgp5r4tsu3l" path="res://scripts/FreeRoamingCamera3D.gd" id="6_1u752"]
+[ext_resource type="PackedScene" uid="uid://slv4fbydqt7v" path="res://scenes/projectile/basic_round/basic_round_projectile_explo.tscn" id="6_6in2w"]
 [ext_resource type="PackedScene" uid="uid://bngmh3npf8b1v" path="res://scenes/models/segmented_twad_robot.tscn" id="6_meuj1"]
 [ext_resource type="PackedScene" uid="uid://b4iuas1jqhse3" path="res://scenes/VFX/Etherals/circling_etheral.tscn" id="7_xnfcr"]
 [ext_resource type="PackedScene" uid="uid://v7x76lnh135e" path="res://scenes/test/power_ring/PowerRing.tscn" id="8_6n3pg"]
 [ext_resource type="Shader" uid="uid://cv4deawtx0pb3" path="res://shaders/new_pipeline/outline_new_pipeline_shaded.gdshader" id="9_rijnb"]
-[ext_resource type="PackedScene" uid="uid://dk45ay0rdt3g6" path="res://scenes/projectile/basic_round/basic_round_projectile.tscn" id="11_gp3m0"]
 [ext_resource type="PackedScene" uid="uid://vg4v25l817yt" path="res://scenes/test/exocube/exocube.tscn" id="11_rv1hs"]
-[ext_resource type="PackedScene" uid="uid://bu0o6b85leql7" path="res://scenes/VFX/Explosion/explosions.tscn" id="12_e07xg"]
-[ext_resource type="PackedScene" uid="uid://sh6uw0xli20u" path="res://scenes/VFX/Explosion/sphere_explosion.tscn" id="13_xnfcr"]
 [ext_resource type="PackedScene" uid="uid://b12sxh8hols1l" path="res://scenes/models/cube_uv.tscn" id="19_voo7p"]
 [ext_resource type="PackedScene" uid="uid://qfg6ip0muxgn" path="res://scenes/models/cup_uv.tscn" id="20_6in2w"]
 [ext_resource type="Script" uid="uid://dr8i2irhdjpuy" path="res://scenes/entity/spawner/spawner.gd" id="20_ioc36"]
@@ -414,6 +413,15 @@ surface_material_override/0 = SubResource("ShaderMaterial_6n3pg")
 [node name="HealerBot" parent="MainViewport/SubViewport" instance=ExtResource("3_ap201")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -5.0878887, 0.62210655, -4.269994)
 
+[node name="BasicWeapon" type="Node" parent="MainViewport/SubViewport/HealerBot" node_paths=PackedStringArray("source", "targets", "root_projectile")]
+script = ExtResource("5_voo7p")
+projectile = ExtResource("6_6in2w")
+reload = 0.1
+source = NodePath("..")
+targets = NodePath("../../Targets")
+root_projectile = NodePath("../..")
+metadata/_custom_type_script = "uid://c0ydmpenhown0"
+
 [node name="TwoSegmentObject" parent="MainViewport/SubViewport" instance=ExtResource("6_meuj1")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 8.249, 0.3043263, 4.8904324)
 move_speed = 60.0
@@ -589,24 +597,6 @@ vanishing_time = 0.3
 sphere = NodePath("..")
 running = true
 
-[node name="Projectiles" type="Node3D" parent="MainViewport/SubViewport"]
-
-[node name="BasicRoundProjectileExplo" parent="MainViewport/SubViewport/Projectiles" node_paths=PackedStringArray("explosion") instance=ExtResource("11_gp3m0")]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
-speed = 40.0
-explosion = NodePath("Explosions")
-
-[node name="Explosions" parent="MainViewport/SubViewport/Projectiles/BasicRoundProjectileExplo" instance=ExtResource("12_e07xg")]
-
-[node name="BasicRoundProjectile" parent="MainViewport/SubViewport/Projectiles" node_paths=PackedStringArray("explosion") instance=ExtResource("11_gp3m0")]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
-end_pos = Vector3(0, 0, 20)
-speed = 40.0
-explosion = NodePath("SphereExplosion")
-
-[node name="SphereExplosion" parent="MainViewport/SubViewport/Projectiles/BasicRoundProjectile" instance=ExtResource("13_xnfcr")]
-transform = Transform3D(16, 0, 0, 0, 16, 0, 0, 0, 16, 0, 0, 0)
-
 [node name="Env" type="Node3D" parent="MainViewport/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.972229, 5.5879517)
 
@@ -669,7 +659,7 @@ scale_curve = SubResource("Curve_igudv")
 
 [node name="Spawner" type="Node3D" parent="MainViewport/SubViewport" node_paths=PackedStringArray("spawn_center", "destination")]
 script = ExtResource("20_ioc36")
-spawn_center = NodePath("../SimpleRobot")
+spawn_center = NodePath("../HealerBot")
 destination = NodePath("../Targets")
 spawned_object = ExtResource("4_rijnb")
 y_pos = -0.046

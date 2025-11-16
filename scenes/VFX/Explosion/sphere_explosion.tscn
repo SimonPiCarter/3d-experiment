@@ -4,13 +4,13 @@
 [ext_resource type="PackedScene" uid="uid://cvyhsdynhh21x" path="res://scenes/VFX/Sphere/sphere.tscn" id="2_f6crx"]
 [ext_resource type="Script" uid="uid://cslr07kprh2cn" path="res://scripts/vfx/explosion/sphere_animator.gd" id="3_mw1fh"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_ujovj"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_f6crx"]
 noise_type = 4
 frequency = 0.015
 fractal_octaves = 1
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_4hnvk"]
-noise = SubResource("FastNoiseLite_ujovj")
+noise = SubResource("FastNoiseLite_f6crx")
 seamless = true
 
 [node name="SphereExplosion" type="Node3D"]

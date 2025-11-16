@@ -1,5 +1,7 @@
 class_name BaseExplosion extends Node3D
 
+signal explosion_finished
+
 func setup() -> void:
 	pass
 

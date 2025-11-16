@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://cl0qjcbdrsenh"]
+
+[ext_resource type="PackedScene" uid="uid://dk45ay0rdt3g6" path="res://scenes/projectile/basic_round/basic_round_projectile.tscn" id="1_h0vla"]
+[ext_resource type="PackedScene" uid="uid://sh6uw0xli20u" path="res://scenes/VFX/Explosion/sphere_explosion.tscn" id="2_ocwy8"]
+
+[node name="BasicRoundProjectile" node_paths=PackedStringArray("explosion") instance=ExtResource("1_h0vla")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+speed = 40.0
+explosion = NodePath("SphereExplosion")
+
+[node name="SphereExplosion" parent="." index="1" instance=ExtResource("2_ocwy8")]
+transform = Transform3D(16, 0, 0, 0, 16, 0, 0, 0, 16, 0, 0, 0)
