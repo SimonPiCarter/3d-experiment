@@ -1,9 +1,45 @@
-[gd_scene load_steps=3 format=3 uid="uid://dccijlgfscbxi"]
+[gd_scene load_steps=11 format=3 uid="uid://dccijlgfscbxi"]
 
 [ext_resource type="PackedScene" uid="uid://dwfivcym0skda" path="res://scenes/entity/QuadEntity.tscn" id="1_h84w8"]
+[ext_resource type="Script" uid="uid://bw12smqrutldf" path="res://scenes/models/quad_entity_robot_3.gd" id="2_8ih53"]
 [ext_resource type="PackedScene" uid="uid://cobr225vkbh0b" path="res://scenes/models/robot_3.tscn" id="2_h84w8"]
+[ext_resource type="PackedScene" uid="uid://cvqfp2l6cegs8" path="res://scenes/UI/indicators/ProgressBar.tscn" id="3_4ar2q"]
+[ext_resource type="Shader" uid="uid://cc18tpomiri80" path="res://shaders/new_pipeline/outline_new_pipeline_unshaded.gdshader" id="5_jaust"]
+
+[sub_resource type="Curve" id="Curve_pspuw"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.14000002, 1), 0.0, 0.0, 0, 0, Vector2(0.48666665, 1), 0.0, 0.0, 0, 0, Vector2(0.9866667, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_fpjiy"]
+curve = SubResource("Curve_pspuw")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jaust"]
+emission_shape = 1
+emission_sphere_radius = 0.25
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 3.0
+initial_velocity_max = 3.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -5.000002
+linear_accel_max = -5.000002
+radial_accel_min = -1.0700022
+radial_accel_max = -1.0700022
+scale_curve = SubResource("CurveTexture_fpjiy")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_voo7p"]
+render_priority = 0
+shader = ExtResource("5_jaust")
+shader_parameter/original_color = Color(1, 1, 1, 1)
+shader_parameter/outline_color = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/use_mask = false
+
+[sub_resource type="SphereMesh" id="SphereMesh_mcyeo"]
+material = SubResource("ShaderMaterial_voo7p")
+radius = 0.2
+height = 0.4
 
 [node name="QuadEntity" instance=ExtResource("1_h84w8")]
+script = ExtResource("2_8ih53")
 move_speed = 7.5
 step_offset = 0.5
 
@@ -40,4 +76,21 @@ step_time = 0.075
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.72844, -2.6912894, 3.749795)
 step_time = 0.075
 
-[node name="robot3" parent="." index="1" instance=ExtResource("2_h84w8")]
+[node name="DeathTimer" type="Timer" parent="." index="1"]
+wait_time = 5.0
+one_shot = true
+
+[node name="cloudy_explosion" type="GPUParticles3D" parent="." index="2"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+layers = 17
+emitting = false
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_jaust")
+draw_pass_1 = SubResource("SphereMesh_mcyeo")
+
+[node name="robot3" parent="." index="3" instance=ExtResource("2_h84w8")]
+
+[node name="ProgressBar" parent="robot3" index="1" instance=ExtResource("3_4ar2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8431396, 0)

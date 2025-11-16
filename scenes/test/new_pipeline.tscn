@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://boqtgauorybyx"]
+[gd_scene load_steps=71 format=3 uid="uid://boqtgauorybyx"]
 
 [ext_resource type="Script" uid="uid://nje6tyvvpq8b" path="res://scenes/test/new_pipeline.gd" id="1_e07xg"]
 [ext_resource type="Shader" uid="uid://cw4s5m23hur31" path="res://shaders/primal/circle_from_plane.gdshader" id="1_gvkf4"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://sh6uw0xli20u" path="res://scenes/VFX/Explosion/sphere_explosion.tscn" id="13_xnfcr"]
 [ext_resource type="PackedScene" uid="uid://b12sxh8hols1l" path="res://scenes/models/cube_uv.tscn" id="19_voo7p"]
 [ext_resource type="PackedScene" uid="uid://qfg6ip0muxgn" path="res://scenes/models/cup_uv.tscn" id="20_6in2w"]
+[ext_resource type="Script" uid="uid://dr8i2irhdjpuy" path="res://scenes/entity/spawner/spawner.gd" id="20_ioc36"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_olbwg"]
 render_priority = -1
@@ -288,7 +289,7 @@ height = 0.4
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.14000002, 1), 0.0, 0.0, 0, 0, Vector2(0.48666665, 1), 0.0, 0.0, 0, 0, Vector2(0.9866667, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
-[sub_resource type="CurveTexture" id="CurveTexture_fpjiy"]
+[sub_resource type="CurveTexture" id="CurveTexture_voo7p"]
 curve = SubResource("Curve_6in2w")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ioc36"]
@@ -302,9 +303,9 @@ linear_accel_min = -5.000002
 linear_accel_max = -5.000002
 radial_accel_min = -1.0700022
 radial_accel_max = -1.0700022
-scale_curve = SubResource("CurveTexture_fpjiy")
+scale_curve = SubResource("CurveTexture_voo7p")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_voo7p"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_atw0o"]
 render_priority = 0
 shader = ExtResource("2_ap201")
 shader_parameter/original_color = Color(1, 1, 1, 1)
@@ -312,7 +313,7 @@ shader_parameter/outline_color = Color(0.5, 0.5, 0.5, 1)
 shader_parameter/use_mask = false
 
 [sub_resource type="SphereMesh" id="SphereMesh_740d2"]
-material = SubResource("ShaderMaterial_voo7p")
+material = SubResource("ShaderMaterial_atw0o")
 radius = 0.2
 height = 0.4
 
@@ -411,9 +412,6 @@ surface_material_override/0 = SubResource("ShaderMaterial_6n3pg")
 
 [node name="HealerBot" parent="MainViewport/SubViewport" instance=ExtResource("3_ap201")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -5.0878887, 0.62210655, -4.269994)
-
-[node name="SmallBot" parent="MainViewport/SubViewport" instance=ExtResource("4_rijnb")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.6380758, -0.04581499, 5.0515814)
 
 [node name="TwoSegmentObject" parent="MainViewport/SubViewport" instance=ExtResource("6_meuj1")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 8.249, 0.3043263, 4.8904324)
@@ -666,6 +664,23 @@ transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, -0.5, 0, 0.5, -2.1855694e-
 deg_speed = 720.0
 speed_curve = SubResource("Curve_rv1hs")
 scale_curve = SubResource("Curve_igudv")
+
+[node name="Spawner" type="Node3D" parent="MainViewport/SubViewport" node_paths=PackedStringArray("spawn_center", "destination")]
+script = ExtResource("20_ioc36")
+spawn_center = NodePath("../SimpleRobot")
+destination = NodePath("../Targets")
+spawned_object = ExtResource("4_rijnb")
+y_pos = -0.046
+spawn_scale = 0.3
+metadata/_custom_type_script = "uid://dr8i2irhdjpuy"
+
+[node name="Targets" type="Node3D" parent="MainViewport/SubViewport"]
+
+[node name="SmallBot" parent="MainViewport/SubViewport/Targets" instance=ExtResource("4_rijnb")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.6380758, -0.04581499, 5.0515814)
+
+[node name="SmallBot2" parent="MainViewport/SubViewport/Targets" instance=ExtResource("4_rijnb")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.6380758, -0.04581499, 12.271186)
 
 [node name="OutlineViewport" type="SubViewportContainer" parent="."]
 visibility_layer = 0

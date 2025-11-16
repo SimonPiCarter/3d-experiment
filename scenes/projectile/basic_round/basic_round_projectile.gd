@@ -6,7 +6,12 @@ extends Node3D
 @onready var mesh_instance_3d: MeshInstance3D = $MeshInstance3D
 @export var explosion : BaseExplosion = null
 
+var effect : Callable = no_effect
+
 var done = true
+
+func no_effect():
+	pass
 
 func _ready():
 	mesh_instance_3d.scale = Vector3.ZERO
@@ -22,6 +27,7 @@ func start() -> void:
 	var time = (end_pos - position).length()/speed
 	t.tween_property(mesh_instance_3d, "scale", Vector3.ONE, 0.1)
 	t.tween_property(self, "position", end_pos, time)
+	t.tween_callback(effect)
 	t.tween_property(mesh_instance_3d, "scale", Vector3.ZERO, 0.01)
 	t.tween_property(self, "done", true, 0.).set_delay(0.2)
 
