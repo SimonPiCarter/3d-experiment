@@ -13,6 +13,15 @@ const MOUSE_SENSITIVITY := 0.002
 @export var rotation_speed : float = 1.
 @export var ref_camera : Camera3D = null
 
+func get_up() -> Vector3:
+	return transform * Vector3.UP - position
+
+func get_left() -> Vector3:
+	return transform * Vector3.LEFT - position
+
+func get_forward() -> Vector3:
+	return transform * Vector3.FORWARD - position
+
 func _process(delta):
 	if ref_camera:
 		position = ref_camera.position
@@ -51,6 +60,3 @@ func _input(event):
 			zoom_in = event.pressed
 		if event.keycode == KEY_F:
 			zoom_out = event.pressed
-	#if event is InputEventMouseMotion:
-	#	rotate_x(-event.relative.y * MOUSE_SENSITIVITY)
-	#	rotation.x = clamp(rotation.x, -PI/2, PI/2)

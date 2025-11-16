@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://boqtgauorybyx"]
+[gd_scene load_steps=72 format=3 uid="uid://boqtgauorybyx"]
 
 [ext_resource type="Script" uid="uid://nje6tyvvpq8b" path="res://scenes/test/new_pipeline.gd" id="1_e07xg"]
 [ext_resource type="Shader" uid="uid://cw4s5m23hur31" path="res://shaders/primal/circle_from_plane.gdshader" id="1_gvkf4"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://b12sxh8hols1l" path="res://scenes/models/cube_uv.tscn" id="19_voo7p"]
 [ext_resource type="PackedScene" uid="uid://qfg6ip0muxgn" path="res://scenes/models/cup_uv.tscn" id="20_6in2w"]
 [ext_resource type="Script" uid="uid://dr8i2irhdjpuy" path="res://scenes/entity/spawner/spawner.gd" id="20_ioc36"]
+[ext_resource type="Script" uid="uid://34jx7s516ea1" path="res://scenes/test/world_input.gd" id="21_6in2w"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_olbwg"]
 render_priority = -1
@@ -412,7 +413,6 @@ surface_material_override/0 = SubResource("ShaderMaterial_6n3pg")
 
 [node name="HealerBot" parent="MainViewport/SubViewport" instance=ExtResource("3_ap201")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -5.0878887, 0.62210655, -4.269994)
-turn_speed = 6.0
 
 [node name="TwoSegmentObject" parent="MainViewport/SubViewport" instance=ExtResource("6_meuj1")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 8.249, 0.3043263, 4.8904324)
@@ -700,7 +700,6 @@ size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="OutlineViewport/SubViewport" node_paths=PackedStringArray("ref_camera")]
-transform = Transform3D(0.67880076, -0.7343225, 0, 0.7343225, 0.67880076, 0, 0, 0, 1, -6.326, 20, 6.01)
 cull_mask = 16
 projection = 1
 current = true
@@ -730,3 +729,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("ViewportTexture_vwlc3")
+
+[node name="Control" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("ref_camera", "debug")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("21_6in2w")
+ref_camera = NodePath("../../MainViewport/SubViewport/Camera3D")
+debug = NodePath("../../MainViewport/SubViewport/VFX/PowerRing3")
