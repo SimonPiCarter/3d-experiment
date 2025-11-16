@@ -9,6 +9,7 @@ class_name IKTarget extends Marker3D
 @export var opposite_target: IKTarget
 @export var adjusted_target : bool = false
 
+var current_speed : Vector3 = Vector3.ZERO
 var is_stepping := false
 var has_stepped := false
 
@@ -20,7 +21,7 @@ func should_step() -> bool:
 func step():
 	var target_pos = step_marker.global_position
 	if adjusted_target:
-		target_pos = step_marker.global_position + 0.9*step_distance*(step_marker.global_position - global_position).normalized()
+		target_pos = step_marker.global_position + current_speed * 2. * step_time
 	var half_way = (global_position + target_pos)/2.
 	is_stepping = true
 	has_stepped = true

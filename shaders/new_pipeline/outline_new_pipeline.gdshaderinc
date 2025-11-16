@@ -23,12 +23,18 @@ void vertex() {
 void fragment() {
 	if((CAMERA_VISIBLE_LAYERS & mask_layer_val) == mask_layer_val) {
 		ALBEDO = original_color.rgb;
+		#ifdef USE_ALPHA
+		ALPHA = original_color.a;
+		#endif
 	} else if((CAMERA_VISIBLE_LAYERS & outline_layer_val) == outline_layer_val) {
 		if (use_mask) {
 			ALBEDO = texture(outline_mask, UV).rgb;
 		} else {
 			ALBEDO = outline_color.rgb;
 		}
+		#ifdef USE_ALPHA
+		ALPHA = original_color.a;
+		#endif
 	} else {
 		discard;
 	}

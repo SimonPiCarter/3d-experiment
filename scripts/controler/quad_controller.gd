@@ -16,7 +16,13 @@ class_name IKQuadController extends Node3D
 
 var floor_offset_ref : float = 0.
 
-func _ready() -> void:
+func set_current_speed(current_speed:Vector3):
+	front_left_ik_target.current_speed = current_speed
+	front_right_ik_target.current_speed = current_speed
+	back_left_ik_target.current_speed = current_speed
+	back_right_ik_target.current_speed = current_speed
+
+func update_step_info():
 	front_left_ik_target.step_distance = step_distance
 	front_right_ik_target.step_distance = step_distance
 	back_left_ik_target.step_distance = step_distance
@@ -25,6 +31,9 @@ func _ready() -> void:
 	front_right_ik_target.step_time = step_time
 	back_left_ik_target.step_time = step_time
 	back_right_ik_target.step_time = step_time
+
+func _ready() -> void:
+	update_step_info()
 
 	if quad_object:
 		quad_object.FrontLeftLeg.target_node = front_left_ik_target.get_path()
@@ -37,6 +46,7 @@ func _ready() -> void:
 var elapsed = randf_range(0,1)
 var cycle = 1.
 var amplitude = 0.005
+
 func _physics_process(delta: float) -> void:
 	var armature = quad_object.Armature
 	elapsed += delta

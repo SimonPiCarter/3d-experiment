@@ -404,7 +404,7 @@ skeleton = NodePath("../Sprite3D")
 surface_material_override/0 = SubResource("StandardMaterial3D_4raox")
 
 [node name="BackgroundCheck" type="MeshInstance3D" parent="MainViewport/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6004361, -0.15586472, -1.5166348)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6004361, -0.15586472, -1.516634)
 layers = 16
 mesh = SubResource("PlaneMesh_gvkf4")
 skeleton = NodePath("../Sprite3D")
@@ -412,6 +412,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_6n3pg")
 
 [node name="HealerBot" parent="MainViewport/SubViewport" instance=ExtResource("3_ap201")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -5.0878887, 0.62210655, -4.269994)
+turn_speed = 6.0
 
 [node name="TwoSegmentObject" parent="MainViewport/SubViewport" instance=ExtResource("6_meuj1")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 8.249, 0.3043263, 4.8904324)
@@ -560,6 +561,7 @@ autoplay = "test"
 
 [node name="SphereVFX3" parent="MainViewport/SubViewport" instance=ExtResource("1_m8x48")]
 transform = Transform3D(32, 0, 0, 0, 32, 0, 0, 0, 32, -1.2666016, 0, -16.22937)
+visible = false
 color_high = Color(0.56078434, 0.972549, 0.8862745, 1)
 color_low = Color(0.56078434, 0.972549, 0.8862745, 1)
 noise = SubResource("NoiseTexture2D_74qp2")
