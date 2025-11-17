@@ -1,0 +1,97 @@
+[gd_scene load_steps=9 format=3 uid="uid://bip43til0tsg0"]
+
+[ext_resource type="Shader" uid="uid://cc18tpomiri80" path="res://shaders/new_pipeline/outline_new_pipeline_unshaded.gdshader" id="1_tmvnx"]
+[ext_resource type="Script" uid="uid://ck8i8c2f3ym7c" path="res://scenes/env/shrines/red_shrine.gd" id="2_mkobg"]
+[ext_resource type="PackedScene" uid="uid://v7x76lnh135e" path="res://scenes/test/power_ring/PowerRing.tscn" id="2_thj0y"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_rv1hs"]
+height = 10.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rijnb"]
+render_priority = 0
+shader = ExtResource("1_tmvnx")
+shader_parameter/original_color = Color(1, 0.28627452, 0.2784314, 1)
+shader_parameter/outline_color = Color(0, 0.1764706, 0.003921569, 1)
+shader_parameter/use_mask = false
+
+[sub_resource type="Animation" id="Animation_mb1q2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PowerRing3:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.006350994, 2.1603208, 0.013381004)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PowerRing4:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.006350994, 3.4189363, 0.013381004)]
+}
+
+[sub_resource type="Animation" id="Animation_gs3fw"]
+resource_name = "new_animation"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PowerRing3:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector3(-0.006350994, 2.1603208, 0.013381004), Vector3(-0.006, 3.419, 0.013)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PowerRing4:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector3(-0.006350994, 3.4189363, 0.013381004), Vector3(-0.006, 2.16, 0.013)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mb1q2"]
+_data = {
+&"RESET": SubResource("Animation_mb1q2"),
+&"pingpong": SubResource("Animation_gs3fw")
+}
+
+[node name="RedRoundShrine" type="MeshInstance3D"]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, 0, 0, 0)
+layers = 17
+mesh = SubResource("CapsuleMesh_rv1hs")
+skeleton = NodePath("../../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_rijnb")
+script = ExtResource("2_mkobg")
+
+[node name="PowerRing3" parent="." instance=ExtResource("2_thj0y")]
+transform = Transform3D(0.50000006, 0, 0, 0, -2.1855683e-08, -0.49999976, 0, 0.50000006, -2.1855696e-08, -0.006350994, 2.1603208, 0.013381004)
+
+[node name="PowerRing4" parent="." instance=ExtResource("2_thj0y")]
+transform = Transform3D(0.3535534, 0.3535534, -1.5454312e-08, 0, -2.1855683e-08, -0.49999976, -0.3535534, 0.3535534, -1.5454312e-08, -0.006350994, 3.4189363, 0.013381004)
+clockwise = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_mb1q2")
+}
+autoplay = "pingpong"

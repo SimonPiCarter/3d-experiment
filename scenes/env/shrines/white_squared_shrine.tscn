@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://dbxla1me04wl3"]
+
+[ext_resource type="Shader" uid="uid://cv4deawtx0pb3" path="res://shaders/new_pipeline/outline_new_pipeline_shaded.gdshader" id="1_6et05"]
+[ext_resource type="PackedScene" uid="uid://v7x76lnh135e" path="res://scenes/test/power_ring/PowerRing.tscn" id="2_1648n"]
+[ext_resource type="Script" uid="uid://pn4jpfmawfwb" path="res://scenes/env/shrines/white_shrine.gd" id="2_xf13m"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_0k3ve"]
+size = Vector3(1, 10, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_74qp2"]
+render_priority = 0
+shader = ExtResource("1_6et05")
+shader_parameter/original_color = Color(0.78039217, 0.8627451, 0.8156863, 1)
+shader_parameter/outline_color = Color(0, 0, 0.007843138, 1)
+shader_parameter/use_mask = false
+
+[sub_resource type="Curve" id="Curve_meuj1"]
+_data = [Vector2(0, 0.29213488), 0.0, 0.0, 0, 0, Vector2(0.27227724, 1), 0.0, 0.0, 0, 0, Vector2(0.8019802, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.29213488), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Curve" id="Curve_voo7p"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.6881188, 0.37078655), 0.0, 0.0, 0, 0, Vector2(0.85643566, 0.37078655), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[node name="WhiteShrine" type="MeshInstance3D"]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, 0, 0, 0)
+layers = 17
+mesh = SubResource("BoxMesh_0k3ve")
+skeleton = NodePath("../../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_74qp2")
+script = ExtResource("2_xf13m")
+
+[node name="PowerRing" parent="." instance=ExtResource("2_1648n")]
+transform = Transform3D(0.50000006, 0, 0, 0, -2.1855683e-08, -0.49999976, 0, 0.50000006, -2.1855696e-08, -0.046037197, 4.513968, 0.05726242)
+deg_speed = 720.0
+speed_curve = SubResource("Curve_meuj1")
+scale_curve = SubResource("Curve_voo7p")
+
+[node name="PowerRing3" parent="." instance=ExtResource("2_1648n")]
+transform = Transform3D(0.50000006, 0, 0, 0, -2.1855683e-08, -0.49999976, 0, 0.50000006, -2.1855696e-08, -0.046037197, 2.633781, 0.05726242)
+deg_speed = 720.0
+speed_curve = SubResource("Curve_meuj1")
+scale_curve = SubResource("Curve_voo7p")
+
+[node name="PowerRing2" parent="." instance=ExtResource("2_1648n")]
+transform = Transform3D(0.3535534, 0.3535534, -1.5454312e-08, 0, -2.1855683e-08, -0.49999976, -0.3535534, 0.3535534, -1.5454312e-08, -0.046037197, 3.5663457, 0.05726242)
+clockwise = false
+color = Color(0.1962552, 0.68664235, 0.58633333, 1)
