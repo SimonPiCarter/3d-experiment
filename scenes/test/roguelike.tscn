@@ -1,0 +1,290 @@
+[gd_scene load_steps=28 format=3 uid="uid://cwab8rgcx2vwh"]
+
+[ext_resource type="Shader" uid="uid://cc18tpomiri80" path="res://shaders/new_pipeline/outline_new_pipeline_unshaded.gdshader" id="3_f3ban"]
+[ext_resource type="PackedScene" uid="uid://dd7pumxmee75o" path="res://scenes/models/quad_entity_robot_2.tscn" id="4_d7k2a"]
+[ext_resource type="Script" uid="uid://dj7w0ypgd8ehs" path="res://scenes/entity/quand_ent_target_move.gd" id="5_trm4v"]
+[ext_resource type="Script" uid="uid://c0ydmpenhown0" path="res://scripts/logic/weapon/basic_weapon.gd" id="6_suq5a"]
+[ext_resource type="PackedScene" uid="uid://slv4fbydqt7v" path="res://scenes/projectile/basic_round/basic_round_projectile_explo.tscn" id="7_t76cc"]
+[ext_resource type="Script" uid="uid://b1oixtkf8uu56" path="res://scenes/test/roguelike/spawner_timer.gd" id="11_t0qp2"]
+[ext_resource type="PackedScene" uid="uid://dbxla1me04wl3" path="res://scenes/env/shrines/white_squared_shrine.tscn" id="12_5ppvk"]
+[ext_resource type="Script" uid="uid://d1sgp5r4tsu3l" path="res://scripts/FreeRoamingCamera3D.gd" id="12_lfq6i"]
+[ext_resource type="PackedScene" uid="uid://bip43til0tsg0" path="res://scenes/env/shrines/red_round_shrine.tscn" id="12_sh2j4"]
+[ext_resource type="PackedScene" uid="uid://v7x76lnh135e" path="res://scenes/test/power_ring/PowerRing.tscn" id="13_jp1mq"]
+[ext_resource type="PackedScene" uid="uid://b12sxh8hols1l" path="res://scenes/models/cube_uv.tscn" id="17_ai35e"]
+[ext_resource type="Script" uid="uid://dr8i2irhdjpuy" path="res://scenes/entity/spawner/spawner.gd" id="20_xv1n7"]
+[ext_resource type="PackedScene" uid="uid://dccijlgfscbxi" path="res://scenes/models/quad_entity_robot_3.tscn" id="21_x6ykq"]
+[ext_resource type="Shader" uid="uid://c4njs3466gxfy" path="res://shaders/2d/pixel_outline_v2.gdshader" id="22_srh33"]
+[ext_resource type="Script" uid="uid://34jx7s516ea1" path="res://scenes/test/world_input.gd" id="23_iofpw"]
+
+[sub_resource type="Sky" id="Sky_ckagc"]
+
+[sub_resource type="Environment" id="Environment_rijnb"]
+background_mode = 1
+background_color = Color(0.3019608, 0.60784316, 0.9019608, 1)
+sky = SubResource("Sky_ckagc")
+ambient_light_source = 2
+ambient_light_color = Color(0.6775041, 0.784652, 1, 1)
+ambient_light_energy = 0.05
+glow_enabled = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_gvkf4"]
+size = Vector2(200, 200)
+
+[sub_resource type="Gradient" id="Gradient_74qp2"]
+colors = PackedColorArray(0.9764706, 0.61960787, 0.41568628, 1, 0.9476287, 0.52065206, 0.25580785, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rijnb"]
+gradient = SubResource("Gradient_74qp2")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4raox"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = SubResource("GradientTexture1D_rijnb")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6n3pg"]
+render_priority = 0
+shader = ExtResource("3_f3ban")
+shader_parameter/original_color = Color(0, 0, 0, 1)
+shader_parameter/outline_color = Color(0, 0, 0.007843138, 1)
+shader_parameter/use_mask = false
+
+[sub_resource type="Curve" id="Curve_rv1hs"]
+_data = [Vector2(0, 0.29213488), 0.0, 0.0, 0, 0, Vector2(0.27227724, 1), 0.0, 0.0, 0, 0, Vector2(0.8019802, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.29213488), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Curve" id="Curve_igudv"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.6881188, 0.37078655), 0.0, 0.0, 0, 0, Vector2(0.85643566, 0.37078655), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_gvkf4"]
+viewport_path = NodePath("MainViewport/SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m8x48"]
+shader = ExtResource("22_srh33")
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_width = 1.0
+shader_parameter/type = 1
+shader_parameter/active = 1
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_vwlc3"]
+viewport_path = NodePath("OutlineViewport/SubViewport")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MainViewport" type="SubViewportContainer" parent="."]
+visibility_layer = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="MainViewport"]
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="HealerBot" parent="MainViewport/SubViewport" instance=ExtResource("4_d7k2a")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -5.0878887, 0.62210655, -4.269994)
+script = ExtResource("5_trm4v")
+step_offset = 1.0
+
+[node name="BasicWeapon" type="Node" parent="MainViewport/SubViewport/HealerBot" node_paths=PackedStringArray("source", "targets", "root_projectile")]
+script = ExtResource("6_suq5a")
+projectile = ExtResource("7_t76cc")
+reload = 1.0
+source = NodePath("..")
+targets = NodePath("../../Targets")
+root_projectile = NodePath("../..")
+metadata/_custom_type_script = "uid://c0ydmpenhown0"
+
+[node name="Camera3D" type="Camera3D" parent="MainViewport/SubViewport"]
+transform = Transform3D(0.7071068, 0.35355338, -0.61237246, 2.1855696e-08, 0.8660254, 0.50000006, 0.7071068, -0.35355338, 0.61237246, -31.931957, 28.372437, 32.13317)
+cull_mask = 1
+projection = 1
+current = true
+fov = 45.0
+size = 25.0
+far = 100.0
+script = ExtResource("12_lfq6i")
+
+[node name="SmallBotSpawner" type="Node3D" parent="MainViewport/SubViewport" node_paths=PackedStringArray("spawn_center", "destination", "target")]
+script = ExtResource("20_xv1n7")
+spawn_center = NodePath("../HealerBot")
+destination = NodePath("../Targets")
+spawned_object = ExtResource("21_x6ykq")
+spawn_rate = 10.0
+spawn_range = 50.0
+y_pos = -0.046
+spawn_scale = 0.3
+target = NodePath("../HealerBot")
+metadata/_custom_type_script = "uid://dr8i2irhdjpuy"
+
+[node name="Timer" type="Timer" parent="MainViewport/SubViewport/SmallBotSpawner" node_paths=PackedStringArray("spawner")]
+wait_time = 30.0
+autostart = true
+script = ExtResource("11_t0qp2")
+spawner = NodePath("..")
+
+[node name="Targets" type="Node3D" parent="MainViewport/SubViewport"]
+
+[node name="Env" type="Node3D" parent="MainViewport/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.972229, 5.5879517)
+
+[node name="cube_uv" parent="MainViewport/SubViewport/Env" instance=ExtResource("17_ai35e")]
+transform = Transform3D(36.944534, 33.691265, 1.004078e-06, -30.213917, 33.131405, 22.123047, 14.907068, -16.346512, 44.83939, 59.917114, -60.12744, -18.956848)
+
+[node name="cube_uv2" parent="MainViewport/SubViewport/Env" instance=ExtResource("17_ai35e")]
+transform = Transform3D(0.80000424, 0.5748231, 0.17196411, -0.5242864, 0.5303673, 0.66620886, 0.29174808, -0.62312835, 0.7256681, 6.3186245, -8.910034, -20.614325)
+
+[node name="cube_uv3" parent="MainViewport/SubViewport/Env" instance=ExtResource("17_ai35e")]
+transform = Transform3D(0.80000424, 0.5748231, 0.17196411, -0.5242864, 0.5303673, 0.66620886, 0.29174808, -0.62312835, 0.7256681, 6.324574, -8.910034, -49.711468)
+
+[node name="cube_uv6" parent="MainViewport/SubViewport/Env" instance=ExtResource("17_ai35e")]
+transform = Transform3D(0.80000424, 0.5748231, 0.17196411, -0.5242864, 0.5303673, 0.66620886, 0.29174808, -0.62312835, 0.7256681, 23.060047, -8.910095, 32.514606)
+
+[node name="cube_uv7" parent="MainViewport/SubViewport/Env" instance=ExtResource("17_ai35e")]
+transform = Transform3D(0.80000424, 0.5748231, 0.17196411, -0.5242864, 0.5303673, 0.66620886, 0.29174808, -0.62312835, 0.7256681, -20.41798, -8.910095, 31.183674)
+
+[node name="cube_uv8" parent="MainViewport/SubViewport/Env" instance=ExtResource("17_ai35e")]
+transform = Transform3D(0.80000424, 0.5748231, 0.17196411, -0.5242864, 0.5303673, 0.66620886, 0.29174808, -0.62312835, 0.7256681, 32.391346, -8.910095, -62.63969)
+
+[node name="cube_uv9" parent="MainViewport/SubViewport/Env" instance=ExtResource("17_ai35e")]
+transform = Transform3D(0.80000424, 0.5748231, 0.17196411, -0.5242864, 0.5303673, 0.66620886, 0.29174808, -0.62312835, 0.7256681, -41.854626, -8.910095, -29.450481)
+
+[node name="cube_uv10" parent="MainViewport/SubViewport/Env" instance=ExtResource("17_ai35e")]
+transform = Transform3D(0.80000424, 0.5748231, 0.17196411, -0.5242864, 0.5303673, 0.66620886, 0.29174808, -0.62312835, 0.7256681, 0.011829376, -8.910095, 59.010696)
+
+[node name="cube_uv11" parent="MainViewport/SubViewport/Env" instance=ExtResource("17_ai35e")]
+transform = Transform3D(0.80000424, 0.5748231, 0.17196411, -0.5242864, 0.5303673, 0.66620886, 0.29174808, -0.62312835, 0.7256681, 0.011829376, -8.910095, 59.010696)
+
+[node name="cube_uv4" parent="MainViewport/SubViewport/Env" instance=ExtResource("17_ai35e")]
+transform = Transform3D(0.80000424, 0.5748231, 0.17196411, -0.5242864, 0.5303673, 0.66620886, 0.29174808, -0.62312835, 0.7256681, -9.965954, -8.910034, -44.357067)
+
+[node name="cube_uv5" parent="MainViewport/SubViewport/Env" instance=ExtResource("17_ai35e")]
+transform = Transform3D(0.80000424, 0.5748231, 0.17196411, -0.5242864, 0.5303673, 0.66620886, 0.29174808, -0.62312835, 0.7256681, -22.176342, -8.910034, -2.4550285)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="MainViewport/SubViewport/Env"]
+transform = Transform3D(0.95441765, -0.10836294, 0.27810884, -0.11621561, 0.72331774, 0.6806655, -0.27491996, -0.6819597, 0.6777537, 2.5636919, -4.6608806, -7.523493)
+shadow_enabled = true
+sky_mode = 1
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="MainViewport/SubViewport/Env"]
+transform = Transform3D(1, 0, 0, 0, 0.16723329, 0.98591745, 0, -0.98591745, 0.16723329, 0, 0.9341488, 5.9281473)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="MainViewport/SubViewport/Env"]
+environment = SubResource("Environment_rijnb")
+
+[node name="Background" type="MeshInstance3D" parent="MainViewport/SubViewport/Env"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6004361, -8.128094, -7.1045866)
+mesh = SubResource("PlaneMesh_gvkf4")
+skeleton = NodePath("../Sprite3D")
+surface_material_override/0 = SubResource("StandardMaterial3D_4raox")
+
+[node name="BackgroundCheck" type="MeshInstance3D" parent="MainViewport/SubViewport/Env"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6004361, -8.128094, -7.1045856)
+layers = 16
+mesh = SubResource("PlaneMesh_gvkf4")
+skeleton = NodePath("../Sprite3D")
+surface_material_override/0 = SubResource("ShaderMaterial_6n3pg")
+
+[node name="VFX" type="Node3D" parent="MainViewport/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.972229, 5.5879517)
+
+[node name="PowerRing3" parent="MainViewport/SubViewport/VFX" instance=ExtResource("13_jp1mq")]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, -0.5, 0, 0.5, -2.1855694e-08, 5.124731, -7.121277, 9.43269)
+deg_speed = 720.0
+speed_curve = SubResource("Curve_rv1hs")
+scale_curve = SubResource("Curve_igudv")
+
+[node name="Shrines" type="Node3D" parent="MainViewport/SubViewport"]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, 0, 0, 0)
+
+[node name="WhiteShrine" parent="MainViewport/SubViewport/Shrines" node_paths=PackedStringArray("buff", "activator") instance=ExtResource("12_5ppvk")]
+transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, 10.097657, 0, 25.850224)
+buff = NodePath("../../HealerBot")
+activator = NodePath("../../HealerBot")
+
+[node name="RedShrine" parent="MainViewport/SubViewport/Shrines" node_paths=PackedStringArray("buff", "activator") instance=ExtResource("12_sh2j4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.002932, 0, -17.583498)
+buff = NodePath("../../HealerBot")
+activator = NodePath("../../HealerBot")
+
+[node name="WhiteSpawner" type="Node3D" parent="MainViewport/SubViewport/Shrines" node_paths=PackedStringArray("spawn_center", "destination", "target")]
+script = ExtResource("20_xv1n7")
+spawn_center = NodePath("../../HealerBot")
+destination = NodePath("..")
+spawned_object = ExtResource("12_5ppvk")
+spawn_rate = 15.0
+spawn_range = 20.0
+target = NodePath("../../HealerBot")
+metadata/_custom_type_script = "uid://dr8i2irhdjpuy"
+
+[node name="RedSpawner" type="Node3D" parent="MainViewport/SubViewport/Shrines" node_paths=PackedStringArray("spawn_center", "destination", "target")]
+script = ExtResource("20_xv1n7")
+spawn_center = NodePath("../../HealerBot")
+destination = NodePath("..")
+spawned_object = ExtResource("12_sh2j4")
+spawn_rate = 15.0
+spawn_range = 20.0
+target = NodePath("../../HealerBot")
+metadata/_custom_type_script = "uid://dr8i2irhdjpuy"
+
+[node name="OutlineViewport" type="SubViewportContainer" parent="."]
+visibility_layer = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="OutlineViewport"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="OutlineViewport/SubViewport" node_paths=PackedStringArray("ref_camera")]
+cull_mask = 16
+projection = 1
+current = true
+fov = 45.0
+size = 25.0
+far = 100.0
+script = ExtResource("12_lfq6i")
+ref_camera = NodePath("../../../MainViewport/SubViewport/Camera3D")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MainView" type="TextureRect" parent="CanvasLayer"]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_gvkf4")
+
+[node name="OutlineView" type="TextureRect" parent="CanvasLayer"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_m8x48")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_vwlc3")
+
+[node name="Control" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("ref_camera", "debug", "ent_moving")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("23_iofpw")
+ref_camera = NodePath("../../MainViewport/SubViewport/Camera3D")
+debug = NodePath("../../MainViewport/SubViewport/VFX/PowerRing3")
+ent_moving = NodePath("../../MainViewport/SubViewport/HealerBot")

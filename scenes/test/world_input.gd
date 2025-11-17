@@ -2,6 +2,7 @@ extends Control
 
 @export var ref_camera : FreeRoamingCamera3D = null
 @export var debug : Node3D = null
+@export var ent_moving : QuadEntityTargetMove = null
 
 func _input(event: InputEvent) -> void:
 	if not ref_camera:
@@ -20,4 +21,10 @@ func _input(event: InputEvent) -> void:
 		var floor_clic = world_pos + forward*t
 		if debug:
 			debug.global_position = floor_clic + Vector3(0,0.1,0)
-			print(floor_clic)
+			#print(floor_clic)
+		if ent_moving:
+			ent_moving.target_position = floor_clic
+
+	#if event is InputEventKey and event.is_pressed():
+	#	if event.keycode == KEY_S and ent_moving:
+	#		ent_moving.stop_movement()

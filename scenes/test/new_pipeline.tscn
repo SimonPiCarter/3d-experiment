@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://boqtgauorybyx"]
+[gd_scene load_steps=68 format=3 uid="uid://boqtgauorybyx"]
 
 [ext_resource type="Script" uid="uid://nje6tyvvpq8b" path="res://scenes/test/new_pipeline.gd" id="1_e07xg"]
 [ext_resource type="Shader" uid="uid://cw4s5m23hur31" path="res://shaders/primal/circle_from_plane.gdshader" id="1_gvkf4"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://cslr07kprh2cn" path="res://scripts/vfx/explosion/sphere_animator.gd" id="4_ltf4q"]
 [ext_resource type="PackedScene" uid="uid://dccijlgfscbxi" path="res://scenes/models/quad_entity_robot_3.tscn" id="4_rijnb"]
 [ext_resource type="PackedScene" uid="uid://dwd16khdfntj7" path="res://scenes/models/quad_entity_simpl_robot.tscn" id="5_6n3pg"]
+[ext_resource type="Script" uid="uid://dj7w0ypgd8ehs" path="res://scenes/entity/quand_ent_target_move.gd" id="5_ioc36"]
 [ext_resource type="Script" uid="uid://c0ydmpenhown0" path="res://scripts/logic/weapon/basic_weapon.gd" id="5_voo7p"]
 [ext_resource type="Script" uid="uid://d1sgp5r4tsu3l" path="res://scripts/FreeRoamingCamera3D.gd" id="6_1u752"]
 [ext_resource type="PackedScene" uid="uid://slv4fbydqt7v" path="res://scenes/projectile/basic_round/basic_round_projectile_explo.tscn" id="6_6in2w"]
@@ -16,7 +17,10 @@
 [ext_resource type="PackedScene" uid="uid://b4iuas1jqhse3" path="res://scenes/VFX/Etherals/circling_etheral.tscn" id="7_xnfcr"]
 [ext_resource type="PackedScene" uid="uid://v7x76lnh135e" path="res://scenes/test/power_ring/PowerRing.tscn" id="8_6n3pg"]
 [ext_resource type="Shader" uid="uid://cv4deawtx0pb3" path="res://shaders/new_pipeline/outline_new_pipeline_shaded.gdshader" id="9_rijnb"]
+[ext_resource type="Script" uid="uid://bmkj2qdsacu4p" path="res://scenes/entity/quad_ent_axis_move.gd" id="10_atw0o"]
 [ext_resource type="PackedScene" uid="uid://vg4v25l817yt" path="res://scenes/test/exocube/exocube.tscn" id="11_rv1hs"]
+[ext_resource type="PackedScene" uid="uid://bip43til0tsg0" path="res://scenes/env/shrines/red_round_shrine.tscn" id="13_mgpox"]
+[ext_resource type="PackedScene" uid="uid://dbxla1me04wl3" path="res://scenes/env/shrines/white_squared_shrine.tscn" id="15_740d2"]
 [ext_resource type="PackedScene" uid="uid://b12sxh8hols1l" path="res://scenes/models/cube_uv.tscn" id="19_voo7p"]
 [ext_resource type="PackedScene" uid="uid://qfg6ip0muxgn" path="res://scenes/models/cup_uv.tscn" id="20_6in2w"]
 [ext_resource type="Script" uid="uid://dr8i2irhdjpuy" path="res://scenes/entity/spawner/spawner.gd" id="20_ioc36"]
@@ -112,67 +116,6 @@ shader_parameter/original_color = Color(1, 0.28627452, 0.2784314, 1)
 shader_parameter/outline_color = Color(0, 0.1764706, 0.003921569, 1)
 shader_parameter/use_mask = false
 
-[sub_resource type="Animation" id="Animation_mb1q2"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PowerRing3:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-0.006350994, 2.1603208, 0.013381004)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PowerRing4:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-0.006350994, 3.4189363, 0.013381004)]
-}
-
-[sub_resource type="Animation" id="Animation_gs3fw"]
-resource_name = "new_animation"
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PowerRing3:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(-2, -2),
-"update": 0,
-"values": [Vector3(-0.006350994, 2.1603208, 0.013381004), Vector3(-0.006, 3.419, 0.013)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PowerRing4:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(-2, -2),
-"update": 0,
-"values": [Vector3(-0.006350994, 3.4189363, 0.013381004), Vector3(-0.006, 2.16, 0.013)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_mb1q2"]
-_data = {
-&"RESET": SubResource("Animation_mb1q2"),
-&"pingpong": SubResource("Animation_gs3fw")
-}
-
 [sub_resource type="BoxMesh" id="BoxMesh_e07xg"]
 size = Vector3(1, 20, 1)
 
@@ -182,24 +125,6 @@ shader = ExtResource("9_rijnb")
 shader_parameter/original_color = Color(0.24313726, 0.20784314, 0.27450982, 1)
 shader_parameter/outline_color = Color(0.93333334, 0.5411765, 0.10980392, 1)
 shader_parameter/use_mask = false
-
-[sub_resource type="BoxMesh" id="BoxMesh_0k3ve"]
-size = Vector3(1, 10, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_74qp2"]
-render_priority = 0
-shader = ExtResource("9_rijnb")
-shader_parameter/original_color = Color(0.78039217, 0.8627451, 0.8156863, 1)
-shader_parameter/outline_color = Color(0, 0, 0.007843138, 1)
-shader_parameter/use_mask = false
-
-[sub_resource type="Curve" id="Curve_meuj1"]
-_data = [Vector2(0, 0.29213488), 0.0, 0.0, 0, 0, Vector2(0.27227724, 1), 0.0, 0.0, 0, 0, Vector2(0.8019802, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.29213488), 0.0, 0.0, 0, 0]
-point_count = 4
-
-[sub_resource type="Curve" id="Curve_voo7p"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.6881188, 0.37078655), 0.0, 0.0, 0, 0, Vector2(0.85643566, 0.37078655), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 4
 
 [sub_resource type="Sky" id="Sky_ckagc"]
 
@@ -412,11 +337,13 @@ surface_material_override/0 = SubResource("ShaderMaterial_6n3pg")
 
 [node name="HealerBot" parent="MainViewport/SubViewport" instance=ExtResource("3_ap201")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -5.0878887, 0.62210655, -4.269994)
+script = ExtResource("5_ioc36")
+step_offset = 1.0
 
 [node name="BasicWeapon" type="Node" parent="MainViewport/SubViewport/HealerBot" node_paths=PackedStringArray("source", "targets", "root_projectile")]
 script = ExtResource("5_voo7p")
 projectile = ExtResource("6_6in2w")
-reload = 0.1
+reload = 1.0
 source = NodePath("..")
 targets = NodePath("../../Targets")
 root_projectile = NodePath("../..")
@@ -428,6 +355,8 @@ move_speed = 60.0
 
 [node name="SimpleRobot" parent="MainViewport/SubViewport" instance=ExtResource("5_6n3pg")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 8.249, 0.3043263, -2.753)
+script = ExtResource("10_atw0o")
+step_offset = 1.0
 
 [node name="EtheritySegments" parent="MainViewport/SubViewport" instance=ExtResource("7_xnfcr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.700666, 1.8968132, 29.55603)
@@ -466,25 +395,8 @@ mesh = SubResource("CapsuleMesh_rv1hs")
 skeleton = NodePath("../../Camera3D")
 surface_material_override/0 = SubResource("ShaderMaterial_rijnb")
 
-[node name="Pylone2" type="MeshInstance3D" parent="MainViewport/SubViewport/pylones"]
+[node name="Pylone2" parent="MainViewport/SubViewport/pylones" instance=ExtResource("13_mgpox")]
 transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, -20.243917, -9.281599, -11.911208)
-layers = 17
-mesh = SubResource("CapsuleMesh_rv1hs")
-skeleton = NodePath("../../Camera3D")
-surface_material_override/0 = SubResource("ShaderMaterial_rijnb")
-
-[node name="PowerRing3" parent="MainViewport/SubViewport/pylones/Pylone2" instance=ExtResource("8_6n3pg")]
-transform = Transform3D(0.50000006, 0, 0, 0, -2.1855683e-08, -0.49999976, 0, 0.50000006, -2.1855696e-08, -0.006350994, 2.1603208, 0.013381004)
-
-[node name="PowerRing4" parent="MainViewport/SubViewport/pylones/Pylone2" instance=ExtResource("8_6n3pg")]
-transform = Transform3D(0.3535534, 0.3535534, -1.5454312e-08, 0, -2.1855683e-08, -0.49999976, -0.3535534, 0.3535534, -1.5454312e-08, -0.006350994, 3.4189363, 0.013381004)
-clockwise = false
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="MainViewport/SubViewport/pylones/Pylone2"]
-libraries = {
-&"": SubResource("AnimationLibrary_mb1q2")
-}
-autoplay = "pingpong"
 
 [node name="Cubes" type="Node3D" parent="MainViewport/SubViewport/pylones"]
 transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, -3.847542, 2.961668, -3.4023442)
@@ -524,23 +436,8 @@ mesh = SubResource("BoxMesh_e07xg")
 skeleton = NodePath("../../../Camera3D")
 surface_material_override/0 = SubResource("ShaderMaterial_4raox")
 
-[node name="Pylone3" type="MeshInstance3D" parent="MainViewport/SubViewport/pylones"]
+[node name="Pylone3" parent="MainViewport/SubViewport/pylones" instance=ExtResource("15_740d2")]
 transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, 5.816093, -9.392824, 28.990417)
-layers = 17
-mesh = SubResource("BoxMesh_0k3ve")
-skeleton = NodePath("../../Camera3D")
-surface_material_override/0 = SubResource("ShaderMaterial_74qp2")
-
-[node name="PowerRing" parent="MainViewport/SubViewport/pylones/Pylone3" instance=ExtResource("8_6n3pg")]
-transform = Transform3D(0.50000006, 0, 0, 0, -2.1855683e-08, -0.49999976, 0, 0.50000006, -2.1855696e-08, -0.046037197, 2.2715464, 0.057263374)
-deg_speed = 720.0
-speed_curve = SubResource("Curve_meuj1")
-scale_curve = SubResource("Curve_voo7p")
-
-[node name="PowerRing2" parent="MainViewport/SubViewport/pylones/Pylone3" instance=ExtResource("8_6n3pg")]
-transform = Transform3D(0.3535534, 0.3535534, -1.5454312e-08, 0, -2.1855683e-08, -0.49999976, -0.3535534, 0.3535534, -1.5454312e-08, -0.046037197, 3.5301614, 0.057263374)
-clockwise = false
-color = Color(0.1962552, 0.68664235, 0.58633333, 1)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="MainViewport/SubViewport"]
 environment = SubResource("Environment_rijnb")
@@ -657,13 +554,16 @@ deg_speed = 720.0
 speed_curve = SubResource("Curve_rv1hs")
 scale_curve = SubResource("Curve_igudv")
 
-[node name="Spawner" type="Node3D" parent="MainViewport/SubViewport" node_paths=PackedStringArray("spawn_center", "destination")]
+[node name="Spawner" type="Node3D" parent="MainViewport/SubViewport" node_paths=PackedStringArray("spawn_center", "destination", "target")]
 script = ExtResource("20_ioc36")
 spawn_center = NodePath("../HealerBot")
 destination = NodePath("../Targets")
 spawned_object = ExtResource("4_rijnb")
+spawn_rate = 15.0
+spawn_range = 50.0
 y_pos = -0.046
 spawn_scale = 0.3
+target = NodePath("../HealerBot")
 metadata/_custom_type_script = "uid://dr8i2irhdjpuy"
 
 [node name="Targets" type="Node3D" parent="MainViewport/SubViewport"]
@@ -720,7 +620,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("ViewportTexture_vwlc3")
 
-[node name="Control" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("ref_camera", "debug")]
+[node name="Control" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("ref_camera", "debug", "ent_moving")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -730,3 +630,4 @@ grow_vertical = 2
 script = ExtResource("21_6in2w")
 ref_camera = NodePath("../../MainViewport/SubViewport/Camera3D")
 debug = NodePath("../../MainViewport/SubViewport/VFX/PowerRing3")
+ent_moving = NodePath("../../MainViewport/SubViewport/HealerBot")

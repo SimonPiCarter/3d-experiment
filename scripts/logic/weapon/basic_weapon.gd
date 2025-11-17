@@ -1,6 +1,7 @@
 class_name BasicWeapon extends Node
 
 @export var projectile : PackedScene = null
+@export var damage : float = 1.
 @export var reload : float = 2.
 @export var source : Node3D = null
 @export var targets : Node3D = null
@@ -36,4 +37,4 @@ func find_target() -> Robot3:
 
 func impact(target):
 	if not target.dead:
-		target.health.damage(1.)
+		target.health.damage(damage)

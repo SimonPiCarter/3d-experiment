@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="3d_experiments"
-run/main_scene="uid://boqtgauorybyx"
+run/main_scene="uid://cwab8rgcx2vwh"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
+
+[debug]
+
+settings/stdout/print_fps=true
 
 [editor]
 
