@@ -12,15 +12,6 @@ func _ready():
 	ref_pos = marker_container.position
 	ref_step_time = $IKQuadContainer.step_time
 
-func _physics_process(delta: float) -> void:
-	var dir_updown = Input.get_axis('ui_down', 'ui_up')
-	var dir_leftright = Input.get_axis('ui_right', 'ui_left')
-	if dir_updown != 0 or dir_leftright != 0:
-		_handle_movement(dir_updown * Vector3(1,0,-1) + dir_leftright * Vector3(-1,0,-1), delta)
-	else:
-		marker_container.global_position = global_position + ref_pos
-		$IKQuadContainer.set_current_speed(Vector3.ZERO)
-
 func _handle_movement(direction: Vector3, delta):
 	var length_dir = direction.length()
 	if length_dir <= 0.01:
