@@ -22,13 +22,14 @@ func _ready():
 func _on_explosion_finished() -> void:
 	queue_free()
 
+var start_tween : Tween = null
 func start() -> void:
 	if !done:
 		return
 	done = false
 	position = start_pos
-	var t = get_tree().create_tween()
-	t.tween_property(mesh_instance_3d, "scale", Vector3.ONE, 0.1)
+	start_tween = get_tree().create_tween()
+	start_tween.tween_property(mesh_instance_3d, "scale", Vector3.ONE, 0.1)
 
 func _process(delta):
 	if done:
@@ -39,6 +40,7 @@ func _process(delta):
 		done = true
 		global_position = target.global_position
 		effect.call()
+		start_tween.kill()
 		var t = get_tree().create_tween()
 		t.tween_property(mesh_instance_3d, "scale", Vector3.ZERO, 0.01)
 		if explosion:
