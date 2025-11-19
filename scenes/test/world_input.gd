@@ -29,6 +29,8 @@ func _input(event: InputEvent) -> void:
 			if pick_texture:
 				var picked = Picker.get_node_from_texture(pick_texture, int(event.position.x), int(event.position.y))
 				print(picked)
+				if picked:
+					ent_moving = [picked]
 
 	#
 	#if event is InputEventKey and event.is_pressed():
