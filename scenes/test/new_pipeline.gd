@@ -3,6 +3,14 @@ extends Node3D
 @onready var targets = $MainViewport/SubViewport/Targets
 @onready var healer_bot: QuadEntity = $MainViewport/SubViewport/HealerBot
 
+func _ready() -> void:
+	var id = Picker.get_next_id()
+	Picker.register_new_pickable(id, healer_bot)
+	id = Picker.get_next_id()
+	Picker.register_new_pickable(id, $MainViewport/SubViewport/HealerBot2)
+	id = Picker.get_next_id()
+	Picker.register_new_pickable(id, $MainViewport/SubViewport/HealerBot3)
+
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.is_pressed() and event.keycode == KEY_A:
 		var robot = healer_bot.get_node("robot2") as Robot2

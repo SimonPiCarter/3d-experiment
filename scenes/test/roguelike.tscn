@@ -106,7 +106,7 @@ projection = 1
 current = true
 fov = 45.0
 size = 25.0
-far = 100.0
+far = 400.0
 script = ExtResource("12_lfq6i")
 
 [node name="SmallBotSpawner" type="Node3D" parent="MainViewport/SubViewport" node_paths=PackedStringArray("spawn_center", "destination", "target")]
@@ -114,7 +114,7 @@ script = ExtResource("20_xv1n7")
 spawn_center = NodePath("../HealerBot")
 destination = NodePath("../Targets")
 spawned_object = ExtResource("21_x6ykq")
-spawn_rate = 10.0
+spawn_rate = 1.0
 spawn_range = 50.0
 y_pos = -0.046
 spawn_scale = 0.3
@@ -252,7 +252,7 @@ projection = 1
 current = true
 fov = 45.0
 size = 25.0
-far = 100.0
+far = 400.0
 script = ExtResource("12_lfq6i")
 ref_camera = NodePath("../../../MainViewport/SubViewport/Camera3D")
 
@@ -287,4 +287,4 @@ grow_vertical = 2
 script = ExtResource("23_iofpw")
 ref_camera = NodePath("../../MainViewport/SubViewport/Camera3D")
 debug = NodePath("../../MainViewport/SubViewport/VFX/PowerRing3")
-ent_moving = NodePath("../../MainViewport/SubViewport/HealerBot")
+ent_moving = [NodePath("../../MainViewport/SubViewport/HealerBot")]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://boqtgauorybyx"]
+[gd_scene load_steps=70 format=3 uid="uid://boqtgauorybyx"]
 
 [ext_resource type="Script" uid="uid://nje6tyvvpq8b" path="res://scenes/test/new_pipeline.gd" id="1_e07xg"]
 [ext_resource type="Shader" uid="uid://cw4s5m23hur31" path="res://shaders/primal/circle_from_plane.gdshader" id="1_gvkf4"]
@@ -135,7 +135,6 @@ sky = SubResource("Sky_ckagc")
 ambient_light_source = 2
 ambient_light_color = Color(0.6775041, 0.784652, 1, 1)
 ambient_light_energy = 0.05
-glow_enabled = true
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_mpahi"]
 noise_type = 4
@@ -294,6 +293,12 @@ shader_parameter/active = 1
 [sub_resource type="ViewportTexture" id="ViewportTexture_vwlc3"]
 viewport_path = NodePath("OutlineViewport/SubViewport")
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_aas4t"]
+viewport_path = NodePath("PickViewport/SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_mgpox"]
+viewport_path = NodePath("PickViewport/SubViewport")
+
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_e07xg")
 
@@ -310,6 +315,14 @@ stretch = true
 handle_input_locally = false
 size = Vector2i(1152, 648)
 render_target_update_mode = 4
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="MainViewport/SubViewport"]
+transform = Transform3D(0.95441765, -0.10836294, 0.27810884, -0.11621561, 0.72331774, 0.6806655, -0.27491996, -0.6819597, 0.6777537, 2.5636919, 3.3113484, -1.9355414)
+shadow_enabled = true
+sky_mode = 1
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="MainViewport/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.16723329, 0.98591745, 0, -0.98591745, 0.16723329, 0, 8.906378, 11.516099)
 
 [node name="circle" type="MeshInstance3D" parent="MainViewport/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2824707, -0.155, -27.085876)
@@ -341,6 +354,34 @@ script = ExtResource("5_ioc36")
 step_offset = 1.0
 
 [node name="BasicWeapon" type="Node" parent="MainViewport/SubViewport/HealerBot" node_paths=PackedStringArray("source", "targets", "root_projectile")]
+script = ExtResource("5_voo7p")
+projectile = ExtResource("6_6in2w")
+reload = 1.0
+source = NodePath("..")
+targets = NodePath("../../Targets")
+root_projectile = NodePath("../..")
+metadata/_custom_type_script = "uid://c0ydmpenhown0"
+
+[node name="HealerBot2" parent="MainViewport/SubViewport" instance=ExtResource("3_ap201")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -5.0878887, 0.62210655, 8.914577)
+script = ExtResource("5_ioc36")
+step_offset = 1.0
+
+[node name="BasicWeapon" type="Node" parent="MainViewport/SubViewport/HealerBot2" node_paths=PackedStringArray("source", "targets", "root_projectile")]
+script = ExtResource("5_voo7p")
+projectile = ExtResource("6_6in2w")
+reload = 1.0
+source = NodePath("..")
+targets = NodePath("../../Targets")
+root_projectile = NodePath("../..")
+metadata/_custom_type_script = "uid://c0ydmpenhown0"
+
+[node name="HealerBot3" parent="MainViewport/SubViewport" instance=ExtResource("3_ap201")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.61742973, 0.62210655, -4.269994)
+script = ExtResource("5_ioc36")
+step_offset = 1.0
+
+[node name="BasicWeapon" type="Node" parent="MainViewport/SubViewport/HealerBot3" node_paths=PackedStringArray("source", "targets", "root_projectile")]
 script = ExtResource("5_voo7p")
 projectile = ExtResource("6_6in2w")
 reload = 1.0
@@ -382,6 +423,7 @@ projection = 1
 current = true
 fov = 45.0
 size = 25.0
+far = 400.0
 script = ExtResource("6_1u752")
 
 [node name="pylones" type="Node3D" parent="MainViewport/SubViewport"]
@@ -440,14 +482,6 @@ transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, 5.816
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="MainViewport/SubViewport"]
 environment = SubResource("Environment_rijnb")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="MainViewport/SubViewport"]
-transform = Transform3D(0.95441765, -0.10836294, 0.27810884, -0.11621561, 0.72331774, 0.6806655, -0.27491996, -0.6819597, 0.6777537, 2.5636919, 3.3113484, -1.9355414)
-shadow_enabled = true
-sky_mode = 1
-
-[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="MainViewport/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 0.16723329, 0.98591745, 0, -0.98591745, 0.16723329, 0, 8.906378, 11.516099)
 
 [node name="SphereVFX2" parent="MainViewport/SubViewport" instance=ExtResource("1_m8x48")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -8.275635, 0, 28.214539)
@@ -594,6 +628,32 @@ projection = 1
 current = true
 fov = 45.0
 size = 25.0
+far = 400.0
+script = ExtResource("6_1u752")
+ref_camera = NodePath("../../../MainViewport/SubViewport/Camera3D")
+
+[node name="PickViewport" type="SubViewportContainer" parent="."]
+visibility_layer = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="PickViewport"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="PickViewport/SubViewport" node_paths=PackedStringArray("ref_camera")]
+cull_mask = 32
+projection = 1
+current = true
+fov = 45.0
+size = 25.0
+far = 400.0
 script = ExtResource("6_1u752")
 ref_camera = NodePath("../../../MainViewport/SubViewport/Camera3D")
 
@@ -618,6 +678,16 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("ViewportTexture_vwlc3")
 
+[node name="PickView" type="TextureRect" parent="CanvasLayer"]
+visible = false
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_aas4t")
+
 [node name="Control" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("ref_camera", "debug", "ent_moving")]
 layout_mode = 3
 anchors_preset = 15
@@ -627,5 +697,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("21_6in2w")
 ref_camera = NodePath("../../MainViewport/SubViewport/Camera3D")
+pick_texture = SubResource("ViewportTexture_mgpox")
 debug = NodePath("../../MainViewport/SubViewport/VFX/PowerRing3")
-ent_moving = NodePath("../../MainViewport/SubViewport/HealerBot")
+ent_moving = [NodePath("../../MainViewport/SubViewport/HealerBot"), NodePath("../../MainViewport/SubViewport/HealerBot2"), NodePath("../../MainViewport/SubViewport/HealerBot3")]

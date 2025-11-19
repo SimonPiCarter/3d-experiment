@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://d21fvaypyajxp"]
+
+[ext_resource type="Shader" uid="uid://cet5sqtvi4ygv" path="res://scenes/test/camera_layer/camera_layer_test.gdshader" id="1_ho2fs"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_7knb3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x2ga0"]
+render_priority = 0
+shader = ExtResource("1_ho2fs")
+
+[node name="Test" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.2978516)
+cull_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+layers = 1048575
+mesh = SubResource("CapsuleMesh_7knb3")
+skeleton = NodePath("../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_x2ga0")

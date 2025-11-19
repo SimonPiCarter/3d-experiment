@@ -38,11 +38,12 @@ material = SubResource("ShaderMaterial_voo7p")
 radius = 0.2
 height = 0.4
 
-[node name="QuadEntity" instance=ExtResource("1_h84w8")]
+[node name="QuadEntity" node_paths=PackedStringArray("quad_object") instance=ExtResource("1_h84w8")]
 script = ExtResource("2_8ih53")
 move_speed = 2.5
 turn_speed = 12.566
 step_offset = 0.25
+quad_object = NodePath("robot3")
 
 [node name="IKQuadContainer" parent="." index="0" node_paths=PackedStringArray("quad_object")]
 quad_object = NodePath("../robot3")

@@ -3,8 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://dwfivcym0skda" path="res://scenes/entity/QuadEntity.tscn" id="1_e3jom"]
 [ext_resource type="PackedScene" uid="uid://bpf2yq0qibfvi" path="res://scenes/models/robot_2.tscn" id="2_akexo"]
 
-[node name="QuadEntity" instance=ExtResource("1_e3jom")]
+[node name="QuadEntity" node_paths=PackedStringArray("quad_object") instance=ExtResource("1_e3jom")]
 step_offset = 0.5
+quad_object = NodePath("robot2")
 
 [node name="IKQuadContainer" parent="." index="0" node_paths=PackedStringArray("quad_object")]
 quad_object = NodePath("../robot2")

@@ -7,9 +7,8 @@ render_mode unshaded;
 render_mode depth_test_disabled;
 #endif
 
-
-const uint mask_layer_val = 1u;
-const uint outline_layer_val = 1u>>5u;
+const int mask_layer_val = 1;
+const int outline_layer_val = 1<<4;
 
 uniform vec4 original_color : source_color;
 uniform vec4 outline_color : source_color = vec4(0.5,0.5,0.5,1.);
@@ -21,12 +20,12 @@ void vertex() {
 }
 
 void fragment() {
-	if((CAMERA_VISIBLE_LAYERS & mask_layer_val) == mask_layer_val) {
+	if((int(CAMERA_VISIBLE_LAYERS) & mask_layer_val) != 0) {
 		ALBEDO = original_color.rgb;
 		#ifdef USE_ALPHA
 		ALPHA = original_color.a;
 		#endif
-	} else if((CAMERA_VISIBLE_LAYERS & outline_layer_val) == outline_layer_val) {
+	} else if((int(CAMERA_VISIBLE_LAYERS) & outline_layer_val) != 0) {
 		if (use_mask) {
 			ALBEDO = texture(outline_mask, UV).rgb;
 		} else {

@@ -1,21 +1,32 @@
-[gd_scene load_steps=17 format=4 uid="uid://bpf2yq0qibfvi"]
+[gd_scene load_steps=19 format=4 uid="uid://bpf2yq0qibfvi"]
 
 [ext_resource type="PackedScene" uid="uid://dp5d6xpbviyh6" path="res://model/robot2.glb" id="1_fcyj1"]
 [ext_resource type="Script" uid="uid://cssyvtlm806gc" path="res://scripts/ik/ik_auto_start.gd" id="2_a8m4m"]
 [ext_resource type="Script" uid="uid://bgcgl5qwsw28r" path="res://scenes/models/robot_2.gd" id="2_flht3"]
 [ext_resource type="Shader" uid="uid://cc18tpomiri80" path="res://shaders/new_pipeline/outline_new_pipeline_unshaded.gdshader" id="4_krmdn"]
+[ext_resource type="Shader" uid="uid://7eh5v4axp1ng" path="res://shaders/new_pipeline/pickable.gdshader" id="4_obp05"]
 [ext_resource type="Shader" uid="uid://dhrgs41dp44l7" path="res://shaders/new_pipeline/outline_new_pipeline_alpha.gdshader" id="5_flht3"]
 [ext_resource type="Shader" uid="uid://cv4deawtx0pb3" path="res://shaders/new_pipeline/outline_new_pipeline_shaded.gdshader" id="5_obp05"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_g76fm"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1nqg0"]
+resource_local_to_scene = true
 render_priority = 0
+shader = ExtResource("4_obp05")
+shader_parameter/pickable_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g76fm"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_1nqg0")
 shader = ExtResource("5_obp05")
 shader_parameter/original_color = Color(0.67058825, 0.5803922, 0.47843137, 1)
 shader_parameter/outline_color = Color(0.59607846, 0.25490198, 0.3137255, 1)
 shader_parameter/use_mask = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wfoq8"]
+resource_local_to_scene = true
 render_priority = 0
+next_pass = SubResource("ShaderMaterial_1nqg0")
 shader = ExtResource("4_krmdn")
 shader_parameter/original_color = Color(0.40784314, 0.92941177, 0.36078432, 1)
 shader_parameter/outline_color = Color(0.48235294, 0.58431375, 0.42745098, 1)
@@ -124,6 +135,57 @@ shader_parameter/original_color = Color(0.40784314, 0.92941177, 0.36078432, 0.61
 shader_parameter/outline_color = Color(0.043137256, 0.16078432, 0.003921569, 1)
 shader_parameter/use_mask = false
 
+[sub_resource type="Animation" id="Animation_obp05"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Armature/Skeleton3D/Icosphere2:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Armature/Skeleton3D/Icosphere2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Armature/Skeleton3D/Icosphere:surface_material_override/0:shader_parameter/original_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.40784314, 0.92941177, 0.36078432, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Armature/Skeleton3D/Icosphere2:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="Animation" id="Animation_krmdn"]
 resource_name = "attack"
 length = 0.4
@@ -180,57 +242,6 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="Animation" id="Animation_obp05"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Armature/Skeleton3D/Icosphere2:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(1, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Armature/Skeleton3D/Icosphere2:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Armature/Skeleton3D/Icosphere:surface_material_override/0:shader_parameter/original_color")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.40784314, 0.92941177, 0.36078432, 1)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Armature/Skeleton3D/Icosphere2:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_obp05"]
 _data = {
 &"RESET": SubResource("Animation_obp05"),
@@ -247,11 +258,11 @@ BackRightLeg = NodePath("Armature/Skeleton3D/BackRight")
 Armature = NodePath("Armature")
 
 [node name="Body" parent="Armature/Skeleton3D" index="0"]
-layers = 1021
+layers = 61
 surface_material_override/0 = SubResource("ShaderMaterial_g76fm")
 
 [node name="Icosphere" parent="Armature/Skeleton3D" index="1"]
-layers = 29
+layers = 61
 surface_material_override/0 = SubResource("ShaderMaterial_wfoq8")
 
 [node name="Marker3D" type="Marker3D" parent="Armature/Skeleton3D/Icosphere" index="0"]
@@ -265,7 +276,7 @@ skin = SubResource("Skin_qbhfo")
 surface_material_override/0 = SubResource("ShaderMaterial_krmdn")
 
 [node name="Legs" parent="Armature/Skeleton3D" index="3"]
-layers = 29
+layers = 61
 surface_material_override/0 = SubResource("ShaderMaterial_g76fm")
 
 [node name="FrontLeft" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="4"]

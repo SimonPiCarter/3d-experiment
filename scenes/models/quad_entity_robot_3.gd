@@ -10,6 +10,7 @@ var health : Health = Health.new()
 var dead = false
 
 func _ready():
+	radius = 0.5
 	super._ready()
 
 	health.health_changed.connect(_on_health_changed)
