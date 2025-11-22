@@ -21,7 +21,9 @@ func should_step() -> bool:
 func step():
 	var target_pos = step_marker.global_position
 	if adjusted_target:
-		target_pos = step_marker.global_position + current_speed * 2. * step_time
+		target_pos = step_marker.global_position + current_speed * step_time
+	if has_node("MeshInstance3D4"):
+		get_node("MeshInstance3D4").global_position = target_pos
 	var half_way = (global_position + target_pos)/2.
 	is_stepping = true
 	has_stepped = true

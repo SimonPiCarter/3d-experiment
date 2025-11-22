@@ -9,7 +9,6 @@ quad_object = NodePath("robot2")
 
 [node name="IKQuadContainer" parent="." index="0" node_paths=PackedStringArray("quad_object")]
 quad_object = NodePath("../robot2")
-floor_offset = 0.02
 
 [node name="FrontLeftIKMarker" parent="IKQuadContainer/MarkerContainer" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.08, -2.437, 3.042)
@@ -36,3 +35,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.870854, -2.6912894, 5.5008
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.72844, -2.6912894, 3.749795)
 
 [node name="robot2" parent="." index="1" instance=ExtResource("2_akexo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.99079895, 0)

@@ -688,10 +688,13 @@ mesh = SubResource("PlaneMesh_gvkf4")
 skeleton = NodePath("../Sprite3D")
 surface_material_override/0 = SubResource("ShaderMaterial_6n3pg")
 
+[node name="SmallBot" parent="MainViewport/SubViewport" instance=ExtResource("4_rijnb")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.6380758, -0.04581499, 5.0515814)
+script = ExtResource("5_ioc36")
+
 [node name="HealerBot" parent="MainViewport/SubViewport" instance=ExtResource("3_ap201")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -7.962083, 0.62210655, 2.332418)
 script = ExtResource("5_ioc36")
-step_offset = 1.0
 
 [node name="BasicWeapon" type="Node" parent="MainViewport/SubViewport/HealerBot" node_paths=PackedStringArray("source", "targets", "root_projectile")]
 script = ExtResource("5_voo7p")
@@ -705,7 +708,6 @@ metadata/_custom_type_script = "uid://c0ydmpenhown0"
 [node name="HealerBot2" parent="MainViewport/SubViewport" instance=ExtResource("3_ap201")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 3.5916119, 0.62210655, 3.9383297)
 script = ExtResource("5_ioc36")
-step_offset = 1.0
 
 [node name="BasicWeapon" type="Node" parent="MainViewport/SubViewport/HealerBot2" node_paths=PackedStringArray("source", "targets", "root_projectile")]
 script = ExtResource("5_voo7p")
@@ -719,7 +721,6 @@ metadata/_custom_type_script = "uid://c0ydmpenhown0"
 [node name="HealerBot3" parent="MainViewport/SubViewport" instance=ExtResource("3_ap201")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -9.398123, 0.62210655, 11.753531)
 script = ExtResource("5_ioc36")
-step_offset = 1.0
 
 [node name="BasicWeapon" type="Node" parent="MainViewport/SubViewport/HealerBot3" node_paths=PackedStringArray("source", "targets", "root_projectile")]
 script = ExtResource("5_voo7p")
@@ -738,7 +739,7 @@ move_speed = 60.0
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 1.8779516, 0.3043263, 16.23522)
 script = ExtResource("5_ioc36")
 turn_speed = 5.0
-step_offset = 1.0
+step_offset = 0.5
 
 [node name="EtheritySegments" parent="MainViewport/SubViewport" instance=ExtResource("7_xnfcr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.700666, 1.8968132, 29.55603)
@@ -1026,7 +1027,6 @@ script = ExtResource("20_ioc36")
 spawn_center = NodePath("../HealerBot")
 destination = NodePath("../Targets")
 spawned_object = ExtResource("4_rijnb")
-spawn_rate = 15.0
 spawn_range = 50.0
 y_pos = -0.046
 spawn_scale = 0.3
@@ -1034,9 +1034,6 @@ target = NodePath("../HealerBot")
 metadata/_custom_type_script = "uid://dr8i2irhdjpuy"
 
 [node name="Targets" type="Node3D" parent="MainViewport/SubViewport"]
-
-[node name="SmallBot" parent="MainViewport/SubViewport/Targets" instance=ExtResource("4_rijnb")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.6380758, -0.04581499, 5.0515814)
 
 [node name="SmallBot2" parent="MainViewport/SubViewport/Targets" instance=ExtResource("4_rijnb")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.6380758, -0.04581499, 12.271186)

@@ -1,10 +1,19 @@
-[gd_scene load_steps=11 format=3 uid="uid://dccijlgfscbxi"]
+[gd_scene load_steps=13 format=3 uid="uid://dccijlgfscbxi"]
 
 [ext_resource type="PackedScene" uid="uid://dwfivcym0skda" path="res://scenes/entity/QuadEntity.tscn" id="1_h84w8"]
 [ext_resource type="Script" uid="uid://bw12smqrutldf" path="res://scenes/models/quad_entity_robot_3.gd" id="2_8ih53"]
 [ext_resource type="PackedScene" uid="uid://cobr225vkbh0b" path="res://scenes/models/robot_3.tscn" id="2_h84w8"]
 [ext_resource type="PackedScene" uid="uid://cvqfp2l6cegs8" path="res://scenes/UI/indicators/ProgressBar.tscn" id="3_4ar2q"]
 [ext_resource type="Shader" uid="uid://cc18tpomiri80" path="res://shaders/new_pipeline/outline_new_pipeline_unshaded.gdshader" id="5_jaust"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jaust"]
+shading_mode = 0
+albedo_color = Color(0.30980393, 1, 1, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_pspuw"]
+material = SubResource("StandardMaterial3D_jaust")
+radial_segments = 8
+rings = 4
 
 [sub_resource type="Curve" id="Curve_pspuw"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.14000002, 1), 0.0, 0.0, 0, 0, Vector2(0.48666665, 1), 0.0, 0.0, 0, 0, Vector2(0.9866667, 0), 0.0, 0.0, 0, 0]
@@ -40,18 +49,18 @@ height = 0.4
 
 [node name="QuadEntity" node_paths=PackedStringArray("quad_object") instance=ExtResource("1_h84w8")]
 script = ExtResource("2_8ih53")
-move_speed = 2.5
+move_speed = 5.0
 turn_speed = 12.566
-step_offset = 0.25
+step_offset = 0.5
 quad_object = NodePath("robot3")
 
 [node name="IKQuadContainer" parent="." index="0" node_paths=PackedStringArray("quad_object")]
 quad_object = NodePath("../robot3")
-step_distance = 0.05
-step_time = 0.04
+step_distance = 0.001
+step_time = 0.025
 
 [node name="FrontLeftIKMarker" parent="IKQuadContainer/MarkerContainer" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3331652, -0.29845905, 1.3538384)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.333, -0.609, 1.354)
 
 [node name="FrontRightIKMarker" parent="IKQuadContainer/MarkerContainer" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2440919, -0.6090472, 1.3727729)
@@ -63,16 +72,44 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3149648, -0.55274844, -0.95
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2666082, -0.55274844, -0.9341467)
 
 [node name="FrontLeftIKTarget" parent="IKQuadContainer/TargetContainer" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.9908314, -2.437, 11.906335)
+transform = Transform3D(0.9839536, 0, 0.17842442, 0, 1, 0, -0.17842442, 0, 0.9839536, 2.9658523, -2.437, 3.4646592)
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="IKQuadContainer/TargetContainer/FrontLeftIKTarget" index="0"]
+transform = Transform3D(0.17711166, 0, 0.032116394, 0, 0.18, 0, -0.032116394, 0, 0.17711166, 2.9658523, -2.437, 3.4646592)
+top_level = true
+visible = false
+mesh = SubResource("CapsuleMesh_pspuw")
+skeleton = NodePath("../../FrontLeftIKMarker")
 
 [node name="FrontRightIKTarget" parent="IKQuadContainer/TargetContainer" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.525082, -2.6912894, 10.786005)
+transform = Transform3D(0.9839536, 0, 0.17842442, 0, 1, 0, -0.17842442, 0, 0.9839536, -3.6634412, -2.6912894, 3.5281763)
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="IKQuadContainer/TargetContainer/FrontRightIKTarget" index="0"]
+transform = Transform3D(0.17711166, 0, 0.032116394, 0, 0.18, 0, -0.032116394, 0, 0.17711166, -3.6634412, -2.6912894, 3.5281763)
+top_level = true
+visible = false
+mesh = SubResource("CapsuleMesh_pspuw")
+skeleton = NodePath("../../FrontLeftIKMarker")
 
 [node name="BackLeftIKTarget" parent="IKQuadContainer/TargetContainer" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.870854, -2.6912894, 5.5008254)
+transform = Transform3D(0.9839536, 0, 0.17842442, 0, 1, 0, -0.17842442, 0, 0.9839536, 3.9089122, -2.6912894, -3.2163205)
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="IKQuadContainer/TargetContainer/BackLeftIKTarget" index="0"]
+transform = Transform3D(0.17711166, 0, 0.032116394, 0, 0.18, 0, -0.032116394, 0, 0.17711166, 3.9089122, -2.6912894, -3.2163205)
+top_level = true
+visible = false
+mesh = SubResource("CapsuleMesh_pspuw")
+skeleton = NodePath("../../FrontLeftIKMarker")
 
 [node name="BackRightIKTarget" parent="IKQuadContainer/TargetContainer" index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.72844, -2.6912894, 3.749795)
+transform = Transform3D(0.9839536, 0, 0.17842442, 0, 1, 0, -0.17842442, 0, 0.9839536, -3.1510615, -2.6912894, -3.7156925)
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="IKQuadContainer/TargetContainer/BackRightIKTarget" index="0"]
+transform = Transform3D(0.17711166, 0, 0.032116394, 0, 0.18, 0, -0.032116394, 0, 0.17711166, -3.1510615, -2.6912894, -3.7156925)
+top_level = true
+visible = false
+mesh = SubResource("CapsuleMesh_pspuw")
+skeleton = NodePath("../../FrontLeftIKMarker")
 
 [node name="DeathTimer" type="Timer" parent="." index="1"]
 wait_time = 5.0
@@ -89,6 +126,7 @@ process_material = SubResource("ParticleProcessMaterial_jaust")
 draw_pass_1 = SubResource("SphereMesh_mcyeo")
 
 [node name="robot3" parent="." index="3" instance=ExtResource("2_h84w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26110005, 0)
 
 [node name="ProgressBar" parent="robot3" index="1" instance=ExtResource("3_4ar2q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8431396, 0)

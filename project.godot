@@ -19,10 +19,14 @@ config/icon="res://icon.svg"
 
 Picker="*res://scripts/logic/picker/Picker.gd"
 
+[display]
+
+window/movie_file="/home/simon/godot_workspace/3d-experiments/export.ogv"
+
 [editor]
 
 movie_writer/video_quality=1.0
-movie_writer/movie_file="/home/simon/godot_workspace/3d-experiments/export.ogv"
+movie_writer/movie_file="/home/simon/godot_workspace/3d-experiments/export.avi"
 
 [rendering]
 

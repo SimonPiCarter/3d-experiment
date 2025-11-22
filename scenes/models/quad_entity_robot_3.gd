@@ -28,6 +28,8 @@ func _on_health_changed(cur, max_h) -> void:
 func _on_death() -> void:
 	if dead:
 		return
+	NavigationServer3D.free_rid(agent_rid)
+	agent_rid = RID()
 	robot_3.hide()
 	cloudy_explosion.emitting = true
 	death_timer.start()
