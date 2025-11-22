@@ -24,24 +24,28 @@ func _ready():
 	ref_step_time = $IKQuadContainer.step_time
 
 func _exit_tree() -> void:
-	NavigationServer3D.free_rid(agent_rid)
+	if agent_rid.is_valid():
+		NavigationServer3D.free_rid(agent_rid)
 
 var current_velocity: Vector3 = Vector3.ZERO
 func on_safe_velocity_computed(safe_velocity: Vector3):
 	_real_handle_movement(safe_velocity.limit_length(move_speed * cur_delta))
 
-var cur_delta: float = 0.
+var cur_delta: float = 1.
 func _handle_movement(direction: Vector3, delta):
-	NavigationServer3D.agent_set_position(agent_rid, global_transform.origin)
+	if agent_rid.is_valid():
+		NavigationServer3D.agent_set_position(agent_rid, global_transform.origin)
 	cur_delta = delta
 	var length_dir = direction.length()
 	if length_dir <= 0.0001:
 		marker_container.global_position = global_position + ref_pos
 		$IKQuadContainer.set_current_speed(Vector3.ZERO)
-		NavigationServer3D.agent_set_velocity(agent_rid, Vector3.ZERO)
+		if agent_rid.is_valid():
+			NavigationServer3D.agent_set_velocity(agent_rid, Vector3.ZERO)
 		return
 	var norm_dir = direction / length_dir
-	NavigationServer3D.agent_set_velocity(agent_rid, norm_dir * move_speed * delta)
+	if agent_rid.is_valid():
+		NavigationServer3D.agent_set_velocity(agent_rid, norm_dir * move_speed * delta)
 
 func _real_handle_movement(speed: Vector3):
 	var local_dir = $Marker3D.global_position - global_position
@@ -55,7 +59,7 @@ func _real_handle_movement(speed: Vector3):
 	if abs(delta_angle) > 0.01:
 		$IKQuadContainer.step_time = ref_step_time / 2.
 		$IKQuadContainer.update_step_info()
-		marker_container.global_position = global_position + ref_pos
+		marker_container.global_position = global_position + ref_pos + speed.normalized() * step_offset /2.
 		var max_angle = turn_speed * cur_delta
 		rotate_object_local(Vector3.UP, -clamp(delta_angle, -max_angle, max_angle))
 	else:
