@@ -391,6 +391,8 @@ move_speed = 60.0
 [node name="SimpleRobot" parent="MainViewport/SubViewport" instance=ExtResource("5_6n3pg")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 8.249, 0.3043263, -2.753)
 script = ExtResource("5_ioc36")
+turn_speed = 5.0
+step_offset = 1.0
 
 [node name="EtheritySegments" parent="MainViewport/SubViewport" instance=ExtResource("7_xnfcr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.700666, 1.8968132, 29.55603)

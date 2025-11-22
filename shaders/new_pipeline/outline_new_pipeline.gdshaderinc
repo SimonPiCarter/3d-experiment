@@ -9,6 +9,7 @@ render_mode depth_test_disabled;
 
 const int mask_layer_val = 1;
 const int outline_layer_val = 1<<4;
+const int pickable_layer_val = 1<<5;
 
 uniform vec4 original_color : source_color;
 uniform vec4 outline_color : source_color = vec4(0.5,0.5,0.5,1.);
@@ -34,7 +35,7 @@ void fragment() {
 		#ifdef USE_ALPHA
 		ALPHA = original_color.a;
 		#endif
-	} else {
+	} else if((int(CAMERA_VISIBLE_LAYERS) & pickable_layer_val) != 0) {
 		discard;
 	}
 }
