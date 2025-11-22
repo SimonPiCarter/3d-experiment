@@ -1027,6 +1027,7 @@ script = ExtResource("20_ioc36")
 spawn_center = NodePath("../HealerBot")
 destination = NodePath("../Targets")
 spawned_object = ExtResource("4_rijnb")
+spawn_rate = 15.0
 spawn_range = 50.0
 y_pos = -0.046
 spawn_scale = 0.3
