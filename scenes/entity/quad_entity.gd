@@ -49,7 +49,7 @@ func _handle_movement(direction: Vector3, delta):
 
 func _real_handle_movement(speed: Vector3):
 	var local_dir = $Marker3D.global_position - global_position
-	$IKQuadContainer.set_current_speed(speed)
+	$IKQuadContainer.set_current_speed(speed/cur_delta)
 	position += speed
 
 	if speed.length() <= 0.0001:
