@@ -41,7 +41,7 @@ func _ready() -> void:
 		quad_object.BackLeftLeg.target_node = back_left_ik_target.get_path()
 		quad_object.BackRightLeg.target_node = back_right_ik_target.get_path()
 
-		floor_offset_ref = quad_object.Armature.global_position.y - avg_leg_pos().y
+		floor_offset_ref = quad_object.Armature.global_position.y
 
 var elapsed = randf_range(0,1)
 var cycle = 1.
@@ -52,8 +52,7 @@ func _physics_process(delta: float) -> void:
 	elapsed += delta
 	while elapsed > cycle: elapsed -= cycle
 	var cur_offset = cos(elapsed/cycle*2*PI) * amplitude
-	armature.global_position = lerp(armature.global_position, avg_leg_pos(), 3.0 * delta) \
-		+ Vector3(0,floor_offset+cur_offset,0)
+	armature.global_position.y = floor_offset_ref+cur_offset
 
 func avg_leg_pos() -> Vector3:
 	return (front_left_ik_target.global_position + front_right_ik_target.global_position
