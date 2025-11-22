@@ -14,6 +14,8 @@ func _ready() -> void:
 	Picker.register_new_pickable(id, $MainViewport/SubViewport/SimpleRobot)
 
 func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.is_pressed() and event.keycode == KEY_C:
+		$MainViewport/SubViewport/VFX/Beam.switch()
 	if event is InputEventKey and event.is_pressed() and event.keycode == KEY_A:
 		var robot = healer_bot.get_node("robot2") as Robot2
 		var basic_round_projectile = preload("res://scenes/projectile/basic_round/basic_round_projectile_sphere.tscn").instantiate() as BasicRoundProjectile

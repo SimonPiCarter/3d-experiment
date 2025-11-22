@@ -47,6 +47,7 @@ func get_node_from_texture(tex: Texture2D, x: int, y: int) -> Node3D:
 	var img : Image = tex.get_image()
 	var color : Color = img.get_pixel(x, y)
 	var id : int = color_to_id(color)
+	print("Picked color: ", color, " id: ", id)
 	if id >= 0 and id < registered_pickables.size():
 		return registered_pickables[id]
 	return null

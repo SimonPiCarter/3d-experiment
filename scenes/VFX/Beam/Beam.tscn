@@ -1,0 +1,311 @@
+[gd_scene load_steps=24 format=3 uid="uid://cfdijiejbba4r"]
+
+[ext_resource type="Script" uid="uid://ctvljgb8dkeig" path="res://scenes/VFX/Beam/beam.gd" id="1_6dcwb"]
+[ext_resource type="ArrayMesh" uid="uid://dog2xo0hcxbg5" path="res://model/cone_rect.obj" id="1_ewlnh"]
+[ext_resource type="Shader" uid="uid://omwbr8l8gkkf" path="res://scenes/VFX/Beam/Beam.gdshader" id="1_wo8jx"]
+[ext_resource type="PackedScene" uid="uid://bni427ua3ote2" path="res://scenes/VFX/Cone/cone_encapsuled.tscn" id="3_nttx8"]
+[ext_resource type="Script" uid="uid://dlpumqgps5erp" path="res://scenes/VFX/Beam/animation_tree.gd" id="5_cmr3n"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_wo8jx"]
+frequency = 0.0097
+fractal_octaves = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ewlnh"]
+noise = SubResource("FastNoiseLite_wo8jx")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nttx8"]
+render_priority = 0
+shader = ExtResource("1_wo8jx")
+shader_parameter/noise = SubResource("NoiseTexture2D_ewlnh")
+shader_parameter/high_shape_color = Color(0.9843137, 0.7254902, 0.32941177, 1)
+shader_parameter/low_shape_color = Color(0.96862745, 0.5882353, 0.09019608, 1)
+shader_parameter/threshold = 0.8
+shader_parameter/speed = 0.5
+
+[sub_resource type="Animation" id="Animation_6dcwb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cone:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Cone:threshold")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MeshInstance3D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_cmr3n"]
+resource_name = "clear"
+length = 1.0000033
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cone:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.50000006, 1.0000033),
+"transitions": PackedFloat32Array(1, 0.8, 0.8),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.7853982, 0), Vector3(0, 0.7853982, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Cone:threshold")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.50000006, 1.0000033),
+"transitions": PackedFloat32Array(0.8, 0.2, 0.2),
+"update": 0,
+"values": [0.6, 1.0, 1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MeshInstance3D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.50000006, 1.0000033),
+"transitions": PackedFloat32Array(0.2, 0.2, 0.2),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(0, 1, 0), Vector3(0, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_nttx8"]
+resource_name = "run"
+length = 1.0666701
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cone:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.0666666),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 5.497787, 0), Vector3(0, 18.064157, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("MeshInstance3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.23333326, 0.3666666, 0.5666666, 0.66666675, 0.8666668, 1.0666666),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0.1), Vector3(0, 0, 0), Vector3(0.1, 0, 0), Vector3(0, 0, 0.1), Vector3(0, 0, 0), Vector3(0.1, 0, 0), Vector3(0, 0, 0.1), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Cone:threshold")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.0666666),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.6, 0.6]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MeshInstance3D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.031938016, 1.0666666),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_f5di5"]
+resource_name = "setup"
+length = 0.46667004
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cone:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 5.497787, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Cone:threshold")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4666667),
+"transitions": PackedFloat32Array(0.2, 1),
+"update": 0,
+"values": [1.0, 0.6]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MeshInstance3D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.4666667),
+"transitions": PackedFloat32Array(0.2, 1),
+"update": 0,
+"values": [Vector3(0, 1, 0), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6dcwb"]
+_data = {
+&"RESET": SubResource("Animation_6dcwb"),
+&"clear": SubResource("Animation_cmr3n"),
+&"run": SubResource("Animation_nttx8"),
+&"setup": SubResource("Animation_f5di5")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_f5di5"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nttx8"]
+animation = &"clear"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6dcwb"]
+animation = &"run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cmr3n"]
+animation = &"setup"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1np1n"]
+break_loop_at_end = true
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cmr3n"]
+advance_mode = 2
+advance_expression = "done"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_m3nig"]
+break_loop_at_end = true
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jcetn"]
+advance_mode = 2
+advance_expression = "!done"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_f5di5"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_jcetn"]
+states/RESET/node = SubResource("AnimationNodeAnimation_f5di5")
+states/RESET/position = Vector2(449, 184)
+states/Start/position = Vector2(196, 100)
+states/clear/node = SubResource("AnimationNodeAnimation_nttx8")
+states/clear/position = Vector2(657, 92)
+states/run/node = SubResource("AnimationNodeAnimation_6dcwb")
+states/run/position = Vector2(528, 76)
+states/setup/node = SubResource("AnimationNodeAnimation_cmr3n")
+states/setup/position = Vector2(323, 71)
+transitions = ["setup", "run", SubResource("AnimationNodeStateMachineTransition_1np1n"), "run", "clear", SubResource("AnimationNodeStateMachineTransition_cmr3n"), "clear", "RESET", SubResource("AnimationNodeStateMachineTransition_m3nig"), "RESET", "setup", SubResource("AnimationNodeStateMachineTransition_jcetn"), "Start", "RESET", SubResource("AnimationNodeStateMachineTransition_f5di5")]
+
+[node name="Beam" type="Node3D"]
+script = ExtResource("1_6dcwb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0)
+layers = 17
+mesh = ExtResource("1_ewlnh")
+surface_material_override/0 = SubResource("ShaderMaterial_nttx8")
+
+[node name="Cone" parent="." instance=ExtResource("3_nttx8")]
+transform = Transform3D(0.5, 0, 0, 0, 0.75, 0, 0, 0, 0.5, 0, 0, 0)
+threshold = 1.0
+color = Color(0.96862745, 0.5882353, 0.09019608, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_6dcwb")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_jcetn")
+anim_player = NodePath("../AnimationPlayer")
+script = ExtResource("5_cmr3n")

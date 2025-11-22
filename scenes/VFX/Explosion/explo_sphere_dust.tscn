@@ -1,0 +1,248 @@
+[gd_scene load_steps=12 format=3 uid="uid://dpo4rthvuoh13"]
+
+[ext_resource type="PackedScene" uid="uid://cvyhsdynhh21x" path="res://scenes/VFX/Sphere/sphere.tscn" id="1_8nrd0"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_740d2"]
+noise_type = 2
+frequency = 0.0154
+fractal_octaves = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_mgpox"]
+noise = SubResource("FastNoiseLite_740d2")
+seamless = true
+
+[sub_resource type="Animation" id="Animation_aas4t"]
+resource_name = "RUN"
+length = 1.5
+loop_mode = 1
+step = 0.016666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:threshold")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:threshold_alpha")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.03333333, 0.15, 1.3833333, 1.5),
+"transitions": PackedFloat32Array(1, 0.3, 0.25, -2, 1),
+"update": 0,
+"values": [1.0, 1.0, 0.6, 1.0, 1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.7166667, 1.5166667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(3.1, 3.1, 3.1), Vector3(3.1, 3.1, 3.1), Vector3(4, 4, 4), Vector3(4, 4, 4)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 4.712389, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_lcv6h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:threshold")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:threshold_alpha")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(4, 4, 4)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s2vcg"]
+_data = {
+&"RESET": SubResource("Animation_lcv6h"),
+&"RUN": SubResource("Animation_aas4t")
+}
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_mgpox"]
+noise_type = 4
+frequency = 0.0154
+fractal_octaves = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_aas4t"]
+noise = SubResource("FastNoiseLite_mgpox")
+seamless = true
+
+[sub_resource type="Animation" id="Animation_740d2"]
+resource_name = "run"
+length = 1.5
+loop_mode = 1
+step = 0.016666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:threshold")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:threshold_alpha")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.11666667, 0.41666666, 1.5),
+"transitions": PackedFloat32Array(1, 0.2, -2, 1),
+"update": 0,
+"values": [0.0, 0.0, 1.0, 1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25, 1.5),
+"transitions": PackedFloat32Array(0.1, -2, 1),
+"update": 0,
+"values": [Vector3(0.5, 0.5, 0.5), Vector3(3, 3, 3), Vector3(3, 3, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_mgpox"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:threshold")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:threshold_alpha")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(3, 3, 3)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mgpox"]
+_data = {
+&"RESET": SubResource("Animation_mgpox"),
+&"run": SubResource("Animation_740d2")
+}
+
+[node name="ExploSphereVFX" type="Node3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="Dust" parent="." instance=ExtResource("1_8nrd0")]
+transform = Transform3D(6.2, 0, 0, 0, 6.2, 0, 0, 0, 6.2, 0, 0, 0)
+color_high = Color(1, 1, 1, 1)
+color_low = Color(0.92941177, 0.5019608, 0.6, 1)
+threshold = 0.0
+threshold_alpha = 1.0
+noise = SubResource("NoiseTexture2D_mgpox")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Dust"]
+libraries = {
+&"": SubResource("AnimationLibrary_s2vcg")
+}
+autoplay = "RUN"
+
+[node name="Core" parent="." instance=ExtResource("1_8nrd0")]
+color_high = Color(1, 1, 1, 1)
+color_low = Color(0.63529414, 0.29411766, 0.43529412, 1)
+threshold = 0.0
+noise = SubResource("NoiseTexture2D_aas4t")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Core"]
+libraries = {
+&"": SubResource("AnimationLibrary_mgpox")
+}
+autoplay = "run"

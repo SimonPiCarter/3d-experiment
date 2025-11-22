@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://delt1wpc61ms"]
+
+[ext_resource type="ArrayMesh" uid="uid://dmoi0erhqnwf2" path="res://model/cone.obj" id="1_ic6bd"]
+[ext_resource type="Shader" uid="uid://bheb3rnfrrvep" path="res://scenes/models/materials/vfx/sphere_back_vfx.gdshader" id="2_wabc4"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_kqquj"]
+noise_type = 2
+frequency = 0.015
+fractal_octaves = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_scxka"]
+noise = SubResource("FastNoiseLite_kqquj")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qy4ca"]
+resource_local_to_scene = true
+render_priority = 1
+shader = ExtResource("2_wabc4")
+shader_parameter/Noise = SubResource("NoiseTexture2D_scxka")
+shader_parameter/Threshold = 0.0
+shader_parameter/ThresholdAlpha = 0.594000028215
+shader_parameter/ColorHigh = Color(0, 0, 1, 0)
+shader_parameter/ColorLow = Color(0.8352941, 0.8784314, 0.29411766, 1)
+
+[node name="Cone" type="MeshInstance3D"]
+transform = Transform3D(-0.39442143, 0, -1.4472152, 0, 1.5, 0, 1.4472152, 0, -0.39442143, 0, 0, 0)
+layers = 17
+mesh = ExtResource("1_ic6bd")
+surface_material_override/0 = SubResource("ShaderMaterial_qy4ca")

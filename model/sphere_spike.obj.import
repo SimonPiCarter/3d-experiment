@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://uc7k2gt3130"
+path="res://.godot/imported/sphere_spike.obj-5c361edbee6453b9c58db08445ad996f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/sphere_spike.obj-5c361edbee6453b9c58db08445ad996f.mesh"]
+
+source_file="res://model/sphere_spike.obj"
+dest_files=["res://.godot/imported/sphere_spike.obj-5c361edbee6453b9c58db08445ad996f.mesh", "res://.godot/imported/sphere_spike.obj-5c361edbee6453b9c58db08445ad996f.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

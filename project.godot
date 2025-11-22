@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="3d_experiments"
-run/main_scene="uid://cwab8rgcx2vwh"
+run/main_scene="uid://boqtgauorybyx"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -21,4 +21,9 @@ Picker="*res://scripts/logic/picker/Picker.gd"
 
 [editor]
 
-movie_writer/movie_file="/home/simon/godot_workspace/3d-experiments/export.mp4"
+movie_writer/video_quality=1.0
+movie_writer/movie_file="/home/simon/godot_workspace/3d-experiments/export.ogv"
+
+[rendering]
+
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality=3

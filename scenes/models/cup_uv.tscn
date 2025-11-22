@@ -7,7 +7,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1mi4d"]
 render_priority = 0
 shader = ExtResource("2_1mi4d")
-shader_parameter/original_color = Color(0, 0.8926722, 0, 1)
+shader_parameter/original_color = Color(0.5647059, 0.36862746, 0.6627451, 1)
 shader_parameter/outline_color = Color(0.5, 0.5, 0.5, 1)
 shader_parameter/outline_mask = ExtResource("3_1mi4d")
 shader_parameter/use_mask = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://boqtgauorybyx"]
+[gd_scene load_steps=94 format=3 uid="uid://boqtgauorybyx"]
 
 [ext_resource type="Script" uid="uid://nje6tyvvpq8b" path="res://scenes/test/new_pipeline.gd" id="1_e07xg"]
 [ext_resource type="Shader" uid="uid://cw4s5m23hur31" path="res://shaders/primal/circle_from_plane.gdshader" id="1_gvkf4"]
@@ -20,10 +20,15 @@
 [ext_resource type="PackedScene" uid="uid://vg4v25l817yt" path="res://scenes/test/exocube/exocube.tscn" id="11_rv1hs"]
 [ext_resource type="PackedScene" uid="uid://bip43til0tsg0" path="res://scenes/env/shrines/red_round_shrine.tscn" id="13_mgpox"]
 [ext_resource type="PackedScene" uid="uid://dbxla1me04wl3" path="res://scenes/env/shrines/white_squared_shrine.tscn" id="15_740d2"]
+[ext_resource type="PackedScene" uid="uid://dpo4rthvuoh13" path="res://scenes/VFX/Explosion/explo_sphere_dust.tscn" id="17_mgpox"]
 [ext_resource type="PackedScene" uid="uid://b12sxh8hols1l" path="res://scenes/models/cube_uv.tscn" id="19_voo7p"]
 [ext_resource type="PackedScene" uid="uid://qfg6ip0muxgn" path="res://scenes/models/cup_uv.tscn" id="20_6in2w"]
 [ext_resource type="Script" uid="uid://dr8i2irhdjpuy" path="res://scenes/entity/spawner/spawner.gd" id="20_ioc36"]
 [ext_resource type="Script" uid="uid://34jx7s516ea1" path="res://scenes/test/world_input.gd" id="21_6in2w"]
+[ext_resource type="ArrayMesh" uid="uid://bctbpe0qjnfts" path="res://model/spike.obj" id="22_aas4t"]
+[ext_resource type="ArrayMesh" uid="uid://uc7k2gt3130" path="res://model/sphere_spike.obj" id="23_lcv6h"]
+[ext_resource type="PackedScene" uid="uid://bni427ua3ote2" path="res://scenes/VFX/Cone/cone_encapsuled.tscn" id="24_kqquj"]
+[ext_resource type="PackedScene" uid="uid://cfdijiejbba4r" path="res://scenes/VFX/Beam/Beam.tscn" id="25_0ydtf"]
 
 [sub_resource type="Sky" id="Sky_ckagc"]
 
@@ -135,52 +140,6 @@ shader_parameter/original_color = Color(0.24313726, 0.20784314, 0.27450982, 1)
 shader_parameter/outline_color = Color(0.93333334, 0.5411765, 0.10980392, 1)
 shader_parameter/use_mask = false
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_mpahi"]
-noise_type = 4
-frequency = 0.015
-fractal_octaves = 1
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_74qp2"]
-noise = SubResource("FastNoiseLite_mpahi")
-seamless = true
-
-[sub_resource type="Animation" id="Animation_5upta"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:threshold")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
-[sub_resource type="Animation" id="Animation_xnn52"]
-resource_name = "test"
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:threshold")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.93333334),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.8, 0.79]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_mpahi"]
-_data = {
-&"RESET": SubResource("Animation_5upta"),
-&"test": SubResource("Animation_xnn52")
-}
-
 [sub_resource type="Curve" id="Curve_0k3ve"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.14000002, 1), 0.0, 0.0, 0, 0, Vector2(0.48666665, 1), 0.0, 0.0, 0, 0, Vector2(0.9866667, 0), 0.0, 0.0, 0, 0]
 point_count = 4
@@ -279,6 +238,393 @@ point_count = 4
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.6881188, 0.37078655), 0.0, 0.0, 0, 0, Vector2(0.85643566, 0.37078655), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
+[sub_resource type="SphereMesh" id="SphereMesh_mgpox"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aas4t"]
+render_priority = 0
+shader = ExtResource("2_ap201")
+shader_parameter/original_color = Color(1, 1, 1, 1)
+shader_parameter/outline_color = Color(0.6509804, 0.38039216, 0.5019608, 1)
+shader_parameter/use_mask = false
+
+[sub_resource type="Animation" id="Animation_aas4t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sphere:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Spike1:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.5, 0.5, 0.5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Spike4:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.43193775, 0.43193775, 0.4319377)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Spike2:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.4319377, 0.4319377, 0.4319377)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Spike3:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.43193778, 0.43193775, 0.4319377)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Spike5:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.39999995, 0.39999995, 0.39999998)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("MeshInstance3D:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.3, 0.3, 0.3)]
+}
+
+[sub_resource type="Animation" id="Animation_mgpox"]
+resource_name = "hit"
+loop_mode = 1
+step = 0.015625
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sphere:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.203125, 0.40625, 1),
+"transitions": PackedFloat32Array(0.2, 0.2, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.6, 0.6, 0.6), Vector3(0, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Spike1:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.203125, 0.40625, 1),
+"transitions": PackedFloat32Array(0.2, 0.2, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.4, 0.4, 0.4), Vector3(0, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Spike4:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.203125, 0.40625, 1),
+"transitions": PackedFloat32Array(0.2, 0.2, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.45, 0.45, 0.45), Vector3(0, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Spike2:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.203125, 0.40625, 1),
+"transitions": PackedFloat32Array(0.2, 0.2, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.4, 0.4, 0.4), Vector3(0, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Spike3:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.203125, 0.40625, 1),
+"transitions": PackedFloat32Array(0.2, 0.2, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.4, 0.4, 0.4), Vector3(0, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Spike5:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.001908794, 0.203125, 0.2050338, 0.40625, 0.40815878, 1, 1.0019088),
+"transitions": PackedFloat32Array(0.2, 0.2, 0.2, 0.2, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0.4, 0.4, 0.4), Vector3(0.4, 0.4, 0.4), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("MeshInstance3D:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.203125, 0.40625, 1),
+"transitions": PackedFloat32Array(0.2, 0.2, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.3, 0.3, 0.3), Vector3(0, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_aas4t"]
+_data = {
+&"RESET": SubResource("Animation_aas4t"),
+&"hit": SubResource("Animation_mgpox")
+}
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_mpahi"]
+noise_type = 4
+frequency = 0.015
+fractal_octaves = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_74qp2"]
+noise = SubResource("FastNoiseLite_mpahi")
+seamless = true
+
+[sub_resource type="Animation" id="Animation_5upta"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:threshold")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_xnn52"]
+resource_name = "test"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:threshold")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.93333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.8, 0.79]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mpahi"]
+_data = {
+&"RESET": SubResource("Animation_5upta"),
+&"test": SubResource("Animation_xnn52")
+}
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_s2vcg"]
+noise_type = 4
+frequency = 0.0044
+fractal_octaves = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_0ydtf"]
+width = 2048
+height = 2048
+noise = SubResource("FastNoiseLite_s2vcg")
+seamless = true
+
+[sub_resource type="Curve" id="Curve_aas4t"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_lcv6h"]
+_limits = [0.0, 4.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.53333336, 4), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_s2vcg"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_0ydtf"]
+curve_x = SubResource("Curve_aas4t")
+curve_y = SubResource("Curve_lcv6h")
+curve_z = SubResource("Curve_s2vcg")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lcv6h"]
+lifetime_randomness = 0.3
+emission_shape_scale = Vector3(0.75, 0.5, 0.75)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+direction = Vector3(0, 1, 0)
+spread = 0.0
+initial_velocity_min = 6.0
+initial_velocity_max = 8.0
+gravity = Vector3(0, 2, 0)
+scale_curve = SubResource("CurveXYZTexture_0ydtf")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mgpox"]
+render_priority = 0
+shader = ExtResource("2_ap201")
+shader_parameter/original_color = Color(0.9843137, 0.7254902, 0.32941177, 1)
+shader_parameter/outline_color = Color(0.3137255, 0.5019608, 0.5019608, 1)
+shader_parameter/use_mask = false
+
+[sub_resource type="BoxMesh" id="BoxMesh_mgpox"]
+material = SubResource("ShaderMaterial_mgpox")
+size = Vector3(0.02, 0.2, 0.02)
+
+[sub_resource type="Animation" id="Animation_s2vcg"]
+resource_name = "run"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 6.2831855, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_scxka"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0ydtf"]
+_data = {
+&"RESET": SubResource("Animation_scxka"),
+&"run": SubResource("Animation_s2vcg")
+}
+
+[sub_resource type="Animation" id="Animation_0ydtf"]
+resource_name = "run"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:threshold")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [0.4, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.5, 0.5),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 6.2831855, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_kqquj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:threshold")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.6]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kqquj"]
+_data = {
+&"RESET": SubResource("Animation_kqquj"),
+&"run": SubResource("Animation_0ydtf")
+}
+
 [sub_resource type="ViewportTexture" id="ViewportTexture_gvkf4"]
 viewport_path = NodePath("MainViewport/SubViewport")
 
@@ -343,7 +689,7 @@ skeleton = NodePath("../Sprite3D")
 surface_material_override/0 = SubResource("ShaderMaterial_6n3pg")
 
 [node name="HealerBot" parent="MainViewport/SubViewport" instance=ExtResource("3_ap201")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -5.0878887, 0.62210655, -4.269994)
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -7.962083, 0.62210655, 2.332418)
 script = ExtResource("5_ioc36")
 step_offset = 1.0
 
@@ -357,7 +703,7 @@ root_projectile = NodePath("../..")
 metadata/_custom_type_script = "uid://c0ydmpenhown0"
 
 [node name="HealerBot2" parent="MainViewport/SubViewport" instance=ExtResource("3_ap201")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -5.0878887, 0.62210655, 8.914577)
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 3.5916119, 0.62210655, 3.9383297)
 script = ExtResource("5_ioc36")
 step_offset = 1.0
 
@@ -371,7 +717,7 @@ root_projectile = NodePath("../..")
 metadata/_custom_type_script = "uid://c0ydmpenhown0"
 
 [node name="HealerBot3" parent="MainViewport/SubViewport" instance=ExtResource("3_ap201")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.61742973, 0.62210655, -4.269994)
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -9.398123, 0.62210655, 11.753531)
 script = ExtResource("5_ioc36")
 step_offset = 1.0
 
@@ -389,7 +735,7 @@ transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 8.249, 0.3043263, 4.890
 move_speed = 60.0
 
 [node name="SimpleRobot" parent="MainViewport/SubViewport" instance=ExtResource("5_6n3pg")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 8.249, 0.3043263, -2.753)
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 1.8779516, 0.3043263, 16.23522)
 script = ExtResource("5_ioc36")
 turn_speed = 5.0
 step_offset = 1.0
@@ -482,50 +828,6 @@ surface_material_override/0 = SubResource("ShaderMaterial_4raox")
 [node name="Pylone3" parent="MainViewport/SubViewport/pylones" instance=ExtResource("15_740d2")]
 transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, 5.816093, -9.392824, 28.990417)
 
-[node name="SphereVFX2" parent="MainViewport/SubViewport" instance=ExtResource("1_m8x48")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -8.275635, 0, 28.214539)
-color_high = Color(0.68235296, 0.13725491, 0.20392157, 1)
-color_low = Color(0.9607843, 0.49019608, 0.2901961, 1)
-threshold = 0.0
-noise = SubResource("NoiseTexture2D_74qp2")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="MainViewport/SubViewport/SphereVFX2"]
-root_node = NodePath("../../SphereVFX2")
-libraries = {
-&"": SubResource("AnimationLibrary_mpahi")
-}
-autoplay = "test"
-
-[node name="SphereVFX3" parent="MainViewport/SubViewport" instance=ExtResource("1_m8x48")]
-transform = Transform3D(32, 0, 0, 0, 32, 0, 0, 0, 32, -1.2666016, 0, -16.22937)
-visible = false
-color_high = Color(0.56078434, 0.972549, 0.8862745, 1)
-color_low = Color(0.56078434, 0.972549, 0.8862745, 1)
-noise = SubResource("NoiseTexture2D_74qp2")
-
-[node name="SphereAnimator" type="Node3D" parent="MainViewport/SubViewport/SphereVFX3" node_paths=PackedStringArray("sphere")]
-script = ExtResource("4_ltf4q")
-lowering_start = 0.0
-lowering_time = 5.0
-vanishing_start = 4.0
-vanishing_time = 5.0
-sphere = NodePath("..")
-running = true
-
-[node name="SphereVFX4" parent="MainViewport/SubViewport" instance=ExtResource("1_m8x48")]
-transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -33.98065, 0, -2.296753)
-color_high = Color(1, 1, 1, 1)
-color_low = Color(0.56078434, 0.827451, 1, 1)
-noise = SubResource("NoiseTexture2D_74qp2")
-
-[node name="SphereAnimator" type="Node3D" parent="MainViewport/SubViewport/SphereVFX4" node_paths=PackedStringArray("sphere")]
-script = ExtResource("4_ltf4q")
-lowering_time = -1.0
-vanishing_start = 0.2
-vanishing_time = 0.3
-sphere = NodePath("..")
-running = true
-
 [node name="Env" type="Node3D" parent="MainViewport/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.972229, 5.5879517)
 
@@ -545,7 +847,7 @@ transform = Transform3D(0.80000424, 0.5748231, 0.17196411, -0.5242864, 0.5303673
 transform = Transform3D(0.80000424, 0.5748231, 0.17196411, -0.5242864, 0.5303673, 0.66620886, 0.29174808, -0.62312835, 0.7256681, -22.176342, -8.910034, -2.4550285)
 
 [node name="cup_uv" parent="MainViewport/SubViewport/Env" instance=ExtResource("20_6in2w")]
-transform = Transform3D(1, 0, 0, 0, 0.6655952, -0.746313, 0, 0.746313, 0.6655952, -13.832886, -6.609436, -1.2610474)
+transform = Transform3D(1, 0, 0, 0, 0.6655952, -0.746313, 0, 0.746313, 0.6655952, -28.642181, -6.609436, -27.88295)
 
 [node name="VFX" type="Node3D" parent="MainViewport/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.972229, 5.5879517)
@@ -554,7 +856,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.972229, 5.5879517)
 transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, -0.5, 0, 0.5, -2.1855694e-08, 5.930237, -7.1987305, -20.312805)
 
 [node name="Exocube" parent="MainViewport/SubViewport/VFX" instance=ExtResource("11_rv1hs")]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.92907715, -6.428406, 1.8096924)
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 7.7504234, -6.428406, -3.1665545)
 
 [node name="blue_boom" type="GPUParticles3D" parent="MainViewport/SubViewport/VFX"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0303502, -7.151159, 7.305786)
@@ -585,6 +887,139 @@ transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, -0.5, 0, 0.5, -2.1855694e-
 deg_speed = 720.0
 speed_curve = SubResource("Curve_rv1hs")
 scale_curve = SubResource("Curve_igudv")
+
+[node name="ExploSphereVFX" parent="MainViewport/SubViewport/VFX" instance=ExtResource("17_mgpox")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -9.400028, -7.972229, 6.227108)
+
+[node name="HitMarker" type="Node3D" parent="MainViewport/SubViewport/VFX"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.68808, -5.8011475, 6.5902405)
+
+[node name="Sphere" type="MeshInstance3D" parent="MainViewport/SubViewport/VFX/HitMarker"]
+layers = 17
+mesh = SubResource("SphereMesh_mgpox")
+surface_material_override/0 = SubResource("ShaderMaterial_aas4t")
+
+[node name="Spike1" type="MeshInstance3D" parent="MainViewport/SubViewport/VFX/HitMarker"]
+transform = Transform3D(0.5, 0, 0, 0, 0.49585354, -0.06425931, 0, 0.06425931, 0.49585354, -0.066410065, 0.08831787, -0.036183357)
+layers = 17
+mesh = ExtResource("22_aas4t")
+skeleton = NodePath("../Sphere")
+surface_material_override/0 = SubResource("ShaderMaterial_aas4t")
+
+[node name="Spike2" type="MeshInstance3D" parent="MainViewport/SubViewport/VFX/HitMarker"]
+transform = Transform3D(0.07617052, 0.42516845, 0, -0.42516845, 0.07617052, 0, 0, 0, 0.4319377, -0.08508682, 0, -0.036183357)
+layers = 17
+mesh = ExtResource("22_aas4t")
+skeleton = NodePath("../Sphere")
+surface_material_override/0 = SubResource("ShaderMaterial_aas4t")
+
+[node name="Spike3" type="MeshInstance3D" parent="MainViewport/SubViewport/VFX/HitMarker"]
+transform = Transform3D(-0.32973713, 0.27900478, 0, -0.27900478, -0.32973713, 0, 0, 0, 0.4319377, -0.066410065, 0, -0.036183357)
+layers = 17
+mesh = ExtResource("22_aas4t")
+skeleton = NodePath("../Sphere")
+surface_material_override/0 = SubResource("ShaderMaterial_aas4t")
+
+[node name="Spike4" type="MeshInstance3D" parent="MainViewport/SubViewport/VFX/HitMarker"]
+transform = Transform3D(0.43193775, 0, 0, 0, -0.05674541, 0.42819405, 0, -0.4281941, -0.056745403, 0.13092041, 0.00012207031, -0.0138549805)
+layers = 17
+mesh = ExtResource("22_aas4t")
+skeleton = NodePath("../Sphere")
+surface_material_override/0 = SubResource("ShaderMaterial_aas4t")
+
+[node name="Spike5" type="MeshInstance3D" parent="MainViewport/SubViewport/VFX/HitMarker"]
+transform = Transform3D(-0.24997167, -0.31227252, 0, 0.31227252, -0.24997167, 0, 0, 0, 0.39999998, 0.07488632, 0.10559082, -0.036183357)
+layers = 17
+mesh = ExtResource("22_aas4t")
+skeleton = NodePath("../Sphere")
+surface_material_override/0 = SubResource("ShaderMaterial_aas4t")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MainViewport/SubViewport/VFX/HitMarker"]
+libraries = {
+&"": SubResource("AnimationLibrary_aas4t")
+}
+autoplay = "hit"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MainViewport/SubViewport/VFX/HitMarker"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+layers = 17
+mesh = ExtResource("23_lcv6h")
+surface_material_override/0 = SubResource("ShaderMaterial_aas4t")
+
+[node name="SphereVFX2" parent="MainViewport/SubViewport/VFX" instance=ExtResource("1_m8x48")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -8.275635, -7.972229, 22.626587)
+color_high = Color(0.68235296, 0.13725491, 0.20392157, 1)
+color_low = Color(0.9607843, 0.49019608, 0.2901961, 1)
+threshold = 0.0
+noise = SubResource("NoiseTexture2D_74qp2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MainViewport/SubViewport/VFX/SphereVFX2"]
+libraries = {
+&"": SubResource("AnimationLibrary_mpahi")
+}
+autoplay = "test"
+
+[node name="SphereVFX3" parent="MainViewport/SubViewport/VFX" instance=ExtResource("1_m8x48")]
+transform = Transform3D(32, 0, 0, 0, 32, 0, 0, 0, 32, -1.2666016, -7.972229, -21.817322)
+color_high = Color(0.56078434, 0.972549, 0.8862745, 1)
+color_low = Color(0.56078434, 0.972549, 0.8862745, 1)
+noise = SubResource("NoiseTexture2D_0ydtf")
+
+[node name="SphereAnimator" type="Node3D" parent="MainViewport/SubViewport/VFX/SphereVFX3" node_paths=PackedStringArray("sphere")]
+script = ExtResource("4_ltf4q")
+lowering_start = 0.0
+lowering_time = 5.0
+vanishing_start = 4.0
+vanishing_time = 5.0
+sphere = NodePath("..")
+running = true
+
+[node name="SphereVFX4" parent="MainViewport/SubViewport/VFX" instance=ExtResource("1_m8x48")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -33.98065, -7.972229, -7.8847046)
+color_high = Color(1, 1, 1, 1)
+color_low = Color(0.56078434, 0.827451, 1, 1)
+noise = SubResource("NoiseTexture2D_74qp2")
+
+[node name="SphereAnimator" type="Node3D" parent="MainViewport/SubViewport/VFX/SphereVFX4" node_paths=PackedStringArray("sphere")]
+script = ExtResource("4_ltf4q")
+lowering_time = -1.0
+vanishing_start = 0.2
+vanishing_time = 0.3
+sphere = NodePath("..")
+running = true
+
+[node name="Buff" type="Node3D" parent="MainViewport/SubViewport/VFX"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9824181, -7.972229, 10.753292)
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="MainViewport/SubViewport/VFX/Buff"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5292969, 0)
+layers = 17
+amount = 12
+explosiveness = 0.75
+process_material = SubResource("ParticleProcessMaterial_lcv6h")
+draw_pass_1 = SubResource("BoxMesh_mgpox")
+
+[node name="BuffContinuous" parent="MainViewport/SubViewport/VFX" instance=ExtResource("24_kqquj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.8836994, -8.068481, -3.223389)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MainViewport/SubViewport/VFX/BuffContinuous"]
+libraries = {
+&"": SubResource("AnimationLibrary_0ydtf")
+}
+autoplay = "run"
+
+[node name="BuffOneShot" parent="MainViewport/SubViewport/VFX" instance=ExtResource("24_kqquj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8732834, -8.277283, 10.668251)
+color = Color(0.9843137, 0.7254902, 0.32941177, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MainViewport/SubViewport/VFX/BuffOneShot"]
+libraries = {
+&"": SubResource("AnimationLibrary_kqquj")
+}
+autoplay = "run"
+
+[node name="Beam" parent="MainViewport/SubViewport/VFX" instance=ExtResource("25_0ydtf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.178, -8.128, 15.145)
 
 [node name="Spawner" type="Node3D" parent="MainViewport/SubViewport" node_paths=PackedStringArray("spawn_center", "destination", "target")]
 script = ExtResource("20_ioc36")

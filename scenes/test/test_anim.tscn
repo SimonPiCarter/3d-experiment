@@ -1,0 +1,131 @@
+[gd_scene load_steps=14 format=3 uid="uid://clkhkcr24mu7y"]
+
+[ext_resource type="Script" uid="uid://vvdqmg18tep1" path="res://scenes/test/test_anim.gd" id="1_kl8b8"]
+[ext_resource type="Script" uid="uid://d3mylyppsdrer" path="res://scenes/test/animation_tree.gd" id="2_3i4ft"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_bokkx"]
+
+[sub_resource type="Animation" id="Animation_bokkx"]
+resource_name = "rotate"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../MeshInstance3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 6.2831855)]
+}
+
+[sub_resource type="Animation" id="Animation_kl8b8"]
+resource_name = "jump"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../MeshInstance3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.56666666),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.5, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../MeshInstance3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3i4ft"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../MeshInstance3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../MeshInstance3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3i4ft"]
+_data = {
+&"RESET": SubResource("Animation_3i4ft"),
+&"jump": SubResource("Animation_kl8b8"),
+&"rotate": SubResource("Animation_bokkx")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3i4ft"]
+animation = &"jump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ll8fh"]
+animation = &"rotate"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vs3rd"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8ovlc"]
+advance_mode = 2
+advance_expression = "is_jumping == true"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kl8b8"]
+advance_mode = 2
+advance_expression = "is_jumping == false"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_bokkx"]
+states/jump/node = SubResource("AnimationNodeAnimation_3i4ft")
+states/jump/position = Vector2(575, 54)
+states/rotate/node = SubResource("AnimationNodeAnimation_ll8fh")
+states/rotate/position = Vector2(344, 60)
+transitions = ["Start", "rotate", SubResource("AnimationNodeStateMachineTransition_vs3rd"), "rotate", "jump", SubResource("AnimationNodeStateMachineTransition_8ovlc"), "jump", "rotate", SubResource("AnimationNodeStateMachineTransition_kl8b8")]
+
+[node name="TestAnim" type="Node3D"]
+script = ExtResource("1_kl8b8")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.8406422, 0.54159087, 0, -0.54159087, 0.8406422, 0, 2.5167847, 4.6531982)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_bokkx")
+skeleton = NodePath("../Camera3D")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Camera3D")
+libraries = {
+&"": SubResource("AnimationLibrary_3i4ft")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../Camera3D")
+tree_root = SubResource("AnimationNodeStateMachine_bokkx")
+anim_player = NodePath("../AnimationPlayer")
+script = ExtResource("2_3i4ft")

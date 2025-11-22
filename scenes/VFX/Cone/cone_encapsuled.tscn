@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://bni427ua3ote2"]
+
+[ext_resource type="PackedScene" uid="uid://delt1wpc61ms" path="res://scenes/VFX/Cone/cone.tscn" id="1_4myrn"]
+[ext_resource type="Script" uid="uid://c5h8x0442jn3n" path="res://scenes/VFX/Cone/cone.gd" id="1_t3bnv"]
+[ext_resource type="Shader" uid="uid://bheb3rnfrrvep" path="res://scenes/models/materials/vfx/sphere_back_vfx.gdshader" id="2_8wwbw"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_kqquj"]
+noise_type = 2
+frequency = 0.015
+fractal_octaves = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_scxka"]
+noise = SubResource("FastNoiseLite_kqquj")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kqquj"]
+resource_local_to_scene = true
+render_priority = 1
+shader = ExtResource("2_8wwbw")
+shader_parameter/Noise = SubResource("NoiseTexture2D_scxka")
+shader_parameter/Threshold = 0.0
+shader_parameter/ThresholdAlpha = 0.6
+shader_parameter/ColorHigh = Color(0.8352941, 0.8784314, 0.29411766, 1)
+shader_parameter/ColorLow = Color(0.8352941, 0.8784314, 0.29411766, 1)
+
+[node name="Cone" type="Node3D"]
+script = ExtResource("1_t3bnv")
+
+[node name="Cone" parent="." instance=ExtResource("1_4myrn")]
+transform = Transform3D(1.5000001, 0, 0, 0, 1.5, 0, 0, 0, 1.5000001, 0, 0, 0)
+surface_material_override/0 = SubResource("ShaderMaterial_kqquj")
