@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://bgmgmigu7s8k6"]
+[gd_scene load_steps=12 format=3 uid="uid://bgmgmigu7s8k6"]
 
 [ext_resource type="PackedScene" uid="uid://lf6p81kkvxyd" path="res://model/simple_robot1.glb" id="1_iicvt"]
 [ext_resource type="Script" uid="uid://cssyvtlm806gc" path="res://scripts/ik/ik_auto_start.gd" id="2_ayw8u"]
 [ext_resource type="Script" uid="uid://c3mo76km5qekk" path="res://scenes/models/simple_robot.gd" id="2_u716b"]
+[ext_resource type="Shader" uid="uid://7eh5v4axp1ng" path="res://shaders/new_pipeline/pickable.gdshader" id="5_lbww1"]
 [ext_resource type="Shader" uid="uid://cv4deawtx0pb3" path="res://shaders/new_pipeline/outline_new_pipeline_shaded.gdshader" id="5_u716b"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_boslc"]
@@ -10,24 +11,42 @@ render_priority = 0
 shader = ExtResource("5_u716b")
 shader_parameter/original_color = Color(0.38431373, 0.33333334, 0.39607844, 1)
 shader_parameter/outline_color = Color(0.5176471, 0.5019608, 0.5019608, 1)
+shader_parameter/use_mask = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u716b"]
 render_priority = 0
 shader = ExtResource("5_u716b")
 shader_parameter/original_color = Color(0.68235296, 0.13725491, 0.20392157, 1)
 shader_parameter/outline_color = Color(0.5137255, 0.5019608, 0.5019608, 1)
+shader_parameter/use_mask = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eq3wd"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_lbww1")
+shader_parameter/pickable_color = Color(0, 0, 0, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_shhoi"]
+resource_local_to_scene = true
 render_priority = 0
+next_pass = SubResource("ShaderMaterial_eq3wd")
 shader = ExtResource("5_u716b")
 shader_parameter/original_color = Color(0.78039217, 0.8627451, 0.8156863, 1)
 shader_parameter/outline_color = Color(0.5058824, 0.5019608, 0.5019608, 1)
+shader_parameter/use_mask = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qeouw"]
+render_priority = 0
+shader = ExtResource("5_lbww1")
+shader_parameter/pickable_color = Color(0, 0, 0, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lbww1"]
 render_priority = 0
+next_pass = SubResource("ShaderMaterial_qeouw")
 shader = ExtResource("5_u716b")
 shader_parameter/original_color = Color(0.60784316, 0.67058825, 0.69803923, 1)
 shader_parameter/outline_color = Color(0.50980395, 0.5019608, 0.5019608, 1)
+shader_parameter/use_mask = false
 
 [node name="SimpleRobot" node_paths=PackedStringArray("FrontLeftLeg", "FrontRightLeg", "BackLeftLeg", "BackRightLeg", "Armature") instance=ExtResource("1_iicvt")]
 script = ExtResource("2_u716b")
@@ -82,7 +101,7 @@ script = ExtResource("2_ayw8u")
 metadata/_custom_type_script = "uid://cssyvtlm806gc"
 
 [node name="Arms" parent="Armature/Skeleton3D" index="4"]
-layers = 17
+layers = 49
 surface_material_override/0 = SubResource("ShaderMaterial_shhoi")
 
 [node name="Marker3D" type="Marker3D" parent="Armature/Skeleton3D/Arms" index="0"]
@@ -90,13 +109,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0567794, 1.4247084, 2.2526
 gizmo_extents = 0.5
 
 [node name="Body" parent="Armature/Skeleton3D" index="5"]
-layers = 17
+layers = 49
 surface_material_override/0 = SubResource("ShaderMaterial_shhoi")
 
 [node name="Head" parent="Armature/Skeleton3D" index="6"]
-layers = 17
+layers = 49
 surface_material_override/0 = SubResource("ShaderMaterial_shhoi")
 
 [node name="Legs" parent="Armature/Skeleton3D" index="7"]
-layers = 17
+layers = 49
 surface_material_override/0 = SubResource("ShaderMaterial_lbww1")

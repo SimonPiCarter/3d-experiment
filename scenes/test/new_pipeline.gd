@@ -10,6 +10,8 @@ func _ready() -> void:
 	Picker.register_new_pickable(id, $MainViewport/SubViewport/HealerBot2)
 	id = Picker.get_next_id()
 	Picker.register_new_pickable(id, $MainViewport/SubViewport/HealerBot3)
+	id = Picker.get_next_id()
+	Picker.register_new_pickable(id, $MainViewport/SubViewport/SimpleRobot)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.is_pressed() and event.keycode == KEY_A:

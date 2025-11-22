@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://boqtgauorybyx"]
+[gd_scene load_steps=69 format=3 uid="uid://boqtgauorybyx"]
 
 [ext_resource type="Script" uid="uid://nje6tyvvpq8b" path="res://scenes/test/new_pipeline.gd" id="1_e07xg"]
 [ext_resource type="Shader" uid="uid://cw4s5m23hur31" path="res://shaders/primal/circle_from_plane.gdshader" id="1_gvkf4"]
@@ -17,7 +17,6 @@
 [ext_resource type="PackedScene" uid="uid://b4iuas1jqhse3" path="res://scenes/VFX/Etherals/circling_etheral.tscn" id="7_xnfcr"]
 [ext_resource type="PackedScene" uid="uid://v7x76lnh135e" path="res://scenes/test/power_ring/PowerRing.tscn" id="8_6n3pg"]
 [ext_resource type="Shader" uid="uid://cv4deawtx0pb3" path="res://shaders/new_pipeline/outline_new_pipeline_shaded.gdshader" id="9_rijnb"]
-[ext_resource type="Script" uid="uid://bmkj2qdsacu4p" path="res://scenes/entity/quad_ent_axis_move.gd" id="10_atw0o"]
 [ext_resource type="PackedScene" uid="uid://vg4v25l817yt" path="res://scenes/test/exocube/exocube.tscn" id="11_rv1hs"]
 [ext_resource type="PackedScene" uid="uid://bip43til0tsg0" path="res://scenes/env/shrines/red_round_shrine.tscn" id="13_mgpox"]
 [ext_resource type="PackedScene" uid="uid://dbxla1me04wl3" path="res://scenes/env/shrines/white_squared_shrine.tscn" id="15_740d2"]
@@ -25,6 +24,16 @@
 [ext_resource type="PackedScene" uid="uid://qfg6ip0muxgn" path="res://scenes/models/cup_uv.tscn" id="20_6in2w"]
 [ext_resource type="Script" uid="uid://dr8i2irhdjpuy" path="res://scenes/entity/spawner/spawner.gd" id="20_ioc36"]
 [ext_resource type="Script" uid="uid://34jx7s516ea1" path="res://scenes/test/world_input.gd" id="21_6in2w"]
+
+[sub_resource type="Sky" id="Sky_ckagc"]
+
+[sub_resource type="Environment" id="Environment_rijnb"]
+background_mode = 1
+background_color = Color(0.3019608, 0.60784316, 0.9019608, 1)
+sky = SubResource("Sky_ckagc")
+ambient_light_source = 2
+ambient_light_color = Color(0.6775041, 0.784652, 1, 1)
+ambient_light_energy = 0.05
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_olbwg"]
 render_priority = -1
@@ -125,16 +134,6 @@ shader = ExtResource("9_rijnb")
 shader_parameter/original_color = Color(0.24313726, 0.20784314, 0.27450982, 1)
 shader_parameter/outline_color = Color(0.93333334, 0.5411765, 0.10980392, 1)
 shader_parameter/use_mask = false
-
-[sub_resource type="Sky" id="Sky_ckagc"]
-
-[sub_resource type="Environment" id="Environment_rijnb"]
-background_mode = 1
-background_color = Color(0.3019608, 0.60784316, 0.9019608, 1)
-sky = SubResource("Sky_ckagc")
-ambient_light_source = 2
-ambient_light_color = Color(0.6775041, 0.784652, 1, 1)
-ambient_light_energy = 0.05
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_mpahi"]
 noise_type = 4
@@ -316,13 +315,8 @@ handle_input_locally = false
 size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="MainViewport/SubViewport"]
-transform = Transform3D(0.95441765, -0.10836294, 0.27810884, -0.11621561, 0.72331774, 0.6806655, -0.27491996, -0.6819597, 0.6777537, 2.5636919, 3.3113484, -1.9355414)
-shadow_enabled = true
-sky_mode = 1
-
-[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="MainViewport/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 0.16723329, 0.98591745, 0, -0.98591745, 0.16723329, 0, 8.906378, 11.516099)
+[node name="WorldEnvironment" type="WorldEnvironment" parent="MainViewport/SubViewport"]
+environment = SubResource("Environment_rijnb")
 
 [node name="circle" type="MeshInstance3D" parent="MainViewport/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2824707, -0.155, -27.085876)
@@ -396,8 +390,7 @@ move_speed = 60.0
 
 [node name="SimpleRobot" parent="MainViewport/SubViewport" instance=ExtResource("5_6n3pg")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 8.249, 0.3043263, -2.753)
-script = ExtResource("10_atw0o")
-step_offset = 1.0
+script = ExtResource("5_ioc36")
 
 [node name="EtheritySegments" parent="MainViewport/SubViewport" instance=ExtResource("7_xnfcr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.700666, 1.8968132, 29.55603)
@@ -416,8 +409,15 @@ curve = SubResource("Curve3D_xnfcr")
 [node name="PathFollow3D" type="PathFollow3D" parent="MainViewport/SubViewport/EtheritySegments2/Path3D2"]
 transform = Transform3D(0.7071064, 0, -0.7071063, 0, 1, 0, 0.7071063, 0, 0.7071064, 0, 0, 0)
 
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="MainViewport/SubViewport"]
+transform = Transform3D(0.95441765, -0.10836298, 0.27810878, -0.11621556, 0.7233177, 0.68066555, -0.2749199, -0.68195975, 0.6777536, 0, 0, 0)
+shadow_enabled = true
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="MainViewport/SubViewport"]
+transform = Transform3D(1, -4.983938e-09, -2.938263e-08, 2.9802322e-08, 0.16723324, 0.98591745, 0, -0.9859174, 0.16723326, 0, 0, 0)
+
 [node name="Camera3D" type="Camera3D" parent="MainViewport/SubViewport"]
-transform = Transform3D(0.7071068, 0.35355335, -0.61237246, 2.1855696e-08, 0.8660254, 0.5, 0.7071068, -0.3535534, 0.61237246, -88.458664, 69.843445, 96.533936)
+transform = Transform3D(0.7071068, 0.35355338, -0.61237246, 2.1855696e-08, 0.8660254, 0.5, 0.7071068, -0.35355338, 0.61237246, -17.407516, 22.080994, 38.139008)
 cull_mask = 1
 projection = 1
 current = true
@@ -479,9 +479,6 @@ surface_material_override/0 = SubResource("ShaderMaterial_4raox")
 
 [node name="Pylone3" parent="MainViewport/SubViewport/pylones" instance=ExtResource("15_740d2")]
 transform = Transform3D(0.9999999, 0, 0, 0, 1.0000005, 0, 0, 0, 0.9999999, 5.816093, -9.392824, 28.990417)
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="MainViewport/SubViewport"]
-environment = SubResource("Environment_rijnb")
 
 [node name="SphereVFX2" parent="MainViewport/SubViewport" instance=ExtResource("1_m8x48")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -8.275635, 0, 28.214539)
