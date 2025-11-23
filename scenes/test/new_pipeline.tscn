@@ -1,4 +1,4 @@
-[gd_scene load_steps=94 format=3 uid="uid://boqtgauorybyx"]
+[gd_scene load_steps=95 format=3 uid="uid://boqtgauorybyx"]
 
 [ext_resource type="Script" uid="uid://nje6tyvvpq8b" path="res://scenes/test/new_pipeline.gd" id="1_e07xg"]
 [ext_resource type="Shader" uid="uid://cw4s5m23hur31" path="res://shaders/primal/circle_from_plane.gdshader" id="1_gvkf4"]
@@ -29,6 +29,7 @@
 [ext_resource type="ArrayMesh" uid="uid://uc7k2gt3130" path="res://model/sphere_spike.obj" id="23_lcv6h"]
 [ext_resource type="PackedScene" uid="uid://bni427ua3ote2" path="res://scenes/VFX/Cone/cone_encapsuled.tscn" id="24_kqquj"]
 [ext_resource type="PackedScene" uid="uid://cfdijiejbba4r" path="res://scenes/VFX/Beam/Beam.tscn" id="25_0ydtf"]
+[ext_resource type="PackedScene" uid="uid://buslmtbcq01xb" path="res://scenes/UI/debug/fps_display.tscn" id="30_kqquj"]
 
 [sub_resource type="Sky" id="Sky_ckagc"]
 
@@ -527,6 +528,21 @@ shader_parameter/use_mask = false
 material = SubResource("ShaderMaterial_mgpox")
 size = Vector3(0.02, 0.2, 0.02)
 
+[sub_resource type="Animation" id="Animation_scxka"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_s2vcg"]
 resource_name = "run"
 loop_mode = 1
@@ -543,25 +559,37 @@ tracks/0/keys = {
 "values": [Vector3(0, 0, 0), Vector3(0, 6.2831855, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_scxka"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0ydtf"]
+_data = {
+&"RESET": SubResource("Animation_scxka"),
+&"run": SubResource("Animation_s2vcg")
+}
+
+[sub_resource type="Animation" id="Animation_kqquj"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
+tracks/0/path = NodePath(".:threshold")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 0, 0)]
+"values": [0.6]
 }
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_0ydtf"]
-_data = {
-&"RESET": SubResource("Animation_scxka"),
-&"run": SubResource("Animation_s2vcg")
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_0ydtf"]
@@ -590,33 +618,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(0.5, 0.5),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 6.2831855, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_kqquj"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:threshold")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.6]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kqquj"]
@@ -1027,7 +1028,7 @@ script = ExtResource("20_ioc36")
 spawn_center = NodePath("../HealerBot")
 destination = NodePath("../Targets")
 spawned_object = ExtResource("4_rijnb")
-spawn_rate = 15.0
+spawn_rate = 1.0
 spawn_range = 50.0
 y_pos = -0.046
 spawn_scale = 0.3
@@ -1120,7 +1121,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("ViewportTexture_aas4t")
 
-[node name="Control" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("ref_camera", "debug", "ent_moving")]
+[node name="Control" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("ref_camera", "debug", "ent_moving", "targets")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -1132,3 +1133,6 @@ ref_camera = NodePath("../../MainViewport/SubViewport/Camera3D")
 pick_texture = SubResource("ViewportTexture_mgpox")
 debug = NodePath("../../MainViewport/SubViewport/VFX/PowerRing3")
 ent_moving = [NodePath("../../MainViewport/SubViewport/HealerBot"), NodePath("../../MainViewport/SubViewport/HealerBot2"), NodePath("../../MainViewport/SubViewport/HealerBot3")]
+targets = NodePath("../../MainViewport/SubViewport/Targets")
+
+[node name="FpsDisplay" parent="CanvasLayer" instance=ExtResource("30_kqquj")]
