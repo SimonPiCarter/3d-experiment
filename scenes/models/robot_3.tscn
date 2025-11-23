@@ -27,13 +27,15 @@ shader_parameter/original_color = Color(0.80784315, 0.7294118, 0.6392157, 1)
 shader_parameter/outline_color = Color(0.5, 0.5, 0.5, 1)
 shader_parameter/use_mask = false
 
-[node name="robot3" node_paths=PackedStringArray("FrontLeftLeg", "FrontRightLeg", "BackLeftLeg", "BackRightLeg", "Armature") instance=ExtResource("1_dt103")]
+[node name="robot3" node_paths=PackedStringArray("FrontLeftLeg", "FrontRightLeg", "BackLeftLeg", "BackRightLeg", "Armature", "Body", "BodyMarker") instance=ExtResource("1_dt103")]
 script = ExtResource("2_mqb12")
 FrontLeftLeg = NodePath("Armature/Skeleton3D/FrontLeft")
 FrontRightLeg = NodePath("Armature/Skeleton3D/FrontRight")
 BackLeftLeg = NodePath("Armature/Skeleton3D/BackLeft")
 BackRightLeg = NodePath("Armature/Skeleton3D/BackRight")
 Armature = NodePath("Armature")
+Body = NodePath("Armature/Skeleton3D/BodyIK")
+BodyMarker = NodePath("Marker3D")
 
 [node name="Exocube" parent="Armature/Skeleton3D" index="0" instance=ExtResource("3_mqb12")]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 1.7428589, 0)
@@ -84,3 +86,16 @@ use_magnet = true
 magnet = Vector3(0, 10, 0)
 script = ExtResource("5_eek0y")
 metadata/_custom_type_script = "uid://cssyvtlm806gc"
+
+[node name="BodyIK" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="7"]
+top_level = true
+root_bone = &"Root"
+tip_bone = &"Body_2"
+use_magnet = true
+magnet = Vector3(0, 10, 0)
+target_node = NodePath("../../../Marker3D")
+script = ExtResource("5_eek0y")
+metadata/_custom_type_script = "uid://cssyvtlm806gc"
+
+[node name="Marker3D" type="Marker3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)

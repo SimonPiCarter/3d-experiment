@@ -249,13 +249,15 @@ _data = {
 &"power": SubResource("Animation_flht3")
 }
 
-[node name="robot2" node_paths=PackedStringArray("FrontLeftLeg", "FrontRightLeg", "BackLeftLeg", "BackRightLeg", "Armature") instance=ExtResource("1_fcyj1")]
+[node name="robot2" node_paths=PackedStringArray("FrontLeftLeg", "FrontRightLeg", "BackLeftLeg", "BackRightLeg", "Armature", "Body", "BodyMarker") instance=ExtResource("1_fcyj1")]
 script = ExtResource("2_flht3")
 FrontLeftLeg = NodePath("Armature/Skeleton3D/FrontLeft")
 FrontRightLeg = NodePath("Armature/Skeleton3D/FrontRight")
 BackLeftLeg = NodePath("Armature/Skeleton3D/BackLeft")
 BackRightLeg = NodePath("Armature/Skeleton3D/BackRight")
 Armature = NodePath("Armature")
+Body = NodePath("Armature/Skeleton3D/BodyBone")
+BodyMarker = NodePath("BodyMarker")
 
 [node name="Body" parent="Armature/Skeleton3D" index="0"]
 layers = 61
@@ -279,7 +281,17 @@ surface_material_override/0 = SubResource("ShaderMaterial_krmdn")
 layers = 61
 surface_material_override/0 = SubResource("ShaderMaterial_g76fm")
 
-[node name="FrontLeft" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="4"]
+[node name="BodyBone" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="4"]
+top_level = true
+root_bone = &"Root"
+tip_bone = &"Sphere"
+use_magnet = true
+magnet = Vector3(0, 10, 0)
+target_node = NodePath("../../../BodyMarker")
+script = ExtResource("2_a8m4m")
+metadata/_custom_type_script = "uid://cssyvtlm806gc"
+
+[node name="FrontLeft" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="5"]
 process_priority = 1
 top_level = true
 root_bone = &"FrontLeftLeg.001"
@@ -289,7 +301,7 @@ magnet = Vector3(0, 10, 0)
 script = ExtResource("2_a8m4m")
 metadata/_custom_type_script = "uid://cssyvtlm806gc"
 
-[node name="FrontRight" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="5"]
+[node name="FrontRight" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="6"]
 top_level = true
 root_bone = &"FrontRightLeg.001"
 tip_bone = &"FrontRightLeg.004"
@@ -298,7 +310,7 @@ magnet = Vector3(0, 10, 0)
 script = ExtResource("2_a8m4m")
 metadata/_custom_type_script = "uid://cssyvtlm806gc"
 
-[node name="BackLeft" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="6"]
+[node name="BackLeft" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="7"]
 top_level = true
 root_bone = &"BackLeftLeg.001"
 tip_bone = &"BackLeftLeg.004"
@@ -307,7 +319,7 @@ magnet = Vector3(0, 10, 0)
 script = ExtResource("2_a8m4m")
 metadata/_custom_type_script = "uid://cssyvtlm806gc"
 
-[node name="BackRight" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="7"]
+[node name="BackRight" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="8"]
 top_level = true
 root_bone = &"BackRightLeg.001"
 tip_bone = &"BackRightLeg.004"
@@ -320,3 +332,6 @@ metadata/_custom_type_script = "uid://cssyvtlm806gc"
 libraries = {
 &"": SubResource("AnimationLibrary_obp05")
 }
+
+[node name="BodyMarker" type="Marker3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
