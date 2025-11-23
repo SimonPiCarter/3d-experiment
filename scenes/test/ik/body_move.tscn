@@ -1,0 +1,75 @@
+[gd_scene load_steps=9 format=3 uid="uid://c4xo8r4sb1ixx"]
+
+[ext_resource type="Script" uid="uid://blsd4o6wlouco" path="res://scenes/test/ik/body_move.gd" id="1_7vqd1"]
+[ext_resource type="PackedScene" uid="uid://bpf2yq0qibfvi" path="res://scenes/models/robot_2.tscn" id="2_wyh1l"]
+[ext_resource type="Shader" uid="uid://7eh5v4axp1ng" path="res://shaders/new_pipeline/pickable.gdshader" id="3_ay4el"]
+[ext_resource type="Shader" uid="uid://cv4deawtx0pb3" path="res://shaders/new_pipeline/outline_new_pipeline_shaded.gdshader" id="4_r5rsp"]
+[ext_resource type="Shader" uid="uid://cc18tpomiri80" path="res://shaders/new_pipeline/outline_new_pipeline_unshaded.gdshader" id="5_x4c2k"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5k7fw"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_ay4el")
+shader_parameter/pickable_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8hova"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_5k7fw")
+shader = ExtResource("4_r5rsp")
+shader_parameter/original_color = Color(0.67058825, 0.5803922, 0.47843137, 1)
+shader_parameter/outline_color = Color(0.59607846, 0.25490198, 0.3137255, 1)
+shader_parameter/use_mask = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q4l6h"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_5k7fw")
+shader = ExtResource("5_x4c2k")
+shader_parameter/original_color = Color(0.40784314, 0.92941177, 0.36078432, 1)
+shader_parameter/outline_color = Color(0.48235294, 0.58431375, 0.42745098, 1)
+shader_parameter/use_mask = false
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_7vqd1")
+
+[node name="robot2" parent="." instance=ExtResource("2_wyh1l")]
+transform = Transform3D(0.75594485, 0, 0.6546353, 0, 1, 0, -0.6546353, 0, 0.75594485, 8.613037, 0, -11.684387)
+
+[node name="Body" parent="robot2/Armature/Skeleton3D" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_8hova")
+
+[node name="Icosphere" parent="robot2/Armature/Skeleton3D" index="1"]
+surface_material_override/0 = SubResource("ShaderMaterial_q4l6h")
+
+[node name="Legs" parent="robot2/Armature/Skeleton3D" index="3"]
+surface_material_override/0 = SubResource("ShaderMaterial_8hova")
+
+[node name="FrontLeft" parent="robot2/Armature/Skeleton3D" index="5"]
+target_node = NodePath("../../../Marker3D")
+
+[node name="FrontRight" parent="robot2/Armature/Skeleton3D" index="6"]
+target_node = NodePath("../../../Marker3D2")
+
+[node name="BackLeft" parent="robot2/Armature/Skeleton3D" index="7"]
+target_node = NodePath("../../../Marker3D3")
+
+[node name="BackRight" parent="robot2/Armature/Skeleton3D" index="8"]
+target_node = NodePath("../../../Marker3D4")
+
+[node name="Marker3D" type="Marker3D" parent="robot2"]
+transform = Transform3D(1.3789263, 0, 0, 0, 1, 0, 0, 0, 1.3397965, 3.4267886, -1.5311279, 3.4917965)
+
+[node name="Marker3D2" type="Marker3D" parent="robot2"]
+transform = Transform3D(1.3789263, 0, 0, 0, 1, 0, 0, 0, 1.3397965, -3.5804136, -1.5311279, 3.2906282)
+
+[node name="Marker3D3" type="Marker3D" parent="robot2"]
+transform = Transform3D(1.3789263, 0, 0, 0, 1, 0, 0, 0, 1.3397965, 3.0955179, -1.5311279, -2.8761182)
+
+[node name="Marker3D4" type="Marker3D" parent="robot2"]
+transform = Transform3D(1.3789263, 0, 0, 0, 1, 0, 0, 0, 1.3397965, -3.2077372, -1.5311279, -3.0772848)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5945703, 0.8040436, 0, -0.80404365, 0.5945703, -0.5651245, 17.448273, 19.446838)
+
+[editable path="robot2"]
