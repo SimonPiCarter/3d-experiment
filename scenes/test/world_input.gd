@@ -24,7 +24,7 @@ func _input(event: InputEvent) -> void:
 			if debug:
 				debug.global_position = floor_clic + Vector3(0,0.1,0)
 			for ent in ent_moving:
-				ent.target_position = floor_clic
+				ent.set_target_position(floor_clic)
 		elif event.button_index == MOUSE_BUTTON_LEFT:
 			if pick_texture:
 				var picked = Picker.get_node_from_texture(pick_texture, int(event.position.x), int(event.position.y))

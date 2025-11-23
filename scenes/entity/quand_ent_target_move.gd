@@ -2,6 +2,9 @@ class_name QuadEntityTargetMove extends QuadEntity
 
 var target_position: Vector3 = Vector3.ZERO
 
+func set_target_position(new_target: Vector3) -> void:
+	target_position = new_target
+
 func _ready():
 	super._ready()
 	stop_movement()
