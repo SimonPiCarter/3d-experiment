@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://dpo4rthvuoh13"]
+[gd_scene load_steps=13 format=3 uid="uid://dpo4rthvuoh13"]
 
 [ext_resource type="PackedScene" uid="uid://cvyhsdynhh21x" path="res://scenes/VFX/Sphere/sphere.tscn" id="1_8nrd0"]
+[ext_resource type="Script" uid="uid://d0gaggfxmu2cl" path="res://scenes/VFX/Explosion/explo_sphere_dust.gd" id="1_f6dvs"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_740d2"]
 noise_type = 2
@@ -65,7 +66,6 @@ tracks/3/keys = {
 [sub_resource type="Animation" id="Animation_aas4t"]
 resource_name = "RUN"
 length = 1.5
-loop_mode = 1
 step = 0.016666668
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -171,9 +171,8 @@ tracks/2/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_740d2"]
-resource_name = "run"
+resource_name = "RUN"
 length = 1.5
-loop_mode = 1
 step = 0.016666668
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -215,11 +214,12 @@ tracks/2/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mgpox"]
 _data = {
 &"RESET": SubResource("Animation_mgpox"),
-&"run": SubResource("Animation_740d2")
+&"RUN": SubResource("Animation_740d2")
 }
 
 [node name="ExploSphereVFX" type="Node3D"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+script = ExtResource("1_f6dvs")
 
 [node name="Dust" parent="." instance=ExtResource("1_8nrd0")]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
@@ -245,4 +245,4 @@ noise = SubResource("NoiseTexture2D_aas4t")
 libraries = {
 &"": SubResource("AnimationLibrary_mgpox")
 }
-autoplay = "run"
+autoplay = "RUN"
