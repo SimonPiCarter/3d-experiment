@@ -1,0 +1,261 @@
+[gd_scene load_steps=24 format=3 uid="uid://bfihn8m3yhws2"]
+
+[ext_resource type="PackedScene" uid="uid://da2eduothcfya" path="res://scenes/templates/world_scene.tscn" id="1_egn45"]
+[ext_resource type="Script" uid="uid://jquglo62113b" path="res://scenes/test/socle_test.gd" id="2_cna4g"]
+[ext_resource type="PackedScene" uid="uid://cuxorc2vslc2a" path="res://scenes/models/socle.tscn" id="2_lwtok"]
+[ext_resource type="PackedScene" uid="uid://bpf2yq0qibfvi" path="res://scenes/models/robot_2.tscn" id="2_wf17m"]
+[ext_resource type="Shader" uid="uid://c4njs3466gxfy" path="res://shaders/2d/pixel_outline_v2.gdshader" id="3_ai8fy"]
+[ext_resource type="Shader" uid="uid://7eh5v4axp1ng" path="res://shaders/new_pipeline/pickable.gdshader" id="5_oc7f7"]
+[ext_resource type="Shader" uid="uid://cv4deawtx0pb3" path="res://shaders/new_pipeline/outline_new_pipeline_shaded.gdshader" id="6_bm0f3"]
+[ext_resource type="Shader" uid="uid://cc18tpomiri80" path="res://shaders/new_pipeline/outline_new_pipeline_unshaded.gdshader" id="7_xkj2w"]
+[ext_resource type="PackedScene" uid="uid://v7ktckkiqub8" path="res://scenes/UI/Controls/button_round.tscn" id="9_bm0f3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ywwqq"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_oc7f7")
+shader_parameter/pickable_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_88u1r"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_ywwqq")
+shader = ExtResource("6_bm0f3")
+shader_parameter/use_albedo_texture = false
+shader_parameter/original_color = Color(0.67058825, 0.5803922, 0.47843137, 1)
+shader_parameter/outline_color = Color(0.59607846, 0.25490198, 0.3137255, 1)
+shader_parameter/use_mask = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t8uid"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_ywwqq")
+shader = ExtResource("7_xkj2w")
+shader_parameter/use_albedo_texture = false
+shader_parameter/original_color = Color(0.40784314, 0.92941177, 0.36078432, 1)
+shader_parameter/outline_color = Color(0.48235294, 0.58431375, 0.42745098, 1)
+shader_parameter/use_mask = false
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_cna4g"]
+size = Vector2(100, 100)
+
+[sub_resource type="Gradient" id="Gradient_8xdjx"]
+colors = PackedColorArray(0.9764706, 0.61960787, 0.41568628, 1, 0.9476287, 0.52065206, 0.25580785, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_1swtx"]
+gradient = SubResource("Gradient_8xdjx")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oc7f7"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = SubResource("GradientTexture1D_1swtx")
+
+[sub_resource type="Gradient" id="Gradient_oc7f7"]
+colors = PackedColorArray(0.19607843, 0.2, 0.3254902, 1, 0.23689508, 0.24153757, 0.38570014, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bm0f3"]
+gradient = SubResource("Gradient_oc7f7")
+width = 1024
+height = 1024
+fill_from = Vector2(0, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_bm0f3"]
+viewport_path = NodePath("MainViewport/SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wf17m"]
+resource_local_to_scene = true
+shader = ExtResource("3_ai8fy")
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_width = 1.0
+shader_parameter/type = 1
+shader_parameter/active = 1
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_xkj2w"]
+viewport_path = NodePath("OutlineViewport/SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_lk33n"]
+viewport_path = NodePath("MainViewport/SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_o54fc"]
+viewport_path = NodePath("OutlineViewport/SubViewport")
+
+[node name="WorldScene" instance=ExtResource("1_egn45")]
+script = ExtResource("2_cna4g")
+
+[node name="MainViewport" parent="." index="0"]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 512.0
+offset_bottom = 400.0
+grow_horizontal = 1
+grow_vertical = 1
+stretch = false
+
+[node name="SubViewport" parent="MainViewport" index="0"]
+transparent_bg = true
+size = Vector2i(512, 400)
+
+[node name="Camera3D" parent="MainViewport/SubViewport" index="1"]
+transform = Transform3D(0.7071068, 0.35355335, -0.61237246, 2.1855696e-08, 0.8660254, 0.5, 0.7071068, -0.3535534, 0.61237246, -17.976, 14, 16.673)
+projection = 0
+size = 13.0
+far = 40.0
+
+[node name="socle" parent="MainViewport/SubViewport" index="2" instance=ExtResource("2_lwtok")]
+transform = Transform3D(1.7127684, 0, 1.0326782, 0, 2, 0, -1.0326782, 0, 1.7127684, -0.049, 0, -0.265)
+
+[node name="robot2" parent="MainViewport/SubViewport/socle" index="1" instance=ExtResource("2_wf17m")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.7176728, 0)
+
+[node name="Body" parent="MainViewport/SubViewport/socle/robot2/Armature/Skeleton3D" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_88u1r")
+
+[node name="Icosphere" parent="MainViewport/SubViewport/socle/robot2/Armature/Skeleton3D" index="1"]
+surface_material_override/0 = SubResource("ShaderMaterial_t8uid")
+
+[node name="Legs" parent="MainViewport/SubViewport/socle/robot2/Armature/Skeleton3D" index="3"]
+surface_material_override/0 = SubResource("ShaderMaterial_88u1r")
+
+[node name="FrontLeft" parent="MainViewport/SubViewport/socle/robot2/Armature/Skeleton3D" index="5"]
+target_node = NodePath("../../../Marker3D")
+
+[node name="FrontRight" parent="MainViewport/SubViewport/socle/robot2/Armature/Skeleton3D" index="6"]
+target_node = NodePath("../../../Marker3D2")
+
+[node name="BackLeft" parent="MainViewport/SubViewport/socle/robot2/Armature/Skeleton3D" index="7"]
+target_node = NodePath("../../../Marker3D3")
+
+[node name="BackRight" parent="MainViewport/SubViewport/socle/robot2/Armature/Skeleton3D" index="8"]
+target_node = NodePath("../../../Marker3D4")
+
+[node name="Marker3D" type="Marker3D" parent="MainViewport/SubViewport/socle/robot2" index="3"]
+transform = Transform3D(0.8563842, 0, -0.5163391, 0, 1, 0, 0.5163391, 0, 0.8563842, 3.036703, -1.2997546, 3.3727856)
+
+[node name="Marker3D2" type="Marker3D" parent="MainViewport/SubViewport/socle/robot2" index="4"]
+transform = Transform3D(0.8563842, 0, -0.5163391, 0, 1, 0, 0.5163391, 0, 0.8563842, -2.9469912, -1.2997546, 3.0612113)
+
+[node name="Marker3D3" type="Marker3D" parent="MainViewport/SubViewport/socle/robot2" index="5"]
+transform = Transform3D(0.8563842, 0, -0.5163391, 0, 1, 0, 0.5163391, 0, 0.8563842, 2.8477888, -1.2997546, -2.8612304)
+
+[node name="Marker3D4" type="Marker3D" parent="MainViewport/SubViewport/socle/robot2" index="6"]
+transform = Transform3D(0.8563842, 0, -0.5163391, 0, 1, 0, 0.5163391, 0, 0.8563842, -3.04325, -1.2997546, -3.152005)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="MainViewport/SubViewport" index="3"]
+transform = Transform3D(0.9848077, 0.08682409, -0.15038373, 0, 0.8660254, 0.5, 0.17364818, -0.49240386, 0.8528685, 0, 21.246826, 0)
+shadow_enabled = true
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="MainViewport/SubViewport" index="4"]
+transform = Transform3D(1, -4.983938e-09, -2.938263e-08, 2.9802322e-08, 0.16723324, 0.98591745, 0, -0.9859174, 0.16723326, 0, 0, 0)
+
+[node name="Background" type="MeshInstance3D" parent="MainViewport/SubViewport" index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6004361, -0.15586472, -1.5166348)
+visible = false
+mesh = SubResource("PlaneMesh_cna4g")
+skeleton = NodePath("../Sprite3D")
+surface_material_override/0 = SubResource("StandardMaterial3D_oc7f7")
+
+[node name="OutlineViewport" parent="." index="1"]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 512.0
+offset_bottom = 400.0
+grow_horizontal = 1
+grow_vertical = 1
+stretch = false
+
+[node name="SubViewport" parent="OutlineViewport" index="0"]
+transparent_bg = false
+size = Vector2i(512, 400)
+
+[node name="Camera3D" parent="OutlineViewport/SubViewport" index="0" node_paths=PackedStringArray("ref_camera")]
+projection = 0
+far = 40.0
+ref_camera = NodePath("../../../MainViewport/SubViewport/Camera3D")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer" index="0"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_bm0f3")
+
+[node name="MainView" parent="CanvasLayer" index="1"]
+visible = false
+anchors_preset = 2
+anchor_top = 1.0
+anchor_right = 0.0
+offset_top = -648.0
+offset_right = 1152.0
+grow_horizontal = 1
+grow_vertical = 0
+size_flags_horizontal = 0
+texture = SubResource("ViewportTexture_bm0f3")
+stretch_mode = 2
+
+[node name="OutlineView" parent="CanvasLayer" index="2"]
+visible = false
+material = SubResource("ShaderMaterial_wf17m")
+anchors_preset = 2
+anchor_top = 1.0
+anchor_right = 0.0
+offset_top = -648.0
+offset_right = 1152.0
+grow_horizontal = 1
+grow_vertical = 0
+texture = SubResource("ViewportTexture_xkj2w")
+stretch_mode = 2
+
+[node name="Control" type="Control" parent="CanvasLayer" index="3"]
+clip_contents = true
+custom_minimum_size = Vector2(512, 400)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -200.0
+offset_right = 256.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainView2" type="TextureRect" parent="CanvasLayer/Control" index="0"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+texture = SubResource("ViewportTexture_lk33n")
+stretch_mode = 2
+
+[node name="OutlineView2" type="TextureRect" parent="CanvasLayer/Control" index="1"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_wf17m")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_o54fc")
+stretch_mode = 2
+
+[node name="ButtonRound" parent="CanvasLayer" index="4" instance=ExtResource("9_bm0f3")]
+custom_minimum_size = Vector2(100, 100)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+offset_left = -553.0
+offset_top = -218.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[editable path="MainViewport/SubViewport/socle/robot2"]

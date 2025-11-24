@@ -1,0 +1,111 @@
+[gd_scene load_steps=8 format=3 uid="uid://da2eduothcfya"]
+
+[ext_resource type="Script" uid="uid://d1sgp5r4tsu3l" path="res://scripts/FreeRoamingCamera3D.gd" id="1_v51pv"]
+[ext_resource type="Shader" uid="uid://c4njs3466gxfy" path="res://shaders/2d/pixel_outline_v2.gdshader" id="2_jjm7f"]
+
+[sub_resource type="Sky" id="Sky_ckagc"]
+
+[sub_resource type="Environment" id="Environment_jjm7f"]
+background_mode = 1
+background_color = Color(0.3019608, 0.60784316, 0.9019608, 1)
+sky = SubResource("Sky_ckagc")
+ambient_light_source = 2
+ambient_light_color = Color(0.6775041, 0.784652, 1, 1)
+ambient_light_energy = 0.05
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_lk33n"]
+viewport_path = NodePath("MainViewport/SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_agdp1"]
+resource_local_to_scene = true
+shader = ExtResource("2_jjm7f")
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_width = 1.0
+shader_parameter/type = 1
+shader_parameter/active = 1
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_o54fc"]
+viewport_path = NodePath("OutlineViewport/SubViewport")
+
+[node name="WorldScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainViewport" type="SubViewportContainer" parent="."]
+visibility_layer = 0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="MainViewport"]
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="MainViewport/SubViewport"]
+environment = SubResource("Environment_jjm7f")
+
+[node name="Camera3D" type="Camera3D" parent="MainViewport/SubViewport"]
+transform = Transform3D(0.7071068, 0.35355338, -0.61237246, 2.1855696e-08, 0.8660254, 0.5, 0.7071068, -0.35355338, 0.61237246, -17.407516, 22.080994, 38.139008)
+cull_mask = 1
+projection = 1
+current = true
+fov = 45.0
+size = 25.0
+far = 400.0
+script = ExtResource("1_v51pv")
+
+[node name="OutlineViewport" type="SubViewportContainer" parent="."]
+visibility_layer = 0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="OutlineViewport"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="OutlineViewport/SubViewport" node_paths=PackedStringArray("ref_camera")]
+cull_mask = 16
+projection = 1
+current = true
+fov = 45.0
+size = 25.0
+far = 400.0
+script = ExtResource("1_v51pv")
+ref_camera = NodePath("")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MainView" type="TextureRect" parent="CanvasLayer"]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_lk33n")
+
+[node name="OutlineView" type="TextureRect" parent="CanvasLayer"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_agdp1")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_o54fc")
