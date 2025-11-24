@@ -31,17 +31,17 @@
 [ext_resource type="PackedScene" uid="uid://cfdijiejbba4r" path="res://scenes/VFX/Beam/Beam.tscn" id="25_0ydtf"]
 [ext_resource type="PackedScene" uid="uid://buslmtbcq01xb" path="res://scenes/UI/debug/fps_display.tscn" id="30_kqquj"]
 
-[sub_resource type="Sky" id="Sky_ckagc"]
+[sub_resource type="Sky" id="Sky_kqquj"]
 
 [sub_resource type="Environment" id="Environment_rijnb"]
 background_mode = 1
 background_color = Color(0.3019608, 0.60784316, 0.9019608, 1)
-sky = SubResource("Sky_ckagc")
+sky = SubResource("Sky_kqquj")
 ambient_light_source = 2
 ambient_light_color = Color(0.6775041, 0.784652, 1, 1)
 ambient_light_energy = 0.05
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_olbwg"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_scxka"]
 render_priority = -1
 shader = ExtResource("1_gvkf4")
 shader_parameter/ray = 0.4
@@ -51,7 +51,7 @@ shader_parameter/color = Color(0.2, 1, 0.2, 0.58431375)
 shader_parameter/ouline_color = Color(0.7555181, 0.077867486, 0.3136828, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_iosng"]
-material = SubResource("ShaderMaterial_olbwg")
+material = SubResource("ShaderMaterial_scxka")
 size = Vector2(10, 10)
 subdivide_width = 2
 
@@ -98,17 +98,18 @@ size = Vector2(200, 200)
 [sub_resource type="Gradient" id="Gradient_74qp2"]
 colors = PackedColorArray(0.9764706, 0.61960787, 0.41568628, 1, 0.9476287, 0.52065206, 0.25580785, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_rijnb"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qy4ca"]
 gradient = SubResource("Gradient_74qp2")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4raox"]
 diffuse_mode = 3
 specular_mode = 1
-albedo_texture = SubResource("GradientTexture1D_rijnb")
+albedo_texture = SubResource("GradientTexture1D_qy4ca")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6n3pg"]
 render_priority = 0
 shader = ExtResource("2_ap201")
+shader_parameter/use_albedo_texture = false
 shader_parameter/original_color = Color(0, 0, 0, 1)
 shader_parameter/outline_color = Color(0, 0, 0.007843138, 1)
 shader_parameter/use_mask = false
@@ -127,6 +128,7 @@ height = 10.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rijnb"]
 render_priority = 0
 shader = ExtResource("2_ap201")
+shader_parameter/use_albedo_texture = false
 shader_parameter/original_color = Color(1, 0.28627452, 0.2784314, 1)
 shader_parameter/outline_color = Color(0, 0.1764706, 0.003921569, 1)
 shader_parameter/use_mask = false
@@ -137,6 +139,7 @@ size = Vector3(1, 20, 1)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4raox"]
 render_priority = 0
 shader = ExtResource("9_rijnb")
+shader_parameter/use_albedo_texture = false
 shader_parameter/original_color = Color(0.24313726, 0.20784314, 0.27450982, 1)
 shader_parameter/outline_color = Color(0.93333334, 0.5411765, 0.10980392, 1)
 shader_parameter/use_mask = false
@@ -145,7 +148,7 @@ shader_parameter/use_mask = false
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.14000002, 1), 0.0, 0.0, 0, 0, Vector2(0.48666665, 1), 0.0, 0.0, 0, 0, Vector2(0.9866667, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
-[sub_resource type="CurveTexture" id="CurveTexture_o73tt"]
+[sub_resource type="CurveTexture" id="CurveTexture_8j1eq"]
 curve = SubResource("Curve_0k3ve")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gp3m0"]
@@ -154,17 +157,18 @@ emission_sphere_radius = 0.25
 gravity = Vector3(0, 0, 0)
 radial_accel_min = -1.0700022
 radial_accel_max = -1.0700022
-scale_curve = SubResource("CurveTexture_o73tt")
+scale_curve = SubResource("CurveTexture_8j1eq")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ioc36"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kkt5o"]
 render_priority = 0
 shader = ExtResource("2_ap201")
+shader_parameter/use_albedo_texture = false
 shader_parameter/original_color = Color(0.56078434, 0.827451, 1, 1)
 shader_parameter/outline_color = Color(0.5019608, 0.827451, 0.5019608, 1)
 shader_parameter/use_mask = false
 
 [sub_resource type="SphereMesh" id="SphereMesh_xnfcr"]
-material = SubResource("ShaderMaterial_ioc36")
+material = SubResource("ShaderMaterial_kkt5o")
 radius = 0.2
 height = 0.4
 
@@ -172,7 +176,7 @@ height = 0.4
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.14000002, 1), 0.0, 0.0, 0, 0, Vector2(0.48666665, 1), 0.0, 0.0, 0, 0, Vector2(0.9866667, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
-[sub_resource type="CurveTexture" id="CurveTexture_voo7p"]
+[sub_resource type="CurveTexture" id="CurveTexture_2rdgq"]
 curve = SubResource("Curve_6in2w")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ioc36"]
@@ -186,17 +190,18 @@ linear_accel_min = -5.000002
 linear_accel_max = -5.000002
 radial_accel_min = -1.0700022
 radial_accel_max = -1.0700022
-scale_curve = SubResource("CurveTexture_voo7p")
+scale_curve = SubResource("CurveTexture_2rdgq")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_atw0o"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4qyeo"]
 render_priority = 0
 shader = ExtResource("2_ap201")
+shader_parameter/use_albedo_texture = false
 shader_parameter/original_color = Color(1, 1, 1, 1)
 shader_parameter/outline_color = Color(0.5, 0.5, 0.5, 1)
 shader_parameter/use_mask = false
 
 [sub_resource type="SphereMesh" id="SphereMesh_740d2"]
-material = SubResource("ShaderMaterial_atw0o")
+material = SubResource("ShaderMaterial_4qyeo")
 radius = 0.2
 height = 0.4
 
@@ -204,7 +209,7 @@ height = 0.4
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1e-05, 1), 0.0, 0.0, 0, 0, Vector2(0.9866667, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_ps0cu"]
+[sub_resource type="CurveTexture" id="CurveTexture_q35h7"]
 curve = SubResource("Curve_mgpox")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_aas4t"]
@@ -215,17 +220,18 @@ linear_accel_min = -5.000002
 linear_accel_max = -5.000002
 radial_accel_min = -1.0700022
 radial_accel_max = -1.0700022
-scale_curve = SubResource("CurveTexture_ps0cu")
+scale_curve = SubResource("CurveTexture_q35h7")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6in2w"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gdstn"]
 render_priority = 0
 shader = ExtResource("2_ap201")
+shader_parameter/use_albedo_texture = false
 shader_parameter/original_color = Color(0.43137255, 0.15294118, 0.15294118, 1)
 shader_parameter/outline_color = Color(0.5, 0.5, 0.5, 1)
 shader_parameter/use_mask = false
 
 [sub_resource type="SphereMesh" id="SphereMesh_s2vcg"]
-material = SubResource("ShaderMaterial_6in2w")
+material = SubResource("ShaderMaterial_gdstn")
 radius = 0.2
 height = 0.4
 radial_segments = 16
@@ -244,6 +250,7 @@ point_count = 4
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_aas4t"]
 render_priority = 0
 shader = ExtResource("2_ap201")
+shader_parameter/use_albedo_texture = false
 shader_parameter/original_color = Color(1, 1, 1, 1)
 shader_parameter/outline_color = Color(0.6509804, 0.38039216, 0.5019608, 1)
 shader_parameter/use_mask = false
@@ -430,13 +437,13 @@ _data = {
 &"hit": SubResource("Animation_mgpox")
 }
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_mpahi"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_bh1fg"]
 noise_type = 4
 frequency = 0.015
 fractal_octaves = 1
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_74qp2"]
-noise = SubResource("FastNoiseLite_mpahi")
+noise = SubResource("FastNoiseLite_bh1fg")
 seamless = true
 
 [sub_resource type="Animation" id="Animation_5upta"]
@@ -476,7 +483,7 @@ _data = {
 &"test": SubResource("Animation_xnn52")
 }
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_s2vcg"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qa6lk"]
 noise_type = 4
 frequency = 0.0044
 fractal_octaves = 1
@@ -484,7 +491,7 @@ fractal_octaves = 1
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_0ydtf"]
 width = 2048
 height = 2048
-noise = SubResource("FastNoiseLite_s2vcg")
+noise = SubResource("FastNoiseLite_qa6lk")
 seamless = true
 
 [sub_resource type="Curve" id="Curve_aas4t"]
@@ -500,7 +507,7 @@ point_count = 3
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_0ydtf"]
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_etkxx"]
 curve_x = SubResource("Curve_aas4t")
 curve_y = SubResource("Curve_lcv6h")
 curve_z = SubResource("Curve_s2vcg")
@@ -515,17 +522,18 @@ spread = 0.0
 initial_velocity_min = 6.0
 initial_velocity_max = 8.0
 gravity = Vector3(0, 2, 0)
-scale_curve = SubResource("CurveXYZTexture_0ydtf")
+scale_curve = SubResource("CurveXYZTexture_etkxx")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_mgpox"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fxbfm"]
 render_priority = 0
 shader = ExtResource("2_ap201")
+shader_parameter/use_albedo_texture = false
 shader_parameter/original_color = Color(0.9843137, 0.7254902, 0.32941177, 1)
 shader_parameter/outline_color = Color(0.3137255, 0.5019608, 0.5019608, 1)
 shader_parameter/use_mask = false
 
 [sub_resource type="BoxMesh" id="BoxMesh_mgpox"]
-material = SubResource("ShaderMaterial_mgpox")
+material = SubResource("ShaderMaterial_fxbfm")
 size = Vector3(0.02, 0.2, 0.02)
 
 [sub_resource type="Animation" id="Animation_scxka"]
@@ -683,7 +691,7 @@ skeleton = NodePath("../Sprite3D")
 surface_material_override/0 = SubResource("StandardMaterial3D_4raox")
 
 [node name="BackgroundCheck" type="MeshInstance3D" parent="MainViewport/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6004361, -0.15586472, -1.516634)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, -0.157, -1.517)
 layers = 16
 mesh = SubResource("PlaneMesh_gvkf4")
 skeleton = NodePath("../Sprite3D")

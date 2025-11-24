@@ -1,5 +1,5 @@
 #ifdef SHADED
-render_mode diffuse_toon, specular_toon, shadows_disabled;
+render_mode diffuse_toon, specular_toon;
 #else
 render_mode unshaded;
 #endif
@@ -11,6 +11,8 @@ const int mask_layer_val = 1;
 const int outline_layer_val = 1<<4;
 const int pickable_layer_val = 1<<5;
 
+uniform sampler2D albedo_texture : filter_nearest;
+uniform bool use_albedo_texture = false;
 uniform vec4 original_color : source_color;
 uniform vec4 outline_color : source_color = vec4(0.5,0.5,0.5,1.);
 uniform sampler2D outline_mask : filter_nearest;
@@ -22,10 +24,17 @@ void vertex() {
 
 void fragment() {
 	if((int(CAMERA_VISIBLE_LAYERS) & mask_layer_val) != 0) {
-		ALBEDO = original_color.rgb;
+		if (use_albedo_texture) {
+			ALBEDO = texture(albedo_texture, UV).rgb;
 		#ifdef USE_ALPHA
-		ALPHA = original_color.a;
+			ALPHA = texture(albedo_texture, UV).a;
 		#endif
+		} else {
+			ALBEDO = original_color.rgb;
+		#ifdef USE_ALPHA
+			ALPHA = original_color.a;
+		#endif
+		}
 	} else if((int(CAMERA_VISIBLE_LAYERS) & outline_layer_val) != 0) {
 		if (use_mask) {
 			ALBEDO = texture(outline_mask, UV).rgb;

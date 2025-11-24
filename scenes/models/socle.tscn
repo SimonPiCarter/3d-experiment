@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=3 uid="uid://cuxorc2vslc2a"]
+
+[ext_resource type="PackedScene" uid="uid://dr4ill014tq3e" path="res://model/socle.glb" id="1_vg4g7"]
+[ext_resource type="Shader" uid="uid://cv4deawtx0pb3" path="res://shaders/new_pipeline/outline_new_pipeline_shaded.gdshader" id="2_odiq3"]
+[ext_resource type="Texture2D" uid="uid://kptq5blcgmrc" path="res://textures/socle/albedo.png" id="3_loj7j"]
+[ext_resource type="Texture2D" uid="uid://cy1fx7mgtsjbe" path="res://textures/socle/outline.png" id="4_odiq3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wxlr7"]
+render_priority = 0
+shader = ExtResource("2_odiq3")
+shader_parameter/albedo_texture = ExtResource("3_loj7j")
+shader_parameter/use_albedo_texture = true
+shader_parameter/original_color = Color(0, 0, 0, 1)
+shader_parameter/outline_color = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/outline_mask = ExtResource("4_odiq3")
+shader_parameter/use_mask = true
+
+[node name="socle" instance=ExtResource("1_vg4g7")]
+
+[node name="Cylinder" parent="." index="0"]
+layers = 17
+surface_material_override/0 = SubResource("ShaderMaterial_wxlr7")
