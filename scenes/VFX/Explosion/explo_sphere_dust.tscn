@@ -237,7 +237,7 @@ autoplay = "RUN"
 [node name="Core" parent="." instance=ExtResource("1_8nrd0")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 color_high = Color(1, 1, 1, 1)
-color_low = Color(0.63529414, 0.29411766, 0.43529412, 1)
+color_low = Color(0.63529414, 0.29411766, 0.43529412, 0.5882353)
 threshold = 0.0
 noise = SubResource("NoiseTexture2D_aas4t")
 
