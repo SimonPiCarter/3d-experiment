@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=3 uid="uid://v7ktckkiqub8"]
+
+[ext_resource type="Script" uid="uid://m1taris26ovj" path="res://scenes/UI/Controls/button_round.gd" id="1_27o07"]
+[ext_resource type="Shader" uid="uid://oswgt0a7en04" path="res://scenes/UI/Controls/button_round.gdshader" id="2_q3vu0"]
+
+[sub_resource type="Gradient" id="Gradient_q3vu0"]
+colors = PackedColorArray(0.28235295, 0.2901961, 0.46666667, 1, 0.3019608, 0.39607844, 0.7058824, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3tron"]
+gradient = SubResource("Gradient_q3vu0")
+width = 100
+height = 100
+fill_from = Vector2(0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q3vu0"]
+resource_local_to_scene = true
+shader = ExtResource("2_q3vu0")
+shader_parameter/rounding = 40.0
+shader_parameter/outline_width = 2.0
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/color_texture = SubResource("GradientTexture2D_3tron")
+shader_parameter/type = 2
+
+[sub_resource type="Gradient" id="Gradient_3tron"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_apdvk"]
+gradient = SubResource("Gradient_3tron")
+width = 1
+height = 1
+
+[node name="ButtonRound" type="Control"]
+texture_filter = 1
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_27o07")
+base_outline_color = Color(0.14267445, 0.14571038, 0.24553436, 1)
+hl_outline_color = Color(0.60473514, 0.61743635, 0.7950319, 1)
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_q3vu0")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_apdvk")
+stretch_mode = 1
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

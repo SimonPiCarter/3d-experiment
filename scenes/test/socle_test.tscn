@@ -1,14 +1,18 @@
-[gd_scene load_steps=24 format=3 uid="uid://bfihn8m3yhws2"]
+[gd_scene load_steps=29 format=3 uid="uid://bfihn8m3yhws2"]
 
 [ext_resource type="PackedScene" uid="uid://da2eduothcfya" path="res://scenes/templates/world_scene.tscn" id="1_egn45"]
 [ext_resource type="Script" uid="uid://jquglo62113b" path="res://scenes/test/socle_test.gd" id="2_cna4g"]
 [ext_resource type="PackedScene" uid="uid://cuxorc2vslc2a" path="res://scenes/models/socle.tscn" id="2_lwtok"]
 [ext_resource type="PackedScene" uid="uid://bpf2yq0qibfvi" path="res://scenes/models/robot_2.tscn" id="2_wf17m"]
-[ext_resource type="Shader" uid="uid://c4njs3466gxfy" path="res://shaders/2d/pixel_outline_v2.gdshader" id="3_ai8fy"]
 [ext_resource type="Shader" uid="uid://7eh5v4axp1ng" path="res://shaders/new_pipeline/pickable.gdshader" id="5_oc7f7"]
 [ext_resource type="Shader" uid="uid://cv4deawtx0pb3" path="res://shaders/new_pipeline/outline_new_pipeline_shaded.gdshader" id="6_bm0f3"]
 [ext_resource type="Shader" uid="uid://cc18tpomiri80" path="res://shaders/new_pipeline/outline_new_pipeline_unshaded.gdshader" id="7_xkj2w"]
+[ext_resource type="Shader" uid="uid://bmqmbmbt64mv5" path="res://shaders/2d/pixel_outline_simple.gdshader" id="8_t8uid"]
 [ext_resource type="PackedScene" uid="uid://v7ktckkiqub8" path="res://scenes/UI/Controls/button_round.tscn" id="9_bm0f3"]
+[ext_resource type="Texture2D" uid="uid://de3lxffhdwuba" path="res://textures/glyphs/first_glyph.png" id="10_xkj2w"]
+[ext_resource type="Texture2D" uid="uid://wtuprgl5ryxw" path="res://textures/glyphs/second_glyph.png" id="11_ywwqq"]
+[ext_resource type="Texture2D" uid="uid://dxkvwdji37y3e" path="res://textures/glyphs/third_glyph.png" id="12_88u1r"]
+[ext_resource type="Shader" uid="uid://d07svbd2hqd68" path="res://shaders/2d/pixel_outline_sprite.gdshader" id="12_t8uid"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ywwqq"]
 resource_local_to_scene = true
@@ -64,7 +68,7 @@ viewport_path = NodePath("MainViewport/SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wf17m"]
 resource_local_to_scene = true
-shader = ExtResource("3_ai8fy")
+shader = ExtResource("8_t8uid")
 shader_parameter/outline_color = Color(0, 0, 0, 1)
 shader_parameter/outline_width = 1.0
 shader_parameter/type = 1
@@ -78,6 +82,13 @@ viewport_path = NodePath("MainViewport/SubViewport")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_o54fc"]
 viewport_path = NodePath("OutlineViewport/SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_py8td"]
+shader = ExtResource("12_t8uid")
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_width = 1.0
+shader_parameter/type = 1
+shader_parameter/active = 1
 
 [node name="WorldScene" instance=ExtResource("1_egn45")]
 script = ExtResource("2_cna4g")
@@ -100,7 +111,7 @@ size = Vector2i(512, 400)
 transform = Transform3D(0.7071068, 0.35355335, -0.61237246, 2.1855696e-08, 0.8660254, 0.5, 0.7071068, -0.3535534, 0.61237246, -17.976, 14, 16.673)
 projection = 0
 size = 13.0
-far = 40.0
+far = 80.0
 
 [node name="socle" parent="MainViewport/SubViewport" index="2" instance=ExtResource("2_lwtok")]
 transform = Transform3D(1.7127684, 0, 1.0326782, 0, 2, 0, -1.0326782, 0, 1.7127684, -0.049, 0, -0.265)
@@ -210,7 +221,7 @@ stretch_mode = 2
 
 [node name="Control" type="Control" parent="CanvasLayer" index="3"]
 clip_contents = true
-custom_minimum_size = Vector2(512, 400)
+custom_minimum_size = Vector2(400, 400)
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -248,14 +259,146 @@ grow_vertical = 2
 texture = SubResource("ViewportTexture_o54fc")
 stretch_mode = 2
 
-[node name="ButtonRound" parent="CanvasLayer" index="4" instance=ExtResource("9_bm0f3")]
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer" index="4"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 21.0
+offset_top = -81.0
+offset_right = 257.0
+offset_bottom = 139.0
+grow_vertical = 2
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+columns = 3
+
+[node name="ButtonRound" parent="CanvasLayer/GridContainer" index="0" instance=ExtResource("9_bm0f3")]
+modulate = Color(0.99016386, 0.6632321, 0.6298537, 1)
 custom_minimum_size = Vector2(100, 100)
-anchors_preset = 3
+layout_mode = 2
+snap_rounding = true
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/GridContainer/ButtonRound" index="1"]
+material = SubResource("ShaderMaterial_py8td")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_xkj2w")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="ButtonRound2" parent="CanvasLayer/GridContainer" index="1" instance=ExtResource("9_bm0f3")]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+snap_rounding = true
+
+[node name="TextureRect4" type="TextureRect" parent="CanvasLayer/GridContainer/ButtonRound2" index="1"]
+modulate = Color(0.87386805, 0.5072524, 0.5950847, 1)
+material = SubResource("ShaderMaterial_py8td")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_ywwqq")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="ButtonRound3" parent="CanvasLayer/GridContainer" index="2" instance=ExtResource("9_bm0f3")]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+snap_rounding = true
+
+[node name="TextureRect4" type="TextureRect" parent="CanvasLayer/GridContainer/ButtonRound3" index="1"]
+modulate = Color(0.9819308, 0.913411, 0.9260333, 1)
+material = SubResource("ShaderMaterial_py8td")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_88u1r")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="ButtonRound4" parent="CanvasLayer/GridContainer" index="3" instance=ExtResource("9_bm0f3")]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+snap_rounding = true
+
+[node name="ButtonRound5" parent="CanvasLayer/GridContainer" index="4" instance=ExtResource("9_bm0f3")]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+snap_rounding = true
+
+[node name="ButtonRound6" parent="CanvasLayer/GridContainer" index="5" instance=ExtResource("9_bm0f3")]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+snap_rounding = true
+
+[node name="ButtonRound7" parent="CanvasLayer/GridContainer" index="6" instance=ExtResource("9_bm0f3")]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+snap_rounding = true
+
+[node name="ButtonRound8" parent="CanvasLayer/GridContainer" index="7" instance=ExtResource("9_bm0f3")]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+snap_rounding = true
+
+[node name="ButtonRound9" parent="CanvasLayer/GridContainer" index="8" instance=ExtResource("9_bm0f3")]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+snap_rounding = true
+
+[node name="ButtonRound10" parent="CanvasLayer/GridContainer" index="9" instance=ExtResource("9_bm0f3")]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+snap_rounding = true
+
+[node name="ButtonRound11" parent="CanvasLayer/GridContainer" index="10" instance=ExtResource("9_bm0f3")]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+snap_rounding = true
+
+[node name="ButtonRound12" parent="CanvasLayer/GridContainer" index="11" instance=ExtResource("9_bm0f3")]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+snap_rounding = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" index="5"]
+custom_minimum_size = Vector2(400, 300)
+anchors_preset = 6
 anchor_left = 1.0
-anchor_top = 1.0
-offset_left = -553.0
-offset_top = -218.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -440.0
+offset_top = -148.0
+offset_right = -40.0
+offset_bottom = 152.0
 grow_horizontal = 0
-grow_vertical = 0
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="ButtonRound" parent="CanvasLayer/VBoxContainer" index="0" instance=ExtResource("9_bm0f3")]
+custom_minimum_size = Vector2(20, 80)
+layout_mode = 2
+snap_rounding = true
+
+[node name="ButtonRound2" parent="CanvasLayer/VBoxContainer" index="1" instance=ExtResource("9_bm0f3")]
+custom_minimum_size = Vector2(20, 80)
+layout_mode = 2
+snap_rounding = true
+
+[node name="ButtonRound3" parent="CanvasLayer/VBoxContainer" index="2" instance=ExtResource("9_bm0f3")]
+custom_minimum_size = Vector2(20, 80)
+layout_mode = 2
+snap_rounding = true
 
 [editable path="MainViewport/SubViewport/socle/robot2"]
