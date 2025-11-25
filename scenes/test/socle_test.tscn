@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bfihn8m3yhws2"]
+[gd_scene load_steps=56 format=3 uid="uid://bfihn8m3yhws2"]
 
 [ext_resource type="PackedScene" uid="uid://da2eduothcfya" path="res://scenes/templates/world_scene.tscn" id="1_egn45"]
 [ext_resource type="Script" uid="uid://jquglo62113b" path="res://scenes/test/socle_test.gd" id="2_cna4g"]
@@ -7,6 +7,8 @@
 [ext_resource type="Shader" uid="uid://7eh5v4axp1ng" path="res://shaders/new_pipeline/pickable.gdshader" id="5_oc7f7"]
 [ext_resource type="Shader" uid="uid://cv4deawtx0pb3" path="res://shaders/new_pipeline/outline_new_pipeline_shaded.gdshader" id="6_bm0f3"]
 [ext_resource type="Shader" uid="uid://cc18tpomiri80" path="res://shaders/new_pipeline/outline_new_pipeline_unshaded.gdshader" id="7_xkj2w"]
+[ext_resource type="Shader" uid="uid://co0h7bhcdglip" path="res://shaders/2d/texture/noise_draw.gdshader" id="8_7w3o2"]
+[ext_resource type="Shader" uid="uid://cumguw2jbhivl" path="res://shaders/2d/shapes/circle.gdshader" id="8_py8td"]
 [ext_resource type="Shader" uid="uid://bmqmbmbt64mv5" path="res://shaders/2d/pixel_outline_simple.gdshader" id="8_t8uid"]
 [ext_resource type="PackedScene" uid="uid://v7ktckkiqub8" path="res://scenes/UI/Controls/button_round.tscn" id="9_bm0f3"]
 [ext_resource type="Texture2D" uid="uid://de3lxffhdwuba" path="res://textures/glyphs/first_glyph.png" id="10_xkj2w"]
@@ -54,6 +56,16 @@ diffuse_mode = 3
 specular_mode = 1
 albedo_texture = SubResource("GradientTexture1D_1swtx")
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7w3o2"]
+frequency = 0.0431
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_j1kdn"]
+noise = SubResource("FastNoiseLite_7w3o2")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j1kdn"]
+shader = ExtResource("8_7w3o2")
+shader_parameter/mask = SubResource("NoiseTexture2D_j1kdn")
+
 [sub_resource type="Gradient" id="Gradient_oc7f7"]
 colors = PackedColorArray(0.19607843, 0.2, 0.3254902, 1, 0.23689508, 0.24153757, 0.38570014, 1)
 
@@ -62,6 +74,113 @@ gradient = SubResource("Gradient_oc7f7")
 width = 1024
 height = 1024
 fill_from = Vector2(0, 1)
+
+[sub_resource type="Gradient" id="Gradient_7w3o2"]
+offsets = PackedFloat32Array(0, 0.5208333, 1)
+colors = PackedColorArray(1, 1, 1, 0.078431375, 1, 1, 1, 0.62352943, 1, 1, 1, 0.078431375)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_j1kdn"]
+gradient = SubResource("Gradient_7w3o2")
+fill_from = Vector2(0.5138889, 0.9965278)
+fill_to = Vector2(0.5069444, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3drxm"]
+resource_local_to_scene = true
+shader = ExtResource("8_py8td")
+shader_parameter/width = 0.005
+shader_parameter/mask = SubResource("GradientTexture2D_j1kdn")
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_py8td"]
+
+[sub_resource type="Gradient" id="Gradient_py8td"]
+offsets = PackedFloat32Array(0.03125, 0.5208333, 0.9583333)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.62352943, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_64fqq"]
+gradient = SubResource("Gradient_py8td")
+fill_from = Vector2(0.5138889, 0.9965278)
+fill_to = Vector2(0.5069444, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7w3o2"]
+resource_local_to_scene = true
+shader = ExtResource("8_py8td")
+shader_parameter/width = 0.003
+shader_parameter/mask = SubResource("GradientTexture2D_64fqq")
+
+[sub_resource type="Gradient" id="Gradient_j1kdn"]
+offsets = PackedFloat32Array(0.083333336, 0.5208333, 0.9166667)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.62352943, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3drxm"]
+gradient = SubResource("Gradient_j1kdn")
+fill_from = Vector2(0.5138889, 0.9965278)
+fill_to = Vector2(0.5069444, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_64fqq"]
+resource_local_to_scene = true
+shader = ExtResource("8_py8td")
+shader_parameter/width = 0.003
+shader_parameter/mask = SubResource("GradientTexture2D_3drxm")
+
+[sub_resource type="Gradient" id="Gradient_3drxm"]
+offsets = PackedFloat32Array(0.20833333, 0.5208333, 0.7604167)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.62352943, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0sdtx"]
+gradient = SubResource("Gradient_3drxm")
+fill_from = Vector2(0.5138889, 0.9965278)
+fill_to = Vector2(0.5069444, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c3750"]
+resource_local_to_scene = true
+shader = ExtResource("8_py8td")
+shader_parameter/width = 0.005
+shader_parameter/mask = SubResource("GradientTexture2D_0sdtx")
+
+[sub_resource type="Gradient" id="Gradient_64fqq"]
+offsets = PackedFloat32Array(0.20833333, 0.5208333, 0.7604167)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.62352943, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_c3750"]
+gradient = SubResource("Gradient_64fqq")
+fill_from = Vector2(0.5138889, 0.9965278)
+fill_to = Vector2(0.5069444, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3jp8v"]
+resource_local_to_scene = true
+shader = ExtResource("8_py8td")
+shader_parameter/width = 0.005
+shader_parameter/mask = SubResource("GradientTexture2D_c3750")
+
+[sub_resource type="Gradient" id="Gradient_3jp8v"]
+offsets = PackedFloat32Array(0.20833333, 0.5208333, 0.7604167)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.62352943, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_63ql7"]
+gradient = SubResource("Gradient_3jp8v")
+fill_from = Vector2(0.5138889, 0.9965278)
+fill_to = Vector2(0.5069444, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_63ql7"]
+resource_local_to_scene = true
+shader = ExtResource("8_py8td")
+shader_parameter/width = 0.004
+shader_parameter/mask = SubResource("GradientTexture2D_63ql7")
+
+[sub_resource type="Gradient" id="Gradient_eaero"]
+offsets = PackedFloat32Array(0.20833333, 0.5208333, 0.7604167)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.62352943, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_yu38t"]
+gradient = SubResource("Gradient_eaero")
+fill_from = Vector2(0.5138889, 0.9965278)
+fill_to = Vector2(0.5069444, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5fgyt"]
+resource_local_to_scene = true
+shader = ExtResource("8_py8td")
+shader_parameter/width = 0.003
+shader_parameter/mask = SubResource("GradientTexture2D_yu38t")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_bm0f3"]
 viewport_path = NodePath("MainViewport/SubViewport")
@@ -108,7 +227,7 @@ transparent_bg = true
 size = Vector2i(512, 400)
 
 [node name="Camera3D" parent="MainViewport/SubViewport" index="1"]
-transform = Transform3D(0.7071068, 0.35355335, -0.61237246, 2.1855696e-08, 0.8660254, 0.5, 0.7071068, -0.3535534, 0.61237246, -17.976, 14, 16.673)
+transform = Transform3D(0.7071068, 0.35355335, -0.61237246, 2.1855696e-08, 0.8660254, 0.5, 0.7071068, -0.3535534, 0.61237246, -17.976, 14, 17.976)
 projection = 0
 size = 13.0
 far = 80.0
@@ -163,7 +282,6 @@ transform = Transform3D(1, -4.983938e-09, -2.938263e-08, 2.9802322e-08, 0.167233
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6004361, -0.15586472, -1.5166348)
 visible = false
 mesh = SubResource("PlaneMesh_cna4g")
-skeleton = NodePath("../Sprite3D")
 surface_material_override/0 = SubResource("StandardMaterial3D_oc7f7")
 
 [node name="OutlineViewport" parent="." index="1"]
@@ -181,11 +299,13 @@ transparent_bg = false
 size = Vector2i(512, 400)
 
 [node name="Camera3D" parent="OutlineViewport/SubViewport" index="0" node_paths=PackedStringArray("ref_camera")]
+transform = Transform3D(0.7071067, 0.35355338, -0.6123724, 0, 0.8660254, 0.5, 0.7071067, -0.35355338, 0.6123724, -17.976, 14, 17.976)
 projection = 0
 far = 40.0
 ref_camera = NodePath("../../../MainViewport/SubViewport/Camera3D")
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer" index="0"]
+material = SubResource("ShaderMaterial_j1kdn")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -193,7 +313,134 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_bm0f3")
 
-[node name="MainView" parent="CanvasLayer" index="1"]
+[node name="Circles" type="Control" parent="CanvasLayer" index="1"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Circle1" type="TextureRect" parent="CanvasLayer/Circles" index="0"]
+material = SubResource("ShaderMaterial_3drxm")
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -200.0
+offset_right = 200.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("PlaceholderTexture2D_py8td")
+
+[node name="Circle2" type="TextureRect" parent="CanvasLayer/Circles" index="1"]
+material = SubResource("ShaderMaterial_7w3o2")
+custom_minimum_size = Vector2(450, 450)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -225.0
+offset_top = -225.0
+offset_right = 225.0
+offset_bottom = 225.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("PlaceholderTexture2D_py8td")
+
+[node name="Circle3" type="TextureRect" parent="CanvasLayer/Circles" index="2"]
+material = SubResource("ShaderMaterial_64fqq")
+custom_minimum_size = Vector2(500, 500)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -250.0
+offset_right = 250.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("PlaceholderTexture2D_py8td")
+
+[node name="Circle4" type="TextureRect" parent="CanvasLayer/Circles" index="3"]
+material = SubResource("ShaderMaterial_c3750")
+custom_minimum_size = Vector2(800, 800)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -250.0
+offset_right = 250.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("PlaceholderTexture2D_py8td")
+
+[node name="Circle5" type="TextureRect" parent="CanvasLayer/Circles" index="4"]
+material = SubResource("ShaderMaterial_3jp8v")
+custom_minimum_size = Vector2(1000, 1000)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -250.0
+offset_right = 250.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("PlaceholderTexture2D_py8td")
+
+[node name="Circle6" type="TextureRect" parent="CanvasLayer/Circles" index="5"]
+material = SubResource("ShaderMaterial_63ql7")
+custom_minimum_size = Vector2(1200, 1200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -250.0
+offset_right = 250.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("PlaceholderTexture2D_py8td")
+
+[node name="Circle7" type="TextureRect" parent="CanvasLayer/Circles" index="6"]
+material = SubResource("ShaderMaterial_5fgyt")
+custom_minimum_size = Vector2(1400, 1400)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -250.0
+offset_right = 250.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("PlaceholderTexture2D_py8td")
+
+[node name="MainView" parent="CanvasLayer" index="2"]
 visible = false
 anchors_preset = 2
 anchor_top = 1.0
@@ -206,7 +453,7 @@ size_flags_horizontal = 0
 texture = SubResource("ViewportTexture_bm0f3")
 stretch_mode = 2
 
-[node name="OutlineView" parent="CanvasLayer" index="2"]
+[node name="OutlineView" parent="CanvasLayer" index="3"]
 visible = false
 material = SubResource("ShaderMaterial_wf17m")
 anchors_preset = 2
@@ -219,7 +466,7 @@ grow_vertical = 0
 texture = SubResource("ViewportTexture_xkj2w")
 stretch_mode = 2
 
-[node name="Control" type="Control" parent="CanvasLayer" index="3"]
+[node name="Control" type="Control" parent="CanvasLayer" index="4"]
 clip_contents = true
 custom_minimum_size = Vector2(400, 400)
 layout_mode = 3
@@ -259,7 +506,352 @@ grow_vertical = 2
 texture = SubResource("ViewportTexture_o54fc")
 stretch_mode = 2
 
-[node name="GridContainer" type="GridContainer" parent="CanvasLayer" index="4"]
+[node name="SmallButtons" type="Control" parent="CanvasLayer" index="5"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ButtonRound13" parent="CanvasLayer/SmallButtons" index="0" instance=ExtResource("9_bm0f3")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = 176.0
+offset_right = 14.0
+offset_bottom = 226.0
+snap_rounding = true
+
+[node name="ButtonRound14" parent="CanvasLayer/SmallButtons" index="1" instance=ExtResource("9_bm0f3")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 33.0
+offset_top = 161.0
+offset_right = 83.0
+offset_bottom = 211.0
+snap_rounding = true
+
+[node name="ButtonRound15" parent="CanvasLayer/SmallButtons" index="2" instance=ExtResource("9_bm0f3")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -103.0
+offset_top = 162.0
+offset_right = -53.0
+offset_bottom = 212.0
+snap_rounding = true
+
+[node name="ButtonRound16" parent="CanvasLayer/SmallButtons" index="3" instance=ExtResource("9_bm0f3")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -154.0
+offset_top = 125.0
+offset_right = -104.0
+offset_bottom = 175.0
+snap_rounding = true
+
+[node name="ButtonRound17" parent="CanvasLayer/SmallButtons" index="4" instance=ExtResource("9_bm0f3")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 99.0
+offset_top = 125.0
+offset_right = 149.0
+offset_bottom = 175.0
+snap_rounding = true
+
+[node name="LeftButtons" type="Control" parent="CanvasLayer" index="6"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Line2D" type="Line2D" parent="CanvasLayer/LeftButtons" index="0"]
+visible = false
+position = Vector2(17, 27)
+points = PackedVector2Array(0, 0, -1000, -330)
+
+[node name="ButtonRound" parent="CanvasLayer/LeftButtons" index="1" instance=ExtResource("9_bm0f3")]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -424.0
+offset_top = -159.0
+offset_right = -334.0
+offset_bottom = -69.0
+snap_rounding = true
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/LeftButtons/ButtonRound" index="1"]
+z_index = 1
+texture_filter = 1
+material = SubResource("ShaderMaterial_py8td")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_xkj2w")
+
+[node name="ButtonRound2" parent="CanvasLayer/LeftButtons" index="2" instance=ExtResource("9_bm0f3")]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -442.0
+offset_top = -43.0
+offset_right = -352.0
+offset_bottom = 47.0
+snap_rounding = true
+
+[node name="TextureRect4" type="TextureRect" parent="CanvasLayer/LeftButtons/ButtonRound2" index="1"]
+z_index = 1
+texture_filter = 1
+material = SubResource("ShaderMaterial_py8td")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_ywwqq")
+
+[node name="ButtonRound3" parent="CanvasLayer/LeftButtons" index="3" instance=ExtResource("9_bm0f3")]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -420.0
+offset_top = 72.0
+offset_right = -330.0
+offset_bottom = 162.0
+snap_rounding = true
+
+[node name="TextureRect4" type="TextureRect" parent="CanvasLayer/LeftButtons/ButtonRound3" index="1"]
+z_index = 1
+texture_filter = 1
+material = SubResource("ShaderMaterial_py8td")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_88u1r")
+
+[node name="ButtonRound4" parent="CanvasLayer/LeftButtons" index="4" instance=ExtResource("9_bm0f3")]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -518.0
+offset_top = -195.0
+offset_right = -428.0
+offset_bottom = -105.0
+snap_rounding = true
+
+[node name="ButtonRound5" parent="CanvasLayer/LeftButtons" index="5" instance=ExtResource("9_bm0f3")]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -547.0
+offset_top = -41.0
+offset_right = -457.0
+offset_bottom = 49.0
+snap_rounding = true
+
+[node name="ButtonRound6" parent="CanvasLayer/LeftButtons" index="6" instance=ExtResource("9_bm0f3")]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -514.0
+offset_top = 116.0
+offset_right = -424.0
+offset_bottom = 206.0
+snap_rounding = true
+
+[node name="ButtonRound7" parent="CanvasLayer/LeftButtons" index="7" instance=ExtResource("9_bm0f3")]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -616.0
+offset_top = -229.0
+offset_right = -526.0
+offset_bottom = -139.0
+snap_rounding = true
+
+[node name="ButtonRound8" parent="CanvasLayer/LeftButtons" index="8" instance=ExtResource("9_bm0f3")]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -646.0
+offset_top = -92.0
+offset_right = -556.0
+offset_bottom = -2.0
+snap_rounding = true
+
+[node name="ButtonRound9" parent="CanvasLayer/LeftButtons" index="9" instance=ExtResource("9_bm0f3")]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -632.0
+offset_top = 45.0
+offset_right = -542.0
+offset_bottom = 135.0
+snap_rounding = true
+
+[node name="ButtonRound13" parent="CanvasLayer/LeftButtons" index="10" instance=ExtResource("9_bm0f3")]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -609.0
+offset_top = 156.0
+offset_right = -519.0
+offset_bottom = 246.0
+snap_rounding = true
+
+[node name="ButtonRound14" parent="CanvasLayer/LeftButtons" index="11" instance=ExtResource("9_bm0f3")]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -701.0
+offset_top = 198.0
+offset_right = -611.0
+offset_bottom = 288.0
+snap_rounding = true
+
+[node name="ButtonRound15" parent="CanvasLayer/LeftButtons" index="12" instance=ExtResource("9_bm0f3")]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -735.0
+offset_top = 91.0
+offset_right = -645.0
+offset_bottom = 181.0
+snap_rounding = true
+
+[node name="ButtonRound10" parent="CanvasLayer/LeftButtons" index="13" instance=ExtResource("9_bm0f3")]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -714.0
+offset_top = -274.0
+offset_right = -624.0
+offset_bottom = -184.0
+snap_rounding = true
+
+[node name="ButtonRound11" parent="CanvasLayer/LeftButtons" index="14" instance=ExtResource("9_bm0f3")]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -751.0
+offset_top = -28.0
+offset_right = -661.0
+offset_bottom = 62.0
+snap_rounding = true
+
+[node name="ButtonRound12" parent="CanvasLayer/LeftButtons" index="15" instance=ExtResource("9_bm0f3")]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -748.0
+offset_top = -150.0
+offset_right = -658.0
+offset_bottom = -60.0
+snap_rounding = true
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer" index="7"]
+visible = false
+texture_filter = 2
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
@@ -272,117 +864,48 @@ theme_override_constants/h_separation = 12
 theme_override_constants/v_separation = 12
 columns = 3
 
-[node name="ButtonRound" parent="CanvasLayer/GridContainer" index="0" instance=ExtResource("9_bm0f3")]
-modulate = Color(0.99016386, 0.6632321, 0.6298537, 1)
-custom_minimum_size = Vector2(100, 100)
+[node name="ButtonRound7" parent="CanvasLayer/GridContainer" index="0" instance=ExtResource("9_bm0f3")]
+custom_minimum_size = Vector2(90, 90)
 layout_mode = 2
 snap_rounding = true
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/GridContainer/ButtonRound" index="1"]
-material = SubResource("ShaderMaterial_py8td")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("10_xkj2w")
-expand_mode = 3
-stretch_mode = 4
-
-[node name="ButtonRound2" parent="CanvasLayer/GridContainer" index="1" instance=ExtResource("9_bm0f3")]
-custom_minimum_size = Vector2(100, 100)
+[node name="ButtonRound8" parent="CanvasLayer/GridContainer" index="1" instance=ExtResource("9_bm0f3")]
+custom_minimum_size = Vector2(90, 90)
 layout_mode = 2
 snap_rounding = true
 
-[node name="TextureRect4" type="TextureRect" parent="CanvasLayer/GridContainer/ButtonRound2" index="1"]
-modulate = Color(0.87386805, 0.5072524, 0.5950847, 1)
-material = SubResource("ShaderMaterial_py8td")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("11_ywwqq")
-expand_mode = 3
-stretch_mode = 4
-
-[node name="ButtonRound3" parent="CanvasLayer/GridContainer" index="2" instance=ExtResource("9_bm0f3")]
-custom_minimum_size = Vector2(100, 100)
+[node name="ButtonRound9" parent="CanvasLayer/GridContainer" index="2" instance=ExtResource("9_bm0f3")]
+custom_minimum_size = Vector2(90, 90)
 layout_mode = 2
 snap_rounding = true
 
-[node name="TextureRect4" type="TextureRect" parent="CanvasLayer/GridContainer/ButtonRound3" index="1"]
-modulate = Color(0.9819308, 0.913411, 0.9260333, 1)
-material = SubResource("ShaderMaterial_py8td")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("12_88u1r")
-expand_mode = 3
-stretch_mode = 4
-
-[node name="ButtonRound4" parent="CanvasLayer/GridContainer" index="3" instance=ExtResource("9_bm0f3")]
-custom_minimum_size = Vector2(100, 100)
+[node name="ButtonRound10" parent="CanvasLayer/GridContainer" index="3" instance=ExtResource("9_bm0f3")]
+custom_minimum_size = Vector2(90, 90)
 layout_mode = 2
 snap_rounding = true
 
-[node name="ButtonRound5" parent="CanvasLayer/GridContainer" index="4" instance=ExtResource("9_bm0f3")]
-custom_minimum_size = Vector2(100, 100)
+[node name="ButtonRound11" parent="CanvasLayer/GridContainer" index="4" instance=ExtResource("9_bm0f3")]
+custom_minimum_size = Vector2(90, 90)
 layout_mode = 2
 snap_rounding = true
 
-[node name="ButtonRound6" parent="CanvasLayer/GridContainer" index="5" instance=ExtResource("9_bm0f3")]
-custom_minimum_size = Vector2(100, 100)
+[node name="ButtonRound12" parent="CanvasLayer/GridContainer" index="5" instance=ExtResource("9_bm0f3")]
+custom_minimum_size = Vector2(90, 90)
 layout_mode = 2
 snap_rounding = true
 
-[node name="ButtonRound7" parent="CanvasLayer/GridContainer" index="6" instance=ExtResource("9_bm0f3")]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-snap_rounding = true
-
-[node name="ButtonRound8" parent="CanvasLayer/GridContainer" index="7" instance=ExtResource("9_bm0f3")]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-snap_rounding = true
-
-[node name="ButtonRound9" parent="CanvasLayer/GridContainer" index="8" instance=ExtResource("9_bm0f3")]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-snap_rounding = true
-
-[node name="ButtonRound10" parent="CanvasLayer/GridContainer" index="9" instance=ExtResource("9_bm0f3")]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-snap_rounding = true
-
-[node name="ButtonRound11" parent="CanvasLayer/GridContainer" index="10" instance=ExtResource("9_bm0f3")]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-snap_rounding = true
-
-[node name="ButtonRound12" parent="CanvasLayer/GridContainer" index="11" instance=ExtResource("9_bm0f3")]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-snap_rounding = true
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" index="5"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" index="8"]
 custom_minimum_size = Vector2(400, 300)
-anchors_preset = 6
-anchor_left = 1.0
+anchors_preset = 8
+anchor_left = 0.5
 anchor_top = 0.5
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -440.0
-offset_top = -148.0
-offset_right = -40.0
-offset_bottom = 152.0
-grow_horizontal = 0
+offset_left = 346.0
+offset_top = -135.0
+offset_right = 746.0
+offset_bottom = 165.0
+grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 10
 
