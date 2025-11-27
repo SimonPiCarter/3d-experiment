@@ -4,6 +4,7 @@ uniform float rounding = 10.f;
 uniform float outline_width = 1.f;
 uniform float border_width = 0.f;
 uniform vec4 outline_color : source_color;
+uniform vec4 base_color : source_color;
 uniform sampler2D color_texture;
 uniform sampler2D border_texture;
 uniform sampler2D mask;
@@ -55,7 +56,7 @@ void fragment() {
 	}
 
 	is_outline = step(0.5, is_outline);
-	COLOR = outline_color * is_outline + (1.-is_outline) * texture(color_texture, UV/region_rect.zw);
+	COLOR = outline_color * is_outline + (1.-is_outline) * base_color * texture(color_texture, UV/region_rect.zw);
 	COLOR.a = get_alpha(UV, region_rect);
 	COLOR.rgb = mix(COLOR.rgb, COLOR.rgb*0.98, vec3(1,1,1)*step(0.5, texture(mask,SCREEN_UV).r));
 }

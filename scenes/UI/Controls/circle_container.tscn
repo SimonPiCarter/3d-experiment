@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://dno85l22r1adk"]
+
+[ext_resource type="Script" uid="uid://c2w1t2jc3mtgp" path="res://scenes/UI/Controls/circle_container.gd" id="1_khe65"]
+
+[node name="CircleContainer" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_khe65")
+radius_delta = 120.0
+min_distance = 350.0
+angle_min = 135.0
+angle_max = 225.0
+
+[node name="Circles" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2

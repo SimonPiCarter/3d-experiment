@@ -6,6 +6,10 @@ class_name ButtonRound extends Control
 @export var outline_width : float = 1.
 @export var base_outline_color : Color = Color.GRAY
 @export var hl_outline_color : Color = Color.WHITE
+@export var two_layers : bool = true
+@export var outter_color : Color = Color("9babb2")
+@export var inner_color : Color = Color("4c4e7d")
+
 @onready var button_texture: TextureRect = $TextureRect2
 @onready var shader = button_texture.material as ShaderMaterial
 @onready var button_inside: TextureRect = $MarginContainer/TextureRect3
@@ -24,6 +28,9 @@ func _process(delta: float) -> void:
 		shader_inside.set_shader_parameter("rounding", rounding-3.)
 	shader.set_shader_parameter("outline_width", outline_width)
 	shader_inside.set_shader_parameter("outline_width", outline_width)
+	shader.set_shader_parameter("base_color", outter_color)
+	shader_inside.set_shader_parameter("base_color", inner_color)
+	button_inside.visible = two_layers
 
 func _on_mouse_exited() -> void:
 	shader.set_shader_parameter("outline_color", base_outline_color)

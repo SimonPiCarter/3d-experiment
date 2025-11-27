@@ -4,7 +4,7 @@
 [ext_resource type="Shader" uid="uid://oswgt0a7en04" path="res://scenes/UI/Controls/button_round.gdshader" id="2_q3vu0"]
 
 [sub_resource type="Gradient" id="Gradient_q3vu0"]
-colors = PackedColorArray(0.60784316, 0.67058825, 0.69803923, 1, 0.5600342, 0.62495095, 0.6533014, 1)
+colors = PackedColorArray(0.61689204, 0.67903024, 0.7062255, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_3tron"]
 gradient = SubResource("Gradient_q3vu0")
@@ -24,6 +24,7 @@ shader_parameter/rounding = 10.0
 shader_parameter/outline_width = 1.0
 shader_parameter/border_width = 0.0
 shader_parameter/outline_color = Color(0.14267445, 0.14571038, 0.24553436, 1)
+shader_parameter/base_color = Color(0.60784316, 0.67058825, 0.69803923, 1)
 shader_parameter/color_texture = SubResource("GradientTexture2D_3tron")
 shader_parameter/mask = SubResource("NoiseTexture2D_3tron")
 shader_parameter/type = 2
@@ -36,7 +37,7 @@ width = 1
 height = 1
 
 [sub_resource type="Gradient" id="Gradient_apdvk"]
-colors = PackedColorArray(0.28235295, 0.2901961, 0.46666667, 1, 0.2977537, 0.30601844, 0.48889786, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.6806387, 0.6353886, 0.66567624, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_o5mtb"]
 gradient = SubResource("Gradient_apdvk")
@@ -56,6 +57,7 @@ shader_parameter/rounding = 7.0
 shader_parameter/outline_width = 1.0
 shader_parameter/border_width = 0.0
 shader_parameter/outline_color = Color(0.14267445, 0.14571038, 0.24553436, 1)
+shader_parameter/base_color = Color(0.29803923, 0.30588236, 0.49019608, 1)
 shader_parameter/color_texture = SubResource("GradientTexture2D_o5mtb")
 shader_parameter/mask = SubResource("NoiseTexture2D_0ma8m")
 shader_parameter/type = 2

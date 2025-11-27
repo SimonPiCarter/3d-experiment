@@ -22,11 +22,15 @@ func get_left() -> Vector3:
 func get_forward() -> Vector3:
 	return transform * Vector3.FORWARD - position
 
-func _process(delta):
+func sync():
 	if ref_camera:
 		position = ref_camera.position
 		rotation = ref_camera.rotation
 		size = ref_camera.size
+
+func _process(delta):
+	if ref_camera:
+		sync()
 	else:
 		var zoom = 0
 		var dir = Vector3.ZERO
