@@ -56,8 +56,9 @@ void fragment() {
 	}
 
 	is_outline = step(0.5, is_outline);
+	float orig_alpha = COLOR.a;
 	COLOR = outline_color * is_outline + (1.-is_outline) * base_color * texture(color_texture, UV/region_rect.zw);
-	COLOR.a = get_alpha(UV, region_rect);
+	COLOR.a = get_alpha(UV, region_rect) * orig_alpha;
 	COLOR.rgb = mix(COLOR.rgb, COLOR.rgb*0.98, vec3(1,1,1)*step(0.5, texture(mask,SCREEN_UV).r));
 }
 
