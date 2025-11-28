@@ -16,6 +16,7 @@ shader_parameter/pickable_color = Color(0, 0, 0, 1)
 render_priority = 0
 next_pass = SubResource("ShaderMaterial_c748l")
 shader = ExtResource("4_c748l")
+shader_parameter/use_albedo_texture = false
 shader_parameter/original_color = Color(0.6745098, 0.6156863, 0.7176471, 1)
 shader_parameter/outline_color = Color(1, 0, 0.019607844, 1)
 shader_parameter/use_mask = false
@@ -23,6 +24,7 @@ shader_parameter/use_mask = false
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5xpix"]
 render_priority = 0
 shader = ExtResource("4_c748l")
+shader_parameter/use_albedo_texture = false
 shader_parameter/original_color = Color(0.80784315, 0.7294118, 0.6392157, 1)
 shader_parameter/outline_color = Color(0.5, 0.5, 0.5, 1)
 shader_parameter/use_mask = false
@@ -49,7 +51,17 @@ surface_material_override/0 = SubResource("ShaderMaterial_44606")
 layers = 49
 surface_material_override/0 = SubResource("ShaderMaterial_5xpix")
 
-[node name="FrontLeft" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="3"]
+[node name="BodyIK" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="3"]
+top_level = true
+root_bone = &"Root"
+tip_bone = &"Body_2"
+use_magnet = true
+magnet = Vector3(0, 10, 0)
+target_node = NodePath("../../../Marker3D")
+script = ExtResource("5_eek0y")
+metadata/_custom_type_script = "uid://cssyvtlm806gc"
+
+[node name="FrontLeft" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="4"]
 process_priority = 1
 top_level = true
 root_bone = &"LegFrontLeft.001"
@@ -59,7 +71,7 @@ magnet = Vector3(0, 1, 0)
 script = ExtResource("5_eek0y")
 metadata/_custom_type_script = "uid://cssyvtlm806gc"
 
-[node name="FrontRight" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="4"]
+[node name="FrontRight" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="5"]
 process_priority = 1
 top_level = true
 root_bone = &"LegFrontRight.001"
@@ -69,7 +81,7 @@ magnet = Vector3(0, 10, 0)
 script = ExtResource("5_eek0y")
 metadata/_custom_type_script = "uid://cssyvtlm806gc"
 
-[node name="BackLeft" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="5"]
+[node name="BackLeft" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="6"]
 top_level = true
 root_bone = &"LegBackLeft.001"
 tip_bone = &"LegBackLeft.003"
@@ -78,22 +90,12 @@ magnet = Vector3(0, 10, 0)
 script = ExtResource("5_eek0y")
 metadata/_custom_type_script = "uid://cssyvtlm806gc"
 
-[node name="BackRight" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="6"]
+[node name="BackRight" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="7"]
 top_level = true
 root_bone = &"LegBackRight.001"
 tip_bone = &"LegBackRight.003"
 use_magnet = true
 magnet = Vector3(0, 10, 0)
-script = ExtResource("5_eek0y")
-metadata/_custom_type_script = "uid://cssyvtlm806gc"
-
-[node name="BodyIK" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="7"]
-top_level = true
-root_bone = &"Root"
-tip_bone = &"Body_2"
-use_magnet = true
-magnet = Vector3(0, 10, 0)
-target_node = NodePath("../../../Marker3D")
 script = ExtResource("5_eek0y")
 metadata/_custom_type_script = "uid://cssyvtlm806gc"
 
