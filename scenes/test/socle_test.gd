@@ -10,8 +10,10 @@ func _input(event: InputEvent) -> void:
 			socle.rotate_y(-0.1)
 	if event is InputEventKey and event.keycode == KEY_P and event.is_pressed():
 		$CanvasLayer2/SubViewport.get_texture().get_image().save_png("res://screenshot.png")
+	if event is InputEventKey and event.keycode == KEY_DOWN and event.is_pressed():
+		$CanvasLayer/CircleSlidingContainer.spin(true)
 	if event is InputEventKey and event.keycode == KEY_UP and event.is_pressed():
-		$CanvasLayer/RightContainer.spin()
+		$CanvasLayer/CircleSlidingContainer.spin(false)
 
 func _process(delta) -> void:
 	socle.rotate_y(-0.1*delta)
