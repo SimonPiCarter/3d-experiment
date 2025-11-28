@@ -1,0 +1,375 @@
+[gd_scene load_steps=9 format=3 uid="uid://uk6nmkd81k27"]
+
+[ext_resource type="Script" uid="uid://dq07ii42wk7rp" path="res://scenes/UI/Controls/circle_sliding_buttons.gd" id="1_5jnkd"]
+[ext_resource type="PackedScene" uid="uid://dno85l22r1adk" path="res://scenes/UI/Controls/circle_container.tscn" id="1_pnof8"]
+[ext_resource type="PackedScene" uid="uid://v7ktckkiqub8" path="res://scenes/UI/Controls/button_round.tscn" id="2_5jnkd"]
+[ext_resource type="Shader" uid="uid://d07svbd2hqd68" path="res://shaders/2d/pixel_outline_sprite.gdshader" id="3_dmjdh"]
+[ext_resource type="Texture2D" uid="uid://wtuprgl5ryxw" path="res://textures/glyphs/second_glyph.png" id="4_hw1j2"]
+[ext_resource type="Texture2D" uid="uid://de3lxffhdwuba" path="res://textures/glyphs/first_glyph.png" id="5_w28ra"]
+[ext_resource type="Texture2D" uid="uid://dxkvwdji37y3e" path="res://textures/glyphs/third_glyph.png" id="6_8ihs3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tojvj"]
+shader = ExtResource("3_dmjdh")
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_width = 1.0
+shader_parameter/type = 1
+shader_parameter/active = 1
+
+[node name="CircleSlidingButtons" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_5jnkd")
+
+[node name="CircleContainer" parent="." instance=ExtResource("1_pnof8")]
+layout_mode = 1
+radius_first = 565.0
+min_distance = 100.0
+angle_min = -20.0
+angle_max = 20.0
+
+[node name="ButtonRound" parent="CircleContainer" instance=ExtResource("2_5jnkd")]
+custom_minimum_size = Vector2(400, 60)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 330.92627
+offset_top = -223.2414
+offset_right = 730.9263
+offset_bottom = -163.2414
+snap_rounding = true
+
+[node name="ButtonRound" parent="CircleContainer/ButtonRound" instance=ExtResource("2_5jnkd")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_right = 0.0
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = -25.0
+offset_right = 55.0
+offset_bottom = 25.0
+grow_horizontal = 1
+snap_rounding = true
+inner_color = Color(0.5341383, 0.5200408, 0.548767, 1)
+
+[node name="TextureRect4" type="TextureRect" parent="CircleContainer/ButtonRound/ButtonRound"]
+z_index = 1
+texture_filter = 1
+material = SubResource("ShaderMaterial_tojvj")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_hw1j2")
+expand_mode = 2
+
+[node name="ButtonRound4" parent="CircleContainer" instance=ExtResource("2_5jnkd")]
+custom_minimum_size = Vector2(400, 60)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 349.77026
+offset_top = -160.29797
+offset_right = 749.77026
+offset_bottom = -100.29797
+snap_rounding = true
+
+[node name="ButtonRound" parent="CircleContainer/ButtonRound4" instance=ExtResource("2_5jnkd")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_right = 0.0
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = -20.0
+offset_right = 45.0
+offset_bottom = 20.0
+grow_horizontal = 1
+snap_rounding = true
+inner_color = Color(0.5341383, 0.5200408, 0.548767, 1)
+
+[node name="TextureRect" type="TextureRect" parent="CircleContainer/ButtonRound4/ButtonRound"]
+z_index = 1
+texture_filter = 1
+material = SubResource("ShaderMaterial_tojvj")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_w28ra")
+expand_mode = 2
+
+[node name="ButtonRound5" parent="CircleContainer" instance=ExtResource("2_5jnkd")]
+custom_minimum_size = Vector2(400, 60)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 361.1797
+offset_top = -95.59253
+offset_right = 761.1797
+offset_bottom = -35.59247
+snap_rounding = true
+
+[node name="ButtonRound" parent="CircleContainer/ButtonRound5" instance=ExtResource("2_5jnkd")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_right = 0.0
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = -25.0
+offset_right = 55.0
+offset_bottom = 25.0
+grow_horizontal = 1
+snap_rounding = true
+inner_color = Color(0.5341383, 0.5200408, 0.548767, 1)
+
+[node name="TextureRect5" type="TextureRect" parent="CircleContainer/ButtonRound5/ButtonRound"]
+z_index = 1
+texture_filter = 1
+material = SubResource("ShaderMaterial_tojvj")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_8ihs3")
+expand_mode = 2
+
+[node name="ButtonRound6" parent="CircleContainer" instance=ExtResource("2_5jnkd")]
+custom_minimum_size = Vector2(400, 60)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 365.0
+offset_top = -30.0
+offset_right = 765.0
+offset_bottom = 30.0
+snap_rounding = true
+
+[node name="ButtonRound" parent="CircleContainer/ButtonRound6" instance=ExtResource("2_5jnkd")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_right = 0.0
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = -25.0
+offset_right = 55.0
+offset_bottom = 25.0
+grow_horizontal = 1
+snap_rounding = true
+inner_color = Color(0.5341383, 0.5200408, 0.548767, 1)
+
+[node name="TextureRect5" type="TextureRect" parent="CircleContainer/ButtonRound6/ButtonRound"]
+z_index = 1
+texture_filter = 1
+material = SubResource("ShaderMaterial_tojvj")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_8ihs3")
+expand_mode = 2
+
+[node name="ButtonRound7" parent="CircleContainer" instance=ExtResource("2_5jnkd")]
+custom_minimum_size = Vector2(400, 60)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 361.1797
+offset_top = 35.5925
+offset_right = 761.1797
+offset_bottom = 95.5925
+snap_rounding = true
+
+[node name="ButtonRound" parent="CircleContainer/ButtonRound7" instance=ExtResource("2_5jnkd")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_right = 0.0
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = -25.0
+offset_right = 55.0
+offset_bottom = 25.0
+grow_horizontal = 1
+snap_rounding = true
+inner_color = Color(0.5341383, 0.5200408, 0.548767, 1)
+
+[node name="TextureRect5" type="TextureRect" parent="CircleContainer/ButtonRound7/ButtonRound"]
+z_index = 1
+texture_filter = 1
+material = SubResource("ShaderMaterial_tojvj")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_8ihs3")
+expand_mode = 2
+
+[node name="ButtonRound8" parent="CircleContainer" instance=ExtResource("2_5jnkd")]
+custom_minimum_size = Vector2(400, 60)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 349.77026
+offset_top = 100.29797
+offset_right = 749.77026
+offset_bottom = 160.29797
+snap_rounding = true
+
+[node name="ButtonRound" parent="CircleContainer/ButtonRound8" instance=ExtResource("2_5jnkd")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_right = 0.0
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = -25.0
+offset_right = 55.0
+offset_bottom = 25.0
+grow_horizontal = 1
+snap_rounding = true
+inner_color = Color(0.5341383, 0.5200408, 0.548767, 1)
+
+[node name="TextureRect5" type="TextureRect" parent="CircleContainer/ButtonRound8/ButtonRound"]
+z_index = 1
+texture_filter = 1
+material = SubResource("ShaderMaterial_tojvj")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_8ihs3")
+expand_mode = 2
+
+[node name="ButtonRound9" parent="CircleContainer" instance=ExtResource("2_5jnkd")]
+custom_minimum_size = Vector2(400, 60)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 330.92627
+offset_top = 163.2414
+offset_right = 730.9263
+offset_bottom = 223.2414
+snap_rounding = true
+
+[node name="ButtonRound" parent="CircleContainer/ButtonRound9" instance=ExtResource("2_5jnkd")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_right = 0.0
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = -25.0
+offset_right = 55.0
+offset_bottom = 25.0
+grow_horizontal = 1
+snap_rounding = true
+inner_color = Color(0.5341383, 0.5200408, 0.548767, 1)
+
+[node name="TextureRect5" type="TextureRect" parent="CircleContainer/ButtonRound9/ButtonRound"]
+z_index = 1
+texture_filter = 1
+material = SubResource("ShaderMaterial_tojvj")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_8ihs3")
+expand_mode = 2
+
+[node name="Reserve" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ButtonRound" parent="Reserve" instance=ExtResource("2_5jnkd")]
+visible = false
+custom_minimum_size = Vector2(400, 60)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 330.92627
+offset_top = -223.2414
+offset_right = 730.9263
+offset_bottom = -163.2414
+snap_rounding = true
+
+[node name="ButtonRound" parent="Reserve/ButtonRound" instance=ExtResource("2_5jnkd")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_right = 0.0
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = -25.0
+offset_right = 55.0
+offset_bottom = 25.0
+grow_horizontal = 1
+snap_rounding = true
+inner_color = Color(0.5341383, 0.5200408, 0.548767, 1)
+
+[node name="TextureRect4" type="TextureRect" parent="Reserve/ButtonRound/ButtonRound"]
+z_index = 1
+texture_filter = 1
+material = SubResource("ShaderMaterial_tojvj")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_hw1j2")
+expand_mode = 2
