@@ -1,4 +1,4 @@
-[gd_scene load_steps=95 format=3 uid="uid://boqtgauorybyx"]
+[gd_scene load_steps=101 format=3 uid="uid://boqtgauorybyx"]
 
 [ext_resource type="Script" uid="uid://nje6tyvvpq8b" path="res://scenes/test/new_pipeline.gd" id="1_e07xg"]
 [ext_resource type="Shader" uid="uid://cw4s5m23hur31" path="res://shaders/primal/circle_from_plane.gdshader" id="1_gvkf4"]
@@ -29,7 +29,9 @@
 [ext_resource type="ArrayMesh" uid="uid://uc7k2gt3130" path="res://model/sphere_spike.obj" id="23_lcv6h"]
 [ext_resource type="PackedScene" uid="uid://bni427ua3ote2" path="res://scenes/VFX/Cone/cone_encapsuled.tscn" id="24_kqquj"]
 [ext_resource type="PackedScene" uid="uid://cfdijiejbba4r" path="res://scenes/VFX/Beam/Beam.tscn" id="25_0ydtf"]
+[ext_resource type="Shader" uid="uid://bwye8r7ehq8mk" path="res://shaders/gradient/circle_gradient.gdshader" id="28_scxka"]
 [ext_resource type="PackedScene" uid="uid://buslmtbcq01xb" path="res://scenes/UI/debug/fps_display.tscn" id="30_kqquj"]
+[ext_resource type="PackedScene" uid="uid://deicgdd7mnyvl" path="res://scenes/UI/indicators/box_mouse.tscn" id="31_qy4ca"]
 
 [sub_resource type="Sky" id="Sky_kqquj"]
 
@@ -634,6 +636,24 @@ _data = {
 &"run": SubResource("Animation_0ydtf")
 }
 
+[sub_resource type="QuadMesh" id="QuadMesh_qy4ca"]
+
+[sub_resource type="Gradient" id="Gradient_8j1eq"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_u051o"]
+gradient = SubResource("Gradient_8j1eq")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2rdgq"]
+render_priority = 0
+shader = ExtResource("28_scxka")
+shader_parameter/gradient_texture = SubResource("GradientTexture2D_u051o")
+shader_parameter/color = Color(1, 0, 0, 1)
+shader_parameter/low_pass = 0.6999999843536
+shader_parameter/high_pass = 0.5000000074506
+shader_parameter/margin = 0.3999999910592
+
 [sub_resource type="ViewportTexture" id="ViewportTexture_gvkf4"]
 viewport_path = NodePath("MainViewport/SubViewport")
 
@@ -1043,6 +1063,13 @@ spawn_scale = 0.3
 target = NodePath("../HealerBot")
 metadata/_custom_type_script = "uid://dr8i2irhdjpuy"
 
+[node name="Gradient" type="MeshInstance3D" parent="MainViewport/SubViewport"]
+transform = Transform3D(50, 0, 0, 0, -2.1855694e-06, 50.000004, 0, -50, -2.1855697e-06, -26.681519, -0.1038208, 2.6560059)
+layers = 17
+mesh = SubResource("QuadMesh_qy4ca")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("ShaderMaterial_2rdgq")
+
 [node name="Targets" type="Node3D" parent="MainViewport/SubViewport"]
 
 [node name="SmallBot2" parent="MainViewport/SubViewport/Targets" instance=ExtResource("4_rijnb")]
@@ -1129,7 +1156,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("ViewportTexture_aas4t")
 
-[node name="Control" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("ref_camera", "debug", "ent_moving", "targets")]
+[node name="WorldInput" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("ref_camera", "debug", "targets", "box")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -1140,7 +1167,11 @@ script = ExtResource("21_6in2w")
 ref_camera = NodePath("../../MainViewport/SubViewport/Camera3D")
 pick_texture = SubResource("ViewportTexture_mgpox")
 debug = NodePath("../../MainViewport/SubViewport/VFX/PowerRing3")
-ent_moving = [NodePath("../../MainViewport/SubViewport/HealerBot"), NodePath("../../MainViewport/SubViewport/HealerBot2"), NodePath("../../MainViewport/SubViewport/HealerBot3")]
 targets = NodePath("../../MainViewport/SubViewport/Targets")
+box = NodePath("TextureRect")
+
+[node name="TextureRect" parent="CanvasLayer/WorldInput" instance=ExtResource("31_qy4ca")]
+visible = false
+layout_mode = 0
 
 [node name="FpsDisplay" parent="CanvasLayer" instance=ExtResource("30_kqquj")]

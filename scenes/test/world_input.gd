@@ -1,10 +1,11 @@
-extends Control
+class_name WorldInput extends Control
 
 @export var ref_camera : FreeRoamingCamera3D = null
 @export var pick_texture : Texture2D = null
 @export var debug : Node3D = null
 @export var ent_moving : Array[QuadEntityTargetMove] = []
 @export var targets : Node3D = null
+@export var box : BoxMouse = null
 
 func calculate_floor_click(event: InputEvent) -> Vector3:
 	var rational_pos = Vector2(
@@ -21,10 +22,23 @@ func calculate_floor_click(event: InputEvent) -> Vector3:
 	var t = (floor_y - world_pos.y) / forward.y
 	return world_pos + forward * t
 
+var boxing = false
+var start_box : Vector2
+
 func _input(event: InputEvent) -> void:
 	if not ref_camera:
 		return
+	if event is InputEventMouseMotion:
+		if boxing and box:
+			box.update(start_box, event.position)
 	if event is InputEventMouseButton and event.is_pressed():
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			boxing = true
+			start_box = event.position
+			if box:
+				box.update(start_box, start_box)
+				box.show()
+	if event is InputEventMouseButton and event.is_released():
 		if event.button_index == MOUSE_BUTTON_RIGHT:
 			var floor_clic = calculate_floor_click(event)
 			if debug:
@@ -32,11 +46,22 @@ func _input(event: InputEvent) -> void:
 			for ent in ent_moving:
 				ent.set_target_position(floor_clic)
 		elif event.button_index == MOUSE_BUTTON_LEFT:
+			if boxing:
+				boxing = false
+				if box:
+					box.hide()
 			if pick_texture:
-				var picked = Picker.get_node_from_texture(pick_texture, int(event.position.x), int(event.position.y))
-				print(picked)
-				if picked:
-					ent_moving = [picked]
+				if box:
+					ent_moving = []
+					var selected = Picker.get_nodes_from_texture(pick_texture, box.get_rect())
+					for e in selected:
+						if e is QuadEntityTargetMove:
+							ent_moving.append(e as QuadEntityTargetMove)
+				else:
+					var picked = Picker.get_node_from_texture(pick_texture, int(event.position.x), int(event.position.y))
+					print(picked)
+					if picked:
+						ent_moving = [picked]
 		elif event.button_index == MOUSE_BUTTON_MIDDLE:
 			if targets:
 				var floor_click = calculate_floor_click(event)

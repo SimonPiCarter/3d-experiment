@@ -52,7 +52,7 @@ func get_node_from_texture(tex: Texture2D, x: int, y: int) -> Node3D:
 		return registered_pickables[id]
 	return null
 
-func get_nodes_from_texture(tex: ImageTexture, rect:Rect2i) -> Array[Node3D]:
+func get_nodes_from_texture(tex: Texture2D, rect:Rect2i) -> Array[Node3D]:
 	var img : Image = tex.get_image()
 	var found_nodes : Array[Node3D] = []
 	for dx in rect.size.x:

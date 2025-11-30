@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://deicgdd7mnyvl"]
+
+[ext_resource type="Shader" uid="uid://blhanfvg3r31x" path="res://shaders/gradient/box_gradient_2d.gdshader" id="1_35rh7"]
+[ext_resource type="Script" uid="uid://dj8n3fj6exjft" path="res://scenes/UI/indicators/box_mouse.gd" id="2_aeber"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qy4ca"]
+shader = ExtResource("1_35rh7")
+shader_parameter/outline_color = Color(0.8392157, 0.38431373, 0.14117648, 1)
+shader_parameter/outline_width = 0.2
+shader_parameter/gradient_color = Color(0.8392157, 0.38431373, 0.14117648, 0.7058824)
+shader_parameter/gradient = 0.0
+shader_parameter/min_alpha = 0.2
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_qy4ca"]
+
+[node name="BoxMouse" type="TextureRect"]
+material = SubResource("ShaderMaterial_qy4ca")
+offset_right = 516.0
+offset_bottom = 217.0
+texture = SubResource("PlaceholderTexture2D_qy4ca")
+stretch_mode = 1
+script = ExtResource("2_aeber")
