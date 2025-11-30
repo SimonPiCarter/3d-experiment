@@ -15,6 +15,9 @@ class_name ButtonRound extends Control
 @onready var button_inside: TextureRect = $MarginContainer/TextureRect3
 @onready var shader_inside = button_inside.material as ShaderMaterial
 
+var inside = false
+signal pressed
+
 func _ready() -> void:
 	shader.set_shader_parameter("outline_color", base_outline_color)
 	shader_inside.set_shader_parameter("outline_color", base_outline_color)
@@ -34,6 +37,14 @@ func _process(delta: float) -> void:
 
 func _on_mouse_exited() -> void:
 	shader.set_shader_parameter("outline_color", base_outline_color)
+	inside = false
 
 func _on_mouse_entered() -> void:
 	shader.set_shader_parameter("outline_color", hl_outline_color)
+	inside = true
+
+func _input(event):
+	if event is InputEventMouseButton and event.is_released():
+		var mevent = event as InputEventMouseButton
+		if mevent.button_index == MOUSE_BUTTON_LEFT and inside:
+			pressed.emit()

@@ -21,14 +21,15 @@ func _ready() -> void:
 func get_materials_for_picker() -> Array[ShaderMaterial]:
 	return []
 
-func apply_force(force_in : Vector3) -> void:
+func apply_force(force_in : Vector3, intensity = 5.) -> void:
 	if not Armature or not BodyMarker:
 		return
 	if body_tween:
 		body_tween.kill()
 	force_in = get_parent().transform.basis.inverse() * force_in
 	body_tween = get_tree().create_tween()
-	body_tween.tween_property(Armature, "position", ref_armature + force_in/3.*2., 0.2).set_trans(Tween.TRANS_CUBIC)
-	body_tween.parallel().tween_property(BodyMarker, "position", ref_marker+force_in, 0.2).set_trans(Tween.TRANS_CUBIC)
-	body_tween.tween_property(Armature, "position", ref_armature, 0.2)
-	body_tween.parallel().tween_property(BodyMarker, "position", ref_marker, 0.2)
+	var time = 1./intensity
+	body_tween.tween_property(Armature, "position", ref_armature + force_in/3.*2., time).set_trans(Tween.TRANS_CUBIC)
+	body_tween.parallel().tween_property(BodyMarker, "position", ref_marker+force_in, time).set_trans(Tween.TRANS_CUBIC)
+	body_tween.tween_property(Armature, "position", ref_armature, time)
+	body_tween.parallel().tween_property(BodyMarker, "position", ref_marker, time)

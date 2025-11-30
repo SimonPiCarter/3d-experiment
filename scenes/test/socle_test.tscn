@@ -278,6 +278,9 @@ surface_material_override/0 = SubResource("ShaderMaterial_88u1r")
 [node name="Icosphere" parent="MainViewport/SubViewport/socle/robot2/Armature/Skeleton3D" index="1"]
 surface_material_override/0 = SubResource("ShaderMaterial_t8uid")
 
+[node name="Icosphere2" parent="MainViewport/SubViewport/socle/robot2/Armature/Skeleton3D" index="2"]
+surface_material_override/0 = null
+
 [node name="Legs" parent="MainViewport/SubViewport/socle/robot2/Armature/Skeleton3D" index="3"]
 surface_material_override/0 = SubResource("ShaderMaterial_88u1r")
 
@@ -744,7 +747,7 @@ min_distance = 180.0
 angle_min = 160.0
 angle_max = 200.0
 
-[node name="ButtonRound" parent="CanvasLayer/LeftContainer" index="1" instance=ExtResource("9_bm0f3")]
+[node name="SimpleBotButton" parent="CanvasLayer/LeftContainer" index="1" instance=ExtResource("9_bm0f3")]
 custom_minimum_size = Vector2(90, 90)
 layout_mode = 1
 anchors_preset = 8
@@ -759,7 +762,7 @@ offset_bottom = 181.80804
 pivot_offset = Vector2(45, 45)
 snap_rounding = true
 
-[node name="TextureRect6" type="TextureRect" parent="CanvasLayer/LeftContainer/ButtonRound" index="2"]
+[node name="TextureRect6" type="TextureRect" parent="CanvasLayer/LeftContainer/SimpleBotButton" index="2"]
 z_index = 1
 texture_filter = 1
 layout_mode = 1
@@ -776,7 +779,7 @@ scale = Vector2(0.5, 0.5)
 mouse_filter = 2
 texture = ExtResource("18_3jp8v")
 
-[node name="ButtonRound2" parent="CanvasLayer/LeftContainer" index="2" instance=ExtResource("9_bm0f3")]
+[node name="SmallBotButton" parent="CanvasLayer/LeftContainer" index="2" instance=ExtResource("9_bm0f3")]
 custom_minimum_size = Vector2(90, 90)
 layout_mode = 1
 anchors_preset = 8
@@ -792,7 +795,7 @@ pivot_offset = Vector2(45, 50)
 snap_rounding = true
 rounding = 45.0
 
-[node name="TextureRect5" type="TextureRect" parent="CanvasLayer/LeftContainer/ButtonRound2" index="2"]
+[node name="TextureRect5" type="TextureRect" parent="CanvasLayer/LeftContainer/SmallBotButton" index="2"]
 z_index = 1
 texture_filter = 1
 layout_mode = 1
@@ -809,7 +812,7 @@ scale = Vector2(0.5, 0.5)
 mouse_filter = 2
 texture = ExtResource("18_c3750")
 
-[node name="ButtonRound3" parent="CanvasLayer/LeftContainer" index="3" instance=ExtResource("9_bm0f3")]
+[node name="HealerBotButton" parent="CanvasLayer/LeftContainer" index="3" instance=ExtResource("9_bm0f3")]
 custom_minimum_size = Vector2(90, 90)
 layout_mode = 1
 anchors_preset = 8
@@ -824,7 +827,7 @@ offset_bottom = -91.80806
 pivot_offset = Vector2(45, 45.000008)
 snap_rounding = true
 
-[node name="TextureRect4" type="TextureRect" parent="CanvasLayer/LeftContainer/ButtonRound3" index="1"]
+[node name="TextureRect4" type="TextureRect" parent="CanvasLayer/LeftContainer/HealerBotButton" index="1"]
 z_index = 1
 texture_filter = 1
 layout_mode = 1
