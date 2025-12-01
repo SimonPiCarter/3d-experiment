@@ -57,8 +57,12 @@ func get_nodes_from_texture(tex: Texture2D, rect:Rect2i) -> Array[Node3D]:
 	var found_nodes : Array[Node3D] = []
 	for dx in rect.size.x:
 		var x = rect.position.x + dx
+		if x >= img.get_width() or x < 0:
+			continue
 		for dy in rect.size.y:
 			var y = rect.position.y + dy
+			if y >= img.get_height() or y < 0:
+				continue
 			var color : Color = img.get_pixel(x, y)
 			var id : int = color_to_id(color)
 			if id >= 0 and id < registered_pickables.size():
