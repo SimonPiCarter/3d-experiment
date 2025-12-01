@@ -27,6 +27,10 @@ func sync():
 		position = ref_camera.position
 		rotation = ref_camera.rotation
 		size = ref_camera.size
+		projection = ref_camera.projection
+		fov = ref_camera.fov
+		near = ref_camera.near
+		far = ref_camera.far
 
 func _process(delta):
 	if ref_camera:
@@ -48,7 +52,7 @@ func _process(delta):
 			zoom = +1
 
 		translate(dir * move_speed * delta)
-		size = clamp(size+zoom, 5, 50)
+		size = clamp(size+zoom, 5, 150)
 
 func _input(event):
 	if event is InputEventKey:
