@@ -14,10 +14,10 @@ func _process(delta: float) -> void:
 	if elapsed > reload:
 		var robot = source.get_node("robot2") as Robot2
 		var target = find_target()
-		var basic_round_projectile = projectile.instantiate() as BasicRoundProjectile
-		root_projectile.add_child(basic_round_projectile)
-		basic_round_projectile.start_pos = robot.get_source()
 		if target:
+			var basic_round_projectile = projectile.instantiate() as BasicRoundProjectile
+			root_projectile.add_child(basic_round_projectile)
+			basic_round_projectile.start_pos = robot.get_source()
 			basic_round_projectile.target = target
 			basic_round_projectile.effect = func(): impact(target)
 			basic_round_projectile.start()
