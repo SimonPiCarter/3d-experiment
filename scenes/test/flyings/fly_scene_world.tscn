@@ -1,0 +1,225 @@
+[gd_scene load_steps=29 format=3 uid="uid://hxhmfr8g7rw7"]
+
+[ext_resource type="PackedScene" uid="uid://da2eduothcfya" path="res://scenes/templates/world_scene.tscn" id="1_fowe6"]
+[ext_resource type="Shader" uid="uid://c4njs3466gxfy" path="res://shaders/2d/pixel_outline_v2.gdshader" id="2_kyd34"]
+[ext_resource type="Script" uid="uid://dsn0wx6scig04" path="res://scenes/test/flyings/fly_test.gd" id="2_whihi"]
+[ext_resource type="ArrayMesh" uid="uid://80xu52rkxvy7" path="res://model/Whale/WhalePart1.obj" id="3_lb45d"]
+[ext_resource type="Shader" uid="uid://cv4deawtx0pb3" path="res://shaders/new_pipeline/outline_new_pipeline_shaded.gdshader" id="4_j18jn"]
+[ext_resource type="ArrayMesh" uid="uid://dx5s7xohxbi1g" path="res://model/Whale/WhalePart2.obj" id="4_t8ufj"]
+[ext_resource type="ArrayMesh" uid="uid://byxywctboi1sa" path="res://model/Whale/WhalePart3.obj" id="5_j18jn"]
+[ext_resource type="ArrayMesh" uid="uid://b0tsnlmlsv312" path="res://model/Whale/WhalePart4.obj" id="6_oomud"]
+[ext_resource type="ArrayMesh" uid="uid://dnh1i0oi0a5o5" path="res://model/Whale/WhalePart5.obj" id="7_aqaie"]
+[ext_resource type="ArrayMesh" uid="uid://obso37g4flba" path="res://model/Whale/WhalePart6.obj" id="8_xgxmr"]
+[ext_resource type="ArrayMesh" uid="uid://d3x3bckt1m16f" path="res://model/Whale/WhalePart7.obj" id="9_o2xst"]
+[ext_resource type="ArrayMesh" uid="uid://mml174t7e6l5" path="res://model/Whale/WhaleTail1.obj" id="10_cw5qq"]
+[ext_resource type="ArrayMesh" uid="uid://dm4puvhftp8dx" path="res://model/Whale/WhaleTail2.obj" id="11_pjy1l"]
+[ext_resource type="PackedScene" uid="uid://doettwsh1qxf0" path="res://scenes/models/advanced_whale.tscn" id="14_t8ufj"]
+
+[sub_resource type="Curve" id="Curve_o5evi"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0.022267208, 0.4124515), 0.0, 1.0678773, 0, 0, Vector2(0.9817814, 2), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_0hp01"]
+_limits = [0.0, 5.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.52429146, 2.0428014), 7.3225865, 7.3225865, 0, 0, Vector2(0.9898785, 4.766536), 4.907693, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t8ufj"]
+render_priority = 0
+shader = ExtResource("4_j18jn")
+shader_parameter/use_albedo_texture = false
+shader_parameter/original_color = Color(0.28235295, 0.2901961, 0.46666667, 1)
+shader_parameter/outline_color = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/use_mask = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lb45d"]
+render_priority = 0
+shader = ExtResource("4_j18jn")
+shader_parameter/use_albedo_texture = false
+shader_parameter/original_color = Color(0.28235295, 0.2901961, 0.46666667, 1)
+shader_parameter/outline_color = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/use_mask = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j18jn"]
+render_priority = 0
+shader = ExtResource("4_j18jn")
+shader_parameter/use_albedo_texture = false
+shader_parameter/original_color = Color(0.28235295, 0.2901961, 0.46666667, 1)
+shader_parameter/outline_color = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/use_mask = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oomud"]
+render_priority = 0
+shader = ExtResource("4_j18jn")
+shader_parameter/use_albedo_texture = false
+shader_parameter/original_color = Color(0.28235295, 0.2901961, 0.46666667, 1)
+shader_parameter/outline_color = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/use_mask = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aqaie"]
+render_priority = 0
+shader = ExtResource("4_j18jn")
+shader_parameter/use_albedo_texture = false
+shader_parameter/original_color = Color(0.28235295, 0.2901961, 0.46666667, 1)
+shader_parameter/outline_color = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/use_mask = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xgxmr"]
+render_priority = 0
+shader = ExtResource("4_j18jn")
+shader_parameter/use_albedo_texture = false
+shader_parameter/original_color = Color(0.28235295, 0.2901961, 0.46666667, 1)
+shader_parameter/outline_color = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/use_mask = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o2xst"]
+render_priority = 0
+shader = ExtResource("4_j18jn")
+shader_parameter/use_albedo_texture = false
+shader_parameter/original_color = Color(0.28235295, 0.2901961, 0.46666667, 1)
+shader_parameter/outline_color = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/use_mask = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cw5qq"]
+render_priority = 0
+shader = ExtResource("4_j18jn")
+shader_parameter/use_albedo_texture = false
+shader_parameter/original_color = Color(0.28235295, 0.2901961, 0.46666667, 1)
+shader_parameter/outline_color = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/use_mask = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pjy1l"]
+render_priority = 0
+shader = ExtResource("4_j18jn")
+shader_parameter/use_albedo_texture = false
+shader_parameter/original_color = Color(0.28235295, 0.2901961, 0.46666667, 1)
+shader_parameter/outline_color = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/use_mask = false
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_oloa6"]
+viewport_path = NodePath("MainViewport/SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hhn0r"]
+resource_local_to_scene = true
+shader = ExtResource("2_kyd34")
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_width = 1.0
+shader_parameter/type = 1
+shader_parameter/active = 1
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_og2iy"]
+viewport_path = NodePath("OutlineViewport/SubViewport")
+
+[node name="WorldScene" instance=ExtResource("1_fowe6")]
+
+[node name="Camera3D" parent="MainViewport/SubViewport" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, -1.605484, 31.58319, 69.27255)
+
+[node name="Node3D" type="Node3D" parent="MainViewport/SubViewport" index="2" node_paths=PackedStringArray("nodes")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9856567, 0, 0)
+script = ExtResource("2_whihi")
+amplitude = 0.2
+nodes = [NodePath("MeshInstance3D"), NodePath("MeshInstance3D2"), NodePath("MeshInstance3D3"), NodePath("MeshInstance3D4"), NodePath("MeshInstance3D5"), NodePath("MeshInstance3D6"), NodePath("MeshInstance3D7"), NodePath("MeshInstance3D8"), NodePath("MeshInstance3D9")]
+oscillation_speed = 2.0
+amplitude_curve = SubResource("Curve_o5evi")
+delay_curve = SubResource("Curve_0hp01")
+distance = 0.7
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MainViewport/SubViewport/Node3D" index="0"]
+layers = 17
+mesh = ExtResource("3_lb45d")
+surface_material_override/0 = SubResource("ShaderMaterial_t8ufj")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MainViewport/SubViewport/Node3D" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.87487507)
+layers = 17
+mesh = ExtResource("4_t8ufj")
+surface_material_override/0 = SubResource("ShaderMaterial_lb45d")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="MainViewport/SubViewport/Node3D" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.8373818)
+layers = 17
+mesh = ExtResource("5_j18jn")
+surface_material_override/0 = SubResource("ShaderMaterial_j18jn")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="MainViewport/SubViewport/Node3D" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.8936038)
+layers = 17
+mesh = ExtResource("6_oomud")
+surface_material_override/0 = SubResource("ShaderMaterial_oomud")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="MainViewport/SubViewport/Node3D" index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.3599634)
+layers = 17
+mesh = ExtResource("7_aqaie")
+surface_material_override/0 = SubResource("ShaderMaterial_aqaie")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="MainViewport/SubViewport/Node3D" index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.529832)
+layers = 17
+mesh = ExtResource("8_xgxmr")
+surface_material_override/0 = SubResource("ShaderMaterial_xgxmr")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="MainViewport/SubViewport/Node3D" index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.732482)
+layers = 17
+mesh = ExtResource("9_o2xst")
+surface_material_override/0 = SubResource("ShaderMaterial_o2xst")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="MainViewport/SubViewport/Node3D" index="7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.069584)
+layers = 17
+mesh = ExtResource("10_cw5qq")
+surface_material_override/0 = SubResource("ShaderMaterial_cw5qq")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="MainViewport/SubViewport/Node3D" index="8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.165894)
+layers = 17
+mesh = ExtResource("11_pjy1l")
+surface_material_override/0 = SubResource("ShaderMaterial_pjy1l")
+
+[node name="Node3D2" type="Node3D" parent="MainViewport/SubViewport" index="3" node_paths=PackedStringArray("nodes")]
+transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, -4.0536194, 0, 0)
+script = ExtResource("2_whihi")
+amplitude = 0.1
+nodes = [NodePath("advanced_whale"), NodePath("advanced_whale2"), NodePath("advanced_whale3"), NodePath("advanced_whale4"), NodePath("advanced_whale5"), NodePath("advanced_whale6"), NodePath("advanced_whale7")]
+oscillation_speed = 2.0
+amplitude_curve = SubResource("Curve_o5evi")
+delay_curve = SubResource("Curve_0hp01")
+distance = 0.7
+
+[node name="advanced_whale" parent="MainViewport/SubViewport/Node3D2" index="0" instance=ExtResource("14_t8ufj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.40942383, 0, 0)
+
+[node name="advanced_whale2" parent="MainViewport/SubViewport/Node3D2" index="1" instance=ExtResource("14_t8ufj")]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 1, 0.40942383, 0, 2.2904053)
+
+[node name="advanced_whale3" parent="MainViewport/SubViewport/Node3D2" index="2" instance=ExtResource("14_t8ufj")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 1, 0.40942383, 0, 4.460026)
+
+[node name="advanced_whale4" parent="MainViewport/SubViewport/Node3D2" index="3" instance=ExtResource("14_t8ufj")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 1, 0.40942383, 0, 6.613984)
+
+[node name="advanced_whale5" parent="MainViewport/SubViewport/Node3D2" index="4" instance=ExtResource("14_t8ufj")]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 1, 0.40942383, 0, 8.932077)
+
+[node name="advanced_whale6" parent="MainViewport/SubViewport/Node3D2" index="5" instance=ExtResource("14_t8ufj")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 1, 0.40942383, 0, 10.729782)
+
+[node name="advanced_whale7" parent="MainViewport/SubViewport/Node3D2" index="6" instance=ExtResource("14_t8ufj")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 1, 0.40942383, 0, 12.905951)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="MainViewport/SubViewport" index="4"]
+transform = Transform3D(0.783191, -0.56407386, 0.26159608, 0.3992353, 0.77874136, 0.4839144, -0.47667915, -0.27455902, 0.8351014, 4.484291, 2.7367554, 4.0705566)
+
+[node name="Camera3D" parent="OutlineViewport/SubViewport" index="0" node_paths=PackedStringArray("ref_camera")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.509827)
+ref_camera = NodePath("../../../MainViewport/SubViewport/Camera3D")
+
+[node name="MainView" parent="CanvasLayer" index="0"]
+texture = SubResource("ViewportTexture_oloa6")
+
+[node name="OutlineView" parent="CanvasLayer" index="1"]
+material = SubResource("ShaderMaterial_hhn0r")
+texture = SubResource("ViewportTexture_og2iy")
