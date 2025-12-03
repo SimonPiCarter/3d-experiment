@@ -1,0 +1,67 @@
+[gd_scene load_steps=8 format=3 uid="uid://cx8reamersawt"]
+
+[ext_resource type="PackedScene" uid="uid://cvyhsdynhh21x" path="res://scenes/VFX/Sphere/sphere.tscn" id="1_cmn6f"]
+[ext_resource type="Script" uid="uid://cnic034am215k" path="res://scenes/test/vfx/fog_unit.gd" id="1_etc3c"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_11gdu"]
+noise_type = 4
+frequency = 0.015
+fractal_octaves = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ixfrg"]
+noise = SubResource("FastNoiseLite_11gdu")
+seamless = true
+
+[sub_resource type="Animation" id="Animation_1soas"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SphereVFX:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_7x8sl"]
+resource_name = "new_animation"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SphereVFX:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.1, 1.1, 1.1), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g74ni"]
+_data = {
+&"RESET": SubResource("Animation_1soas"),
+&"new_animation": SubResource("Animation_7x8sl")
+}
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_etc3c")
+
+[node name="SphereVFX" parent="." instance=ExtResource("1_cmn6f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.32492676)
+color_high = Color(0.21568628, 0.30588236, 0.2901961, 1)
+color_low = Color(0.19215687, 0.21176471, 0.21960784, 1)
+threshold = 0.0
+speed_offset = 0.8
+noise = SubResource("NoiseTexture2D_ixfrg")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_g74ni")
+}
+autoplay = "new_animation"

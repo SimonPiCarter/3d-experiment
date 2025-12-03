@@ -1,9 +1,9 @@
-[gd_scene load_steps=46 format=3 uid="uid://df8h2amca2ljq"]
+[gd_scene load_steps=44 format=3 uid="uid://df8h2amca2ljq"]
 
 [ext_resource type="PackedScene" uid="uid://da2eduothcfya" path="res://scenes/templates/world_scene.tscn" id="1_2fdbc"]
-[ext_resource type="PackedScene" uid="uid://cvyhsdynhh21x" path="res://scenes/VFX/Sphere/sphere.tscn" id="2_wsqkn"]
 [ext_resource type="Shader" uid="uid://na16fd231gnb" path="res://scenes/test/vfx/fog_test.gdshader" id="2_yvcre"]
 [ext_resource type="Shader" uid="uid://cc18tpomiri80" path="res://shaders/new_pipeline/outline_new_pipeline_unshaded.gdshader" id="3_b7od6"]
+[ext_resource type="PackedScene" uid="uid://cx8reamersawt" path="res://scenes/test/vfx/fog_unit.tscn" id="3_tsj5c"]
 [ext_resource type="PackedScene" uid="uid://dd7pumxmee75o" path="res://scenes/models/quad_entity_robot_2.tscn" id="4_ixfrg"]
 [ext_resource type="Shader" uid="uid://c4njs3466gxfy" path="res://shaders/2d/pixel_outline_v2.gdshader" id="4_yrgha"]
 [ext_resource type="Script" uid="uid://dj7w0ypgd8ehs" path="res://scenes/entity/quand_ent_target_move.gd" id="5_yvcre"]
@@ -162,29 +162,20 @@ shader_parameter/dir_2 = Vector2(1, 0)
 shader_parameter/color_1 = Color(0.19215687, 0.21176471, 0.21960784, 0.7294118)
 shader_parameter/color_2 = Color(0.21568628, 0.30588236, 0.2901961, 0.654902)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_11gdu"]
-noise_type = 4
-frequency = 0.015
-fractal_octaves = 1
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ixfrg"]
-noise = SubResource("FastNoiseLite_11gdu")
-seamless = true
-
 [sub_resource type="PlaneMesh" id="PlaneMesh_yvcre"]
 size = Vector2(1000, 1000)
 
 [sub_resource type="Gradient" id="Gradient_tsj5c"]
 colors = PackedColorArray(0.9764706, 0.61960787, 0.41568628, 1, 0.9476287, 0.52065206, 0.25580785, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_qy4ca"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_yvcre"]
 gradient = SubResource("Gradient_tsj5c")
 width = 1024
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7x8sl"]
 diffuse_mode = 3
 specular_mode = 1
-albedo_texture = SubResource("GradientTexture1D_qy4ca")
+albedo_texture = SubResource("GradientTexture1D_yvcre")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1soas"]
 render_priority = 0
@@ -215,129 +206,204 @@ transform = Transform3D(0.7071068, 0.35355335, -0.61237246, 2.1855696e-08, 0.866
 size = 50.0
 far = 800.0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="MainViewport/SubViewport" index="2"]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -13.706055, 0.95341206, -253.24036)
+[node name="FogPlane" type="Node3D" parent="MainViewport/SubViewport" index="2"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MainViewport/SubViewport/FogPlane" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3706055, 0.095341206, -25.324036)
 layers = 17
 mesh = SubResource("PlaneMesh_ixfrg")
-skeleton = NodePath("../SphereVFX")
+skeleton = NodePath("../../Fog_sphere/Node3D/SphereVFX")
 surface_material_override/0 = SubResource("ShaderMaterial_tsj5c")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="MainViewport/SubViewport" index="3"]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -13.706055, 5.8468447, -253.24036)
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MainViewport/SubViewport/FogPlane" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3706055, 0.5846845, -25.324036)
 layers = 17
 mesh = SubResource("PlaneMesh_ixfrg")
-skeleton = NodePath("../SphereVFX")
+skeleton = NodePath("../../Fog_sphere/Node3D/SphereVFX")
 surface_material_override/0 = SubResource("ShaderMaterial_s741g")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="MainViewport/SubViewport" index="4"]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -13.706055, 11.55595, -253.24036)
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="MainViewport/SubViewport/FogPlane" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3706055, 1.1555951, -25.324036)
 layers = 17
 mesh = SubResource("PlaneMesh_ixfrg")
-skeleton = NodePath("../SphereVFX")
+skeleton = NodePath("../../Fog_sphere/Node3D/SphereVFX")
 surface_material_override/0 = SubResource("ShaderMaterial_0ht06")
 
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="MainViewport/SubViewport" index="5"]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -13.706055, 16.449383, -253.24036)
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="MainViewport/SubViewport/FogPlane" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3706055, 1.6449383, -25.324036)
 layers = 17
 mesh = SubResource("PlaneMesh_ixfrg")
-skeleton = NodePath("../SphereVFX")
+skeleton = NodePath("../../Fog_sphere/Node3D/SphereVFX")
 surface_material_override/0 = SubResource("ShaderMaterial_er64q")
 
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="MainViewport/SubViewport" index="6"]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -13.706055, 22.158367, -253.24036)
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="MainViewport/SubViewport/FogPlane" index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3706055, 2.2158368, -25.324036)
 layers = 17
 mesh = SubResource("PlaneMesh_ixfrg")
-skeleton = NodePath("../SphereVFX")
+skeleton = NodePath("../../Fog_sphere/Node3D/SphereVFX")
 surface_material_override/0 = SubResource("ShaderMaterial_8opsf")
 
-[node name="MeshInstance3D6" type="MeshInstance3D" parent="MainViewport/SubViewport" index="7"]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -16.738098, 22.158367, 246.92126)
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="MainViewport/SubViewport/FogPlane" index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6738099, 2.2158368, 24.692127)
+visible = false
 layers = 17
 mesh = SubResource("PlaneMesh_ixfrg")
-skeleton = NodePath("../SphereVFX")
+skeleton = NodePath("../../Fog_sphere/Node3D/SphereVFX")
 surface_material_override/0 = SubResource("ShaderMaterial_8opsf")
 
-[node name="SphereVFX" parent="MainViewport/SubViewport" index="8" instance=ExtResource("2_wsqkn")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 1.3740845, 3.4001284, 4.008423)
-color_high = Color(0.21568628, 0.30588236, 0.2901961, 1)
-color_low = Color(0.19215687, 0.21176471, 0.21960784, 1)
-threshold = 0.0
-noise = SubResource("NoiseTexture2D_ixfrg")
+[node name="Fog_sphere" type="Node3D" parent="MainViewport/SubViewport" index="3"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 1.3740845, 0.3625307, 4.008423)
 
-[node name="SphereVFX2" parent="MainViewport/SubViewport" index="9" instance=ExtResource("2_wsqkn")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -5.831543, 3.4001284, 3.185791)
-color_high = Color(0.21568628, 0.30588236, 0.2901961, 1)
-color_low = Color(0.19215687, 0.21176471, 0.21960784, 1)
-threshold = 0.0
-noise = SubResource("NoiseTexture2D_ixfrg")
+[node name="Node3D" parent="MainViewport/SubViewport/Fog_sphere" index="0" instance=ExtResource("3_tsj5c")]
 
-[node name="SphereVFX3" parent="MainViewport/SubViewport" index="10" instance=ExtResource("2_wsqkn")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 1.3693237, 3.4001284, 13.099487)
-color_high = Color(0.21568628, 0.30588236, 0.2901961, 1)
-color_low = Color(0.19215687, 0.21176471, 0.21960784, 1)
-threshold = 0.0
-noise = SubResource("NoiseTexture2D_ixfrg")
+[node name="Node3D2" parent="MainViewport/SubViewport/Fog_sphere" index="1" instance=ExtResource("3_tsj5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.28205568, 0.40737304)
 
-[node name="SphereVFX4" parent="MainViewport/SubViewport" index="11" instance=ExtResource("2_wsqkn")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -2.4013672, 11.341535, 4.3935547)
-color_high = Color(0.21568628, 0.30588236, 0.2901961, 1)
-color_low = Color(0.19215687, 0.21176471, 0.21960784, 1)
-threshold = 0.0
-noise = SubResource("NoiseTexture2D_ixfrg")
+[node name="Node3D3" parent="MainViewport/SubViewport/Fog_sphere" index="2" instance=ExtResource("3_tsj5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.78647465, 0.021728516, 0.48730472)
 
-[node name="SphereVFX6" parent="MainViewport/SubViewport" index="12" instance=ExtResource("2_wsqkn")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 6.225067, 11.341535, 4.759383)
-color_high = Color(0.21568628, 0.30588236, 0.2901961, 1)
-color_low = Color(0.19215687, 0.21176471, 0.21960784, 1)
-threshold = 0.0
-noise = SubResource("NoiseTexture2D_ixfrg")
+[node name="Node3D4" parent="MainViewport/SubViewport/Fog_sphere" index="3" instance=ExtResource("3_tsj5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.63911134, 0.21701661, 0.12326661)
 
-[node name="SphereVFX5" parent="MainViewport/SubViewport" index="13" instance=ExtResource("2_wsqkn")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 7.3166504, 5.0622377, 11.026245)
-color_high = Color(0.21568628, 0.30588236, 0.2901961, 1)
-color_low = Color(0.19215687, 0.21176471, 0.21960784, 1)
-threshold = 0.0
-noise = SubResource("NoiseTexture2D_ixfrg")
+[node name="Node3D5" parent="MainViewport/SubViewport/Fog_sphere" index="4" instance=ExtResource("3_tsj5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3037842, -0.77409667)
 
-[node name="Background" type="MeshInstance3D" parent="MainViewport/SubViewport" index="14"]
+[node name="Node3D6" parent="MainViewport/SubViewport/Fog_sphere" index="5" instance=ExtResource("3_tsj5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.021728516, -0.36672363)
+
+[node name="Node3D7" parent="MainViewport/SubViewport/Fog_sphere" index="6" instance=ExtResource("3_tsj5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.78647465, 0.3255127, -0.36672363)
+
+[node name="Node3D8" parent="MainViewport/SubViewport/Fog_sphere" index="7" instance=ExtResource("3_tsj5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.63911134, 0.52080077, -0.6508301)
+
+[node name="Node3D9" parent="MainViewport/SubViewport/Fog_sphere" index="8" instance=ExtResource("3_tsj5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81894535, 0.8100586, -0.77409667)
+
+[node name="Node3D10" parent="MainViewport/SubViewport/Fog_sphere" index="9" instance=ExtResource("3_tsj5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.81894535, 0.5280029, -0.36672363)
+
+[node name="Node3D11" parent="MainViewport/SubViewport/Fog_sphere" index="10" instance=ExtResource("3_tsj5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.032470703, 0.8317871, -0.36672363)
+
+[node name="Node3D12" parent="MainViewport/SubViewport/Fog_sphere" index="11" instance=ExtResource("3_tsj5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.179834, 1.0270752, -0.6508301)
+
+[node name="Node3D13" parent="MainViewport/SubViewport/Fog_sphere" index="12" instance=ExtResource("3_tsj5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.60739756, 0.8100586, -0.4395752)
+
+[node name="Node3D14" parent="MainViewport/SubViewport/Fog_sphere" index="13" instance=ExtResource("3_tsj5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.60739756, 0.5280029, -0.032202125)
+
+[node name="Node3D15" parent="MainViewport/SubViewport/Fog_sphere" index="14" instance=ExtResource("3_tsj5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.393872, 0.8317871, -0.032202125)
+
+[node name="Node3D16" parent="MainViewport/SubViewport/Fog_sphere" index="15" instance=ExtResource("3_tsj5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2465087, 1.0270752, -0.3163086)
+
+[node name="Node3D17" parent="MainViewport/SubViewport/Fog_sphere" index="16" instance=ExtResource("3_tsj5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.301538, 0.9602173, -0.44179687)
+
+[node name="Node3D18" parent="MainViewport/SubViewport/Fog_sphere" index="17" instance=ExtResource("3_tsj5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.301538, 0.6781616, -0.0344238)
+
+[node name="Node3D23" parent="MainViewport/SubViewport/Fog_sphere" index="18" instance=ExtResource("3_tsj5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.301538, 1.183305, -0.68851626)
+
+[node name="Node3D24" parent="MainViewport/SubViewport/Fog_sphere" index="19" instance=ExtResource("3_tsj5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.23215617, 0.81705576, -1.2342675)
+
+[node name="Node3D26" parent="MainViewport/SubViewport/Fog_sphere" index="20" instance=ExtResource("3_tsj5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6222956, 0.055710413, -2.053943)
+
+[node name="Node3D27" parent="MainViewport/SubViewport/Fog_sphere" index="21" instance=ExtResource("3_tsj5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.018217996, 0.055710413, -2.0408738)
+
+[node name="Node3D28" parent="MainViewport/SubViewport/Fog_sphere" index="22" instance=ExtResource("3_tsj5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.78116584, 0.055710413, -2.2154357)
+
+[node name="Node3D29" parent="MainViewport/SubViewport/Fog_sphere" index="23" instance=ExtResource("3_tsj5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2818648, 0.40593287, -1.6906343)
+
+[node name="Node3D30" parent="MainViewport/SubViewport/Fog_sphere" index="24" instance=ExtResource("3_tsj5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.30780047, 0.35921204, -1.8930603)
+
+[node name="Node3D31" parent="MainViewport/SubViewport/Fog_sphere" index="25" instance=ExtResource("3_tsj5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8855319, 0.4738684, -1.3933899)
+
+[node name="Node3D32" parent="MainViewport/SubViewport/Fog_sphere" index="26" instance=ExtResource("3_tsj5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7684676, -0.24797541, -2.3591933)
+
+[node name="Node3D33" parent="MainViewport/SubViewport/Fog_sphere" index="27" instance=ExtResource("3_tsj5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10777388, -0.1662139, -2.2932045)
+
+[node name="Node3D34" parent="MainViewport/SubViewport/Fog_sphere" index="28" instance=ExtResource("3_tsj5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46201146, -0.28301585, -2.251255)
+
+[node name="Node3D35" parent="MainViewport/SubViewport/Fog_sphere" index="29" instance=ExtResource("3_tsj5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.069646, -0.051967815, -2.0112412)
+
+[node name="Node3D36" parent="MainViewport/SubViewport/Fog_sphere" index="30" instance=ExtResource("3_tsj5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5161301, 0.6470739, -1.4383621)
+
+[node name="Node3D37" parent="MainViewport/SubViewport/Fog_sphere" index="31" instance=ExtResource("3_tsj5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7919117, 1.0567267, -0.72885895)
+
+[node name="Node3D38" parent="MainViewport/SubViewport/Fog_sphere" index="32" instance=ExtResource("3_tsj5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.538676, 1.2650671, -0.6310959)
+
+[node name="Node3D39" parent="MainViewport/SubViewport/Fog_sphere" index="33" instance=ExtResource("3_tsj5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8045342, 1.2650671, -0.54740447)
+
+[node name="Node3D19" parent="MainViewport/SubViewport/Fog_sphere" index="34" instance=ExtResource("3_tsj5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0117064, 0.82282716, -0.0344238)
+
+[node name="Node3D21" parent="MainViewport/SubViewport/Fog_sphere" index="35" instance=ExtResource("3_tsj5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1375242, -0.39432374, 0.86761475)
+
+[node name="Node3D22" parent="MainViewport/SubViewport/Fog_sphere" index="36" instance=ExtResource("3_tsj5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.46573466, -0.39432374, 0.77563477)
+
+[node name="Node3D20" parent="MainViewport/SubViewport/Fog_sphere" index="37" instance=ExtResource("3_tsj5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33757317, 1.1772339, -0.31853026)
+
+[node name="Background" type="MeshInstance3D" parent="MainViewport/SubViewport" index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6004361, -0.15586472, -1.5166348)
 mesh = SubResource("PlaneMesh_yvcre")
 surface_material_override/0 = SubResource("StandardMaterial3D_7x8sl")
 
-[node name="BackgroundCheck" type="MeshInstance3D" parent="MainViewport/SubViewport" index="15"]
+[node name="BackgroundCheck" type="MeshInstance3D" parent="MainViewport/SubViewport" index="5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, -0.157, -1.517)
 layers = 16
 mesh = SubResource("PlaneMesh_yvcre")
 surface_material_override/0 = SubResource("ShaderMaterial_1soas")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="MainViewport/SubViewport" index="16"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="MainViewport/SubViewport" index="6"]
 transform = Transform3D(0.95441765, -0.10836298, 0.27810878, -0.11621556, 0.7233177, 0.68066555, -0.2749199, -0.68195975, 0.6777536, 0, 0, 0)
 shadow_enabled = true
 
-[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="MainViewport/SubViewport" index="17"]
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="MainViewport/SubViewport" index="7"]
 transform = Transform3D(1, -4.983938e-09, -2.938263e-08, 2.9802322e-08, 0.16723324, 0.98591745, 0, -0.9859174, 0.16723326, 0, 0, 0)
 visible = false
 
-[node name="HealerBot" parent="MainViewport/SubViewport" index="18" instance=ExtResource("4_ixfrg")]
+[node name="HealerBot" parent="MainViewport/SubViewport" index="8" instance=ExtResource("4_ixfrg")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -29.420761, 0.62210655, 57.419205)
 script = ExtResource("5_yvcre")
 
-[node name="HealerBot2" parent="MainViewport/SubViewport" index="19" instance=ExtResource("4_ixfrg")]
+[node name="HealerBot2" parent="MainViewport/SubViewport" index="9" instance=ExtResource("4_ixfrg")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -23.663376, 0.62210655, 65.54848)
 script = ExtResource("5_yvcre")
 
-[node name="HealerBot3" parent="MainViewport/SubViewport" index="20" instance=ExtResource("4_ixfrg")]
+[node name="HealerBot3" parent="MainViewport/SubViewport" index="10" instance=ExtResource("4_ixfrg")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -29.248215, 0.62210655, 42.389908)
 script = ExtResource("5_yvcre")
 
-[node name="cube_uv" parent="MainViewport/SubViewport" index="21" instance=ExtResource("6_ixfrg")]
+[node name="cube_uv" parent="MainViewport/SubViewport" index="11" instance=ExtResource("6_ixfrg")]
 transform = Transform3D(100, 0, 0, 0, 77.48452, 63.2151, 0, -63.21511, 77.48452, 107.38837, -123.289185, -10.2821045)
 
-[node name="cube_uv2" parent="MainViewport/SubViewport" index="22" instance=ExtResource("6_ixfrg")]
+[node name="cube_uv2" parent="MainViewport/SubViewport" index="12" instance=ExtResource("6_ixfrg")]
 transform = Transform3D(100, 0, 0, 0, 77.48452, 63.2151, 0, -63.21511, 77.48452, -105.01514, -123.289185, -10.031982)
-
-[node name="Camera3D" parent="OutlineViewport/SubViewport" index="0" node_paths=PackedStringArray("ref_camera")]
-ref_camera = NodePath("../../../MainViewport/SubViewport/Camera3D")
 
 [node name="MainView" parent="CanvasLayer" index="0"]
 texture = SubResource("ViewportTexture_g74ni")
