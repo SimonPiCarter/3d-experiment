@@ -1,4 +1,4 @@
-[gd_scene load_steps=101 format=3 uid="uid://boqtgauorybyx"]
+[gd_scene load_steps=107 format=3 uid="uid://boqtgauorybyx"]
 
 [ext_resource type="Script" uid="uid://nje6tyvvpq8b" path="res://scenes/test/new_pipeline.gd" id="1_e07xg"]
 [ext_resource type="Shader" uid="uid://cw4s5m23hur31" path="res://shaders/primal/circle_from_plane.gdshader" id="1_gvkf4"]
@@ -29,6 +29,7 @@
 [ext_resource type="ArrayMesh" uid="uid://uc7k2gt3130" path="res://model/sphere_spike.obj" id="23_lcv6h"]
 [ext_resource type="PackedScene" uid="uid://bni427ua3ote2" path="res://scenes/VFX/Cone/cone_encapsuled.tscn" id="24_kqquj"]
 [ext_resource type="PackedScene" uid="uid://cfdijiejbba4r" path="res://scenes/VFX/Beam/Beam.tscn" id="25_0ydtf"]
+[ext_resource type="PackedScene" uid="uid://4f2ootab3hjc" path="res://scenes/VFX/Cube/cube_vfx.tscn" id="27_8j1eq"]
 [ext_resource type="Shader" uid="uid://bwye8r7ehq8mk" path="res://shaders/gradient/circle_gradient.gdshader" id="28_scxka"]
 [ext_resource type="PackedScene" uid="uid://buslmtbcq01xb" path="res://scenes/UI/debug/fps_display.tscn" id="30_kqquj"]
 [ext_resource type="PackedScene" uid="uid://deicgdd7mnyvl" path="res://scenes/UI/indicators/box_mouse.tscn" id="31_qy4ca"]
@@ -636,12 +637,82 @@ _data = {
 &"run": SubResource("Animation_0ydtf")
 }
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_8j1eq"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kkt5o"]
+noise = SubResource("FastNoiseLite_8j1eq")
+seamless = true
+
+[sub_resource type="Animation" id="Animation_8j1eq"]
+resource_name = "run"
+length = 4.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:threshold")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3.6666667, 4.5),
+"transitions": PackedFloat32Array(-2, -2, 1),
+"update": 0,
+"values": [0.0, 1.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:threshold_alpha")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3.8, 4.5),
+"transitions": PackedFloat32Array(1, -2, 1),
+"update": 0,
+"values": [0.0, 0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_kkt5o"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:threshold")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.258]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:threshold_alpha")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kkt5o"]
+_data = {
+&"RESET": SubResource("Animation_kkt5o"),
+&"run": SubResource("Animation_8j1eq")
+}
+
 [sub_resource type="QuadMesh" id="QuadMesh_qy4ca"]
 
 [sub_resource type="Gradient" id="Gradient_8j1eq"]
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_u051o"]
 gradient = SubResource("Gradient_8j1eq")
+width = 1024
+height = 1024
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
@@ -1051,6 +1122,19 @@ autoplay = "run"
 [node name="Beam" parent="MainViewport/SubViewport/VFX" instance=ExtResource("25_0ydtf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.178, -8.128, 15.145)
 
+[node name="CubeVFX" parent="MainViewport/SubViewport/VFX" instance=ExtResource("27_8j1eq")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 28.27655, -4.784485, 23.29663)
+color_high = Color(0.3019608, 0.60784316, 0.9019608, 1)
+color_low = Color(0.56078434, 0.827451, 1, 1)
+threshold = 0.258
+noise = SubResource("NoiseTexture2D_kkt5o")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MainViewport/SubViewport/VFX/CubeVFX"]
+libraries = {
+&"": SubResource("AnimationLibrary_kkt5o")
+}
+autoplay = "run"
+
 [node name="Spawner" type="Node3D" parent="MainViewport/SubViewport" node_paths=PackedStringArray("spawn_center", "destination", "target")]
 script = ExtResource("20_ioc36")
 spawn_center = NodePath("../HealerBot")
@@ -1064,7 +1148,7 @@ target = NodePath("../HealerBot")
 metadata/_custom_type_script = "uid://dr8i2irhdjpuy"
 
 [node name="Gradient" type="MeshInstance3D" parent="MainViewport/SubViewport"]
-transform = Transform3D(50, 0, 0, 0, -2.1855694e-06, 50.000004, 0, -50, -2.1855697e-06, -26.681519, -0.1038208, 2.6560059)
+transform = Transform3D(50, 0, 0, 0, -2.1855694e-06, 50.000004, 0, -50, -2.1855697e-06, -28.02404, -0.155, 5.737421)
 layers = 17
 mesh = SubResource("QuadMesh_qy4ca")
 skeleton = NodePath("")
