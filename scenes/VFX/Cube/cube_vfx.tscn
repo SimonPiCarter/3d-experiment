@@ -1,0 +1,54 @@
+[gd_scene load_steps=9 format=3 uid="uid://4f2ootab3hjc"]
+
+[ext_resource type="Script" uid="uid://q0v8803ja1hd" path="res://scenes/VFX/Sphere/sphere.gd" id="1_dfldm"]
+[ext_resource type="ArrayMesh" uid="uid://jhephyfd76r4" path="res://model/cube_clean_wrap.obj" id="2_2ad5r"]
+[ext_resource type="Shader" uid="uid://bheb3rnfrrvep" path="res://scenes/models/materials/vfx/sphere_back_vfx.gdshader" id="2_je8cu"]
+[ext_resource type="Shader" uid="uid://dxfydo6vsx23c" path="res://scenes/models/materials/vfx/sphere_front_vfx.gdshader" id="3_2ad5r"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_11gdu"]
+noise_type = 3
+frequency = 0.02
+fractal_octaves = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8a028"]
+noise = SubResource("FastNoiseLite_11gdu")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6h5wy"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_je8cu")
+shader_parameter/Noise = SubResource("NoiseTexture2D_8a028")
+shader_parameter/Threshold = 0.27
+shader_parameter/ThresholdAlpha = 0.0
+shader_parameter/ColorHigh = Color(0, 0, 1, 0.5)
+shader_parameter/ColorLow = Color(1, 0, 0, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8a028"]
+resource_local_to_scene = true
+render_priority = 1
+shader = ExtResource("3_2ad5r")
+shader_parameter/Noise = SubResource("NoiseTexture2D_8a028")
+shader_parameter/Threshold = 0.27
+shader_parameter/ThresholdAlpha = 0.0
+shader_parameter/ColorHigh = Color(0, 0, 1, 0)
+shader_parameter/ColorLow = Color(1, 0, 0, 1)
+
+[node name="CubeVFX" type="Node3D"]
+script = ExtResource("1_dfldm")
+alpha = 0.5
+threshold = 0.27
+noise = SubResource("NoiseTexture2D_8a028")
+is_dirty = false
+
+[node name="sphere" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.0000001, 0, 0, 0, 0.9999998, 0, 0, 0, 1, 0, 0, 0)
+layers = 21
+mesh = ExtResource("2_2ad5r")
+surface_material_override/0 = SubResource("ShaderMaterial_6h5wy")
+
+[node name="sphere2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.0000001, 0, 0, 0, 0.9999998, 0, 0, 0, 1, 0, 0, 0)
+layers = 21
+mesh = ExtResource("2_2ad5r")
+surface_material_override/0 = SubResource("ShaderMaterial_8a028")
