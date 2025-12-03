@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://bfihn8m3yhws2"]
+[gd_scene load_steps=62 format=3 uid="uid://bfihn8m3yhws2"]
 
 [ext_resource type="PackedScene" uid="uid://da2eduothcfya" path="res://scenes/templates/world_scene.tscn" id="1_egn45"]
 [ext_resource type="Script" uid="uid://jquglo62113b" path="res://scenes/test/socle_test.gd" id="2_cna4g"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://bpf2yq0qibfvi" path="res://scenes/models/robot_2.tscn" id="2_wf17m"]
 [ext_resource type="Shader" uid="uid://7eh5v4axp1ng" path="res://shaders/new_pipeline/pickable.gdshader" id="5_oc7f7"]
 [ext_resource type="Shader" uid="uid://cv4deawtx0pb3" path="res://shaders/new_pipeline/outline_new_pipeline_shaded.gdshader" id="6_bm0f3"]
-[ext_resource type="Shader" uid="uid://cc18tpomiri80" path="res://shaders/new_pipeline/outline_new_pipeline_unshaded.gdshader" id="7_xkj2w"]
 [ext_resource type="PackedScene" uid="uid://cobr225vkbh0b" path="res://scenes/models/robot_3.tscn" id="8_0sdtx"]
 [ext_resource type="Shader" uid="uid://co0h7bhcdglip" path="res://shaders/2d/texture/noise_draw.gdshader" id="8_7w3o2"]
 [ext_resource type="Shader" uid="uid://cumguw2jbhivl" path="res://shaders/2d/shapes/circle.gdshader" id="8_py8td"]
@@ -21,32 +20,6 @@
 [ext_resource type="Texture2D" uid="uid://bhmiekph1t7y7" path="res://textures/UI/unit_icons/no_outline/simple_bot.png" id="18_3jp8v"]
 [ext_resource type="PackedScene" uid="uid://uk6nmkd81k27" path="res://scenes/UI/Controls/circle_sliding_buttons.tscn" id="18_64fqq"]
 [ext_resource type="Texture2D" uid="uid://clpomavcxb00k" path="res://textures/UI/unit_icons/no_outline/small_bot.png" id="18_c3750"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ywwqq"]
-resource_local_to_scene = true
-render_priority = 0
-shader = ExtResource("5_oc7f7")
-shader_parameter/pickable_color = Color(0, 0, 0, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_88u1r"]
-resource_local_to_scene = true
-render_priority = 0
-next_pass = SubResource("ShaderMaterial_ywwqq")
-shader = ExtResource("6_bm0f3")
-shader_parameter/use_albedo_texture = false
-shader_parameter/original_color = Color(0.67058825, 0.5803922, 0.47843137, 1)
-shader_parameter/outline_color = Color(0.59607846, 0.25490198, 0.3137255, 1)
-shader_parameter/use_mask = false
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_t8uid"]
-resource_local_to_scene = true
-render_priority = 0
-next_pass = SubResource("ShaderMaterial_ywwqq")
-shader = ExtResource("7_xkj2w")
-shader_parameter/use_albedo_texture = false
-shader_parameter/original_color = Color(0.40784314, 0.92941177, 0.36078432, 1)
-shader_parameter/outline_color = Color(0.48235294, 0.58431375, 0.42745098, 1)
-shader_parameter/use_mask = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yu38t"]
 resource_local_to_scene = true
@@ -270,19 +243,6 @@ transform = Transform3D(1.7127684, 0, 1.0326782, 0, 2, 0, -1.0326782, 0, 1.71276
 
 [node name="robot2" parent="MainViewport/SubViewport/socle" index="1" instance=ExtResource("2_wf17m")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.7176728, 0)
-visible = false
-
-[node name="Body" parent="MainViewport/SubViewport/socle/robot2/Armature/Skeleton3D" index="0"]
-surface_material_override/0 = SubResource("ShaderMaterial_88u1r")
-
-[node name="Icosphere" parent="MainViewport/SubViewport/socle/robot2/Armature/Skeleton3D" index="1"]
-surface_material_override/0 = SubResource("ShaderMaterial_t8uid")
-
-[node name="Icosphere2" parent="MainViewport/SubViewport/socle/robot2/Armature/Skeleton3D" index="2"]
-surface_material_override/0 = null
-
-[node name="Legs" parent="MainViewport/SubViewport/socle/robot2/Armature/Skeleton3D" index="3"]
-surface_material_override/0 = SubResource("ShaderMaterial_88u1r")
 
 [node name="FrontLeft" parent="MainViewport/SubViewport/socle/robot2/Armature/Skeleton3D" index="5"]
 target_node = NodePath("../../../Marker3D")
@@ -338,6 +298,7 @@ transform = Transform3D(0.9749991, 0, -0.6449158, 0, 0.99999917, 0, 0.58785516, 
 
 [node name="SimpleRobot" parent="MainViewport/SubViewport/socle" index="3" instance=ExtResource("9_3jp8v")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.5175476, 0)
+visible = false
 
 [node name="FrontLeft" parent="MainViewport/SubViewport/socle/SimpleRobot/Armature/Skeleton3D" index="0"]
 target_node = NodePath("../../Marker3D2")
