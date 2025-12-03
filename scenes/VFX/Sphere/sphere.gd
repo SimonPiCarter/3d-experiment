@@ -7,6 +7,8 @@ class_name SphereVFX extends Node3D
 @export var color_low : Color = Color.RED
 @export_range(0.,1.) var threshold : float = 0.8
 @export_range(0.,1.) var threshold_alpha : float = 0.
+@export_range(0.,0.9) var speed_offset : float = 0.
+@export var reversed : bool = false
 @export var noise : Texture2D = null
 @export var is_dirty : bool = true
 
@@ -27,6 +29,8 @@ func set_up_shaders(mesh : MeshInstance3D, front:bool):
 	mesh.get_surface_override_material(0).set_shader_parameter("Threshold", threshold)
 	mesh.get_surface_override_material(0).set_shader_parameter("ThresholdAlpha", threshold_alpha)
 	mesh.get_surface_override_material(0).set_shader_parameter("Noise", noise)
+	mesh.get_surface_override_material(0).set_shader_parameter("speed_offset", speed_offset)
+	mesh.get_surface_override_material(0).set_shader_parameter("reversed", 1 if reversed else 0.)
 
 func _ready():
 	set_up_shaders(sphere, false)

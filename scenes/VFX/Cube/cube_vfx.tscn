@@ -23,6 +23,8 @@ shader_parameter/Threshold = 0.27
 shader_parameter/ThresholdAlpha = 0.0
 shader_parameter/ColorHigh = Color(0, 0, 1, 0.5)
 shader_parameter/ColorLow = Color(1, 0, 0, 0.5)
+shader_parameter/speed_offset = 0.0
+shader_parameter/reversed = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8a028"]
 resource_local_to_scene = true
@@ -33,22 +35,26 @@ shader_parameter/Threshold = 0.27
 shader_parameter/ThresholdAlpha = 0.0
 shader_parameter/ColorHigh = Color(0, 0, 1, 0)
 shader_parameter/ColorLow = Color(1, 0, 0, 1)
+shader_parameter/speed_offset = 0.0
+shader_parameter/reversed = 0.0
 
 [node name="CubeVFX" type="Node3D"]
 script = ExtResource("1_dfldm")
 alpha = 0.5
 threshold = 0.27
+speed_offset = null
+reversed = null
 noise = SubResource("NoiseTexture2D_8a028")
 is_dirty = false
 
 [node name="sphere" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.0000001, 0, 0, 0, 0.9999998, 0, 0, 0, 1, 0, 0, 0)
-layers = 21
+layers = 17
 mesh = ExtResource("2_2ad5r")
 surface_material_override/0 = SubResource("ShaderMaterial_6h5wy")
 
 [node name="sphere2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.0000001, 0, 0, 0, 0.9999998, 0, 0, 0, 1, 0, 0, 0)
-layers = 21
+layers = 17
 mesh = ExtResource("2_2ad5r")
 surface_material_override/0 = SubResource("ShaderMaterial_8a028")
