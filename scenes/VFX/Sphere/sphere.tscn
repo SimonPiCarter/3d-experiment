@@ -47,12 +47,10 @@ is_dirty = false
 transform = Transform3D(1.0000001, 0, 0, 0, 0.9999998, 0, 0, 0, 1, 0, 0, 0)
 layers = 21
 mesh = SubResource("SphereMesh_11gdu")
-skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("ShaderMaterial_6h5wy")
 
 [node name="sphere2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.0000001, 0, 0, 0, 0.9999998, 0, 0, 0, 1, 0, 0, 0)
 layers = 21
 mesh = SubResource("SphereMesh_pwc1s")
-skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("ShaderMaterial_8a028")
