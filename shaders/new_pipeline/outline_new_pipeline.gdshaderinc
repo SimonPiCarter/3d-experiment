@@ -48,3 +48,9 @@ void fragment() {
 		discard;
 	}
 }
+#ifdef SHADED
+void light() {
+	DIFFUSE_LIGHT = ALBEDO;
+	DIFFUSE_LIGHT += LIGHT_COLOR * ATTENUATION * clamp(smoothstep(0.1, 0.15, dot(LIGHT, NORMAL)), 0, 0.5);
+}
+#endif
