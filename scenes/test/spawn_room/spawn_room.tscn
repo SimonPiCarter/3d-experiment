@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dgaev27jk0ty5"]
+[gd_scene load_steps=23 format=3 uid="uid://dgaev27jk0ty5"]
 
 [ext_resource type="PackedScene" uid="uid://da2eduothcfya" path="res://scenes/templates/world_scene.tscn" id="1_c8bss"]
 [ext_resource type="Shader" uid="uid://c4njs3466gxfy" path="res://shaders/2d/pixel_outline_v2.gdshader" id="2_j5kw2"]
@@ -17,14 +17,14 @@ size = Vector2(1000, 1000)
 [sub_resource type="Gradient" id="Gradient_reekq"]
 colors = PackedColorArray(0.9764706, 0.61960787, 0.41568628, 1, 0.9476287, 0.52065206, 0.25580785, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_qy4ca"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ksg3c"]
 gradient = SubResource("Gradient_reekq")
 width = 1024
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xwact"]
 diffuse_mode = 3
 specular_mode = 1
-albedo_texture = SubResource("GradientTexture1D_qy4ca")
+albedo_texture = SubResource("GradientTexture1D_ksg3c")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8h1f0"]
 render_priority = 0
@@ -44,6 +44,15 @@ shader_parameter/use_albedo_texture = false
 shader_parameter/original_color = Color(0.24313726, 0.20784314, 0.27450982, 1)
 shader_parameter/outline_color = Color(0.93333334, 0.5411765, 0.10980392, 1)
 shader_parameter/use_mask = false
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ksg3c"]
+noise_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_mkva7"]
+width = 1024
+height = 1024
+noise = SubResource("FastNoiseLite_ksg3c")
+seamless = true
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_lixl2"]
 viewport_path = NodePath("MainViewport/SubViewport")
@@ -71,14 +80,12 @@ far = 600.0
 [node name="Background" type="MeshInstance3D" parent="MainViewport/SubViewport" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6004361, -0.15586472, -1.5166348)
 mesh = SubResource("PlaneMesh_ewlut")
-skeleton = NodePath("../Sprite3D")
 surface_material_override/0 = SubResource("StandardMaterial3D_xwact")
 
 [node name="BackgroundCheck" type="MeshInstance3D" parent="MainViewport/SubViewport" index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, -0.157, -1.517)
 layers = 16
 mesh = SubResource("PlaneMesh_ewlut")
-skeleton = NodePath("../Sprite3D")
 surface_material_override/0 = SubResource("ShaderMaterial_8h1f0")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="MainViewport/SubViewport" index="4"]
@@ -87,6 +94,7 @@ shadow_enabled = true
 
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="MainViewport/SubViewport" index="5"]
 transform = Transform3D(1, -4.983938e-09, -2.938263e-08, 2.9802322e-08, 0.16723324, 0.98591745, 0, -0.9859174, 0.16723326, 0, 0, 0)
+visible = false
 
 [node name="pylones" type="Node3D" parent="MainViewport/SubViewport" index="6"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.219317, 0)
@@ -108,49 +116,46 @@ surface_material_override/0 = SubResource("ShaderMaterial_w1hyg")
 transform = Transform3D(145, 0, 0, 0, 145, 0, 0, 0, 145, 0, -8.219317, 0)
 color_high = Color(0.21568628, 0.30588236, 0.2901961, 1)
 color_low = Color(0.19215687, 0.21176471, 0.21960784, 1)
-threshold = 0.0
+threshold = 1.0
+speed_offset = 0.9
+reversed = true
+noise = SubResource("NoiseTexture2D_mkva7")
 
 [node name="HealerBot" parent="MainViewport/SubViewport" index="7" instance=ExtResource("6_ksg3c")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -53.899582, 0.62210655, 157.77931)
 script = ExtResource("7_mkva7")
 
-[node name="BasicWeapon" type="Node" parent="MainViewport/SubViewport/HealerBot" index="5" node_paths=PackedStringArray("source", "targets", "root_projectile")]
+[node name="BasicWeapon" type="Node" parent="MainViewport/SubViewport/HealerBot" index="5" node_paths=PackedStringArray("source", "targets")]
 script = ExtResource("8_w1hyg")
 projectile = ExtResource("9_0634q")
 reload = 1.0
 source = NodePath("..")
 targets = NodePath("../../../../OutlineViewport/SubViewport/Camera3D")
-root_projectile = NodePath("")
 metadata/_custom_type_script = "uid://c0ydmpenhown0"
 
 [node name="HealerBot2" parent="MainViewport/SubViewport" index="8" instance=ExtResource("6_ksg3c")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -48.142197, 0.62210655, 165.90858)
 script = ExtResource("7_mkva7")
 
-[node name="BasicWeapon" type="Node" parent="MainViewport/SubViewport/HealerBot2" index="5" node_paths=PackedStringArray("source", "targets", "root_projectile")]
+[node name="BasicWeapon" type="Node" parent="MainViewport/SubViewport/HealerBot2" index="5" node_paths=PackedStringArray("source", "targets")]
 script = ExtResource("8_w1hyg")
 projectile = ExtResource("9_0634q")
 reload = 1.0
 source = NodePath("..")
 targets = NodePath("../../../../OutlineViewport/SubViewport/Camera3D")
-root_projectile = NodePath("")
 metadata/_custom_type_script = "uid://c0ydmpenhown0"
 
 [node name="HealerBot3" parent="MainViewport/SubViewport" index="9" instance=ExtResource("6_ksg3c")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -53.727036, 0.62210655, 142.75002)
 script = ExtResource("7_mkva7")
 
-[node name="BasicWeapon" type="Node" parent="MainViewport/SubViewport/HealerBot3" index="5" node_paths=PackedStringArray("source", "targets", "root_projectile")]
+[node name="BasicWeapon" type="Node" parent="MainViewport/SubViewport/HealerBot3" index="5" node_paths=PackedStringArray("source", "targets")]
 script = ExtResource("8_w1hyg")
 projectile = ExtResource("9_0634q")
 reload = 1.0
 source = NodePath("..")
 targets = NodePath("../../../../OutlineViewport/SubViewport/Camera3D")
-root_projectile = NodePath("")
 metadata/_custom_type_script = "uid://c0ydmpenhown0"
-
-[node name="Camera3D" parent="OutlineViewport/SubViewport" index="0" node_paths=PackedStringArray("ref_camera")]
-ref_camera = NodePath("../../../MainViewport/SubViewport/Camera3D")
 
 [node name="MainView" parent="CanvasLayer" index="0"]
 texture = SubResource("ViewportTexture_lixl2")

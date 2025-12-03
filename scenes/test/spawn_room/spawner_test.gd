@@ -52,8 +52,8 @@ func run() -> void:
 	var t = get_tree().create_tween()
 	t.tween_interval(2.)
 	var sphere = $"../SphereVFX"
-	sphere.threshold_alpha = 1.
-	t.tween_property(sphere, "threshold_alpha", 0., 5.)
+	sphere.threshold_alpha = 0.
+	t.tween_property(sphere, "threshold_alpha", 1., 5.)
 
 
 func _input(event: InputEvent) -> void:
