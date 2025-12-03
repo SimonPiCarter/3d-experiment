@@ -1,0 +1,73 @@
+[gd_scene load_steps=10 format=3 uid="uid://d2bwdeg25s7qm"]
+
+[ext_resource type="Script" uid="uid://d1sgp5r4tsu3l" path="res://scripts/FreeRoamingCamera3D.gd" id="1_dpo8d"]
+[ext_resource type="Shader" uid="uid://cmwp40tw6ncne" path="res://scenes/test/light/shader light.gdshader" id="1_lp66l"]
+[ext_resource type="PackedScene" uid="uid://dp5d6xpbviyh6" path="res://model/robot2.glb" id="3_yyfqr"]
+[ext_resource type="PackedScene" uid="uid://u80ueucf1jqc" path="res://model/robot3.glb" id="4_nniuo"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_dpo8d"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yyfqr"]
+render_priority = 0
+shader = ExtResource("1_lp66l")
+shader_parameter/color = Color(0.7607843, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_lp66l"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_yyfqr"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_lp66l"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.9940886, 0, -0.10857193, 0, 1, 0, 0.10857193, 0, 0.9940886, 0, 0, 0)
+mesh = SubResource("SphereMesh_dpo8d")
+surface_material_override/0 = SubResource("ShaderMaterial_yyfqr")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.9940886, 0, -0.10857193, 0.089660116, 0.56394404, 0.8209312, 0.06122849, -0.825813, 0.5606104, -1.8595581, 0, 0)
+mesh = SubResource("CylinderMesh_lp66l")
+surface_material_override/0 = SubResource("ShaderMaterial_yyfqr")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.9940886, -1.11379475e-08, -0.10857192, 0.10790854, -0.1103763, 0.9880147, -0.011983782, -0.99389005, -0.10972363, 1.326477, 0, 0)
+mesh = SubResource("CapsuleMesh_yyfqr")
+surface_material_override/0 = SubResource("ShaderMaterial_yyfqr")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.54205376, -0.09866669, 0.8345314, -0.84025836, -0.04947537, 0.5399242, -0.011983782, -0.99389005, -0.10972363, 3.1003418, 0, 0)
+mesh = SubResource("BoxMesh_lp66l")
+surface_material_override/0 = SubResource("ShaderMaterial_yyfqr")
+
+[node name="FreeRoamingCamera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.8740013, 0.4859236, 0, -0.4859236, 0.8740013, 0, 3.8070068, 6.0092773)
+script = ExtResource("1_dpo8d")
+metadata/_custom_type_script = "uid://d1sgp5r4tsu3l"
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.46640208, 0.42609203, -0.7751868, -2.6151806e-08, 0.8763403, 0.4816925, 0.88457274, -0.22466235, 0.40872693, -3.0026245, 1.9199219, 2.298706)
+
+[node name="robot2" parent="." instance=ExtResource("3_yyfqr")]
+transform = Transform3D(0.16261615, -0.029600006, 0.25035942, 0.19381364, 0.20520301, -0.10162678, -0.16122115, 0.21683072, 0.13035402, -4.198494, 0, 0.22839355)
+
+[node name="Body" parent="robot2/Armature/Skeleton3D" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_yyfqr")
+
+[node name="Icosphere" parent="robot2/Armature/Skeleton3D" index="1"]
+surface_material_override/0 = SubResource("ShaderMaterial_yyfqr")
+
+[node name="Legs" parent="robot2/Armature/Skeleton3D" index="2"]
+surface_material_override/0 = SubResource("ShaderMaterial_yyfqr")
+
+[node name="robot3" parent="robot2" instance=ExtResource("4_nniuo")]
+transform = Transform3D(0.79804784, 0.568981, 0.19844493, -0.5995708, 0.71680474, 0.35595754, 0.06028688, -0.4030528, 0.9131888, -1.1473594, 5.174922, 8.26097)
+
+[node name="Body" parent="robot2/robot3/Armature/Skeleton3D" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_yyfqr")
+
+[node name="Legs" parent="robot2/robot3/Armature/Skeleton3D" index="1"]
+surface_material_override/0 = SubResource("ShaderMaterial_yyfqr")
+
+[editable path="robot2"]
+[editable path="robot2/robot3"]
