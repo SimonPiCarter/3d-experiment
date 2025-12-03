@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://cobr225vkbh0b"]
+[gd_scene load_steps=11 format=3 uid="uid://cobr225vkbh0b"]
 
 [ext_resource type="PackedScene" uid="uid://u80ueucf1jqc" path="res://model/robot3.glb" id="1_dt103"]
 [ext_resource type="Script" uid="uid://csiyy0tqnvol2" path="res://scenes/models/robot_3.gd" id="2_mqb12"]
 [ext_resource type="PackedScene" uid="uid://vg4v25l817yt" path="res://scenes/test/exocube/exocube.tscn" id="3_mqb12"]
 [ext_resource type="Shader" uid="uid://cc18tpomiri80" path="res://shaders/new_pipeline/outline_new_pipeline_unshaded.gdshader" id="4_c748l"]
 [ext_resource type="Shader" uid="uid://7eh5v4axp1ng" path="res://shaders/new_pipeline/pickable.gdshader" id="4_mqb12"]
+[ext_resource type="Shader" uid="uid://cv4deawtx0pb3" path="res://shaders/new_pipeline/outline_new_pipeline_shaded.gdshader" id="5_5xpix"]
 [ext_resource type="Script" uid="uid://cssyvtlm806gc" path="res://scripts/ik/ik_auto_start.gd" id="5_eek0y"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c748l"]
@@ -15,7 +16,7 @@ shader_parameter/pickable_color = Color(0, 0, 0, 1)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_44606"]
 render_priority = 0
 next_pass = SubResource("ShaderMaterial_c748l")
-shader = ExtResource("4_c748l")
+shader = ExtResource("5_5xpix")
 shader_parameter/use_albedo_texture = false
 shader_parameter/original_color = Color(0.6745098, 0.6156863, 0.7176471, 1)
 shader_parameter/outline_color = Color(1, 0, 0.019607844, 1)
