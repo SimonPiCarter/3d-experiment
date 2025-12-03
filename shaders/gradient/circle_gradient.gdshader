@@ -2,7 +2,7 @@ shader_type spatial;
 
 render_mode unshaded;
 
-uniform sampler2D gradient_texture;
+uniform sampler2D gradient_texture : filter_linear;
 uniform vec4 color : source_color;
 uniform float low_pass : hint_range(0.0, 1.0, 0.01);
 uniform float high_pass : hint_range(0.0, 1.0, 0.01);
