@@ -2,22 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dqgoh3oe3vrjw"
-path.bptc="res://.godot/imported/albedo.png-3ea1a5585e84178b3e0908e25673e866.bptc.ctex"
+uid="uid://bbdweuduqqciv"
+path="res://.godot/imported/shaded_mask.png-bcbf58d92f6b29021fbf76358f75eb70.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://model/VAT/robot2/albedo.png"
-dest_files=["res://.godot/imported/albedo.png-3ea1a5585e84178b3e0908e25673e866.bptc.ctex"]
+source_file="res://model/VAT/robot2/shaded_mask.png"
+dest_files=["res://.godot/imported/shaded_mask.png-bcbf58d92f6b29021fbf76358f75eb70.ctex"]
 
 [params]
 
-compress/mode=2
-compress/high_quality=true
+compress/mode=0
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
