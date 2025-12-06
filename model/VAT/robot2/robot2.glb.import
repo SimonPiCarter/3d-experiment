@@ -1,0 +1,61 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://dtivvj5tm0xmg"
+path="res://.godot/imported/robot2.glb-7c28f4fc6bf4f605efd1d5689dff8406.scn"
+
+[deps]
+
+source_file="res://model/VAT/robot2/robot2.glb"
+dest_files=["res://.godot/imported/robot2.glb-7c28f4fc6bf4f605efd1d5689dff8406.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/root_script=null
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+nodes/import_as_skeleton_bones=false
+nodes/use_name_suffixes=true
+nodes/use_node_type_suffixes=true
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+animation/import_rest_as_RESET=false
+import_script/path=""
+materials/extract=2
+materials/extract_format=1
+materials/extract_path=""
+_subresources={
+"materials": {
+"@MATERIAL:0": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://demo/assets/models/robot2/@MATERIAL_0.res",
+"use_external/path": "res://demo/assets/models/robot2/@MATERIAL_0.res"
+}
+},
+"meshes": {
+"robot2_mesh_120": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://model/VAT/robot2/robot2_exported_mesh.res",
+"save_to_file/path": "uid://c75jlt5r74o2j"
+}
+}
+}
+gltf/naming_version=2
+gltf/embedded_image_handling=1

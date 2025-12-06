@@ -1,0 +1,119 @@
+[gd_scene load_steps=24 format=3 uid="uid://rlnye2ocs2oo"]
+
+[ext_resource type="PackedScene" uid="uid://da2eduothcfya" path="res://scenes/templates/world_scene.tscn" id="1_cssqi"]
+[ext_resource type="Shader" uid="uid://c4njs3466gxfy" path="res://shaders/2d/pixel_outline_v2.gdshader" id="2_d66d7"]
+[ext_resource type="Shader" uid="uid://cc18tpomiri80" path="res://shaders/new_pipeline/outline_new_pipeline_unshaded.gdshader" id="2_p03yx"]
+[ext_resource type="PackedScene" uid="uid://dd7pumxmee75o" path="res://scenes/models/quad_entity_robot_2.tscn" id="3_l544o"]
+[ext_resource type="Script" uid="uid://damlqeu0m6ksk" path="res://addons/godot_vat/vat_multi_mesh_instance_3d.gd" id="3_p03yx"]
+[ext_resource type="Shader" uid="uid://bvppykyi3ougu" path="res://addons/godot_vat/shaders/vat_multiple_anims.gdshader" id="3_wfgve"]
+[ext_resource type="Script" uid="uid://b8yr2dwmb2v3a" path="res://scenes/test/vat_multi_mesh/animator.gd" id="3_x3i31"]
+[ext_resource type="Script" uid="uid://dj7w0ypgd8ehs" path="res://scenes/entity/quand_ent_target_move.gd" id="4_hvaur"]
+[ext_resource type="Texture2D" uid="uid://87rs08b0xjwu" path="res://model/VAT/robot2/vaexport/normals.png" id="4_x3i31"]
+[ext_resource type="Texture2D" uid="uid://ddihy6kbgdbwt" path="res://model/VAT/robot2/vaexport/offsets.exr" id="5_su8r1"]
+[ext_resource type="ArrayMesh" uid="uid://c75jlt5r74o2j" path="res://model/VAT/robot2/robot2_exported_mesh.res" id="6_l544o"]
+[ext_resource type="Texture2D" uid="uid://dqgoh3oe3vrjw" path="res://model/VAT/robot2/albedo.png" id="9_lqqw6"]
+[ext_resource type="PackedScene" uid="uid://buslmtbcq01xb" path="res://scenes/UI/debug/fps_display.tscn" id="12_hvaur"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_703fr"]
+size = Vector2(1000, 1000)
+
+[sub_resource type="Gradient" id="Gradient_aoc4t"]
+colors = PackedColorArray(0.9764706, 0.61960787, 0.41568628, 1, 0.9476287, 0.52065206, 0.25580785, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_yvcre"]
+gradient = SubResource("Gradient_aoc4t")
+width = 1024
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0qt50"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = SubResource("GradientTexture1D_yvcre")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wfgve"]
+render_priority = 0
+shader = ExtResource("2_p03yx")
+shader_parameter/use_albedo_texture = false
+shader_parameter/original_color = Color(0, 0, 0, 1)
+shader_parameter/outline_color = Color(0, 0, 0.007843138, 1)
+shader_parameter/use_mask = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hvaur"]
+render_priority = 0
+shader = ExtResource("3_wfgve")
+shader_parameter/offset_map = ExtResource("5_su8r1")
+shader_parameter/normal_map = ExtResource("4_x3i31")
+shader_parameter/texture_albedo = ExtResource("9_lqqw6")
+shader_parameter/fps = 120.0
+shader_parameter/specular = 0.0
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 0.0
+
+[sub_resource type="MultiMesh" id="MultiMesh_lqqw6"]
+transform_format = 1
+use_custom_data = true
+mesh = ExtResource("6_l544o")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_p03yx"]
+viewport_path = NodePath("MainViewport/SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_703fr"]
+resource_local_to_scene = true
+shader = ExtResource("2_d66d7")
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_width = 1.0
+shader_parameter/type = 1
+shader_parameter/active = 1
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_aoc4t"]
+viewport_path = NodePath("OutlineViewport/SubViewport")
+
+[node name="WorldScene" instance=ExtResource("1_cssqi")]
+
+[node name="Camera3D" parent="MainViewport/SubViewport" index="1"]
+transform = Transform3D(0.7071068, 0.35355335, -0.61237246, 2.1855696e-08, 0.8660254, 0.5, 0.7071068, -0.3535534, 0.61237246, -44.06236, 50, 54.045494)
+
+[node name="Background" type="MeshInstance3D" parent="MainViewport/SubViewport" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6004361, -0.15586472, -1.5166348)
+mesh = SubResource("PlaneMesh_703fr")
+surface_material_override/0 = SubResource("StandardMaterial3D_0qt50")
+
+[node name="BackgroundCheck" type="MeshInstance3D" parent="MainViewport/SubViewport" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, -0.157, -1.517)
+layers = 16
+mesh = SubResource("PlaneMesh_703fr")
+surface_material_override/0 = SubResource("ShaderMaterial_wfgve")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="MainViewport/SubViewport" index="4"]
+transform = Transform3D(0.95441765, -0.10836298, 0.27810878, -0.11621556, 0.7233177, 0.68066555, -0.2749199, -0.68195975, 0.6777536, 0, 0, 0)
+shadow_enabled = true
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="MainViewport/SubViewport" index="5"]
+transform = Transform3D(1, -4.983938e-09, -2.938263e-08, 2.9802322e-08, 0.16723324, 0.98591745, 0, -0.9859174, 0.16723326, 0, 0, 0)
+visible = false
+
+[node name="HealerBot" parent="MainViewport/SubViewport" index="6" instance=ExtResource("3_l544o")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 1.1787109, 0)
+script = ExtResource("4_hvaur")
+
+[node name="Animator" type="Node3D" parent="MainViewport/SubViewport" index="7" node_paths=PackedStringArray("vat_multi_mesh_instance_3d")]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
+script = ExtResource("3_x3i31")
+vat_multi_mesh_instance_3d = NodePath("VATMultiMeshInstance3D")
+
+[node name="VATMultiMeshInstance3D" type="MultiMeshInstance3D" parent="MainViewport/SubViewport/Animator" index="0"]
+transform = Transform3D(0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, 2.686, 0.5, -2.748)
+layers = 17
+material_override = SubResource("ShaderMaterial_hvaur")
+multimesh = SubResource("MultiMesh_lqqw6")
+script = ExtResource("3_p03yx")
+animation_tracks = Array[Vector2i]([Vector2i(0, 40), Vector2i(41, 120)])
+metadata/_custom_type_script = "uid://damlqeu0m6ksk"
+
+[node name="MainView" parent="CanvasLayer" index="0"]
+texture = SubResource("ViewportTexture_p03yx")
+
+[node name="OutlineView" parent="CanvasLayer" index="1"]
+material = SubResource("ShaderMaterial_703fr")
+texture = SubResource("ViewportTexture_aoc4t")
+
+[node name="FpsDisplay" parent="CanvasLayer" index="2" instance=ExtResource("12_hvaur")]
