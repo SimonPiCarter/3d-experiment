@@ -28,6 +28,14 @@ window/movie_file="/home/simon/godot_workspace/3d-experiments/export.ogv"
 movie_writer/video_quality=1.0
 movie_writer/movie_file="/home/simon/godot_workspace/3d-experiments/export.avi"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot_vat/plugin.cfg")
+
+[filesystem]
+
+import/blender/enabled=false
+
 [rendering]
 
 lights_and_shadows/directional_shadow/soft_shadow_filter_quality=0
