@@ -19,13 +19,6 @@ const vec2[8] DIRECTIONS = {
 float gtz(float input) { return max(0, sign(input)); }
 // returns 1 if input > 0, else 0
 
-float compute_color_power(vec4 color) {
-	return 1000.*color.r + gtz(color.r)*100.
-		 + 100.*color.g + gtz(color.g)*10.
-		 + 10.*color.b + gtz(color.b)
-		 + color.a;
-}
-
 float check_color(sampler2D tex, vec2 from, vec2 size) {
 	float result = 0.0;
 	vec4 ref_color = texture(tex, from);
@@ -36,10 +29,15 @@ float check_color(sampler2D tex, vec2 from, vec2 size) {
 						 + abs(color.g - ref_color.g)
 						 + abs(color.b - ref_color.b)
 						 + abs(color.a - ref_color.a);
-		float val_color = color.r+color.g+color.b;
-		float diff = ref_val_color - val_color;
-		float abs_diff = abs(diff);
-		result += gtz(diff_color) * gtz(abs_diff - diff);
+		vec4 diff_val_color = color - ref_color;
+		vec4 greater_color = vec4(gtz(diff_val_color.r), gtz(diff_val_color.g), gtz(diff_val_color.b), gtz(diff_val_color.a));
+		vec4 reversed_diff_val_color = -diff_val_color;
+		vec4 lower_color = vec4(gtz(reversed_diff_val_color.r), gtz(reversed_diff_val_color.g), gtz(reversed_diff_val_color.b), gtz(reversed_diff_val_color.a));
+		float factor = greater_color.r;
+		factor += greater_color.g * (1.-min(1., lower_color.r));
+		factor += greater_color.b * (1.-min(1., lower_color.r + lower_color.g));
+		factor += greater_color.a * (1.-min(1., lower_color.r + lower_color.g + lower_color.b));
+		result += factor;
 	}
 	return result * ref_color.a;
 }
