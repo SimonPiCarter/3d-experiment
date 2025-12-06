@@ -11,7 +11,7 @@ const int mask_layer_val = 1;
 const int outline_layer_val = 1<<4;
 const int pickable_layer_val = 1<<5;
 
-uniform sampler2D albedo_texture : filter_nearest;
+uniform sampler2D albedo_texture : filter_nearest, source_color;
 uniform bool use_albedo_texture = false;
 uniform vec4 original_color : source_color;
 uniform vec4 outline_color : source_color = vec4(0.5,0.5,0.5,1.);
