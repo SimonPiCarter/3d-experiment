@@ -38,10 +38,7 @@ func setupInstances():
 			a = 0
 		
 func randomizeInstance(i: int):
-	if randi() %1:
-		node3D.scale = Vector3(1,1,1)
-	else:
-		node3D.scale = Vector3(2,2,1.5)
+	node3D.scale = Vector3(1,1,1)
 		
 	location.x = x
 	location.z = z

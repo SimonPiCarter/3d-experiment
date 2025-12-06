@@ -4,7 +4,7 @@ render_mode diffuse_toon, specular_toon;
 //depth_draw_opaque
 
 uniform sampler2D offset_map : filter_nearest;
-uniform sampler2D normal_map;
+uniform sampler2D normal_map : filter_nearest;
 uniform sampler2D texture_albedo : source_color;
 
 uniform float fps = 24.0; // change this to what the fps is in Blender
@@ -88,6 +88,7 @@ void fragment(){
 }
 
 void light() {
+	DIFFUSE_LIGHT = ALBEDO;
 	DIFFUSE_LIGHT += ALBEDO * (1.-shaded);
 	DIFFUSE_LIGHT += LIGHT_COLOR * ATTENUATION * clamp(smoothstep(0.1, 0.15, dot(LIGHT, NORMAL)), 0, 0.5) * shaded;
 }
