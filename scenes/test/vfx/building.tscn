@@ -1,11 +1,13 @@
-[gd_scene load_steps=39 format=3 uid="uid://bj3odj3n4aa7g"]
+[gd_scene load_steps=64 format=3 uid="uid://bj3odj3n4aa7g"]
 
 [ext_resource type="PackedScene" uid="uid://da2eduothcfya" path="res://scenes/templates/world_scene.tscn" id="1_hvvfc"]
 [ext_resource type="Shader" uid="uid://cc18tpomiri80" path="res://shaders/new_pipeline/outline_new_pipeline_unshaded.gdshader" id="2_3ynjs"]
 [ext_resource type="Shader" uid="uid://cv4deawtx0pb3" path="res://shaders/new_pipeline/outline_new_pipeline_shaded.gdshader" id="2_hb0md"]
 [ext_resource type="Shader" uid="uid://c4njs3466gxfy" path="res://shaders/2d/pixel_outline_v2.gdshader" id="2_hp3wi"]
 [ext_resource type="PackedScene" uid="uid://dd7pumxmee75o" path="res://scenes/models/quad_entity_robot_2.tscn" id="3_lshim"]
+[ext_resource type="Shader" uid="uid://dhrgs41dp44l7" path="res://shaders/new_pipeline/outline_new_pipeline_alpha.gdshader" id="4_666m3"]
 [ext_resource type="Script" uid="uid://dj7w0ypgd8ehs" path="res://scenes/entity/quand_ent_target_move.gd" id="4_hb0md"]
+[ext_resource type="Shader" uid="uid://bwye8r7ehq8mk" path="res://shaders/gradient/circle_gradient.gdshader" id="5_s6682"]
 [ext_resource type="PackedScene" uid="uid://4f2ootab3hjc" path="res://scenes/VFX/Cube/cube_vfx.tscn" id="7_mfb4q"]
 [ext_resource type="ArrayMesh" uid="uid://dj7wo4fxwc780" path="res://model/sphere_clean_wrap.obj" id="8_8l60q"]
 [ext_resource type="Shader" uid="uid://bheb3rnfrrvep" path="res://scenes/models/materials/vfx/sphere_back_vfx.gdshader" id="8_lnxaa"]
@@ -15,7 +17,7 @@ size = Vector3(4, 1, 0.05)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8l60q"]
 render_priority = 0
-shader = ExtResource("2_hb0md")
+shader = ExtResource("2_3ynjs")
 shader_parameter/use_albedo_texture = false
 shader_parameter/original_color = Color(0.7879121, 1.353256, 1.2328587, 1)
 shader_parameter/outline_color = Color(0.5019608, 0.8235294, 0.75686276, 1)
@@ -43,6 +45,21 @@ shader_parameter/original_color = Color(2.454227, 0.8499633, 0.7660193, 1)
 shader_parameter/outline_color = Color(0.5019608, 0.35686275, 0.77254903, 1)
 shader_parameter/use_mask = false
 
+[sub_resource type="Animation" id="Animation_mfb4q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:surface_material_override/0:shader_parameter/original_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(2.454227, 0.8499633, 0.7660193, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_hb0md"]
 resource_name = "run"
 length = 5.0
@@ -60,21 +77,6 @@ tracks/0/keys = {
 "values": [Color(2.454227, 0.8499633, 0.7660193, 1), Color(1, 0.3254902, 0.2901961, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_mfb4q"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:surface_material_override/0:shader_parameter/original_color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(2.454227, 0.8499633, 0.7660193, 1)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8l60q"]
 _data = {
 &"RESET": SubResource("Animation_mfb4q"),
@@ -83,6 +85,21 @@ _data = {
 
 [sub_resource type="BoxMesh" id="BoxMesh_hb0md"]
 size = Vector3(8, 0.5, 0.05)
+
+[sub_resource type="Animation" id="Animation_lnxaa"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:surface_material_override/0:shader_parameter/original_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.7879121, 1.353256, 1.2328587, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_8l60q"]
 resource_name = "run"
@@ -101,7 +118,77 @@ tracks/0/keys = {
 "values": [Color(0.7879121, 1.353256, 1.2328587, 1), Color(1.0701526, 1.8247963, 1.664085, 1), Color(0.7879121, 1.353256, 1.2328587, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_lnxaa"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lnxaa"]
+_data = {
+&"RESET": SubResource("Animation_lnxaa"),
+&"run": SubResource("Animation_8l60q")
+}
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_lnxaa"]
+size = Vector2(4, 0.05)
+
+[sub_resource type="Curve" id="Curve_lnxaa"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_666m3"]
+_data = [Vector2(0.09951456, 0.9844358), 0.0, 0.0, 0, 0, Vector2(0.7645631, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_s6682"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_vtdqv"]
+curve_x = SubResource("Curve_lnxaa")
+curve_y = SubResource("Curve_666m3")
+curve_z = SubResource("Curve_s6682")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lnxaa"]
+emission_shape = 3
+emission_box_extents = Vector3(2, 0.025, 0.05)
+direction = Vector3(0, 1, 0)
+spread = 0.0
+initial_velocity_min = 1.5
+initial_velocity_max = 1.5
+gravity = Vector3(0, -0.25, 0)
+scale_curve = SubResource("CurveXYZTexture_vtdqv")
+
+[sub_resource type="BoxMesh" id="BoxMesh_666m3"]
+size = Vector3(0.05, 0.2, 0.05)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_666m3"]
+size = Vector2(0.5, 0.05)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_s6682"]
+size = Vector2(0.05, 0.05)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_31e2t"]
+render_priority = 0
+shader = ExtResource("4_666m3")
+shader_parameter/use_albedo_texture = false
+shader_parameter/original_color = Color(2.621079, 4.415934, 4.0336967, 1)
+shader_parameter/outline_color = Color(0.5019608, 0.8235294, 0.75686276, 1)
+shader_parameter/use_mask = false
+
+[sub_resource type="Animation" id="Animation_vtdqv"]
+resource_name = "vanish"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:surface_material_override/0:shader_parameter/original_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 3.9666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.7879121, 1.353256, 1.2328587, 1), Color(0.7879121, 1.353256, 1.2328587, 0), Color(0.7879121, 1.353256, 1.2328587, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_31e2t"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -113,13 +200,71 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(0.7879121, 1.353256, 1.2328587, 1)]
+"values": [Color(2.621079, 4.415934, 4.0336967, 1)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_lnxaa"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_31e2t"]
 _data = {
-&"RESET": SubResource("Animation_lnxaa"),
-&"run": SubResource("Animation_8l60q")
+&"RESET": SubResource("Animation_31e2t"),
+&"vanish": SubResource("Animation_vtdqv")
+}
+
+[sub_resource type="QuadMesh" id="QuadMesh_vtdqv"]
+
+[sub_resource type="Gradient" id="Gradient_31e2t"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_s6682"]
+gradient = SubResource("Gradient_31e2t")
+width = 1024
+height = 1024
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6fxmk"]
+render_priority = 0
+shader = ExtResource("5_s6682")
+shader_parameter/gradient_texture = SubResource("GradientTexture2D_s6682")
+shader_parameter/color = Color(0.5764706, 1, 0.9098039, 0.26666668)
+shader_parameter/low_pass = 0.0
+shader_parameter/high_pass = 0.5000000074506
+shader_parameter/margin = 0.3999999910592
+
+[sub_resource type="Animation" id="Animation_6fxmk"]
+resource_name = "vanish"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(20, 20, 20), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_2lav8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(20, 20, 20)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2lav8"]
+_data = {
+&"RESET": SubResource("Animation_2lav8"),
+&"vanish": SubResource("Animation_6fxmk")
 }
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_lshim"]
@@ -144,6 +289,112 @@ shader_parameter/use_albedo_texture = false
 shader_parameter/original_color = Color(0, 0, 0, 1)
 shader_parameter/outline_color = Color(0, 0, 0.007843138, 1)
 shader_parameter/use_mask = false
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_666m3"]
+noise_type = 2
+seed = 5
+fractal_octaves = 3
+fractal_lacunarity = 5.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_s6682"]
+noise = SubResource("FastNoiseLite_666m3")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vtdqv"]
+render_priority = 0
+shader = ExtResource("8_lnxaa")
+shader_parameter/Noise = SubResource("NoiseTexture2D_s6682")
+shader_parameter/Threshold = 0.434000020615
+shader_parameter/ThresholdAlpha = 0.58800002793
+shader_parameter/ColorHigh = Color(0.2, 1, 0.2, 0.5)
+shader_parameter/ColorLow = Color(0.2, 1, 0.2, 1)
+shader_parameter/speed_offset = 0.650000030875
+shader_parameter/reversed = 1.0
+
+[sub_resource type="Animation" id="Animation_666m3"]
+resource_name = "run"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:surface_material_override/0:shader_parameter/Threshold")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.250000011875, 0.434000020615]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:surface_material_override/0:shader_parameter/ThresholdAlpha")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.250000011875, 1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(0.25, 1, -2),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 1.5707964, 0), Vector3(0, 3.1415927, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_s6682"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:surface_material_override/0:shader_parameter/Threshold")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.434000020615]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:surface_material_override/0:shader_parameter/ThresholdAlpha")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.58800002793]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s6682"]
+_data = {
+&"RESET": SubResource("Animation_s6682"),
+&"run": SubResource("Animation_666m3")
+}
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_8j1eq"]
 noise_type = 0
@@ -215,26 +466,6 @@ _data = {
 &"RESET": SubResource("Animation_kkt5o"),
 &"run": SubResource("Animation_8j1eq")
 }
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_666m3"]
-noise_type = 2
-seed = 5
-fractal_octaves = 3
-fractal_lacunarity = 5.0
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_s6682"]
-noise = SubResource("FastNoiseLite_666m3")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vtdqv"]
-render_priority = 0
-shader = ExtResource("8_lnxaa")
-shader_parameter/Noise = SubResource("NoiseTexture2D_s6682")
-shader_parameter/Threshold = 0.850000040375
-shader_parameter/ThresholdAlpha = 1.0
-shader_parameter/ColorHigh = Color(0.2, 1, 0.2, 0.5)
-shader_parameter/ColorLow = Color(0.2, 1, 0.2, 1)
-shader_parameter/speed_offset = 0.650000030875
-shader_parameter/reversed = 1.0
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_3ynjs"]
 viewport_path = NodePath("MainViewport/SubViewport")
@@ -396,6 +627,7 @@ autoplay = "run"
 
 [node name="Node3D4" type="Node3D" parent="MainViewport/SubViewport" index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.760807, -0.5822754, -11.739546)
+visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MainViewport/SubViewport/Node3D4" index="0"]
 layers = 17
@@ -424,33 +656,228 @@ mesh = SubResource("BoxMesh_mfb4q")
 skeleton = NodePath("../../Camera3D")
 surface_material_override/0 = SubResource("ShaderMaterial_8l60q")
 
-[node name="Camera3D" parent="MainViewport/SubViewport" index="5"]
+[node name="Planes" type="Node3D" parent="MainViewport/SubViewport" index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8379011, -0.5822754, -11.691005)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MainViewport/SubViewport/Planes" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.018076897, 0.43963623, 0.023676872)
+layers = 17
+mesh = SubResource("PlaneMesh_lnxaa")
+skeleton = NodePath("../../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_8l60q")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="MainViewport/SubViewport/Planes" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.016714096, 0.33990312, 0.02836132)
+layers = 17
+material_override = SubResource("ShaderMaterial_8l60q")
+cast_shadow = 0
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_lnxaa")
+draw_pass_1 = SubResource("BoxMesh_666m3")
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="MainViewport/SubViewport/Planes" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.016714096, 0.011208534, 3.985538)
+layers = 17
+material_override = SubResource("ShaderMaterial_8l60q")
+cast_shadow = 0
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_lnxaa")
+draw_pass_1 = SubResource("BoxMesh_666m3")
+
+[node name="GPUParticles3D3" type="GPUParticles3D" parent="MainViewport/SubViewport/Planes" index="3"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 2.0081224, 0.54282475, 1.9971924)
+layers = 17
+material_override = SubResource("ShaderMaterial_8l60q")
+cast_shadow = 0
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_lnxaa")
+draw_pass_1 = SubResource("BoxMesh_666m3")
+
+[node name="GPUParticles3D4" type="GPUParticles3D" parent="MainViewport/SubViewport/Planes" index="4"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1.9697537, 0.54282475, 1.9971924)
+layers = 17
+material_override = SubResource("ShaderMaterial_8l60q")
+cast_shadow = 0
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_lnxaa")
+draw_pass_1 = SubResource("BoxMesh_666m3")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="MainViewport/SubViewport/Planes" index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6021299, 0.43963623, 0.16863632)
+layers = 17
+mesh = SubResource("PlaneMesh_666m3")
+skeleton = NodePath("../../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_8l60q")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="MainViewport/SubViewport/Planes" index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3002925, 0.43963623, 0.16863632)
+layers = 17
+mesh = SubResource("PlaneMesh_s6682")
+skeleton = NodePath("../../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_8l60q")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="MainViewport/SubViewport/Planes" index="7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2235208, 0.43963623, 0.16863632)
+layers = 17
+mesh = SubResource("PlaneMesh_s6682")
+skeleton = NodePath("../../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_8l60q")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="MainViewport/SubViewport/Planes" index="8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.146749, 0.43963623, 0.16863632)
+layers = 17
+mesh = SubResource("PlaneMesh_s6682")
+skeleton = NodePath("../../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_8l60q")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="MainViewport/SubViewport/Planes" index="9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8231089, 0.43963623, 0.24330616)
+layers = 17
+mesh = SubResource("PlaneMesh_s6682")
+skeleton = NodePath("../../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_8l60q")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="MainViewport/SubViewport/Planes" index="10"]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -1.6234887, 0.43963623, 3.8809566)
+layers = 17
+mesh = SubResource("PlaneMesh_666m3")
+skeleton = NodePath("../../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_8l60q")
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="MainViewport/SubViewport/Planes" index="11"]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -1.3216512, 0.43963623, 3.8809566)
+layers = 17
+mesh = SubResource("PlaneMesh_s6682")
+skeleton = NodePath("../../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_8l60q")
+
+[node name="MeshInstance3D12" type="MeshInstance3D" parent="MainViewport/SubViewport/Planes" index="12"]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -1.2448795, 0.43963623, 3.8809566)
+layers = 17
+mesh = SubResource("PlaneMesh_s6682")
+skeleton = NodePath("../../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_8l60q")
+
+[node name="MeshInstance3D13" type="MeshInstance3D" parent="MainViewport/SubViewport/Planes" index="13"]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -1.1681077, 0.43963623, 3.8809566)
+layers = 17
+mesh = SubResource("PlaneMesh_s6682")
+skeleton = NodePath("../../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_8l60q")
+
+[node name="MeshInstance3D14" type="MeshInstance3D" parent="MainViewport/SubViewport/Planes" index="14"]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -1.8444676, 0.43963623, 3.8062868)
+layers = 17
+mesh = SubResource("PlaneMesh_s6682")
+skeleton = NodePath("../../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_8l60q")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MainViewport/SubViewport/Planes" index="15"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.023677826, 0.43963623, 3.99571)
+layers = 17
+mesh = SubResource("PlaneMesh_lnxaa")
+skeleton = NodePath("../../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_8l60q")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="MainViewport/SubViewport/Planes" index="16"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1.9583454, 0.43963623, 2.0007486)
+layers = 17
+mesh = SubResource("PlaneMesh_lnxaa")
+skeleton = NodePath("../../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_8l60q")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="MainViewport/SubViewport/Planes" index="17"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.9958363, 0.43963623, 2.0007486)
+layers = 17
+mesh = SubResource("PlaneMesh_lnxaa")
+skeleton = NodePath("../../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_8l60q")
+
+[node name="PlanesVanishing" type="Node3D" parent="MainViewport/SubViewport" index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.004506, -0.5822754, 1.7453957)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MainViewport/SubViewport/PlanesVanishing" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.018076897, 0.43963623, 0.023676872)
+mesh = SubResource("PlaneMesh_lnxaa")
+skeleton = NodePath("../../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_31e2t")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MainViewport/SubViewport/PlanesVanishing" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.023677826, 0.43963623, 3.99571)
+mesh = SubResource("PlaneMesh_lnxaa")
+skeleton = NodePath("../../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_31e2t")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="MainViewport/SubViewport/PlanesVanishing" index="2"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1.9583454, 0.43963623, 2.0007486)
+mesh = SubResource("PlaneMesh_lnxaa")
+skeleton = NodePath("../../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_31e2t")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="MainViewport/SubViewport/PlanesVanishing" index="3"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.9958363, 0.43963623, 2.0007486)
+mesh = SubResource("PlaneMesh_lnxaa")
+skeleton = NodePath("../../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_31e2t")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MainViewport/SubViewport/PlanesVanishing" index="4"]
+libraries = {
+&"": SubResource("AnimationLibrary_31e2t")
+}
+
+[node name="Gradient" type="MeshInstance3D" parent="MainViewport/SubViewport" index="7"]
+transform = Transform3D(20, 0, 0, 0, -8.742278e-07, 20, 0, -20, -8.742278e-07, 9.166016, 2.3129883, 16.367065)
+layers = 17
+mesh = SubResource("QuadMesh_vtdqv")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("ShaderMaterial_6fxmk")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MainViewport/SubViewport/Gradient" index="0"]
+libraries = {
+&"": SubResource("AnimationLibrary_2lav8")
+}
+autoplay = "vanish"
+
+[node name="Camera3D" parent="MainViewport/SubViewport" index="8"]
 transform = Transform3D(0.7071068, 0.35355338, -0.61237246, 2.1855696e-08, 0.8660254, 0.5, 0.7071068, -0.35355338, 0.61237246, -19.334026, 11.321106, 17.303307)
 
-[node name="Background2" type="MeshInstance3D" parent="MainViewport/SubViewport" index="6"]
+[node name="Background2" type="MeshInstance3D" parent="MainViewport/SubViewport" index="9"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6004361, -0.15586472, -1.5166348)
 mesh = SubResource("PlaneMesh_lshim")
 surface_material_override/0 = SubResource("StandardMaterial3D_8l60q")
 
-[node name="BackgroundCheck" type="MeshInstance3D" parent="MainViewport/SubViewport" index="7"]
+[node name="BackgroundCheck" type="MeshInstance3D" parent="MainViewport/SubViewport" index="10"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, -0.157, -1.517)
 layers = 16
 mesh = SubResource("PlaneMesh_lshim")
 surface_material_override/0 = SubResource("ShaderMaterial_lnxaa")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="MainViewport/SubViewport" index="8"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="MainViewport/SubViewport" index="11"]
 transform = Transform3D(0.95441765, -0.10836298, 0.27810878, -0.11621556, 0.7233177, 0.68066555, -0.2749199, -0.68195975, 0.6777536, 0, 0, 0)
 shadow_enabled = true
 
-[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="MainViewport/SubViewport" index="9"]
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="MainViewport/SubViewport" index="12"]
 transform = Transform3D(1, -4.983938e-09, -2.938263e-08, 2.9802322e-08, 0.16723324, 0.98591745, 0, -0.9859174, 0.16723326, 0, 0, 0)
 visible = false
 
-[node name="HealerBot" parent="MainViewport/SubViewport" index="10" instance=ExtResource("3_lshim")]
+[node name="HealerBot" parent="MainViewport/SubViewport" index="13" instance=ExtResource("3_lshim")]
 transform = Transform3D(0.3, 0, 0, 0, 0.30000004, 0, 0, 0, 0.30000004, 0, 0.6148071, 0)
 script = ExtResource("4_hb0md")
 
-[node name="CubeVFX" parent="MainViewport/SubViewport" index="11" instance=ExtResource("7_mfb4q")]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MainViewport/SubViewport/HealerBot" index="5"]
+transform = Transform3D(6.6666665, 0, 0, 0, 6.666666, 0, 0, 0, 6.666666, 0.3974946, -2.5119016, 0.09554862)
+layers = 17
+mesh = ExtResource("8_8l60q")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_vtdqv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MainViewport/SubViewport/HealerBot/MeshInstance3D" index="0"]
+libraries = {
+&"": SubResource("AnimationLibrary_s6682")
+}
+autoplay = "run"
+
+[node name="CubeVFX" parent="MainViewport/SubViewport" index="14" instance=ExtResource("7_mfb4q")]
 transform = Transform3D(3.8, 0, 0, 0, 3.8, 0, 0, 0, 3.8, 9.648645, 2.024292, -0.45386955)
 color_high = Color(0.3372549, 0.6745098, 1, 1)
 color_low = Color(0.76697344, 1.1229308, 1.353256, 1)
@@ -464,13 +891,6 @@ libraries = {
 &"": SubResource("AnimationLibrary_kkt5o")
 }
 autoplay = "run"
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="MainViewport/SubViewport" index="12"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.11924839, -0.13876343, 0.028664589)
-layers = 17
-mesh = ExtResource("8_8l60q")
-skeleton = NodePath("../../..")
-surface_material_override/0 = SubResource("ShaderMaterial_vtdqv")
 
 [node name="MainView" parent="CanvasLayer" index="0"]
 texture = SubResource("ViewportTexture_3ynjs")
