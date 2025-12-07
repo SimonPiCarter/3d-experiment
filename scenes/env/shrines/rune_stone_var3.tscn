@@ -1,0 +1,159 @@
+[gd_scene load_steps=12 format=3 uid="uid://dlebjkhb0bnl7"]
+
+[ext_resource type="Script" uid="uid://bhbd7hw5orqrh" path="res://scenes/env/shrines/rune_stone_var_3.gd" id="1_v288l"]
+[ext_resource type="Script" uid="uid://bo323vppjs8mt" path="res://scenes/templates/circle_arranger.gd" id="2_v288l"]
+[ext_resource type="Shader" uid="uid://cv4deawtx0pb3" path="res://shaders/new_pipeline/outline_new_pipeline_shaded.gdshader" id="3_p6tqd"]
+[ext_resource type="Shader" uid="uid://8qqlrwev4asc" path="res://shaders/vfx/decal_texture.gdshader" id="4_bfvhd"]
+[ext_resource type="ArrayMesh" uid="uid://cua7tvui3g6vh" path="res://model/rock.obj" id="4_v288l"]
+[ext_resource type="Texture2D" uid="uid://dxkvwdji37y3e" path="res://textures/glyphs/third_glyph.png" id="5_s1ph2"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ii1fx"]
+size = Vector3(0.25, 0.25, 0.25)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4h8xn"]
+render_priority = 0
+shader = ExtResource("3_p6tqd")
+shader_parameter/use_albedo_texture = false
+shader_parameter/original_color = Color(0.24313726, 0.20784314, 0.27450982, 1)
+shader_parameter/outline_color = Color(0.93333334, 0.5411765, 0.10980392, 1)
+shader_parameter/use_mask = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2hv5x"]
+render_priority = 0
+shader = ExtResource("3_p6tqd")
+shader_parameter/use_albedo_texture = false
+shader_parameter/original_color = Color(0.24313726, 0.20784314, 0.27450982, 1)
+shader_parameter/outline_color = Color(0.93333334, 0.2901961, 0.10980392, 1)
+shader_parameter/use_mask = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_5hhw2"]
+size = Vector2(2, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hvhxh"]
+render_priority = 0
+shader = ExtResource("4_bfvhd")
+shader_parameter/albedo = ExtResource("5_s1ph2")
+shader_parameter/color = Color(1, 1, 1, 1)
+
+[node name="RuneStone" type="Node3D"]
+script = ExtResource("1_v288l")
+
+[node name="StoneCircle" type="Node3D" parent="."]
+
+[node name="CircleArranger" type="Node3D" parent="StoneCircle"]
+script = ExtResource("2_v288l")
+ray = 1.0
+rotate = true
+metadata/_custom_type_script = "uid://bo323vppjs8mt"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StoneCircle/CircleArranger"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.569458, 0)
+layers = 17
+mesh = SubResource("BoxMesh_ii1fx")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_4h8xn")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="StoneCircle/CircleArranger"]
+transform = Transform3D(-0.49999997, 0, -0.8660252, 0, 1, 0, 0.8660252, 0, -0.49999997, -0.5, 1.0766971, 0.8660254)
+layers = 17
+mesh = SubResource("BoxMesh_ii1fx")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_4h8xn")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="StoneCircle/CircleArranger"]
+transform = Transform3D(-0.4999999, 0, 0.86602545, 0, 1, 0, -0.86602545, 0, -0.4999999, -0.5, 0.66339135, -0.8660254)
+layers = 17
+mesh = SubResource("BoxMesh_ii1fx")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_4h8xn")
+
+[node name="CircleArranger2" type="Node3D" parent="StoneCircle"]
+transform = Transform3D(0.17364822, 0, 0.9848077, 0, 1, 0, -0.9848077, 0, 0.17364822, 0, 0, 0)
+script = ExtResource("2_v288l")
+ray = 1.25
+rotate = true
+metadata/_custom_type_script = "uid://bo323vppjs8mt"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StoneCircle/CircleArranger2"]
+transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 1.25, 1.8699591, 0)
+layers = 17
+mesh = SubResource("BoxMesh_ii1fx")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_4h8xn")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="StoneCircle/CircleArranger2"]
+transform = Transform3D(-4.371138e-08, 0, -0.9999998, 0, 1, 0, 0.9999998, 0, -4.371138e-08, 7.6540425e-17, 1.4002931, 1.25)
+layers = 17
+mesh = SubResource("BoxMesh_ii1fx")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_4h8xn")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="StoneCircle/CircleArranger2"]
+transform = Transform3D(-0.9999998, 0, 8.742276e-08, 0, 1, 0, -8.742276e-08, 0, -0.9999998, -1.25, 1.6257327, 1.5308085e-16)
+layers = 17
+mesh = SubResource("BoxMesh_ii1fx")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_4h8xn")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="StoneCircle/CircleArranger2"]
+transform = Transform3D(1.1924882e-08, 0, 1.0000001, 0, 1, 0, -1.0000001, 0, 1.1924882e-08, -2.2962126e-16, 2.5087047, -1.25)
+layers = 17
+mesh = SubResource("BoxMesh_ii1fx")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_4h8xn")
+
+[node name="CircleArranger3" type="Node3D" parent="StoneCircle"]
+transform = Transform3D(0.7660444, 0, 0.6427875, 0, 1, 0, -0.6427875, 0, 0.7660444, 0, 0, 0)
+script = ExtResource("2_v288l")
+ray = 1.5
+rotate = true
+metadata/_custom_type_script = "uid://bo323vppjs8mt"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StoneCircle/CircleArranger3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 3.1214252, 0)
+layers = 17
+mesh = SubResource("BoxMesh_ii1fx")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_4h8xn")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="StoneCircle/CircleArranger3"]
+transform = Transform3D(0.30901688, 0, -0.95105624, 0, 1, 0, 0.95105624, 0, 0.30901688, 0.4635255, 2.3511724, 1.4265847)
+layers = 17
+mesh = SubResource("BoxMesh_ii1fx")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_4h8xn")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="StoneCircle/CircleArranger3"]
+transform = Transform3D(-0.8090169, 0, -0.58778507, 0, 1, 0, 0.58778507, 0, -0.8090169, -1.2135255, 2.3887458, 0.88167787)
+layers = 17
+mesh = SubResource("BoxMesh_ii1fx")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_4h8xn")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="StoneCircle/CircleArranger3"]
+transform = Transform3D(-0.80901694, 0, 0.58778536, 0, 1, 0, -0.58778536, 0, -0.80901694, -1.2135255, 2.8959851, -0.88167787)
+layers = 17
+mesh = SubResource("BoxMesh_ii1fx")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_4h8xn")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="StoneCircle/CircleArranger3"]
+transform = Transform3D(0.30901712, 0, 0.9510565, 0, 1, 0, -0.9510565, 0, 0.30901712, 0.4635255, 2.2572393, -1.4265847)
+layers = 17
+mesh = SubResource("BoxMesh_ii1fx")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_4h8xn")
+
+[node name="RunStone" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.49151415, 0, -0.091726996, 0, 0.5, 0, 0.091726996, 0, -0.49151415, 0, 2.722, 0.10555351)
+layers = 17
+mesh = ExtResource("4_v288l")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_2hv5x")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RunStone"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -1.071021e-08, 1.3302822, -1.0178556)
+layers = 17
+mesh = SubResource("QuadMesh_5hhw2")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("ShaderMaterial_hvhxh")

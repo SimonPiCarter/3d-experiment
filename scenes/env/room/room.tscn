@@ -1,0 +1,49 @@
+[gd_scene load_steps=9 format=3 uid="uid://doovx36ugov6p"]
+
+[ext_resource type="Script" uid="uid://cgm7xu61sdfr2" path="res://scenes/env/room/room.gd" id="1_5smgo"]
+[ext_resource type="Shader" uid="uid://cv4deawtx0pb3" path="res://shaders/new_pipeline/outline_new_pipeline_shaded.gdshader" id="2_6h343"]
+[ext_resource type="PackedScene" uid="uid://cvyhsdynhh21x" path="res://scenes/VFX/Sphere/sphere.tscn" id="3_ox7qo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ksg3c"]
+render_priority = 0
+shader = ExtResource("2_6h343")
+shader_parameter/use_albedo_texture = false
+shader_parameter/original_color = Color(0.24313726, 0.20784314, 0.27450982, 1)
+shader_parameter/outline_color = Color(0.93333334, 0.5411765, 0.10980392, 1)
+shader_parameter/use_mask = false
+
+[sub_resource type="BoxMesh" id="BoxMesh_w1hyg"]
+size = Vector3(0.5, 20, 0.5)
+
+[sub_resource type="MultiMesh" id="MultiMesh_0634q"]
+transform_format = 1
+mesh = SubResource("BoxMesh_w1hyg")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ksg3c"]
+noise_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_mkva7"]
+width = 1024
+height = 1024
+noise = SubResource("FastNoiseLite_ksg3c")
+seamless = true
+
+[node name="Room" type="Node3D"]
+script = ExtResource("1_5smgo")
+room_ray = 75.0
+nb_objects = 200
+diff_time = 1.0
+
+[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="."]
+layers = 17
+material_override = SubResource("ShaderMaterial_ksg3c")
+multimesh = SubResource("MultiMesh_0634q")
+
+[node name="SphereVFX" parent="." instance=ExtResource("3_ox7qo")]
+transform = Transform3D(145, 0, 0, 0, 145, 0, 0, 0, 145, 0, 0, 0)
+color_high = Color(0.21568628, 0.30588236, 0.2901961, 1)
+color_low = Color(0.19215687, 0.21176471, 0.21960784, 1)
+threshold = 1.0
+speed_offset = 0.9
+reversed = true
+noise = SubResource("NoiseTexture2D_mkva7")
