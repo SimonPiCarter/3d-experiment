@@ -1,0 +1,172 @@
+[gd_scene load_steps=23 format=3 uid="uid://uhgtva2awicx"]
+
+[ext_resource type="PackedScene" uid="uid://da2eduothcfya" path="res://scenes/templates/world_scene.tscn" id="1_cs7ob"]
+[ext_resource type="Shader" uid="uid://cc18tpomiri80" path="res://shaders/new_pipeline/outline_new_pipeline_unshaded.gdshader" id="2_8req8"]
+[ext_resource type="Script" uid="uid://nd2whao8i88m" path="res://scenes/test/room/room_1/room_1.gd" id="2_ii1fx"]
+[ext_resource type="Shader" uid="uid://c4njs3466gxfy" path="res://shaders/2d/pixel_outline_v2.gdshader" id="2_mncfv"]
+[ext_resource type="PackedScene" uid="uid://doovx36ugov6p" path="res://scenes/env/room/room.tscn" id="3_8req8"]
+[ext_resource type="Shader" uid="uid://cv4deawtx0pb3" path="res://shaders/new_pipeline/outline_new_pipeline_shaded.gdshader" id="5_5hhw2"]
+[ext_resource type="PackedScene" uid="uid://dh8k7ew62dcph" path="res://scenes/env/shrines/rune_stone.tscn" id="5_ii1fx"]
+[ext_resource type="PackedScene" uid="uid://c882n7e0mxsso" path="res://scenes/env/shrines/rune_stone_var2.tscn" id="6_4ano6"]
+[ext_resource type="PackedScene" uid="uid://dlebjkhb0bnl7" path="res://scenes/env/shrines/rune_stone_var3.tscn" id="7_hvhxh"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_jeomr"]
+size = Vector2(1000, 1000)
+
+[sub_resource type="Gradient" id="Gradient_ii1fx"]
+colors = PackedColorArray(0.9764706, 0.61960787, 0.41568628, 1, 0.9476287, 0.52065206, 0.25580785, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_yvcre"]
+gradient = SubResource("Gradient_ii1fx")
+width = 1024
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5hhw2"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = SubResource("GradientTexture1D_yvcre")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4ano6"]
+render_priority = 0
+shader = ExtResource("2_8req8")
+shader_parameter/use_albedo_texture = false
+shader_parameter/original_color = Color(0, 0, 0, 1)
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/use_mask = false
+
+[sub_resource type="BoxMesh" id="BoxMesh_5hhw2"]
+size = Vector3(10, 4, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4h8xn"]
+render_priority = 0
+shader = ExtResource("5_5hhw2")
+shader_parameter/use_albedo_texture = false
+shader_parameter/original_color = Color(0.9764706, 0.61960787, 0.41568628, 1)
+shader_parameter/outline_color = Color(0.93333334, 0.5411765, 0.10980392, 1)
+shader_parameter/use_mask = false
+
+[sub_resource type="BoxMesh" id="BoxMesh_4ano6"]
+size = Vector3(1, 4, 0.5)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_4ano6"]
+top_radius = 0.25
+bottom_radius = 0.25
+height = 1.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_5hhw2"]
+top_radius = 0.25
+bottom_radius = 0.25
+height = 5.0
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_8req8"]
+viewport_path = NodePath("MainViewport/SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jeomr"]
+resource_local_to_scene = true
+shader = ExtResource("2_mncfv")
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_width = 1.0
+shader_parameter/type = 1
+shader_parameter/active = 1
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ii1fx"]
+viewport_path = NodePath("OutlineViewport/SubViewport")
+
+[node name="WorldScene" instance=ExtResource("1_cs7ob")]
+script = ExtResource("2_ii1fx")
+
+[node name="Camera3D" parent="MainViewport/SubViewport" index="1"]
+transform = Transform3D(0.7071068, 0.35355338, -0.61237246, 2.1855696e-08, 0.8660254, 0.5, 0.7071068, -0.35355338, 0.61237246, -51.85, 50, 48.713)
+far = 150.0
+
+[node name="Background" type="MeshInstance3D" parent="MainViewport/SubViewport" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6004361, -0.15586472, -1.5166348)
+mesh = SubResource("PlaneMesh_jeomr")
+surface_material_override/0 = SubResource("StandardMaterial3D_5hhw2")
+
+[node name="BackgroundCheck" type="MeshInstance3D" parent="MainViewport/SubViewport" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, -0.157, -1.517)
+layers = 16
+mesh = SubResource("PlaneMesh_jeomr")
+surface_material_override/0 = SubResource("ShaderMaterial_4ano6")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="MainViewport/SubViewport" index="4"]
+transform = Transform3D(0.95441765, -0.10836298, 0.27810878, -0.11621556, 0.7233177, 0.68066555, -0.2749199, -0.68195975, 0.6777536, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Room" parent="MainViewport/SubViewport" index="5" instance=ExtResource("3_8req8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.013671875, 6.1035156e-05, 0.016601563)
+room_ray = 25.0
+nb_objects = 50
+
+[node name="RuneStone" parent="MainViewport/SubViewport/Room" index="2" instance=ExtResource("5_ii1fx")]
+visible = false
+
+[node name="RuneStone2" parent="MainViewport/SubViewport/Room" index="3" instance=ExtResource("6_4ano6")]
+visible = false
+
+[node name="RuneStone3" parent="MainViewport/SubViewport/Room" index="4" instance=ExtResource("7_hvhxh")]
+
+[node name="Ruines" type="Node3D" parent="MainViewport/SubViewport/Room" index="5"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MainViewport/SubViewport/Room/Ruines" index="0"]
+transform = Transform3D(0.7289798, -0.54233015, 0.41769177, 0.32317638, 0.81056404, 0.48840854, -0.60344464, -0.22105187, 0.76615316, -6.4787607, -1.2638571, -9.269897)
+layers = 17
+mesh = SubResource("BoxMesh_5hhw2")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_4h8xn")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="MainViewport/SubViewport/Room/Ruines" index="1"]
+transform = Transform3D(0.7289798, -0.54233015, 0.41769177, 0.32317638, 0.81056404, 0.48840854, -0.60344464, -0.22105187, 0.76615316, -1.124281, -0.33541873, -12.780918)
+layers = 17
+mesh = SubResource("BoxMesh_4ano6")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_4h8xn")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="MainViewport/SubViewport/Room/Ruines" index="2"]
+transform = Transform3D(0.7289798, -0.54233015, 0.41769177, 0.32317638, 0.81056404, 0.48840854, -0.60344464, -0.22105187, 0.76615316, 0.9450049, -0.5409707, -13.778018)
+layers = 17
+mesh = SubResource("BoxMesh_4ano6")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_4h8xn")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="MainViewport/SubViewport/Room/Ruines" index="3"]
+transform = Transform3D(0.7289798, -0.54233015, 0.41769177, 0.32317638, 0.81056404, 0.48840854, -0.60344464, -0.22105187, 0.76615316, 3.5896747, -1.402672, -14.670521)
+layers = 17
+mesh = SubResource("BoxMesh_4ano6")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_4h8xn")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MainViewport/SubViewport/Room/Ruines" index="4"]
+transform = Transform3D(0.32760158, -0.4052852, -0.85347587, 0.1452346, 0.9141903, -0.37836885, 0.9335867, 1.034202e-09, 0.35835165, 11.770388, -2.0281677, 4.997497)
+layers = 17
+mesh = SubResource("BoxMesh_5hhw2")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_4h8xn")
+
+[node name="Column2" type="MeshInstance3D" parent="MainViewport/SubViewport/Room/Ruines" index="5"]
+transform = Transform3D(0.111410655, -0.69993305, 0.7054656, -0.12469454, 0.6944287, 0.7086749, -0.98592025, -0.16692148, -0.009911067, 18.258549, -0.20751953, -10.462443)
+layers = 17
+mesh = SubResource("CylinderMesh_4ano6")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_4h8xn")
+
+[node name="Column" type="MeshInstance3D" parent="MainViewport/SubViewport/Room/Ruines" index="6"]
+transform = Transform3D(-0.059619993, 0, 0.99822116, 0, 1, 0, -0.99822116, 0, -0.059619993, 19.253544, -0.51013184, -10.416789)
+layers = 17
+mesh = SubResource("CylinderMesh_5hhw2")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_4h8xn")
+
+[node name="Column3" type="MeshInstance3D" parent="MainViewport/SubViewport/Room/Ruines" index="7"]
+transform = Transform3D(-0.059619993, 0, 0.99822116, 0, 1, 0, -0.99822116, 0, -0.059619993, 17.877226, 1.9685059, -11.998501)
+layers = 17
+mesh = SubResource("CylinderMesh_5hhw2")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_4h8xn")
+
+[node name="MainView" parent="CanvasLayer" index="0"]
+texture = SubResource("ViewportTexture_8req8")
+
+[node name="OutlineView" parent="CanvasLayer" index="1"]
+material = SubResource("ShaderMaterial_jeomr")
+texture = SubResource("ViewportTexture_ii1fx")
