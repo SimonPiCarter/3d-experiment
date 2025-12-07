@@ -57,7 +57,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.32492676)
 color_high = Color(0.21568628, 0.30588236, 0.2901961, 1)
 color_low = Color(0.19215687, 0.21176471, 0.21960784, 1)
 threshold = 0.0
-speed_offset = 0.8
 noise = SubResource("NoiseTexture2D_ixfrg")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
