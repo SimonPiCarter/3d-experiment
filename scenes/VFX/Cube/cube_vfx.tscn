@@ -42,8 +42,6 @@ shader_parameter/reversed = 0.0
 script = ExtResource("1_dfldm")
 alpha = 0.5
 threshold = 0.27
-speed_offset = null
-reversed = null
 noise = SubResource("NoiseTexture2D_8a028")
 is_dirty = false
 

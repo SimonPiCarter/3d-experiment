@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://bj3odj3n4aa7g"]
+[gd_scene load_steps=75 format=3 uid="uid://bj3odj3n4aa7g"]
 
 [ext_resource type="PackedScene" uid="uid://da2eduothcfya" path="res://scenes/templates/world_scene.tscn" id="1_hvvfc"]
 [ext_resource type="Shader" uid="uid://cc18tpomiri80" path="res://shaders/new_pipeline/outline_new_pipeline_unshaded.gdshader" id="2_3ynjs"]
@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://4f2ootab3hjc" path="res://scenes/VFX/Cube/cube_vfx.tscn" id="7_mfb4q"]
 [ext_resource type="ArrayMesh" uid="uid://dj7wo4fxwc780" path="res://model/sphere_clean_wrap.obj" id="8_8l60q"]
 [ext_resource type="Shader" uid="uid://bheb3rnfrrvep" path="res://scenes/models/materials/vfx/sphere_back_vfx.gdshader" id="8_lnxaa"]
+[ext_resource type="PackedScene" uid="uid://b1isg7c3vh3ad" path="res://scenes/VFX/Cube/cube_vfx_2.tscn" id="10_vtdqv"]
+[ext_resource type="Shader" uid="uid://nuw2tjyyo7t7" path="res://shaders/vfx/cube_vfx.gdshader" id="11_31e2t"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_mfb4q"]
 size = Vector3(4, 1, 0.05)
@@ -171,6 +173,21 @@ shader_parameter/original_color = Color(2.621079, 4.415934, 4.0336967, 1)
 shader_parameter/outline_color = Color(0.5019608, 0.8235294, 0.75686276, 1)
 shader_parameter/use_mask = false
 
+[sub_resource type="Animation" id="Animation_31e2t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:surface_material_override/0:shader_parameter/original_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(2.621079, 4.415934, 4.0336967, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_vtdqv"]
 resource_name = "vanish"
 length = 4.0
@@ -186,21 +203,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(0.7879121, 1.353256, 1.2328587, 1), Color(0.7879121, 1.353256, 1.2328587, 0), Color(0.7879121, 1.353256, 1.2328587, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_31e2t"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MeshInstance3D:surface_material_override/0:shader_parameter/original_color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(2.621079, 4.415934, 4.0336967, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_31e2t"]
@@ -229,6 +231,21 @@ shader_parameter/low_pass = 0.0
 shader_parameter/high_pass = 0.5000000074506
 shader_parameter/margin = 0.3999999910592
 
+[sub_resource type="Animation" id="Animation_2lav8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(20, 20, 20)]
+}
+
 [sub_resource type="Animation" id="Animation_6fxmk"]
 resource_name = "vanish"
 length = 2.0
@@ -244,21 +261,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(20, 20, 20), Vector3(0, 0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_2lav8"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(20, 20, 20)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2lav8"]
@@ -310,47 +312,6 @@ shader_parameter/ColorLow = Color(0.2, 1, 0.2, 1)
 shader_parameter/speed_offset = 0.650000030875
 shader_parameter/reversed = 1.0
 
-[sub_resource type="Animation" id="Animation_666m3"]
-resource_name = "run"
-length = 4.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:surface_material_override/0:shader_parameter/Threshold")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.250000011875, 0.434000020615]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:surface_material_override/0:shader_parameter/ThresholdAlpha")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.250000011875, 1.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 2, 4),
-"transitions": PackedFloat32Array(0.25, 1, -2),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 1.5707964, 0), Vector3(0, 3.1415927, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_s6682"]
 length = 0.001
 tracks/0/type = "value"
@@ -388,6 +349,47 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_666m3"]
+resource_name = "run"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:surface_material_override/0:shader_parameter/Threshold")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.250000011875, 0.434000020615]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:surface_material_override/0:shader_parameter/ThresholdAlpha")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.250000011875, 1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(4, 0.25, -2),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 1.5707964, 0), Vector3(0, 3.1415927, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_s6682"]
@@ -466,6 +468,78 @@ _data = {
 &"RESET": SubResource("Animation_kkt5o"),
 &"run": SubResource("Animation_8j1eq")
 }
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_31e2t"]
+noise_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6fxmk"]
+noise = SubResource("FastNoiseLite_31e2t")
+seamless = true
+
+[sub_resource type="Gradient" id="Gradient_6fxmk"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2lav8"]
+gradient = SubResource("Gradient_6fxmk")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.7708333, 0.19097222)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2lav8"]
+resource_local_to_scene = true
+render_priority = 1
+shader = ExtResource("11_31e2t")
+shader_parameter/noise = SubResource("NoiseTexture2D_6fxmk")
+shader_parameter/threshold_offset = SubResource("GradientTexture2D_2lav8")
+shader_parameter/color = Color(0.76697344, 1.1229308, 1.353256, 1)
+shader_parameter/threshold = 0.0
+
+[sub_resource type="Animation" id="Animation_xvrc3"]
+resource_name = "run"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:threshold")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1.0666666, 3.0666666),
+"transitions": PackedFloat32Array(-2, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_u607y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:threshold")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.2778871]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u607y"]
+_data = {
+&"RESET": SubResource("Animation_u607y"),
+&"run": SubResource("Animation_xvrc3")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xvrc3"]
+resource_local_to_scene = true
+render_priority = 1
+shader = ExtResource("11_31e2t")
+shader_parameter/noise = SubResource("NoiseTexture2D_6fxmk")
+shader_parameter/threshold_offset = SubResource("GradientTexture2D_2lav8")
+shader_parameter/color = Color(1.3278294e-05, 0.7286795, 1.0354989, 1)
+shader_parameter/threshold = 0.8595001
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_3ynjs"]
 viewport_path = NodePath("MainViewport/SubViewport")
@@ -861,7 +935,7 @@ transform = Transform3D(1, -4.983938e-09, -2.938263e-08, 2.9802322e-08, 0.167233
 visible = false
 
 [node name="HealerBot" parent="MainViewport/SubViewport" index="13" instance=ExtResource("3_lshim")]
-transform = Transform3D(0.3, 0, 0, 0, 0.30000004, 0, 0, 0, 0.30000004, 0, 0.6148071, 0)
+transform = Transform3D(0.3, 0, 0, 0, 0.30000004, 0, 0, 0, 0.30000004, 4.6376724, 0.6148071, 1.2997289)
 script = ExtResource("4_hb0md")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MainViewport/SubViewport/HealerBot" index="5"]
@@ -889,6 +963,32 @@ noise = SubResource("NoiseTexture2D_8l60q")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MainViewport/SubViewport/CubeVFX" index="2"]
 libraries = {
 &"": SubResource("AnimationLibrary_kkt5o")
+}
+autoplay = "run"
+
+[node name="CubeVFX2" parent="MainViewport/SubViewport" index="15" instance=ExtResource("10_vtdqv")]
+transform = Transform3D(-8.305164e-08, -1.9, -2.9297553e-17, 1.8999884, -8.3051134e-08, -0.0066322377, 0.0066322377, -2.8990435e-10, 1.8999884, 0.98091364, 0.68933105, 6.2805142)
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_2lav8")
+threshold = 0.2778871
+color = Color(0.76697344, 1.1229308, 1.353256, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MainViewport/SubViewport/CubeVFX2" index="0"]
+libraries = {
+&"": SubResource("AnimationLibrary_u607y")
+}
+autoplay = "run"
+
+[node name="CubeVFX3" parent="MainViewport/SubViewport" index="16" instance=ExtResource("10_vtdqv")]
+transform = Transform3D(-8.305164e-08, -1.9, -2.9297553e-17, 1.8999884, -8.3051134e-08, -0.0066322377, 0.0066322377, -2.8990435e-10, 1.8999884, 6.150292, 0.68933105, 6.694065)
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_xvrc3")
+threshold = 0.2778871
+color = Color(1.3278294e-05, 0.7286795, 1.0354989, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MainViewport/SubViewport/CubeVFX3" index="0"]
+libraries = {
+&"": SubResource("AnimationLibrary_u607y")
 }
 autoplay = "run"
 

@@ -1,0 +1,74 @@
+[gd_scene load_steps=13 format=3 uid="uid://6o6v70b4eovn"]
+
+[ext_resource type="Script" uid="uid://d4d5kebi52p52" path="res://scenes/env/fog/fog_entity.gd" id="1_5dv3f"]
+[ext_resource type="Shader" uid="uid://baskq2t16155t" path="res://scenes/test/vfx/fog_test_var2.gdshader" id="2_05wlm"]
+[ext_resource type="Shader" uid="uid://cc18tpomiri80" path="res://shaders/new_pipeline/outline_new_pipeline_unshaded.gdshader" id="3_3xke2"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_3xke2"]
+size = Vector2(1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_skxwa"]
+noise_type = 2
+frequency = 0.025
+fractal_octaves = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_c4gaj"]
+width = 256
+height = 1024
+noise = SubResource("FastNoiseLite_skxwa")
+seamless = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_f3ly0"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dver5"]
+noise = SubResource("FastNoiseLite_f3ly0")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ubxly"]
+render_priority = 0
+shader = ExtResource("2_05wlm")
+shader_parameter/noise_1 = SubResource("NoiseTexture2D_c4gaj")
+shader_parameter/noise_2 = SubResource("NoiseTexture2D_dver5")
+shader_parameter/speed_1 = 0.025
+shader_parameter/speed_2 = 0.05
+shader_parameter/dir_1 = Vector2(1, 0)
+shader_parameter/dir_2 = Vector2(1, 0)
+shader_parameter/color_1 = Color(0.19215687, 0.21176471, 0.21960784, 1)
+shader_parameter/color_2 = Color(0.19215687, 0.21176471, 0.21960784, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_skxwa"]
+render_priority = 0
+shader = ExtResource("3_3xke2")
+shader_parameter/use_albedo_texture = false
+shader_parameter/original_color = Color(0.19215687, 0.21176471, 0.21960784, 1)
+shader_parameter/outline_color = Color(0.19215687, 0.21176471, 0.21960784, 1)
+shader_parameter/use_mask = false
+
+[sub_resource type="SphereMesh" id="SphereMesh_05wlm"]
+height = 0.5
+is_hemisphere = true
+
+[sub_resource type="MultiMesh" id="MultiMesh_3xke2"]
+transform_format = 1
+instance_count = 22
+mesh = SubResource("SphereMesh_05wlm")
+buffer = PackedFloat32Array(10, 0, 0, -2.5, 0, 10, 0, 0, 0, 0, 10, -4.2828856, 10, 0, 0, -2.5, 0, 10, 0, 0, 0, 0, 10, 4.0951934, 10, 0, 0, 2.5, 0, 10, 0, 0, 0, 0, 10, -5.6717052, 10, 0, 0, 2.5, 0, 10, 0, 0, 0, 0, 10, 6.071908, 10, 0, 0, -5.823872, 0, 10, 0, 0, 0, 0, 10, -2.5, 10, 0, 0, 5.8062906, 0, 10, 0, 0, 0, 0, 10, -2.5, 10, 0, 0, -4.0530024, 0, 10, 0, 0, 0, 0, 10, 2.5, 10, 0, 0, 3.906529, 0, 10, 0, 0, 0, 0, 10, 2.5, 10, 0, 0, 13.951996, 0, 10, 0, -5.918397, 0, 0, 10, 5.3103814, 10, 0, 0, 15.102157, 0, 10, 0, -5.874108, 0, 0, 10, -15.681136, 10, 0, 0, -13.048146, 0, 10, 0, -5.678825, 0, 0, 10, 13.892443, 10, 0, 0, -0.74020225, 0, 10, 0, -5.92884, 0, 0, 10, 14.705179, 10, 0, 0, 16.136734, 0, 10, 0, -5.967328, 0, 0, 10, -0.20454179, 10, 0, 0, 0.41470614, 0, 10, 0, -5.5960646, 0, 0, 10, 14.551445, 10, 0, 0, -14.212571, 0, 10, 0, -5.6524415, 0, 0, 10, 4.311805, 10, 0, 0, -6.3020515, 0, 10, 0, -5.7666783, 0, 0, 10, -15.92003, 10, 0, 0, -3.040684, 0, 10, 0, -5.6196027, 0, 0, 10, -14.278358, 10, 0, 0, -13.756403, 0, 10, 0, -5.7862587, 0, 0, 10, 13.410727, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+
+[node name="FogEntity" type="Node3D"]
+script = ExtResource("1_5dv3f")
+
+[node name="Plane" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
+layers = 17
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_3xke2")
+surface_material_override/0 = SubResource("ShaderMaterial_ubxly")
+
+[node name="Spheres" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.08343506, 0)
+
+[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="."]
+layers = 17
+material_override = SubResource("ShaderMaterial_skxwa")
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_3xke2")

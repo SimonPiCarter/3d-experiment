@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://cmyd1wpm57jih"]
+
+[ext_resource type="Shader" uid="uid://bwye8r7ehq8mk" path="res://shaders/gradient/circle_gradient.gdshader" id="1_vkjht"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_er1sc"]
+
+[sub_resource type="Gradient" id="Gradient_vkjht"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vkjht"]
+gradient = SubResource("Gradient_vkjht")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u051o"]
+render_priority = 0
+shader = ExtResource("1_vkjht")
+shader_parameter/gradient_texture = SubResource("GradientTexture2D_vkjht")
+shader_parameter/color = Color(0, 1, 0, 1)
+shader_parameter/low_pass = 0.60000000894072
+shader_parameter/high_pass = 0.5000000074506
+shader_parameter/margin = 0.20000000298024
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(45.977367, 2.5314864e-07, 19.648958, -19.542358, 5.201252, 45.72793, -2.0439873, -49.728737, 4.7828026, 0, 0, 0)
+layers = 17
+mesh = SubResource("QuadMesh_er1sc")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("ShaderMaterial_u051o")

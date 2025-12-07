@@ -23,6 +23,8 @@ shader_parameter/Threshold = 0.8
 shader_parameter/ThresholdAlpha = 0.0
 shader_parameter/ColorHigh = Color(0, 0, 1, 0.5)
 shader_parameter/ColorLow = Color(1, 0, 0, 0.5)
+shader_parameter/speed_offset = 0.0
+shader_parameter/reversed = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8a028"]
 resource_local_to_scene = true
@@ -33,6 +35,8 @@ shader_parameter/Threshold = 0.8
 shader_parameter/ThresholdAlpha = 0.0
 shader_parameter/ColorHigh = Color(0, 0, 1, 0)
 shader_parameter/ColorLow = Color(1, 0, 0, 1)
+shader_parameter/speed_offset = 0.0
+shader_parameter/reversed = 0.0
 
 [node name="SphereVFX" type="Node3D"]
 script = ExtResource("1_11gdu")

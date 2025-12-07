@@ -1,0 +1,38 @@
+[gd_scene load_steps=9 format=3 uid="uid://b1isg7c3vh3ad"]
+
+[ext_resource type="ArrayMesh" uid="uid://dcino2dxu6a8" path="res://model/cube_test_uv.obj" id="1_earcm"]
+[ext_resource type="Shader" uid="uid://nuw2tjyyo7t7" path="res://shaders/vfx/cube_vfx.gdshader" id="2_nkplb"]
+[ext_resource type="Script" uid="uid://dcxdfstn5qtd6" path="res://scenes/VFX/Cube/cube_vfx_2.gd" id="3_nkplb"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_31e2t"]
+noise_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6fxmk"]
+noise = SubResource("FastNoiseLite_31e2t")
+seamless = true
+
+[sub_resource type="Gradient" id="Gradient_6fxmk"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2lav8"]
+gradient = SubResource("Gradient_6fxmk")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.7708333, 0.19097222)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2lav8"]
+resource_local_to_scene = true
+render_priority = 1
+shader = ExtResource("2_nkplb")
+shader_parameter/noise = SubResource("NoiseTexture2D_6fxmk")
+shader_parameter/threshold_offset = SubResource("GradientTexture2D_2lav8")
+shader_parameter/color = Color(0.56078434, 0.827451, 1, 0.5647059)
+shader_parameter/threshold = 0.35999999195328
+
+[node name="CubeVFX2" type="MeshInstance3D"]
+transform = Transform3D(-4.371139e-08, -1, 0, 0.9999939, -4.3711122e-08, -0.0034906515, 0.0034906515, -1.5258123e-10, 0.9999939, 0, 0, 0)
+layers = 17
+mesh = ExtResource("1_earcm")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_2lav8")
+script = ExtResource("3_nkplb")
