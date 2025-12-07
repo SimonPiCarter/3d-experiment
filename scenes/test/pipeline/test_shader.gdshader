@@ -43,7 +43,7 @@ void fragment() {
 	normals_view_remapped /= length(normals_view_remapped);
 	vec3 normals_world = (INV_VIEW_MATRIX * vec4(normals_view_remapped, 0.0)).xyz;
 	float dot_p = abs(dot(normals_view_remapped, vec3(0,0,-1)));
-	
+
 	float surface_id = get_surface_id(SCREEN_UV);
 	//ALBEDO = vec3(linear_depth/10., dot_p,0);
 
@@ -53,7 +53,7 @@ void fragment() {
 		vec2 uv = SCREEN_UV + DIRECTIONS[i]*pixel_size;
 		float other_d = get_depth(uv, INV_PROJECTION_MATRIX);
 		float other_id = get_surface_id(uv);
-		is_outline += step(0.1 / dot_p, other_d - linear_depth) * (1.-step(0.01, abs(surface_id - other_id)));
+		is_outline += step(0.05 / dot_p * (linear_depth/10.), other_d - linear_depth) * (1.-step(0.01, abs(surface_id - other_id)));
 		is_outline += step(0.01, surface_id - other_id);
 	}
 	is_outline = clamp(is_outline, 0., 1.);

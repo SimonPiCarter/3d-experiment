@@ -1,8 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://1llmlua1mh0"]
+[gd_scene load_steps=22 format=3 uid="uid://1llmlua1mh0"]
 
 [ext_resource type="Shader" uid="uid://bwv28xk2js83c" path="res://scenes/test/pipeline/test_shader.gdshader" id="1_7khbq"]
 [ext_resource type="Shader" uid="uid://c0w1ro1a2oi64" path="res://scenes/test/pipeline/offset_plane.gdshader" id="1_r3bhw"]
-[ext_resource type="ArrayMesh" uid="uid://dx5s7xohxbi1g" path="res://model/Whale/WhalePart2.obj" id="2_6k7f7"]
+[ext_resource type="ArrayMesh" uid="uid://c75jlt5r74o2j" path="res://model/VAT/robot2/robot2_exported_mesh.res" id="2_6k7f7"]
+[ext_resource type="Texture2D" uid="uid://dqgoh3oe3vrjw" path="res://model/VAT/robot2/albedo.png" id="2_bbeef"]
 [ext_resource type="Script" uid="uid://d1sgp5r4tsu3l" path="res://scripts/FreeRoamingCamera3D.gd" id="2_bf8xf"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_mrh1i"]
@@ -41,14 +42,21 @@ render_priority = 0
 shader = ExtResource("1_r3bhw")
 shader_parameter/color = Color(0.99908346, 0.6960844, 0.459428, 1)
 shader_parameter/elevation = SubResource("NoiseTexture2D_6k7f7")
-shader_parameter/factor = 5.0
+shader_parameter/factor = 1.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_r3bhw"]
 radius = 0.1
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bbeef"]
 shading_mode = 0
+albedo_color = Color(1, 0.69803923, 0.45882353, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_bbeef"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_383q7"]
+shading_mode = 0
 albedo_color = Color(0.98039216, 1, 1, 1)
+albedo_texture = ExtResource("2_bbeef")
 
 [sub_resource type="QuadMesh" id="QuadMesh_7khbq"]
 flip_faces = true
@@ -127,8 +135,33 @@ mesh = SubResource("SphereMesh_r3bhw")
 surface_material_override/0 = SubResource("StandardMaterial3D_bbeef")
 
 [node name="MeshInstance3D19" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5046387, -0.8509425, -5.25338)
-mesh = SubResource("SphereMesh_r3bhw")
+transform = Transform3D(-0.12562951, 0.39321104, 0.9108249, -0.15580954, 0.89888483, -0.40954712, -0.9797654, -0.19336638, -0.05166045, -3.668335, -2.3939724, 1.4036026)
+mesh = SubResource("BoxMesh_bbeef")
+surface_material_override/0 = SubResource("StandardMaterial3D_bbeef")
+
+[node name="MeshInstance3D22" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.12562951, 0.39321104, 0.9108249, -0.15580954, 0.89888483, -0.40954712, -0.9797654, -0.19336638, -0.05166045, 10.404297, -2.3939724, 8.62809)
+mesh = SubResource("BoxMesh_bbeef")
+surface_material_override/0 = SubResource("StandardMaterial3D_bbeef")
+
+[node name="MeshInstance3D23" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.12562951, 0.39321104, 0.9108249, -0.15580954, 0.89888483, -0.40954712, -0.9797654, -0.19336638, -0.05166045, 18.76123, -2.3939724, -6.029991)
+mesh = SubResource("BoxMesh_bbeef")
+surface_material_override/0 = SubResource("StandardMaterial3D_bbeef")
+
+[node name="MeshInstance3D24" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.12562951, 0.39321104, 0.9108249, -0.15580954, 0.89888483, -0.40954712, -0.9797654, -0.19336638, -0.05166045, 10.891357, -2.3939724, -15.186058)
+mesh = SubResource("BoxMesh_bbeef")
+surface_material_override/0 = SubResource("StandardMaterial3D_bbeef")
+
+[node name="MeshInstance3D25" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.12562951, 0.39321104, 0.9108249, -0.15580954, 0.89888483, -0.40954712, -0.9797654, -0.19336638, -0.05166045, 3.5423584, -2.3939724, -16.838219)
+mesh = SubResource("BoxMesh_bbeef")
+surface_material_override/0 = SubResource("StandardMaterial3D_bbeef")
+
+[node name="MeshInstance3D26" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.12562951, 0.39321104, 0.9108249, -0.15580954, 0.89888483, -0.40954712, -0.9797654, -0.19336638, -0.05166045, -11.461548, -2.3939724, -10.79464)
+mesh = SubResource("BoxMesh_bbeef")
 surface_material_override/0 = SubResource("StandardMaterial3D_bbeef")
 
 [node name="MeshInstance3D20" type="MeshInstance3D" parent="."]
@@ -162,15 +195,17 @@ mesh = SubResource("SphereMesh_r3bhw")
 surface_material_override/0 = SubResource("StandardMaterial3D_bbeef")
 
 [node name="MeshInstance3D14" type="MeshInstance3D" parent="."]
-transform = Transform3D(-0.657433, 0.72533345, 0.20414078, 0.72352296, 0.6833304, -0.09784725, -0.2104675, 0.08337247, -0.97403926, -2.1374106, 0.2240324, -1.4121823)
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -4.8208213, -1.9092073, -3.4005857)
 mesh = ExtResource("2_6k7f7")
-surface_material_override/0 = SubResource("StandardMaterial3D_bbeef")
+surface_material_override/0 = SubResource("StandardMaterial3D_383q7")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.9318686, 0, 0.3627959, -0.17258234, 0.879607, 0.4432908, -0.3191178, -0.475701, 0.81967825, 0, 2.4505267, 4.3702745)
 
 [node name="FreeRoamingCamera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.5616936, 0.16620204, -0.81047934, 0.09939625, 0.9589634, 0.2655365, 0.8213527, -0.22970884, 0.5221237, -4.3460407, 1.7817035, 2.1819835)
+transform = Transform3D(0.7071068, 0.35355338, -0.61237246, 0, 0.8660254, 0.50000006, 0.7071068, -0.35355338, 0.61237246, -20.392776, 5.874941, 11.726021)
+projection = 1
+size = 30.0
 script = ExtResource("2_bf8xf")
 metadata/_custom_type_script = "uid://d1sgp5r4tsu3l"
 
