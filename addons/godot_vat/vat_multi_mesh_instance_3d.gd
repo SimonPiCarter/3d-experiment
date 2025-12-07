@@ -24,7 +24,7 @@ var number_of_animation_tracks: int
 
 func _enter_tree():
 	pass
-	
+
 func _exit_tree():
 	# Clean-up of the plugin goes here.
 	pass
@@ -39,11 +39,11 @@ func _get_configuration_warnings(): # display the warning on the scene dock
 	if animation_tracks.size() == 0:
 		warnings.push_back('No animation tracks defined')
 	return warnings
-	
+
 func _validate_property(property: Dictionary): # update the config warnings
 	if property.name == "animation_tracks" or property.name == "multimesh":
 		update_configuration_warnings()
-	
+
 func _ready() -> void:
 	if multimesh:
 		multimesh.instance_count = 0
@@ -53,7 +53,7 @@ func _ready() -> void:
 		multimesh.instance_count = instance_count
 	else:
 		printerr("VATMultiMeshInstance3D: No multimesh defined")
-		
+
 	number_of_animation_tracks = animation_tracks.size()
 	if number_of_animation_tracks == 0:
 		printerr("VATMultiMeshInstance3D: You have not defined any animation tracks!")
@@ -105,7 +105,7 @@ func get_start_end_frames_from_track_number(track_number: int) -> Vector2i:
 	return animation_tracks[track_number]
 
 ## get animation start/end frames from instance.
-## instance must have been initialized. 
+## instance must have been initialized.
 func get_start_end_frames_from_instance(instance_id: int) -> Vector2i:
 	var vec2: Vector2i
 	custom_data = multimesh.get_instance_custom_data(instance_id)
@@ -118,7 +118,7 @@ func get_start_end_frames_from_instance(instance_id: int) -> Vector2i:
 func get_track_number_from_track_vector(track_vector: Vector2i) -> int:
 	for i in range(animation_tracks.size()):
 		if track_vector == animation_tracks[i]: return i
-	
+
 	return -1
 
 ## get track_number from instance_id
