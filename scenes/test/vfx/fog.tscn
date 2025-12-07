@@ -1,6 +1,7 @@
-[gd_scene load_steps=51 format=3 uid="uid://df8h2amca2ljq"]
+[gd_scene load_steps=53 format=3 uid="uid://df8h2amca2ljq"]
 
 [ext_resource type="PackedScene" uid="uid://da2eduothcfya" path="res://scenes/templates/world_scene.tscn" id="1_2fdbc"]
+[ext_resource type="Script" uid="uid://cev655okd30f3" path="res://scenes/test/vfx/fog_test.gd" id="2_g74ni"]
 [ext_resource type="Shader" uid="uid://na16fd231gnb" path="res://scenes/test/vfx/fog_test.gdshader" id="2_yvcre"]
 [ext_resource type="Shader" uid="uid://baskq2t16155t" path="res://scenes/test/vfx/fog_test_var2.gdshader" id="3_7x8sl"]
 [ext_resource type="Shader" uid="uid://cc18tpomiri80" path="res://shaders/new_pipeline/outline_new_pipeline_unshaded.gdshader" id="3_b7od6"]
@@ -11,6 +12,7 @@
 [ext_resource type="Script" uid="uid://dj7w0ypgd8ehs" path="res://scenes/entity/quand_ent_target_move.gd" id="5_yvcre"]
 [ext_resource type="PackedScene" uid="uid://b12sxh8hols1l" path="res://scenes/models/cube_uv.tscn" id="6_ixfrg"]
 [ext_resource type="PackedScene" uid="uid://buslmtbcq01xb" path="res://scenes/UI/debug/fps_display.tscn" id="7_yrgha"]
+[ext_resource type="PackedScene" uid="uid://doovx36ugov6p" path="res://scenes/env/room/room.tscn" id="10_1soas"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_ixfrg"]
 size = Vector2(50, 50)
@@ -199,14 +201,14 @@ size = Vector2(1000, 1000)
 [sub_resource type="Gradient" id="Gradient_tsj5c"]
 colors = PackedColorArray(0.9764706, 0.61960787, 0.41568628, 1, 0.9476287, 0.52065206, 0.25580785, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_yvcre"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_g74ni"]
 gradient = SubResource("Gradient_tsj5c")
 width = 1024
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7x8sl"]
 diffuse_mode = 3
 specular_mode = 1
-albedo_texture = SubResource("GradientTexture1D_yvcre")
+albedo_texture = SubResource("GradientTexture1D_g74ni")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1soas"]
 render_priority = 0
@@ -231,6 +233,7 @@ shader_parameter/active = 1
 viewport_path = NodePath("OutlineViewport/SubViewport")
 
 [node name="WorldScene" instance=ExtResource("1_2fdbc")]
+script = ExtResource("2_g74ni")
 
 [node name="Camera3D" parent="MainViewport/SubViewport" index="1"]
 transform = Transform3D(0.7071068, 0.35355335, -0.61237246, 2.1855696e-08, 0.8660254, 0.5, 0.7071068, -0.3535534, 0.61237246, -144.0512, 128.36188, 162.02939)
@@ -296,7 +299,6 @@ surface_material_override/0 = SubResource("ShaderMaterial_g74ni")
 
 [node name="Fog_sphere" type="Node3D" parent="MainViewport/SubViewport" index="4"]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 1.3740845, 0.3625307, -0.24182129)
-visible = false
 
 [node name="Node3D" parent="MainViewport/SubViewport/Fog_sphere" index="0" instance=ExtResource("3_tsj5c")]
 
@@ -412,8 +414,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.46573466, -0.39432374, 0.7
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33757317, 1.1772339, -0.31853026)
 
 [node name="FogEntity" parent="MainViewport/SubViewport" index="5" instance=ExtResource("5_7x8sl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63.526733, 3.1067505, 98.33423)
-fog_size = Vector2(100, 100)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.772705, 3.1067505, 88.14368)
+fog_size = Vector2(40, 40)
 height = 2
 small_fog = 50
 
@@ -458,6 +460,26 @@ transform = Transform3D(100, 0, 0, 0, 77.48452, 63.2151, 0, -63.21511, 77.48452,
 
 [node name="cube_uv2" parent="MainViewport/SubViewport" index="15" instance=ExtResource("6_ixfrg")]
 transform = Transform3D(100, 0, 0, 0, 77.48452, 63.2151, 0, -63.21511, 77.48452, -105.01514, -123.289185, -10.031982)
+
+[node name="cube_uv3" parent="MainViewport/SubViewport" index="16" instance=ExtResource("6_ixfrg")]
+transform = Transform3D(30, 0, 0, 0, 7.748451, 6.3215113, 0, -6.3215113, 7.748451, 36.680176, -6.120178, 114.48547)
+
+[node name="cube_uv7" parent="MainViewport/SubViewport" index="17" instance=ExtResource("6_ixfrg")]
+transform = Transform3D(30, 0, 0, 0, 7.748451, 6.3215113, 0, -6.3215113, 7.748451, 36.680176, -6.120178, 58.997192)
+
+[node name="cube_uv6" parent="MainViewport/SubViewport" index="18" instance=ExtResource("6_ixfrg")]
+transform = Transform3D(-1.3113415e-06, -6.321511, 7.7484508, 0, 7.748451, 6.3215113, -30, 2.7632203e-07, -3.3869557e-07, 63.87744, -6.120178, 90.263306)
+
+[node name="cube_uv4" parent="MainViewport/SubViewport" index="19" instance=ExtResource("6_ixfrg")]
+transform = Transform3D(-4.371139e-07, 6.3215113, -7.748451, 0, 7.748451, 6.3215113, 10, 2.7632206e-07, -3.3869554e-07, 7.888672, -6.120178, 105.76831)
+
+[node name="cube_uv5" parent="MainViewport/SubViewport" index="20" instance=ExtResource("6_ixfrg")]
+transform = Transform3D(-4.371139e-07, 6.3215113, -7.748451, 0, 7.748451, 6.3215113, 10, 2.7632206e-07, -3.3869554e-07, 7.888672, -6.120178, 74.15491)
+
+[node name="Room" parent="MainViewport/SubViewport" index="21" instance=ExtResource("10_1soas")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -66.76691, 0, 52.752075)
+room_ray = 25.0
+nb_objects = 50
 
 [node name="MainView" parent="CanvasLayer" index="0"]
 texture = SubResource("ViewportTexture_g74ni")

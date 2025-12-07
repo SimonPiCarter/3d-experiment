@@ -7,7 +7,7 @@ extends Node3D
 func _ready():
 	ring_populate()
 	run()
-	
+
 func ring_populate() -> void:
 	for i in 4.*sizing:
 		var new_model = model.duplicate()
