@@ -15,7 +15,7 @@ func _ready() -> void:
 	setupInstances()
 
 func setupInstances():
-	var a: int = 0 # animation track number
+	var a: int = 1 # animation track number
 	for instance in vat_multi_mesh_instance_3d.multimesh.instance_count:
 		# randomize the animation offset
 		vat_multi_mesh_instance_3d.update_instance_animation_offset(instance, randf())
@@ -54,5 +54,24 @@ func randomizeInstance(i: int):
 
 	vat_multi_mesh_instance_3d.multimesh.set_instance_transform(i, node3D.transform)
 
-func _process(_delta: float) -> void:
-	pass
+var direction : float = 1.
+var cur_rot = 0.;
+
+func _input(event) -> void:
+	if event is InputEventKey and event.is_pressed() and event.keycode == KEY_E:
+		direction *= -1.;
+
+func _process(delta: float) -> void:
+	if vat_multi_mesh_instance_3d.instance_count > 1:
+		return
+	if direction < 0. and cur_rot < PI:
+		cur_rot += 2.*PI*delta
+		cur_rot = min(PI, cur_rot)
+		node3D.rotation.y = cur_rot
+	vat_multi_mesh_instance_3d.multimesh.set_instance_transform(0, node3D.transform)
+	if direction > 0. and cur_rot > 0.:
+		cur_rot -= 2.*PI*delta
+		cur_rot = max(0, cur_rot)
+		node3D.rotation.y = cur_rot
+	vat_multi_mesh_instance_3d.multimesh.set_instance_transform(0, node3D.transform)
+	position.z += 4.*0.3*delta*5.*direction
