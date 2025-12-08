@@ -7,6 +7,8 @@ class_name WorldInput extends Control
 @export var targets : Node3D = null
 @export var box : BoxMouse = null
 
+var middle_btn_pressed : bool = false
+
 func calculate_floor_click(event: InputEvent) -> Vector3:
 	var rational_pos = Vector2(
 		event.position.x / get_viewport_rect().size.x - 0.5,
@@ -77,3 +79,17 @@ func _input(event: InputEvent) -> void:
 	#if event is InputEventKey and event.is_pressed():
 	#	if event.keycode == KEY_S and ent_moving:
 	#		ent_moving.stop_movement()
+
+	if event is InputEventMouseButton:
+		var m_event = event as InputEventMouseButton
+		if m_event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.is_pressed():
+			ref_camera.cur_size += 2
+		if m_event.button_index == MOUSE_BUTTON_WHEEL_UP and event.is_pressed():
+			ref_camera.cur_size -= 2
+		if m_event.button_index == MOUSE_BUTTON_MIDDLE:
+			middle_btn_pressed = event.is_pressed()
+
+	if event is InputEventMouseMotion:
+		var m_event = event as InputEventMouseMotion
+		if middle_btn_pressed:
+			ref_camera.move_cam(Vector3(-m_event.relative.x, 0, -m_event.relative.y) * 0.1)

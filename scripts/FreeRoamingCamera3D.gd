@@ -35,15 +35,20 @@ func sync():
 
 var ref_pos : Vector3
 var cur_move : Vector3
+var cur_size : float
 
 func _ready() -> void:
 	ref_pos = position
+	cur_size = size
+
+func move_cam(delta_pos : Vector3) -> void:
+	var trans = Transform3D().rotated(Vector3(0,1,0), deg_to_rad(45))
+	cur_move += delta_pos * trans
 
 func _process(delta):
 	if ref_camera:
 		sync()
 	else:
-		var zoom = 0
 		var dir = Vector3.ZERO
 		if left:
 			dir.x = -1
@@ -54,15 +59,15 @@ func _process(delta):
 		if down:
 			dir.z = +2
 		if zoom_in:
-			zoom = -1
+			cur_size -= 1
 		if zoom_out:
-			zoom = +1
+			cur_size += 1
 		dir *= move_speed * delta
-		var trans = Transform3D().rotated(Vector3(0,1,0), deg_to_rad(45))
-		cur_move += dir * trans
+		move_cam(dir)
 		position = ref_pos + cur_move
 
-		size = clamp(size+zoom, 5, 75)
+		cur_size = clamp(cur_size, 5, 75)
+		size = cur_size
 		far = max(50, 4*size)
 		var move = transform.basis * Vector3(0,0,1) * size
 		position += move

@@ -176,3 +176,6 @@ texture = SubResource("ViewportTexture_8req8")
 [node name="OutlineView" parent="CanvasLayer" index="1"]
 material = SubResource("ShaderMaterial_jeomr")
 texture = SubResource("ViewportTexture_ii1fx")
+
+[node name="WorldInput" parent="CanvasLayer" index="2" node_paths=PackedStringArray("ref_camera")]
+ref_camera = NodePath("../../MainViewport/SubViewport/Camera3D")

@@ -1,7 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://da2eduothcfya"]
+[gd_scene load_steps=11 format=3 uid="uid://da2eduothcfya"]
 
 [ext_resource type="Script" uid="uid://d1sgp5r4tsu3l" path="res://scripts/FreeRoamingCamera3D.gd" id="1_v51pv"]
 [ext_resource type="Shader" uid="uid://c4njs3466gxfy" path="res://shaders/2d/pixel_outline_v2.gdshader" id="2_jjm7f"]
+[ext_resource type="Script" uid="uid://34jx7s516ea1" path="res://scenes/test/world_input.gd" id="3_lk33n"]
+[ext_resource type="PackedScene" uid="uid://deicgdd7mnyvl" path="res://scenes/UI/indicators/box_mouse.tscn" id="4_agdp1"]
+[ext_resource type="PackedScene" uid="uid://buslmtbcq01xb" path="res://scenes/UI/debug/fps_display.tscn" id="5_o54fc"]
 
 [sub_resource type="Sky" id="Sky_ckagc"]
 
@@ -107,3 +110,20 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("ViewportTexture_o54fc")
+
+[node name="WorldInput" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("box")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_lk33n")
+box = NodePath("TextureRect")
+metadata/_custom_type_script = "uid://34jx7s516ea1"
+
+[node name="TextureRect" parent="CanvasLayer/WorldInput" instance=ExtResource("4_agdp1")]
+visible = false
+layout_mode = 0
+
+[node name="FpsDisplay" parent="CanvasLayer" instance=ExtResource("5_o54fc")]
