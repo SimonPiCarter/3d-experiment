@@ -78,7 +78,6 @@ script = ExtResource("2_ii1fx")
 
 [node name="Camera3D" parent="MainViewport/SubViewport" index="1"]
 transform = Transform3D(0.7071068, 0.35355335, -0.61237246, 2.1855698e-08, 0.8660254, 0.5, 0.7071068, -0.3535534, 0.61237246, -14.664949, 11.223872, 13.301428)
-far = 50.0
 
 [node name="Background" type="MeshInstance3D" parent="MainViewport/SubViewport" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6004361, -0.15586472, -1.5166348)
@@ -105,9 +104,9 @@ column_time = 100.0
 visible = false
 
 [node name="RuneStone2" parent="MainViewport/SubViewport/Room" index="3" instance=ExtResource("6_4ano6")]
-visible = false
 
 [node name="RuneStone3" parent="MainViewport/SubViewport/Room" index="4" instance=ExtResource("7_hvhxh")]
+visible = false
 
 [node name="Ruines" type="Node3D" parent="MainViewport/SubViewport/Room" index="5"]
 

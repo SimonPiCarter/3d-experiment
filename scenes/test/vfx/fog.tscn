@@ -236,9 +236,7 @@ viewport_path = NodePath("OutlineViewport/SubViewport")
 script = ExtResource("2_g74ni")
 
 [node name="Camera3D" parent="MainViewport/SubViewport" index="1"]
-transform = Transform3D(0.7071068, 0.35355335, -0.61237246, 2.1855696e-08, 0.8660254, 0.5, 0.7071068, -0.3535534, 0.61237246, -144.0512, 128.36188, 162.02939)
-size = 50.0
-far = 800.0
+transform = Transform3D(0.7071068, 0.35355335, -0.61237246, 2.1855696e-08, 0.8660254, 0.5, 0.7071068, -0.3535534, 0.61237246, -14.665, 11.224, 13.301)
 
 [node name="FogPlaneVar1" type="Node3D" parent="MainViewport/SubViewport" index="2"]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
