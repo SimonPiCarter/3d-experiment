@@ -33,6 +33,12 @@ func sync():
 		near = ref_camera.near
 		far = ref_camera.far
 
+var ref_pos : Vector3
+var cur_move : Vector3
+
+func _ready() -> void:
+	ref_pos = position
+
 func _process(delta):
 	if ref_camera:
 		sync()
@@ -44,16 +50,22 @@ func _process(delta):
 		if right:
 			dir.x = +1
 		if up:
-			dir.y = +1
+			dir.z = -2
 		if down:
-			dir.y = -1
+			dir.z = +2
 		if zoom_in:
 			zoom = -1
 		if zoom_out:
 			zoom = +1
+		dir *= move_speed * delta
+		var trans = Transform3D().rotated(Vector3(0,1,0), deg_to_rad(45))
+		cur_move += dir * trans
+		position = ref_pos + cur_move
 
-		translate(dir * move_speed * delta)
-		size = clamp(size+zoom, 5, 150)
+		size = clamp(size+zoom, 5, 75)
+		far = max(50, 4*size)
+		var move = transform.basis * Vector3(0,0,1) * size
+		position += move
 
 func _input(event):
 	if not enabled:
