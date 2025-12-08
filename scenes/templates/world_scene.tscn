@@ -127,3 +127,4 @@ visible = false
 layout_mode = 0
 
 [node name="FpsDisplay" parent="CanvasLayer" instance=ExtResource("5_o54fc")]
+mouse_filter = 2

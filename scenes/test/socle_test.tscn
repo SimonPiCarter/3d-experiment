@@ -1049,6 +1049,9 @@ rounding = 5.0
 
 [node name="CircleSlidingContainer" parent="CanvasLayer" index="8" instance=ExtResource("18_64fqq")]
 
+[node name="WorldInput" parent="CanvasLayer" index="9"]
+mouse_filter = 2
+
 [editable path="MainViewport/SubViewport/socle/robot2"]
 [editable path="MainViewport/SubViewport/socle/robot3"]
 [editable path="MainViewport/SubViewport/socle/SimpleRobot"]
