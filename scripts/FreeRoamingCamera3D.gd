@@ -12,6 +12,7 @@ const MOUSE_SENSITIVITY := 0.002
 @export var move_speed : float = 20.
 @export var rotation_speed : float = 1.
 @export var ref_camera : Camera3D = null
+@export var enabled : bool = true
 
 func get_up() -> Vector3:
 	return transform * Vector3.UP - position
@@ -55,6 +56,8 @@ func _process(delta):
 		size = clamp(size+zoom, 5, 150)
 
 func _input(event):
+	if not enabled:
+		return
 	if event is InputEventKey:
 		if event.keycode == KEY_Q:
 			left = event.pressed
