@@ -1,11 +1,11 @@
 shader_type spatial;
-render_mode diffuse_toon, specular_toon;
+render_mode unshaded;
 
 //depth_draw_opaque
 
 uniform sampler2D offset_map : filter_nearest;
 uniform sampler2D normal_map : filter_nearest;
-uniform sampler2D texture_albedo : source_color;
+uniform sampler2D texture_albedo : source_color, filter_nearest;
 
 uniform float fps = 24.0; // change this to what the fps is in Blender
 
@@ -19,7 +19,6 @@ uniform bool use_mask = false;
 uniform sampler2D shaded_mask : filter_nearest;
 
 varying flat vec4 custom_data;
-varying float shaded;
 
 void vertex(){
 	custom_data = INSTANCE_CUSTOM;
@@ -72,6 +71,13 @@ void fragment(){
 		#ifdef USE_ALPHA
 			ALPHA = texture(texture_albedo, UV).a;
 		#endif
+		float shaded = step(0.1, texture(shaded_mask, UV).r);
+
+		vec3 color_orig = ALBEDO;
+		vec3 normals_world = (INV_VIEW_MATRIX * vec4(NORMAL, 0.0)).xyz;
+		float dot_light = dot(normals_world, vec3(0,-1,-1)/sqrt(2.));
+		color_orig -= 0.2*color_orig* smoothstep(-0.1,0.1, dot_light) * shaded;
+		ALBEDO = color_orig;
 	} else if((int(CAMERA_VISIBLE_LAYERS) & outline_layer_val) != 0) {
 		if (use_mask) {
 			ALBEDO = texture(outline_mask, UV).rgb;
@@ -84,11 +90,10 @@ void fragment(){
 	} else if((int(CAMERA_VISIBLE_LAYERS) & pickable_layer_val) != 0) {
 		discard;
 	}
-	shaded = step(0.1, texture(shaded_mask, UV).r);
 }
 
 void light() {
-	DIFFUSE_LIGHT = ALBEDO;
-	DIFFUSE_LIGHT += ALBEDO * (1.-shaded);
-	DIFFUSE_LIGHT += LIGHT_COLOR * ATTENUATION * clamp(smoothstep(0.1, 0.15, dot(LIGHT, NORMAL)), 0, 0.5) * shaded;
+	// DIFFUSE_LIGHT = ALBEDO;
+	//DIFFUSE_LIGHT += ALBEDO * (1.-shaded);
+	//DIFFUSE_LIGHT += LIGHT_COLOR * ATTENUATION * clamp(smoothstep(0.1, 0.15, dot(LIGHT, NORMAL)), 0, 0.5) * shaded;
 }
