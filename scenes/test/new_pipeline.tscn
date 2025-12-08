@@ -1,4 +1,4 @@
-[gd_scene load_steps=107 format=3 uid="uid://boqtgauorybyx"]
+[gd_scene load_steps=111 format=3 uid="uid://boqtgauorybyx"]
 
 [ext_resource type="Script" uid="uid://nje6tyvvpq8b" path="res://scenes/test/new_pipeline.gd" id="1_e07xg"]
 [ext_resource type="Shader" uid="uid://cw4s5m23hur31" path="res://shaders/primal/circle_from_plane.gdshader" id="1_gvkf4"]
@@ -14,8 +14,10 @@
 [ext_resource type="Script" uid="uid://d1sgp5r4tsu3l" path="res://scripts/FreeRoamingCamera3D.gd" id="6_1u752"]
 [ext_resource type="PackedScene" uid="uid://slv4fbydqt7v" path="res://scenes/projectile/basic_round/basic_round_projectile_explo.tscn" id="6_6in2w"]
 [ext_resource type="PackedScene" uid="uid://bngmh3npf8b1v" path="res://scenes/models/segmented_twad_robot.tscn" id="6_meuj1"]
+[ext_resource type="Texture2D" uid="uid://w021a0ewvdos" path="res://model/VAT/robot4/albedo.png" id="7_4qyeo"]
 [ext_resource type="PackedScene" uid="uid://b4iuas1jqhse3" path="res://scenes/VFX/Etherals/circling_etheral.tscn" id="7_xnfcr"]
 [ext_resource type="PackedScene" uid="uid://v7x76lnh135e" path="res://scenes/test/power_ring/PowerRing.tscn" id="8_6n3pg"]
+[ext_resource type="Texture2D" uid="uid://q6om1devfq70" path="res://model/VAT/robot4/outline.png" id="8_q35h7"]
 [ext_resource type="Shader" uid="uid://cv4deawtx0pb3" path="res://shaders/new_pipeline/outline_new_pipeline_shaded.gdshader" id="9_rijnb"]
 [ext_resource type="PackedScene" uid="uid://vg4v25l817yt" path="res://scenes/test/exocube/exocube.tscn" id="11_rv1hs"]
 [ext_resource type="PackedScene" uid="uid://bip43til0tsg0" path="res://scenes/env/shrines/red_round_shrine.tscn" id="13_mgpox"]
@@ -31,6 +33,7 @@
 [ext_resource type="PackedScene" uid="uid://cfdijiejbba4r" path="res://scenes/VFX/Beam/Beam.tscn" id="25_0ydtf"]
 [ext_resource type="PackedScene" uid="uid://4f2ootab3hjc" path="res://scenes/VFX/Cube/cube_vfx.tscn" id="27_8j1eq"]
 [ext_resource type="Shader" uid="uid://bwye8r7ehq8mk" path="res://shaders/gradient/circle_gradient.gdshader" id="28_scxka"]
+[ext_resource type="ArrayMesh" uid="uid://b4dgal7ueu61a" path="res://model/VAT/robot4/robot4.obj" id="30_kkt5o"]
 [ext_resource type="PackedScene" uid="uid://buslmtbcq01xb" path="res://scenes/UI/debug/fps_display.tscn" id="30_kqquj"]
 [ext_resource type="PackedScene" uid="uid://deicgdd7mnyvl" path="res://scenes/UI/indicators/box_mouse.tscn" id="31_qy4ca"]
 
@@ -116,6 +119,16 @@ shader_parameter/use_albedo_texture = false
 shader_parameter/original_color = Color(0, 0, 0, 1)
 shader_parameter/outline_color = Color(0, 0, 0.007843138, 1)
 shader_parameter/use_mask = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q35h7"]
+render_priority = 0
+shader = ExtResource("9_rijnb")
+shader_parameter/albedo_texture = ExtResource("7_4qyeo")
+shader_parameter/use_albedo_texture = true
+shader_parameter/original_color = Color(0, 0, 0, 1)
+shader_parameter/outline_color = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/outline_mask = ExtResource("8_q35h7")
+shader_parameter/use_mask = true
 
 [sub_resource type="Curve3D" id="Curve3D_xnfcr"]
 closed = true
@@ -792,6 +805,12 @@ surface_material_override/0 = SubResource("ShaderMaterial_6n3pg")
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.6380758, -0.04581499, 5.0515814)
 script = ExtResource("5_ioc36")
 
+[node name="Robot4" type="MeshInstance3D" parent="MainViewport/SubViewport"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6.828491, 0.3527832, 8.342285)
+layers = 17
+material_override = SubResource("ShaderMaterial_q35h7")
+mesh = ExtResource("30_kkt5o")
+
 [node name="HealerBot" parent="MainViewport/SubViewport" instance=ExtResource("3_ap201")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -7.962083, 0.62210655, 2.332418)
 script = ExtResource("5_ioc36")
@@ -866,13 +885,13 @@ shadow_enabled = true
 transform = Transform3D(1, -4.983938e-09, -2.938263e-08, 2.9802322e-08, 0.16723324, 0.98591745, 0, -0.9859174, 0.16723326, 0, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="MainViewport/SubViewport"]
-transform = Transform3D(0.7071068, 0.35355338, -0.61237246, 2.1855696e-08, 0.8660254, 0.5, 0.7071068, -0.35355338, 0.61237246, -17.407516, 22.080994, 38.139008)
+transform = Transform3D(0.7071068, 0.35355338, -0.61237246, 2.1855696e-08, 0.8660254, 0.5, 0.7071068, -0.35355338, 0.61237246, -17.408, 11, 38.139)
 cull_mask = 1
 projection = 1
 current = true
 fov = 45.0
 size = 25.0
-far = 400.0
+far = 50.0
 script = ExtResource("6_1u752")
 
 [node name="pylones" type="Node3D" parent="MainViewport/SubViewport"]
