@@ -1,5 +1,4 @@
-#ifdef SHADED
-render_mode diffuse_toon, specular_toon;
+#ifdef SHADOW_ON
 #else
 render_mode unshaded;
 #endif
@@ -35,6 +34,14 @@ void fragment() {
 			ALPHA = original_color.a;
 		#endif
 		}
+	#ifdef SHADED
+		vec3 color_orig = ALBEDO;
+		vec3 normals_world = (INV_VIEW_MATRIX * vec4(NORMAL, 0.0)).xyz;
+		const vec3 light_dir = normalize(vec3(0.902,-3.0,-5.117));
+		float dot_light = dot(normals_world, light_dir);
+		color_orig -= 0.2*color_orig* smoothstep(-0.5, -0.3, dot_light);
+		ALBEDO = color_orig;
+	#endif
 	} else if((int(CAMERA_VISIBLE_LAYERS) & outline_layer_val) != 0) {
 		if (use_mask) {
 			ALBEDO = texture(outline_mask, UV).rgb;
@@ -47,10 +54,11 @@ void fragment() {
 	} else if((int(CAMERA_VISIBLE_LAYERS) & pickable_layer_val) != 0) {
 		discard;
 	}
+	RIM = 0.0;
+	METALLIC = 0.0;
+	ROUGHNESS = 1.;
 }
-#ifdef SHADED
+
 void light() {
-	DIFFUSE_LIGHT = ALBEDO;
-	DIFFUSE_LIGHT += LIGHT_COLOR * ATTENUATION * clamp(smoothstep(0.1, 0.15, dot(LIGHT, NORMAL)), 0, 0.5);
+	DIFFUSE_LIGHT += vec3(1.0) * ATTENUATION;
 }
-#endif
