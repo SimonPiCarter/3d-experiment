@@ -9,9 +9,6 @@
 background_mode = 1
 background_color = Color(0.3019608, 0.60784316, 0.9019608, 1)
 sky = SubResource("Sky_ckagc")
-ambient_light_source = 2
-ambient_light_color = Color(0.6775041, 0.784652, 1, 1)
-ambient_light_energy = 0.05
 glow_enabled = true
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_lk33n"]
