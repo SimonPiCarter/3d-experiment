@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://uhgtva2awicx"]
+[gd_scene load_steps=25 format=3 uid="uid://uhgtva2awicx"]
 
 [ext_resource type="PackedScene" uid="uid://da2eduothcfya" path="res://scenes/templates/world_scene.tscn" id="1_cs7ob"]
 [ext_resource type="Shader" uid="uid://cc18tpomiri80" path="res://shaders/new_pipeline/outline_new_pipeline_unshaded.gdshader" id="2_8req8"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://dh8k7ew62dcph" path="res://scenes/env/shrines/rune_stone.tscn" id="5_ii1fx"]
 [ext_resource type="PackedScene" uid="uid://c882n7e0mxsso" path="res://scenes/env/shrines/rune_stone_var2.tscn" id="6_4ano6"]
 [ext_resource type="PackedScene" uid="uid://dlebjkhb0bnl7" path="res://scenes/env/shrines/rune_stone_var3.tscn" id="7_hvhxh"]
+[ext_resource type="PackedScene" uid="uid://dd7pumxmee75o" path="res://scenes/models/quad_entity_robot_2.tscn" id="9_2hv5x"]
+[ext_resource type="Script" uid="uid://dj7w0ypgd8ehs" path="res://scenes/entity/quand_ent_target_move.gd" id="10_xukly"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_jeomr"]
 size = Vector2(1000, 1000)
@@ -163,6 +165,10 @@ layers = 17
 mesh = SubResource("CylinderMesh_5hhw2")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_4h8xn")
+
+[node name="HealerBot" parent="MainViewport/SubViewport" index="6" instance=ExtResource("9_2hv5x")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -5.219589, 0.65546227, 6.6479645)
+script = ExtResource("10_xukly")
 
 [node name="MainView" parent="CanvasLayer" index="0"]
 texture = SubResource("ViewportTexture_8req8")
