@@ -6,7 +6,11 @@ const int outline_layer_val = 1<<4;
 uniform sampler2D albedo : filter_linear, source_color;
 uniform vec4 color : source_color;
 
+varying float depth;
+
 void vertex() {
+	vec3 vertex_view = (MODELVIEW_MATRIX * vec4(VERTEX, 1.0)).xyz;
+	depth = -vertex_view.z;
 	// Called for every vertex the material is visible on.
 }
 
@@ -15,10 +19,11 @@ void fragment() {
 	col.a = step(0.5, col.a);
 	if((int(CAMERA_VISIBLE_LAYERS) & outline_layer_val) != 0) {
 		ALBEDO = col.rgb * color.rgb/length(color);
+		ALPHA = col.a * color.a * step(depth, 15.);
 	} else {
 		ALBEDO = col.rgb * color.rgb;
+		ALPHA = col.a * color.a;
 	}
-	ALPHA = col.a * color.a;
 }
 
 //void light() {
