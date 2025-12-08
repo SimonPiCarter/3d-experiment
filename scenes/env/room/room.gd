@@ -3,10 +3,12 @@ extends Node3D
 @export var room_ray : float = 5.0
 @export var nb_objects : int = 100
 @export var diff_time : float = 5.0
+@export var column_time : float = 5.0
 @onready var multi_mesh: MultiMeshInstance3D = $MultiMeshInstance3D
 @onready var sphere_vfx: SphereVFX = $SphereVFX
 
 var offsets : Array[float] = []
+var start_pos = -10
 
 func _ready() -> void:
 	run()
@@ -19,14 +21,14 @@ func run() -> void:
 		var angle = i * TAU / nb_objects
 		var x = room_ray * cos(angle)
 		var z = room_ray * sin(angle)
-		offsets.append(randf_range(-2, 2))
-		multi_mesh_data.set_instance_transform(i, Transform3D(Basis(), Vector3(x, -22. + offsets[i], z)))
+		offsets.append(randf_range(-1, 1))
+		multi_mesh_data.set_instance_transform(i, Transform3D(Basis(), Vector3(x, start_pos + offsets[i], z)))
 	sphere_vfx.scale = Vector3.ONE * 2. * room_ray - Vector3.ONE * 5.
 
 func despawn():
 	is_running = true
 	is_spawning = false
-	elapsed_time = -1.0
+	elapsed_time = 1.0
 	sphere_vfx.threshold_alpha = 1.
 	var t = get_tree().create_tween()
 	t.tween_property(sphere_vfx, "threshold_alpha", 0., 3.)
@@ -52,5 +54,5 @@ func _process(delta: float) -> void:
 		var delay = float(i) / float(nb_objects) * diff_time
 		var time = elapsed_time - delay
 		var trans : Transform3D = multi_mesh_data.get_instance_transform(i)
-		trans.origin.y = lerp(trans.origin.y, offsets[i]- (22 if not is_spawning else 0), clamp(time, 0, 1))
+		trans.origin.y = lerp(trans.origin.y, offsets[i]- (-start_pos if not is_spawning else 0), clamp(time/column_time, 0, 1))
 		multi_mesh_data.set_instance_transform(i, trans)
