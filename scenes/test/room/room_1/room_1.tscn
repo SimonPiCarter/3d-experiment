@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://uhgtva2awicx"]
+[gd_scene load_steps=40 format=3 uid="uid://uhgtva2awicx"]
 
 [ext_resource type="PackedScene" uid="uid://da2eduothcfya" path="res://scenes/templates/world_scene.tscn" id="1_cs7ob"]
 [ext_resource type="Shader" uid="uid://cc18tpomiri80" path="res://shaders/new_pipeline/outline_new_pipeline_unshaded.gdshader" id="2_8req8"]
@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://dlebjkhb0bnl7" path="res://scenes/env/shrines/rune_stone_var3.tscn" id="7_hvhxh"]
 [ext_resource type="PackedScene" uid="uid://dd7pumxmee75o" path="res://scenes/models/quad_entity_robot_2.tscn" id="9_2hv5x"]
 [ext_resource type="Script" uid="uid://dj7w0ypgd8ehs" path="res://scenes/entity/quand_ent_target_move.gd" id="10_xukly"]
+[ext_resource type="Shader" uid="uid://bwye8r7ehq8mk" path="res://shaders/gradient/circle_gradient.gdshader" id="11_xukly"]
+[ext_resource type="Script" uid="uid://bo323vppjs8mt" path="res://scenes/templates/circle_arranger.gd" id="12_581dn"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_jeomr"]
 size = Vector2(1000, 1000)
@@ -59,6 +61,333 @@ top_radius = 0.25
 bottom_radius = 0.25
 height = 5.0
 
+[sub_resource type="QuadMesh" id="QuadMesh_581dn"]
+
+[sub_resource type="Gradient" id="Gradient_5u1jx"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_u051o"]
+gradient = SubResource("Gradient_5u1jx")
+width = 1024
+height = 1024
+fill = 1
+fill_from = Vector2(0.5014245, 0.45868945)
+fill_to = Vector2(0.991453, 0.0028490028)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y6cee"]
+render_priority = 0
+shader = ExtResource("11_xukly")
+shader_parameter/gradient_texture = SubResource("GradientTexture2D_u051o")
+shader_parameter/color = Color(0.81960785, 0.9098039, 1, 0.13725491)
+shader_parameter/low_pass = 0.0
+shader_parameter/high_pass = 0.5000000074506
+shader_parameter/margin = 0.3999999910592
+
+[sub_resource type="Gradient" id="Gradient_xukly"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_581dn"]
+gradient = SubResource("Gradient_xukly")
+width = 1024
+height = 1024
+fill = 1
+fill_from = Vector2(0.5014245, 0.45868945)
+fill_to = Vector2(0.991453, 0.0028490028)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5u1jx"]
+render_priority = 0
+shader = ExtResource("11_xukly")
+shader_parameter/gradient_texture = SubResource("GradientTexture2D_581dn")
+shader_parameter/color = Color(0.81960785, 0.9098039, 1, 0.039215688)
+shader_parameter/low_pass = 0.0
+shader_parameter/high_pass = 0.5000000074506
+shader_parameter/margin = 0.3999999910592
+
+[sub_resource type="BoxMesh" id="BoxMesh_581dn"]
+size = Vector3(0.5, 1, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2plpr"]
+render_priority = 0
+shader = ExtResource("5_5hhw2")
+shader_parameter/use_albedo_texture = false
+shader_parameter/original_color = Color(0.24313726, 0.20784314, 0.27450982, 1)
+shader_parameter/outline_color = Color(0.93333334, 0.5411765, 0.10980392, 1)
+shader_parameter/use_mask = false
+
+[sub_resource type="Animation" id="Animation_2hv5x"]
+resource_name = "run"
+length = 30.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HealerBot:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(4.7683716e-07, 3.1000004, 3.170454, 3.47288, 7.7333336, 12.905151, 17.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-28.655437, 0.655, 43.21256), Vector3(-34.77363, 0.655, 37.094368), Vector3(-34.77363, 0.655, 37.094368), Vector3(-34.77363, 0.655, 37.094368), Vector3(-21.761646, 0.6552035, 23.689495), Vector3(-21.761646, 0.6552035, 23.689495), Vector3(-3.7598648, 0.6554605, 4.166833)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraController:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(-0.0333333, 3.1000004, 3.4666667, 7.7404537, 12.9, 17.67),
+"transitions": PackedFloat32Array(-2, 1, -2, 1, -2, 1),
+"update": 0,
+"values": [Vector3(-30.793896, 0.655, 41.0741), Vector3(-34.77363, 0.655, 37.094368), Vector3(-34.77363, 0.655, 37.094368), Vector3(-21.761646, 0.6552035, 23.689495), Vector3(-21.761646, 0.6552035, 23.689495), Vector3(-5.219589, 0.65546227, 6.6479645)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CameraController:cur_size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(-0.0333333, 7.833334, 10.733334, 12.9, 17.671818),
+"transitions": PackedFloat32Array(-2, -2, 1, -2, 1),
+"update": 0,
+"values": [10.0, 20.0, 50.0, 50.0, 20.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HealerBot:target_position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 3.1000004, 3.166667, 3.439546, 3.5062127, 7.7333336, 7.8, 12.871819, 12.9, 17.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-35.22, 0.655, 36.648), Vector3(-35.22, 0.655, 36.648), Vector3(-34.77363, 0.655, 37.094368), Vector3(-34.77363, 0.655, 37.094368), Vector3(-5.219589, 0.65546227, 6.6479645), Vector3(-5.219589, 0.65546227, 6.6479645), Vector3(-21.761646, 0.6552035, 23.689495), Vector3(-21.761646, 0.6552035, 23.689495), Vector3(-3.7598648, 0.6554605, 4.166833), Vector3(-3.7598648, 0.6554605, 4.166833)]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Room")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.03333333, 11.166666),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"spawn"
+}, {
+"args": [],
+"method": &"despawn"
+}]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Trigger/Gradient:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 7.5666666, 11.166666),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(10, 10, 10)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Room/RuneStone2:ray")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 17.678167, 18.2115, 19.178167, 22.766666),
+"transitions": PackedFloat32Array(1, 0.25, 0.25, 1, 1),
+"update": 0,
+"values": [1.0, 1.0, 2.0, 1.0, 1.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Room/RuneStone2:speed_rot")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 17.678167, 18.2115, 19.178167, 23.233334),
+"transitions": PackedFloat32Array(1, 0.25, 0.25, 1, 1),
+"update": 0,
+"values": [0.7853981633974483, 1.0, 10.0, 1.0, 1.5]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Trigger/CircleArranger:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(10.933334, 11.4, 11.9),
+"transitions": PackedFloat32Array(4, 0.25, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.5, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_xukly"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HealerBot:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-5.219589, 0.65546227, 6.6479645)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraController:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-3, 0, 3)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CameraController:cur_size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [75.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HealerBot:target_position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Trigger/Gradient:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(10, 10, 10)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Room/RuneStone2:speed_rot")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.7853981633974483]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Room/RuneStone2:ray")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Trigger/CircleArranger:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_581dn"]
+resource_name = "test_room"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraController:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.23467636, 0.655, 0.78102493)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraController:cur_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [15.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Room/RuneStone2:ray")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.53333336, 1.5),
+"transitions": PackedFloat32Array(0.25, 0.25, 1),
+"update": 0,
+"values": [1.0, 2.0, 1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Room/RuneStone2:speed_rot")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.53333336, 1.5),
+"transitions": PackedFloat32Array(0.25, 0.25, 1),
+"update": 0,
+"values": [1.0, 10.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xukly"]
+_data = {
+&"RESET": SubResource("Animation_xukly"),
+&"run": SubResource("Animation_2hv5x"),
+&"test_room": SubResource("Animation_581dn")
+}
+
 [sub_resource type="ViewportTexture" id="ViewportTexture_8req8"]
 viewport_path = NodePath("MainViewport/SubViewport")
 
@@ -76,8 +405,14 @@ viewport_path = NodePath("OutlineViewport/SubViewport")
 [node name="WorldScene" instance=ExtResource("1_cs7ob")]
 script = ExtResource("2_ii1fx")
 
-[node name="Camera3D" parent="MainViewport/SubViewport" index="1"]
-transform = Transform3D(0.7071068, 0.35355335, -0.61237246, 2.1855698e-08, 0.8660254, 0.5, 0.7071068, -0.3535534, 0.61237246, -14.664949, 11.223872, 13.301428)
+[node name="CameraController" parent="MainViewport/SubViewport" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 3)
+cur_size = 75.0
+
+[node name="CameraSizer" parent="MainViewport/SubViewport/CameraController" index="0"]
+transform = Transform3D(0.7071068, 0.35355338, -0.61237246, 0, 0.8660254, 0.50000006, 0.7071068, -0.35355338, 0.61237246, -9.185587, 7.500001, 9.185587)
+size = 15.0
+far = 60.0
 
 [node name="Background" type="MeshInstance3D" parent="MainViewport/SubViewport" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6004361, -0.15586472, -1.5166348)
@@ -117,49 +452,105 @@ mesh = SubResource("BoxMesh_5hhw2")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_4h8xn")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="MainViewport/SubViewport/Room/Ruines" index="1"]
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="MainViewport/SubViewport/Room/Ruines" index="1"]
+transform = Transform3D(-0.07300943, -0.49320948, 0.86684144, 0.32317632, 0.810564, 0.4884085, -0.94351816, 0.31580102, 0.10021487, -15.625489, -1.2638571, 29.699951)
+layers = 17
+mesh = SubResource("BoxMesh_5hhw2")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_4h8xn")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="MainViewport/SubViewport/Room/Ruines" index="2"]
+transform = Transform3D(0.2705687, -0.37758517, 0.8855629, -0.30664405, 0.8381593, 0.4510632, -0.9125578, -0.3935963, 0.110995576, -39.386475, -1.2638571, 37.421875)
+layers = 17
+mesh = SubResource("BoxMesh_5hhw2")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_4h8xn")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="MainViewport/SubViewport/Room/Ruines" index="3"]
+transform = Transform3D(0.76369846, -0.6079821, -0.21707673, 0.6324996, 0.63733596, 0.44016716, -0.12926298, -0.47345603, 0.87128115, -34.20349, -2.346926, 14.534424)
+layers = 17
+mesh = SubResource("BoxMesh_5hhw2")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_4h8xn")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="MainViewport/SubViewport/Room/Ruines" index="4"]
 transform = Transform3D(0.7289798, -0.54233015, 0.41769177, 0.32317638, 0.81056404, 0.48840854, -0.60344464, -0.22105187, 0.76615316, -1.124281, -0.33541873, -12.780918)
 layers = 17
 mesh = SubResource("BoxMesh_4ano6")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_4h8xn")
 
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="MainViewport/SubViewport/Room/Ruines" index="2"]
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="MainViewport/SubViewport/Room/Ruines" index="5"]
 transform = Transform3D(0.7289798, -0.54233015, 0.41769177, 0.32317638, 0.81056404, 0.48840854, -0.60344464, -0.22105187, 0.76615316, 0.9450049, -0.5409707, -13.778018)
 layers = 17
 mesh = SubResource("BoxMesh_4ano6")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_4h8xn")
 
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="MainViewport/SubViewport/Room/Ruines" index="3"]
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="MainViewport/SubViewport/Room/Ruines" index="6"]
 transform = Transform3D(0.7289798, -0.54233015, 0.41769177, 0.32317638, 0.81056404, 0.48840854, -0.60344464, -0.22105187, 0.76615316, 3.5896747, -1.402672, -14.670521)
 layers = 17
 mesh = SubResource("BoxMesh_4ano6")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_4h8xn")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="MainViewport/SubViewport/Room/Ruines" index="4"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MainViewport/SubViewport/Room/Ruines" index="7"]
 transform = Transform3D(0.32760158, -0.4052852, -0.85347587, 0.1452346, 0.9141903, -0.37836885, 0.9335867, 1.034202e-09, 0.35835165, 11.770388, -2.0281677, 4.997497)
 layers = 17
 mesh = SubResource("BoxMesh_5hhw2")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_4h8xn")
 
-[node name="Column2" type="MeshInstance3D" parent="MainViewport/SubViewport/Room/Ruines" index="5"]
+[node name="Column2" type="MeshInstance3D" parent="MainViewport/SubViewport/Room/Ruines" index="8"]
 transform = Transform3D(0.111410655, -0.69993305, 0.7054656, -0.12469454, 0.6944287, 0.7086749, -0.98592025, -0.16692148, -0.009911067, 18.258549, -0.20751953, -10.462443)
 layers = 17
 mesh = SubResource("CylinderMesh_4ano6")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_4h8xn")
 
-[node name="Column" type="MeshInstance3D" parent="MainViewport/SubViewport/Room/Ruines" index="6"]
+[node name="Column4" type="MeshInstance3D" parent="MainViewport/SubViewport/Room/Ruines" index="9"]
+transform = Transform3D(0.111410655, -0.69993305, 0.7054656, -0.12469454, 0.6944287, 0.7086749, -0.98592025, -0.16692148, -0.009911067, -13.046017, -0.2074585, 47.52779)
+layers = 17
+mesh = SubResource("CylinderMesh_4ano6")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_4h8xn")
+
+[node name="Column" type="MeshInstance3D" parent="MainViewport/SubViewport/Room/Ruines" index="10"]
 transform = Transform3D(-0.059619993, 0, 0.99822116, 0, 1, 0, -0.99822116, 0, -0.059619993, 19.253544, -0.51013184, -10.416789)
 layers = 17
 mesh = SubResource("CylinderMesh_5hhw2")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_4h8xn")
 
-[node name="Column3" type="MeshInstance3D" parent="MainViewport/SubViewport/Room/Ruines" index="7"]
+[node name="Column5" type="MeshInstance3D" parent="MainViewport/SubViewport/Room/Ruines" index="11"]
+transform = Transform3D(-0.059619993, 0, 0.99822116, 0, 1, 0, -0.99822116, 0, -0.059619993, -10.635494, -0.5101929, 42.832478)
+layers = 17
+mesh = SubResource("CylinderMesh_5hhw2")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_4h8xn")
+
+[node name="Column6" type="MeshInstance3D" parent="MainViewport/SubViewport/Room/Ruines" index="12"]
+transform = Transform3D(-0.054001477, -0.42378846, 0.90414995, -0.025266265, 0.9057612, 0.4230346, -0.99822116, 0, -0.059619993, 33.396122, -0.5101929, 23.401691)
+layers = 17
+mesh = SubResource("CylinderMesh_5hhw2")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_4h8xn")
+
+[node name="Column7" type="MeshInstance3D" parent="MainViewport/SubViewport/Room/Ruines" index="13"]
+transform = Transform3D(-0.054001477, -0.42378846, 0.90414995, -0.025266265, 0.9057612, 0.4230346, -0.99822116, 0, -0.059619993, 31.55457, -2.0634766, 23.401691)
+layers = 17
+mesh = SubResource("CylinderMesh_5hhw2")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_4h8xn")
+
+[node name="Column8" type="MeshInstance3D" parent="MainViewport/SubViewport/Room/Ruines" index="14"]
+transform = Transform3D(-0.054001477, -0.42378846, 0.90414995, -0.025266265, 0.9057612, 0.4230346, -0.99822116, 0, -0.059619993, 36.716923, 0.48846436, 23.401691)
+layers = 17
+mesh = SubResource("CylinderMesh_5hhw2")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_4h8xn")
+
+[node name="Column3" type="MeshInstance3D" parent="MainViewport/SubViewport/Room/Ruines" index="15"]
 transform = Transform3D(-0.059619993, 0, 0.99822116, 0, 1, 0, -0.99822116, 0, -0.059619993, 17.877226, 1.9685059, -11.998501)
 layers = 17
 mesh = SubResource("CylinderMesh_5hhw2")
@@ -167,8 +558,106 @@ skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_4h8xn")
 
 [node name="HealerBot" parent="MainViewport/SubViewport" index="6" instance=ExtResource("9_2hv5x")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -5.219589, 0.65546227, 6.6479645)
+transform = Transform3D(0.21213207, 0, -0.21213207, 0, 0.3, 0, 0.21213207, 0, 0.21213207, -5.219589, 0.65546227, 6.6479645)
 script = ExtResource("10_xukly")
+target_position = Vector3(0, 0, 0)
+
+[node name="Trigger" type="Node3D" parent="MainViewport/SubViewport" index="7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.76639, 0, 23.698326)
+
+[node name="Gradient" type="MeshInstance3D" parent="MainViewport/SubViewport/Trigger" index="0"]
+transform = Transform3D(10, 0, 0, 0, -4.371139e-07, 10, 0, -10, -4.371139e-07, 0, 0, 0)
+layers = 17
+mesh = SubResource("QuadMesh_581dn")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("ShaderMaterial_y6cee")
+
+[node name="Gradient2" type="MeshInstance3D" parent="MainViewport/SubViewport/Trigger" index="1"]
+transform = Transform3D(10, 0, 0, 0, -4.371139e-07, 10, 0, -10, -4.371139e-07, 0, 0, 0)
+layers = 17
+mesh = SubResource("QuadMesh_581dn")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("ShaderMaterial_5u1jx")
+
+[node name="CircleArranger" type="Node3D" parent="MainViewport/SubViewport/Trigger" index="2"]
+script = ExtResource("12_581dn")
+ray = 4.5
+rotate = true
+metadata/_custom_type_script = "uid://bo323vppjs8mt"
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="MainViewport/SubViewport/Trigger/CircleArranger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, -0.363227, 0)
+layers = 17
+mesh = SubResource("BoxMesh_581dn")
+skeleton = NodePath("../../../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_2plpr")
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="MainViewport/SubViewport/Trigger/CircleArranger" index="1"]
+transform = Transform3D(0.7660442, 0, -0.6427874, 0, 1, 0, 0.6427874, 0, 0.7660442, 3.4472, -0.363227, 2.8925443)
+layers = 17
+mesh = SubResource("BoxMesh_581dn")
+skeleton = NodePath("../../../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_2plpr")
+
+[node name="MeshInstance3D12" type="MeshInstance3D" parent="MainViewport/SubViewport/Trigger/CircleArranger" index="2"]
+transform = Transform3D(0.17364818, 0, -0.98480743, 0, 1, 0, 0.98480743, 0, 0.17364818, 0.7814168, -0.363227, 4.431635)
+layers = 17
+mesh = SubResource("BoxMesh_581dn")
+skeleton = NodePath("../../../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_2plpr")
+
+[node name="MeshInstance3D13" type="MeshInstance3D" parent="MainViewport/SubViewport/Trigger/CircleArranger" index="3"]
+transform = Transform3D(-0.50000006, 0, -0.8660254, 0, 1, 0, 0.8660254, 0, -0.50000006, -2.25, -0.363227, 3.8971143)
+layers = 17
+mesh = SubResource("BoxMesh_581dn")
+skeleton = NodePath("../../../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_2plpr")
+
+[node name="MeshInstance3D14" type="MeshInstance3D" parent="MainViewport/SubViewport/Trigger/CircleArranger" index="4"]
+transform = Transform3D(-0.9396926, 0, -0.3420202, 0, 1, 0, 0.3420202, 0, -0.9396926, -4.2286167, -0.363227, 1.5390906)
+layers = 17
+mesh = SubResource("BoxMesh_581dn")
+skeleton = NodePath("../../../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_2plpr")
+
+[node name="MeshInstance3D15" type="MeshInstance3D" parent="MainViewport/SubViewport/Trigger/CircleArranger" index="5"]
+transform = Transform3D(-0.9396926, 0, 0.34202015, 0, 1, 0, -0.34202015, 0, -0.9396926, -4.2286167, -0.363227, -1.5390906)
+layers = 17
+mesh = SubResource("BoxMesh_581dn")
+skeleton = NodePath("../../../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_2plpr")
+
+[node name="MeshInstance3D16" type="MeshInstance3D" parent="MainViewport/SubViewport/Trigger/CircleArranger" index="6"]
+transform = Transform3D(-0.4999999, 0, 0.86602545, 0, 1, 0, -0.86602545, 0, -0.4999999, -2.25, -0.363227, -3.8971143)
+layers = 17
+mesh = SubResource("BoxMesh_581dn")
+skeleton = NodePath("../../../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_2plpr")
+
+[node name="MeshInstance3D17" type="MeshInstance3D" parent="MainViewport/SubViewport/Trigger/CircleArranger" index="7"]
+transform = Transform3D(0.1736481, 0, 0.98480743, 0, 1, 0, -0.98480743, 0, 0.1736481, 0.7814168, -0.363227, -4.431635)
+layers = 17
+mesh = SubResource("BoxMesh_581dn")
+skeleton = NodePath("../../../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_2plpr")
+
+[node name="MeshInstance3D18" type="MeshInstance3D" parent="MainViewport/SubViewport/Trigger/CircleArranger" index="8"]
+transform = Transform3D(0.7660443, 0, 0.64278775, 0, 1, 0, -0.64278775, 0, 0.7660443, 3.4472, -0.363227, -2.8925443)
+layers = 17
+mesh = SubResource("BoxMesh_581dn")
+skeleton = NodePath("../../../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_2plpr")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MainViewport/SubViewport" index="8"]
+libraries = {
+&"": SubResource("AnimationLibrary_xukly")
+}
+autoplay = "test_room"
+
+[node name="CameraFollower" parent="OutlineViewport/SubViewport" index="0"]
+transform = Transform3D(0.70710677, 0.3535534, -0.6123724, 0, 0.8660254, 0.50000006, 0.70710677, -0.3535534, 0.6123724, -9.420263, 8.155001, 9.966612)
+size = 15.0
+far = 60.0
 
 [node name="MainView" parent="CanvasLayer" index="0"]
 texture = SubResource("ViewportTexture_8req8")
@@ -176,6 +665,3 @@ texture = SubResource("ViewportTexture_8req8")
 [node name="OutlineView" parent="CanvasLayer" index="1"]
 material = SubResource("ShaderMaterial_jeomr")
 texture = SubResource("ViewportTexture_ii1fx")
-
-[node name="WorldInput" parent="CanvasLayer" index="2" node_paths=PackedStringArray("ref_camera")]
-ref_camera = NodePath("../../MainViewport/SubViewport/Camera3D")

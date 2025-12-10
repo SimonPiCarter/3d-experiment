@@ -4,6 +4,7 @@ extends Node3D
 @export var speed_osc = PI/2.
 @export var ampl_osc = 0.25
 @export var delta_osc = 0.25
+@export var ray : float = 1.
 
 @onready var circle_arranger_1: CircleArranger = $StoneCircle/CircleArranger
 @onready var circle_arranger_2: CircleArranger = $StoneCircle/CircleArranger2
@@ -32,11 +33,17 @@ func _ready() -> void:
 			cubes.append(cube)
 			idx += 1
 
-var elapsed = 0.
+var elapsed_osc = 0.
 func _process(delta: float) -> void:
-	elapsed += delta
-	circle_arranger_1.rotation.y = elapsed * speed_rot * 0.9
-	circle_arranger_2.rotation.y = elapsed * speed_rot * 1.0
-	circle_arranger_3.rotation.y = elapsed * speed_rot * 1.1
+	circle_arranger_1.ray = ray * 1.0
+	circle_arranger_1.update()
+	circle_arranger_1.rotation.y += delta * speed_rot * 0.9
+	circle_arranger_2.ray = ray * 1.25
+	circle_arranger_2.update()
+	circle_arranger_2.rotation.y += delta * speed_rot * 1.0
+	circle_arranger_3.ray = ray * 1.5
+	circle_arranger_3.update()
+	circle_arranger_3.rotation.y += delta * speed_rot * 1.1
+	elapsed_osc += delta * speed_osc
 	for cube in cubes:
-		cube.node.position.y = cube.init_y + ampl_osc * cos(delta_osc * cube.idx + elapsed * speed_osc)
+		cube.node.position.y = cube.init_y + ampl_osc * cos(delta_osc * cube.idx + elapsed_osc)
