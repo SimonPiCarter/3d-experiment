@@ -1,4 +1,4 @@
-[gd_scene load_steps=111 format=3 uid="uid://boqtgauorybyx"]
+[gd_scene load_steps=115 format=3 uid="uid://boqtgauorybyx"]
 
 [ext_resource type="Script" uid="uid://nje6tyvvpq8b" path="res://scenes/test/new_pipeline.gd" id="1_e07xg"]
 [ext_resource type="Shader" uid="uid://cw4s5m23hur31" path="res://shaders/primal/circle_from_plane.gdshader" id="1_gvkf4"]
@@ -18,11 +18,14 @@
 [ext_resource type="PackedScene" uid="uid://b4iuas1jqhse3" path="res://scenes/VFX/Etherals/circling_etheral.tscn" id="7_xnfcr"]
 [ext_resource type="PackedScene" uid="uid://v7x76lnh135e" path="res://scenes/test/power_ring/PowerRing.tscn" id="8_6n3pg"]
 [ext_resource type="Texture2D" uid="uid://q6om1devfq70" path="res://model/VAT/robot4/outline.png" id="8_q35h7"]
+[ext_resource type="Texture2D" uid="uid://byoui1ck6w1ui" path="res://model/VAT/robot4/shaded_mask.png" id="9_qa6lk"]
 [ext_resource type="Shader" uid="uid://cv4deawtx0pb3" path="res://shaders/new_pipeline/outline_new_pipeline_shaded.gdshader" id="9_rijnb"]
 [ext_resource type="PackedScene" uid="uid://vg4v25l817yt" path="res://scenes/test/exocube/exocube.tscn" id="11_rv1hs"]
 [ext_resource type="PackedScene" uid="uid://bip43til0tsg0" path="res://scenes/env/shrines/red_round_shrine.tscn" id="13_mgpox"]
 [ext_resource type="PackedScene" uid="uid://dbxla1me04wl3" path="res://scenes/env/shrines/white_squared_shrine.tscn" id="15_740d2"]
+[ext_resource type="Script" uid="uid://7gobnfnh4r40" path="res://scripts/camera/CameraController.gd" id="17_gdstn"]
 [ext_resource type="PackedScene" uid="uid://dpo4rthvuoh13" path="res://scenes/VFX/Explosion/explo_sphere_dust.tscn" id="17_mgpox"]
+[ext_resource type="Script" uid="uid://c3ake8fsos5uj" path="res://scripts/camera/CameraSizer.gd" id="18_bh1fg"]
 [ext_resource type="PackedScene" uid="uid://b12sxh8hols1l" path="res://scenes/models/cube_uv.tscn" id="19_voo7p"]
 [ext_resource type="PackedScene" uid="uid://qfg6ip0muxgn" path="res://scenes/models/cup_uv.tscn" id="20_6in2w"]
 [ext_resource type="Script" uid="uid://dr8i2irhdjpuy" path="res://scenes/entity/spawner/spawner.gd" id="20_ioc36"]
@@ -36,6 +39,7 @@
 [ext_resource type="ArrayMesh" uid="uid://b4dgal7ueu61a" path="res://model/VAT/robot4/robot4.obj" id="30_kkt5o"]
 [ext_resource type="PackedScene" uid="uid://buslmtbcq01xb" path="res://scenes/UI/debug/fps_display.tscn" id="30_kqquj"]
 [ext_resource type="PackedScene" uid="uid://deicgdd7mnyvl" path="res://scenes/UI/indicators/box_mouse.tscn" id="31_qy4ca"]
+[ext_resource type="Script" uid="uid://0xm7bptiovd2" path="res://scripts/camera/CameraFollower.gd" id="35_bh1fg"]
 
 [sub_resource type="Sky" id="Sky_kqquj"]
 
@@ -47,7 +51,7 @@ ambient_light_source = 2
 ambient_light_color = Color(0.6775041, 0.784652, 1, 1)
 ambient_light_energy = 0.05
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_scxka"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bh1fg"]
 render_priority = -1
 shader = ExtResource("1_gvkf4")
 shader_parameter/ray = 0.4
@@ -57,7 +61,7 @@ shader_parameter/color = Color(0.2, 1, 0.2, 0.58431375)
 shader_parameter/ouline_color = Color(0.7555181, 0.077867486, 0.3136828, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_iosng"]
-material = SubResource("ShaderMaterial_scxka")
+material = SubResource("ShaderMaterial_bh1fg")
 size = Vector2(10, 10)
 subdivide_width = 2
 
@@ -129,6 +133,7 @@ shader_parameter/original_color = Color(0, 0, 0, 1)
 shader_parameter/outline_color = Color(0.5, 0.5, 0.5, 1)
 shader_parameter/outline_mask = ExtResource("8_q35h7")
 shader_parameter/use_mask = true
+shader_parameter/shaded_mask = ExtResource("9_qa6lk")
 
 [sub_resource type="Curve3D" id="Curve3D_xnfcr"]
 closed = true
@@ -722,7 +727,7 @@ _data = {
 
 [sub_resource type="Gradient" id="Gradient_8j1eq"]
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_u051o"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bh1fg"]
 gradient = SubResource("Gradient_8j1eq")
 width = 1024
 height = 1024
@@ -732,7 +737,7 @@ fill_from = Vector2(0.5, 0.5)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2rdgq"]
 render_priority = 0
 shader = ExtResource("28_scxka")
-shader_parameter/gradient_texture = SubResource("GradientTexture2D_u051o")
+shader_parameter/gradient_texture = SubResource("GradientTexture2D_bh1fg")
 shader_parameter/color = Color(1, 0, 0, 1)
 shader_parameter/low_pass = 0.6999999843536
 shader_parameter/high_pass = 0.5000000074506
@@ -804,6 +809,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_6n3pg")
 [node name="SmallBot" parent="MainViewport/SubViewport" instance=ExtResource("4_rijnb")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.6380758, -0.04581499, 5.0515814)
 script = ExtResource("5_ioc36")
+target_position = Vector3(0, 0, 0)
 
 [node name="Robot4" type="MeshInstance3D" parent="MainViewport/SubViewport"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6.828491, 0.3527832, 8.342285)
@@ -814,6 +820,7 @@ mesh = ExtResource("30_kkt5o")
 [node name="HealerBot" parent="MainViewport/SubViewport" instance=ExtResource("3_ap201")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -7.962083, 0.62210655, 2.332418)
 script = ExtResource("5_ioc36")
+target_position = Vector3(0, 0, 0)
 
 [node name="BasicWeapon" type="Node" parent="MainViewport/SubViewport/HealerBot" node_paths=PackedStringArray("source", "targets", "root_projectile")]
 script = ExtResource("5_voo7p")
@@ -827,6 +834,7 @@ metadata/_custom_type_script = "uid://c0ydmpenhown0"
 [node name="HealerBot2" parent="MainViewport/SubViewport" instance=ExtResource("3_ap201")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 3.5916119, 0.62210655, 3.9383297)
 script = ExtResource("5_ioc36")
+target_position = Vector3(0, 0, 0)
 
 [node name="BasicWeapon" type="Node" parent="MainViewport/SubViewport/HealerBot2" node_paths=PackedStringArray("source", "targets", "root_projectile")]
 script = ExtResource("5_voo7p")
@@ -840,6 +848,7 @@ metadata/_custom_type_script = "uid://c0ydmpenhown0"
 [node name="HealerBot3" parent="MainViewport/SubViewport" instance=ExtResource("3_ap201")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -9.398123, 0.62210655, 11.753531)
 script = ExtResource("5_ioc36")
+target_position = Vector3(0, 0, 0)
 
 [node name="BasicWeapon" type="Node" parent="MainViewport/SubViewport/HealerBot3" node_paths=PackedStringArray("source", "targets", "root_projectile")]
 script = ExtResource("5_voo7p")
@@ -857,6 +866,7 @@ move_speed = 60.0
 [node name="SimpleRobot" parent="MainViewport/SubViewport" instance=ExtResource("5_6n3pg")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 1.8779516, 0.3043263, 16.23522)
 script = ExtResource("5_ioc36")
+target_position = Vector3(0, 0, 0)
 turn_speed = 5.0
 step_offset = 0.5
 
@@ -888,11 +898,26 @@ transform = Transform3D(1, -4.983938e-09, -2.938263e-08, 2.9802322e-08, 0.167233
 transform = Transform3D(0.7071068, 0.35355338, -0.61237246, 2.1855696e-08, 0.8660254, 0.5, 0.7071068, -0.35355338, 0.61237246, -17.408, 11, 38.139)
 cull_mask = 1
 projection = 1
-current = true
 fov = 45.0
 size = 25.0
 far = 50.0
 script = ExtResource("6_1u752")
+
+[node name="CameraController" type="Node3D" parent="MainViewport/SubViewport" node_paths=PackedStringArray("camera")]
+script = ExtResource("17_gdstn")
+cur_size = 25.0
+camera = NodePath("CameraSizer")
+metadata/_custom_type_script = "uid://7gobnfnh4r40"
+
+[node name="CameraSizer" type="Camera3D" parent="MainViewport/SubViewport/CameraController"]
+transform = Transform3D(0.70710677, 0.35355338, -0.6123724, 0, 0.8660254, 0.5, 0.70710677, -0.35355338, 0.6123724, -15.30931, 12.5, 15.30931)
+cull_mask = 1
+projection = 1
+current = true
+size = 25.0
+far = 100.0
+script = ExtResource("18_bh1fg")
+metadata/_custom_type_script = "uid://c3ake8fsos5uj"
 
 [node name="pylones" type="Node3D" parent="MainViewport/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.219317, 0)
@@ -1080,7 +1105,7 @@ libraries = {
 autoplay = "test"
 
 [node name="SphereVFX3" parent="MainViewport/SubViewport/VFX" instance=ExtResource("1_m8x48")]
-transform = Transform3D(32, 0, 0, 0, 32, 0, 0, 0, 32, -1.2666016, -7.972229, -21.817322)
+transform = Transform3D(32, 0, 0, 0, 32, 0, 0, 0, 32, -1.7275391, -8.112366, -21.42865)
 color_high = Color(0.56078434, 0.972549, 0.8862745, 1)
 color_low = Color(0.56078434, 0.972549, 0.8862745, 1)
 noise = SubResource("NoiseTexture2D_0ydtf")
@@ -1177,6 +1202,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_2rdgq")
 
 [node name="SmallBot2" parent="MainViewport/SubViewport/Targets" instance=ExtResource("4_rijnb")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.6380758, -0.04581499, 12.271186)
+target_position = Vector3(0, 0, 0)
 
 [node name="OutlineViewport" type="SubViewportContainer" parent="."]
 visibility_layer = 0
@@ -1193,15 +1219,15 @@ handle_input_locally = false
 size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
-[node name="Camera3D" type="Camera3D" parent="OutlineViewport/SubViewport" node_paths=PackedStringArray("ref_camera")]
+[node name="CameraFollower" type="Camera3D" parent="OutlineViewport/SubViewport" node_paths=PackedStringArray("ref_camera")]
+transform = Transform3D(0.70710677, 0.35355338, -0.6123724, 0, 0.8660254, 0.5, 0.70710677, -0.35355338, 0.6123724, -15.30931, 12.5, 15.30931)
 cull_mask = 16
 projection = 1
-current = true
-fov = 45.0
 size = 25.0
-far = 400.0
-script = ExtResource("6_1u752")
-ref_camera = NodePath("../../../MainViewport/SubViewport/Camera3D")
+far = 100.0
+script = ExtResource("35_bh1fg")
+ref_camera = NodePath("../../../MainViewport/SubViewport/CameraController/CameraSizer")
+metadata/_custom_type_script = "uid://0xm7bptiovd2"
 
 [node name="PickViewport" type="SubViewportContainer" parent="."]
 visibility_layer = 0
@@ -1218,15 +1244,15 @@ handle_input_locally = false
 size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
-[node name="Camera3D" type="Camera3D" parent="PickViewport/SubViewport" node_paths=PackedStringArray("ref_camera")]
+[node name="CameraFollower" type="Camera3D" parent="PickViewport/SubViewport" node_paths=PackedStringArray("ref_camera")]
+transform = Transform3D(0.7071067, 0.35355338, -0.6123724, 0, 0.8660254, 0.5, 0.7071067, -0.35355338, 0.6123724, -15.30931, 12.5, 15.30931)
 cull_mask = 32
 projection = 1
-current = true
-fov = 45.0
 size = 25.0
-far = 400.0
-script = ExtResource("6_1u752")
-ref_camera = NodePath("../../../MainViewport/SubViewport/Camera3D")
+far = 100.0
+script = ExtResource("35_bh1fg")
+ref_camera = NodePath("../../../MainViewport/SubViewport/CameraController/CameraSizer")
+metadata/_custom_type_script = "uid://0xm7bptiovd2"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -1259,7 +1285,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("ViewportTexture_aas4t")
 
-[node name="WorldInput" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("ref_camera", "debug", "targets", "box")]
+[node name="WorldInput" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("camera_controller", "ref_camera", "debug", "targets", "box")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -1267,7 +1293,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("21_6in2w")
-ref_camera = NodePath("../../MainViewport/SubViewport/Camera3D")
+camera_controller = NodePath("../../MainViewport/SubViewport/CameraController")
+ref_camera = NodePath("../../MainViewport/SubViewport/CameraController/CameraSizer")
 pick_texture = SubResource("ViewportTexture_mgpox")
 debug = NodePath("../../MainViewport/SubViewport/VFX/PowerRing3")
 targets = NodePath("../../MainViewport/SubViewport/Targets")

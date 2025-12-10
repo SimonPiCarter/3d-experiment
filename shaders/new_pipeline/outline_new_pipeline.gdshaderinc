@@ -16,6 +16,7 @@ uniform vec4 original_color : source_color;
 uniform vec4 outline_color : source_color = vec4(0.5,0.5,0.5,1.);
 uniform sampler2D outline_mask : filter_nearest;
 uniform bool use_mask = false;
+uniform sampler2D shaded_mask : filter_nearest;
 
 void vertex() {
 	// Called for every vertex the material is visible on.
@@ -39,7 +40,7 @@ void fragment() {
 		vec3 normals_world = (INV_VIEW_MATRIX * vec4(NORMAL, 0.0)).xyz;
 		const vec3 light_dir = normalize(vec3(0.902,-3.0,-5.117));
 		float dot_light = dot(normals_world, light_dir);
-		color_orig -= 0.2*color_orig* smoothstep(-0.5, -0.3, dot_light);
+		color_orig -= 0.2*color_orig* smoothstep(-0.5, -0.3, dot_light) * step(0.1,texture(shaded_mask, UV).r);
 		ALBEDO = color_orig;
 	#endif
 	} else if((int(CAMERA_VISIBLE_LAYERS) & outline_layer_val) != 0) {
