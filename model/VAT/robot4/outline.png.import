@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://q6om1devfq70"
-path.s3tc="res://.godot/imported/outline.png-2c9517e6267444ff029dcdbeda64a09f.s3tc.ctex"
+path="res://.godot/imported/outline.png-2c9517e6267444ff029dcdbeda64a09f.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://model/VAT/robot4/outline.png"
-dest_files=["res://.godot/imported/outline.png-2c9517e6267444ff029dcdbeda64a09f.s3tc.ctex"]
+dest_files=["res://.godot/imported/outline.png-2c9517e6267444ff029dcdbeda64a09f.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
