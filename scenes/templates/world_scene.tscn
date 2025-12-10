@@ -1,8 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://da2eduothcfya"]
+[gd_scene load_steps=13 format=3 uid="uid://da2eduothcfya"]
 
-[ext_resource type="Script" uid="uid://d1sgp5r4tsu3l" path="res://scripts/FreeRoamingCamera3D.gd" id="1_v51pv"]
+[ext_resource type="Script" uid="uid://7gobnfnh4r40" path="res://scripts/camera/CameraController.gd" id="1_mx4qy"]
 [ext_resource type="Shader" uid="uid://c4njs3466gxfy" path="res://shaders/2d/pixel_outline_v2.gdshader" id="2_jjm7f"]
+[ext_resource type="Script" uid="uid://c3ake8fsos5uj" path="res://scripts/camera/CameraSizer.gd" id="2_vvf01"]
 [ext_resource type="Script" uid="uid://34jx7s516ea1" path="res://scenes/test/world_input.gd" id="3_lk33n"]
+[ext_resource type="Script" uid="uid://0xm7bptiovd2" path="res://scripts/camera/CameraFollower.gd" id="3_mx4qy"]
 [ext_resource type="PackedScene" uid="uid://deicgdd7mnyvl" path="res://scenes/UI/indicators/box_mouse.tscn" id="4_agdp1"]
 [ext_resource type="PackedScene" uid="uid://buslmtbcq01xb" path="res://scenes/UI/debug/fps_display.tscn" id="5_o54fc"]
 
@@ -54,15 +56,21 @@ render_target_update_mode = 4
 [node name="WorldEnvironment" type="WorldEnvironment" parent="MainViewport/SubViewport"]
 environment = SubResource("Environment_jjm7f")
 
-[node name="Camera3D" type="Camera3D" parent="MainViewport/SubViewport"]
-transform = Transform3D(0.7071068, 0.35355338, -0.61237246, 2.1855696e-08, 0.8660254, 0.5, 0.7071068, -0.35355338, 0.61237246, -14.665, 11.224, 13.301)
+[node name="CameraController" type="Node3D" parent="MainViewport/SubViewport" node_paths=PackedStringArray("camera")]
+script = ExtResource("1_mx4qy")
+cur_size = 25.0
+camera = NodePath("CameraSizer")
+metadata/_custom_type_script = "uid://7gobnfnh4r40"
+
+[node name="CameraSizer" type="Camera3D" parent="MainViewport/SubViewport/CameraController"]
+transform = Transform3D(0.70710677, 0.35355338, -0.6123724, 0, 0.8660254, 0.5, 0.70710677, -0.35355338, 0.6123724, -15.30931, 12.5, 15.30931)
 cull_mask = 1
 projection = 1
 current = true
-fov = 45.0
 size = 25.0
-far = 50.0
-script = ExtResource("1_v51pv")
+far = 100.0
+script = ExtResource("2_vvf01")
+metadata/_custom_type_script = "uid://c3ake8fsos5uj"
 
 [node name="OutlineViewport" type="SubViewportContainer" parent="."]
 visibility_layer = 0
@@ -80,15 +88,15 @@ handle_input_locally = false
 size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
-[node name="Camera3D" type="Camera3D" parent="OutlineViewport/SubViewport" node_paths=PackedStringArray("ref_camera")]
+[node name="CameraFollower" type="Camera3D" parent="OutlineViewport/SubViewport" node_paths=PackedStringArray("ref_camera")]
+transform = Transform3D(0.70710677, 0.3535534, -0.6123724, 0, 0.8660254, 0.50000006, 0.70710677, -0.3535534, 0.6123724, -15.30931, 12.5, 15.30931)
 cull_mask = 16
 projection = 1
-current = true
-fov = 45.0
 size = 25.0
-far = 400.0
-script = ExtResource("1_v51pv")
-ref_camera = NodePath("../../../MainViewport/SubViewport/Camera3D")
+far = 100.0
+script = ExtResource("3_mx4qy")
+ref_camera = NodePath("../../../MainViewport/SubViewport/CameraController/CameraSizer")
+metadata/_custom_type_script = "uid://0xm7bptiovd2"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -111,7 +119,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("ViewportTexture_o54fc")
 
-[node name="WorldInput" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("box")]
+[node name="WorldInput" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("camera_controller", "ref_camera", "box")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -119,6 +127,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_lk33n")
+camera_controller = NodePath("../../MainViewport/SubViewport/CameraController")
+ref_camera = NodePath("../../MainViewport/SubViewport/CameraController/CameraSizer")
 box = NodePath("TextureRect")
 metadata/_custom_type_script = "uid://34jx7s516ea1"
 

@@ -1,6 +1,7 @@
 class_name WorldInput extends Control
 
-@export var ref_camera : FreeRoamingCamera3D = null
+@export var camera_controller : CameraController = null
+@export var ref_camera : CameraSizer = null
 @export var pick_texture : Texture2D = null
 @export var debug : Node3D = null
 @export var ent_moving : Array[QuadEntityTargetMove] = []
@@ -83,13 +84,13 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		var m_event = event as InputEventMouseButton
 		if m_event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.is_pressed():
-			ref_camera.cur_size += 2
+			camera_controller.cur_size += 2
 		if m_event.button_index == MOUSE_BUTTON_WHEEL_UP and event.is_pressed():
-			ref_camera.cur_size -= 2
+			camera_controller.cur_size -= 2
 		if m_event.button_index == MOUSE_BUTTON_MIDDLE:
 			middle_btn_pressed = event.is_pressed()
 
 	if event is InputEventMouseMotion:
 		var m_event = event as InputEventMouseMotion
 		if middle_btn_pressed:
-			ref_camera.move_cam(Vector3(-m_event.relative.x, 0, -m_event.relative.y) * 0.1)
+			camera_controller.move_cam(Vector3(-m_event.relative.x, 0, -m_event.relative.y) * 0.1)
