@@ -1,4 +1,4 @@
-[gd_scene load_steps=115 format=3 uid="uid://boqtgauorybyx"]
+[gd_scene load_steps=119 format=3 uid="uid://boqtgauorybyx"]
 
 [ext_resource type="Script" uid="uid://nje6tyvvpq8b" path="res://scenes/test/new_pipeline.gd" id="1_e07xg"]
 [ext_resource type="Shader" uid="uid://cw4s5m23hur31" path="res://shaders/primal/circle_from_plane.gdshader" id="1_gvkf4"]
@@ -13,14 +13,18 @@
 [ext_resource type="Script" uid="uid://c0ydmpenhown0" path="res://scripts/logic/weapon/basic_weapon.gd" id="5_voo7p"]
 [ext_resource type="Script" uid="uid://d1sgp5r4tsu3l" path="res://scripts/FreeRoamingCamera3D.gd" id="6_1u752"]
 [ext_resource type="PackedScene" uid="uid://slv4fbydqt7v" path="res://scenes/projectile/basic_round/basic_round_projectile_explo.tscn" id="6_6in2w"]
+[ext_resource type="Shader" uid="uid://csy8hrgfaxbfu" path="res://shaders/vat/vat_outline_single_mesh.gdshader" id="6_gdstn"]
 [ext_resource type="PackedScene" uid="uid://bngmh3npf8b1v" path="res://scenes/models/segmented_twad_robot.tscn" id="6_meuj1"]
+[ext_resource type="Texture2D" uid="uid://cay3bhnvvdvss" path="res://model/VAT/robot4/vaexport/normals.png" id="7_3hbjw"]
 [ext_resource type="Texture2D" uid="uid://w021a0ewvdos" path="res://model/VAT/robot4/albedo.png" id="7_4qyeo"]
 [ext_resource type="PackedScene" uid="uid://b4iuas1jqhse3" path="res://scenes/VFX/Etherals/circling_etheral.tscn" id="7_xnfcr"]
 [ext_resource type="PackedScene" uid="uid://v7x76lnh135e" path="res://scenes/test/power_ring/PowerRing.tscn" id="8_6n3pg"]
+[ext_resource type="Texture2D" uid="uid://53g0nikg5a2y" path="res://model/VAT/robot4/vaexport/offsets.exr" id="8_l2qn5"]
 [ext_resource type="Texture2D" uid="uid://q6om1devfq70" path="res://model/VAT/robot4/outline.png" id="8_q35h7"]
 [ext_resource type="Texture2D" uid="uid://byoui1ck6w1ui" path="res://model/VAT/robot4/shaded_mask.png" id="9_qa6lk"]
 [ext_resource type="Shader" uid="uid://cv4deawtx0pb3" path="res://shaders/new_pipeline/outline_new_pipeline_shaded.gdshader" id="9_rijnb"]
 [ext_resource type="PackedScene" uid="uid://vg4v25l817yt" path="res://scenes/test/exocube/exocube.tscn" id="11_rv1hs"]
+[ext_resource type="ArrayMesh" uid="uid://d17uujac403rd" path="res://model/VAT/robot4/robot4_exported.res" id="12_3hbjw"]
 [ext_resource type="PackedScene" uid="uid://bip43til0tsg0" path="res://scenes/env/shrines/red_round_shrine.tscn" id="13_mgpox"]
 [ext_resource type="PackedScene" uid="uid://dbxla1me04wl3" path="res://scenes/env/shrines/white_squared_shrine.tscn" id="15_740d2"]
 [ext_resource type="Script" uid="uid://7gobnfnh4r40" path="res://scripts/camera/CameraController.gd" id="17_gdstn"]
@@ -36,7 +40,6 @@
 [ext_resource type="PackedScene" uid="uid://cfdijiejbba4r" path="res://scenes/VFX/Beam/Beam.tscn" id="25_0ydtf"]
 [ext_resource type="PackedScene" uid="uid://4f2ootab3hjc" path="res://scenes/VFX/Cube/cube_vfx.tscn" id="27_8j1eq"]
 [ext_resource type="Shader" uid="uid://bwye8r7ehq8mk" path="res://shaders/gradient/circle_gradient.gdshader" id="28_scxka"]
-[ext_resource type="ArrayMesh" uid="uid://b4dgal7ueu61a" path="res://model/VAT/robot4/robot4.obj" id="30_kkt5o"]
 [ext_resource type="PackedScene" uid="uid://buslmtbcq01xb" path="res://scenes/UI/debug/fps_display.tscn" id="30_kqquj"]
 [ext_resource type="PackedScene" uid="uid://deicgdd7mnyvl" path="res://scenes/UI/indicators/box_mouse.tscn" id="31_qy4ca"]
 [ext_resource type="Script" uid="uid://0xm7bptiovd2" path="res://scripts/camera/CameraFollower.gd" id="35_bh1fg"]
@@ -126,14 +129,33 @@ shader_parameter/use_mask = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q35h7"]
 render_priority = 0
-shader = ExtResource("9_rijnb")
-shader_parameter/albedo_texture = ExtResource("7_4qyeo")
-shader_parameter/use_albedo_texture = true
-shader_parameter/original_color = Color(0, 0, 0, 1)
+shader = ExtResource("6_gdstn")
+shader_parameter/offset_map = ExtResource("8_l2qn5")
+shader_parameter/normal_map = ExtResource("7_3hbjw")
+shader_parameter/texture_albedo = ExtResource("7_4qyeo")
+shader_parameter/fps = 24.0
 shader_parameter/outline_color = Color(0.5, 0.5, 0.5, 1)
 shader_parameter/outline_mask = ExtResource("8_q35h7")
 shader_parameter/use_mask = true
 shader_parameter/shaded_mask = ExtResource("9_qa6lk")
+shader_parameter/start_frame = 0.0
+shader_parameter/end_frame = 24.0
+shader_parameter/anim_offset = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3hbjw"]
+render_priority = 0
+shader = ExtResource("6_gdstn")
+shader_parameter/offset_map = ExtResource("8_l2qn5")
+shader_parameter/normal_map = ExtResource("7_3hbjw")
+shader_parameter/texture_albedo = ExtResource("7_4qyeo")
+shader_parameter/fps = 24.0
+shader_parameter/outline_color = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/outline_mask = ExtResource("8_q35h7")
+shader_parameter/use_mask = true
+shader_parameter/shaded_mask = ExtResource("9_qa6lk")
+shader_parameter/start_frame = 25.0
+shader_parameter/end_frame = 49.0
+shader_parameter/anim_offset = 0.0
 
 [sub_resource type="Curve3D" id="Curve3D_xnfcr"]
 closed = true
@@ -812,10 +834,16 @@ script = ExtResource("5_ioc36")
 target_position = Vector3(0, 0, 0)
 
 [node name="Robot4" type="MeshInstance3D" parent="MainViewport/SubViewport"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6.828491, 0.3527832, 8.342285)
+transform = Transform3D(0.34163055, 0, -0.36508712, 0, 0.5, 0, 0.36508712, 0, 0.34163055, 6.8032227, 0.47686768, 8.3307495)
 layers = 17
 material_override = SubResource("ShaderMaterial_q35h7")
-mesh = ExtResource("30_kkt5o")
+mesh = ExtResource("12_3hbjw")
+
+[node name="Robot5" type="MeshInstance3D" parent="MainViewport/SubViewport"]
+transform = Transform3D(0.30141604, 0, -0.3989341, 0, 0.5, 0, 0.3989341, 0, 0.30141604, 6.8032227, 0.6387329, 11.99585)
+layers = 17
+material_override = SubResource("ShaderMaterial_3hbjw")
+mesh = ExtResource("12_3hbjw")
 
 [node name="HealerBot" parent="MainViewport/SubViewport" instance=ExtResource("3_ap201")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -7.962083, 0.62210655, 2.332418)
@@ -1040,6 +1068,7 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -9.400028, -7.972229, 6.22710
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.68808, -5.8011475, 6.5902405)
 
 [node name="Sphere" type="MeshInstance3D" parent="MainViewport/SubViewport/VFX/HitMarker"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6182861, 4.6934814)
 layers = 17
 mesh = SubResource("SphereMesh_mgpox")
 surface_material_override/0 = SubResource("ShaderMaterial_aas4t")
@@ -1220,7 +1249,7 @@ size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
 [node name="CameraFollower" type="Camera3D" parent="OutlineViewport/SubViewport" node_paths=PackedStringArray("ref_camera")]
-transform = Transform3D(0.70710677, 0.35355338, -0.6123724, 0, 0.8660254, 0.5, 0.70710677, -0.35355338, 0.6123724, -15.30931, 12.5, 15.30931)
+transform = Transform3D(0.70710677, 0.3535534, -0.6123724, 0, 0.8660254, 0.50000006, 0.70710677, -0.3535534, 0.6123724, -15.30931, 12.5, 15.30931)
 cull_mask = 16
 projection = 1
 size = 25.0
@@ -1245,7 +1274,7 @@ size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
 [node name="CameraFollower" type="Camera3D" parent="PickViewport/SubViewport" node_paths=PackedStringArray("ref_camera")]
-transform = Transform3D(0.7071067, 0.35355338, -0.6123724, 0, 0.8660254, 0.5, 0.7071067, -0.35355338, 0.6123724, -15.30931, 12.5, 15.30931)
+transform = Transform3D(0.7071067, 0.3535534, -0.6123724, 0, 0.8660254, 0.50000006, 0.7071067, -0.3535534, 0.6123724, -15.30931, 12.5, 15.30931)
 cull_mask = 32
 projection = 1
 size = 25.0
