@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="AnimationTrack" load_steps=10 format=3 uid="uid://ur845d74tohj"]
+
+[ext_resource type="Shader" uid="uid://csy8hrgfaxbfu" path="res://shaders/vat/vat_outline_single_mesh.gdshader" id="1_gbtcp"]
+[ext_resource type="Texture2D" uid="uid://dln6sse4kqvvy" path="res://model/VAT/bladebot/vaexport/normals.png" id="2_ucred"]
+[ext_resource type="Texture2D" uid="uid://drmqj0a4diofk" path="res://model/VAT/bladebot/vaexport/offsets.exr" id="3_daxly"]
+[ext_resource type="Texture2D" uid="uid://dridn3lxjdqjj" path="res://model/VAT/bladebot/bladebot_outline.png" id="4_k7ino"]
+[ext_resource type="Texture2D" uid="uid://ceburxn5e8kav" path="res://model/VAT/bladebot/bladebot_shaded_mask.png" id="5_33j16"]
+[ext_resource type="Texture2D" uid="uid://csy3cy814op75" path="res://model/VAT/bladebot/bladebot_albedo.png" id="6_ju02o"]
+[ext_resource type="ArrayMesh" uid="uid://4r5k8qtucs4s" path="res://model/VAT/bladebot/bladebot_exported.res" id="7_5i3f6"]
+[ext_resource type="Script" uid="uid://b0ipfppn458yu" path="res://scenes/entity/vat/animation_track.gd" id="8_mlmg7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l2qn5"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_gbtcp")
+shader_parameter/offset_map = ExtResource("3_daxly")
+shader_parameter/normal_map = ExtResource("2_ucred")
+shader_parameter/texture_albedo = ExtResource("6_ju02o")
+shader_parameter/fps = 24.0
+shader_parameter/outline_color = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/outline_mask = ExtResource("4_k7ino")
+shader_parameter/use_mask = true
+shader_parameter/shaded_mask = ExtResource("5_33j16")
+shader_parameter/start_frame = 0.0
+shader_parameter/end_frame = 0.0
+shader_parameter/anim_offset = 0.0
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("8_mlmg7")
+mesh = ExtResource("7_5i3f6")
+material = SubResource("ShaderMaterial_l2qn5")
+tracks = Array[Vector2i]([Vector2i(0, 24), Vector2i(25, 59)])
+metadata/_custom_type_script = "uid://b0ipfppn458yu"

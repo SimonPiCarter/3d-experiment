@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="AnimationTrack" load_steps=10 format=3 uid="uid://dt5tmatnws7px"]
+
+[ext_resource type="Shader" uid="uid://csy8hrgfaxbfu" path="res://shaders/vat/vat_outline_single_mesh.gdshader" id="1_i4g0w"]
+[ext_resource type="Texture2D" uid="uid://cay3bhnvvdvss" path="res://model/VAT/robot4/vaexport/normals.png" id="2_amfri"]
+[ext_resource type="Texture2D" uid="uid://53g0nikg5a2y" path="res://model/VAT/robot4/vaexport/offsets.exr" id="3_8xstq"]
+[ext_resource type="Texture2D" uid="uid://q6om1devfq70" path="res://model/VAT/robot4/outline.png" id="4_s1ryu"]
+[ext_resource type="Texture2D" uid="uid://byoui1ck6w1ui" path="res://model/VAT/robot4/shaded_mask.png" id="5_x1sqt"]
+[ext_resource type="Texture2D" uid="uid://w021a0ewvdos" path="res://model/VAT/robot4/albedo.png" id="6_kev4u"]
+[ext_resource type="ArrayMesh" uid="uid://7f3g8m8rkx70" path="res://model/VAT/robot4/robot4_exported.res" id="7_jkinu"]
+[ext_resource type="Script" uid="uid://b0ipfppn458yu" path="res://scenes/entity/vat/animation_track.gd" id="8_8pjgf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4c8xg"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_i4g0w")
+shader_parameter/offset_map = ExtResource("3_8xstq")
+shader_parameter/normal_map = ExtResource("2_amfri")
+shader_parameter/texture_albedo = ExtResource("6_kev4u")
+shader_parameter/fps = 24.0
+shader_parameter/outline_color = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/outline_mask = ExtResource("4_s1ryu")
+shader_parameter/use_mask = true
+shader_parameter/shaded_mask = ExtResource("5_x1sqt")
+shader_parameter/start_frame = 0.0
+shader_parameter/end_frame = 0.0
+shader_parameter/anim_offset = 0.0
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("8_8pjgf")
+mesh = ExtResource("7_jkinu")
+material = SubResource("ShaderMaterial_4c8xg")
+tracks = Array[Vector2i]([Vector2i(0, 24), Vector2i(25, 49)])
+metadata/_custom_type_script = "uid://b0ipfppn458yu"
