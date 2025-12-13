@@ -18,7 +18,11 @@ class_name VatMeshInstance extends MeshInstance3D
 		animation_offset = value
 		update()
 
+var setup : bool = false
+var duplicated : bool = false
+
 func _ready() -> void:
+	setup = true
 	update()
 
 func _get_configuration_warnings(): # display the warning on the scene dock
@@ -32,11 +36,22 @@ func _get_configuration_warnings(): # display the warning on the scene dock
 func _validate_property(property: Dictionary): # update the config warnings
 	if property.name == "animation_tracks":
 		update_configuration_warnings()
-		update()
+		update(true)
 
-func update() -> void:
+func bulk_update() -> void:
+	setup = false
+
+func end_bulk_update() -> void:
+	setup = true
+	update()
+
+func update(force_duplicate : bool = false) -> void:
+	if not setup:
+		return
 	self.mesh = animation_tracks.mesh
-	self.material_override = animation_tracks.material.duplicate()
+	if force_duplicate or not duplicated:
+		duplicated = true
+		self.material_override = animation_tracks.material.duplicate()
 	#self.material_override.resource_local_to_scene = true
 	set_current_animation()
 
