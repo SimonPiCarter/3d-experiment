@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://bu0oy87ktyn3p"]
 
-[ext_resource type="PackedScene" uid="uid://d32toa3sindlr" path="res://scenes/entity/TwadEntity.tscn" id="1_sr2b0"]
+[ext_resource type="PackedScene" uid="uid://d32toa3sindlr" path="res://scenes/entity/ik/TwadEntity.tscn" id="1_sr2b0"]
 [ext_resource type="PackedScene" uid="uid://c5prcmcvee0qw" path="res://scenes/models/twad_legs.tscn" id="1_vpt4n"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sr2b0"]

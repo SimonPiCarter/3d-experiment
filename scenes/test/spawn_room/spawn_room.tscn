@@ -7,7 +7,7 @@
 [ext_resource type="Shader" uid="uid://cv4deawtx0pb3" path="res://shaders/new_pipeline/outline_new_pipeline_shaded.gdshader" id="4_xwact"]
 [ext_resource type="PackedScene" uid="uid://cvyhsdynhh21x" path="res://scenes/VFX/Sphere/sphere.tscn" id="5_xwact"]
 [ext_resource type="PackedScene" uid="uid://dd7pumxmee75o" path="res://scenes/models/quad_entity_robot_2.tscn" id="6_ksg3c"]
-[ext_resource type="Script" uid="uid://dj7w0ypgd8ehs" path="res://scenes/entity/quand_ent_target_move.gd" id="7_mkva7"]
+[ext_resource type="Script" uid="uid://dj7w0ypgd8ehs" path="res://scenes/entity/ik/quand_ent_target_move.gd" id="7_mkva7"]
 [ext_resource type="Script" uid="uid://c0ydmpenhown0" path="res://scripts/logic/weapon/basic_weapon.gd" id="8_w1hyg"]
 [ext_resource type="PackedScene" uid="uid://slv4fbydqt7v" path="res://scenes/projectile/basic_round/basic_round_projectile_explo.tscn" id="9_0634q"]
 [ext_resource type="PackedScene" uid="uid://doovx36ugov6p" path="res://scenes/env/room/room.tscn" id="10_w1hyg"]

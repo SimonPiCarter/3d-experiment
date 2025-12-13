@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://ctvcm56dg48c"]
 
-[ext_resource type="PackedScene" uid="uid://dwfivcym0skda" path="res://scenes/entity/QuadEntity.tscn" id="2_bxfid"]
+[ext_resource type="PackedScene" uid="uid://dwfivcym0skda" path="res://scenes/entity/ik/QuadEntity.tscn" id="2_bxfid"]
 
 [sub_resource type="Environment" id="Environment_ebdkv"]
 ambient_light_color = Color(0.68307734, 0.6830774, 0.68307734, 1)

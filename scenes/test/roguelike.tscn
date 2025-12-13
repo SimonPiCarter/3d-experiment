@@ -2,7 +2,7 @@
 
 [ext_resource type="Shader" uid="uid://cc18tpomiri80" path="res://shaders/new_pipeline/outline_new_pipeline_unshaded.gdshader" id="3_f3ban"]
 [ext_resource type="PackedScene" uid="uid://dd7pumxmee75o" path="res://scenes/models/quad_entity_robot_2.tscn" id="4_d7k2a"]
-[ext_resource type="Script" uid="uid://dj7w0ypgd8ehs" path="res://scenes/entity/quand_ent_target_move.gd" id="5_trm4v"]
+[ext_resource type="Script" uid="uid://dj7w0ypgd8ehs" path="res://scenes/entity/ik/quand_ent_target_move.gd" id="5_trm4v"]
 [ext_resource type="Script" uid="uid://c0ydmpenhown0" path="res://scripts/logic/weapon/basic_weapon.gd" id="6_suq5a"]
 [ext_resource type="PackedScene" uid="uid://slv4fbydqt7v" path="res://scenes/projectile/basic_round/basic_round_projectile_explo.tscn" id="7_t76cc"]
 [ext_resource type="Script" uid="uid://b1oixtkf8uu56" path="res://scenes/test/roguelike/spawner_timer.gd" id="11_t0qp2"]

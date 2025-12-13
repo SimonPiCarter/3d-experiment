@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dd7pumxmee75o" path="res://scenes/models/quad_entity_robot_2.tscn" id="4_ixfrg"]
 [ext_resource type="Shader" uid="uid://c4njs3466gxfy" path="res://shaders/2d/pixel_outline_v2.gdshader" id="4_yrgha"]
 [ext_resource type="PackedScene" uid="uid://6o6v70b4eovn" path="res://scenes/env/fog/fog_entity.tscn" id="5_7x8sl"]
-[ext_resource type="Script" uid="uid://dj7w0ypgd8ehs" path="res://scenes/entity/quand_ent_target_move.gd" id="5_yvcre"]
+[ext_resource type="Script" uid="uid://dj7w0ypgd8ehs" path="res://scenes/entity/ik/quand_ent_target_move.gd" id="5_yvcre"]
 [ext_resource type="PackedScene" uid="uid://b12sxh8hols1l" path="res://scenes/models/cube_uv.tscn" id="6_ixfrg"]
 [ext_resource type="PackedScene" uid="uid://buslmtbcq01xb" path="res://scenes/UI/debug/fps_display.tscn" id="7_yrgha"]
 [ext_resource type="PackedScene" uid="uid://doovx36ugov6p" path="res://scenes/env/room/room.tscn" id="10_1soas"]

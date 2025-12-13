@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://dccijlgfscbxi"]
 
-[ext_resource type="PackedScene" uid="uid://dwfivcym0skda" path="res://scenes/entity/QuadEntity.tscn" id="1_h84w8"]
+[ext_resource type="PackedScene" uid="uid://dwfivcym0skda" path="res://scenes/entity/ik/QuadEntity.tscn" id="1_h84w8"]
 [ext_resource type="Script" uid="uid://bw12smqrutldf" path="res://scenes/models/quad_entity_robot_3.gd" id="2_8ih53"]
 [ext_resource type="PackedScene" uid="uid://cobr225vkbh0b" path="res://scenes/models/robot_3.tscn" id="2_h84w8"]
 [ext_resource type="PackedScene" uid="uid://cvqfp2l6cegs8" path="res://scenes/UI/indicators/ProgressBar.tscn" id="3_4ar2q"]

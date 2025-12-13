@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://dwfivcym0skda"]
 
-[ext_resource type="Script" uid="uid://xqdeok8kyc7q" path="res://scenes/entity/quad_entity.gd" id="1_y8n6e"]
+[ext_resource type="Script" uid="uid://xqdeok8kyc7q" path="res://scenes/entity/ik/quad_entity.gd" id="1_y8n6e"]
 [ext_resource type="Script" uid="uid://cwbvx8yscly3j" path="res://scripts/controler/quad_controller.gd" id="2_y8n6e"]
 [ext_resource type="Script" uid="uid://burwyoipe0s80" path="res://scripts/ik/ik_marker.gd" id="3_pks74"]
 [ext_resource type="Script" uid="uid://brupvo5tidu6o" path="res://scripts/ik/ik_target_container.gd" id="4_xth7o"]

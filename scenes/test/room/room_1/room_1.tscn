@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c882n7e0mxsso" path="res://scenes/env/shrines/rune_stone_var2.tscn" id="6_4ano6"]
 [ext_resource type="PackedScene" uid="uid://dlebjkhb0bnl7" path="res://scenes/env/shrines/rune_stone_var3.tscn" id="7_hvhxh"]
 [ext_resource type="PackedScene" uid="uid://dd7pumxmee75o" path="res://scenes/models/quad_entity_robot_2.tscn" id="9_2hv5x"]
-[ext_resource type="Script" uid="uid://dj7w0ypgd8ehs" path="res://scenes/entity/quand_ent_target_move.gd" id="10_xukly"]
+[ext_resource type="Script" uid="uid://dj7w0ypgd8ehs" path="res://scenes/entity/ik/quand_ent_target_move.gd" id="10_xukly"]
 [ext_resource type="Shader" uid="uid://bwye8r7ehq8mk" path="res://shaders/gradient/circle_gradient.gdshader" id="11_xukly"]
 [ext_resource type="Script" uid="uid://bo323vppjs8mt" path="res://scenes/templates/circle_arranger.gd" id="12_581dn"]
 
@@ -111,6 +111,105 @@ shader_parameter/use_albedo_texture = false
 shader_parameter/original_color = Color(0.24313726, 0.20784314, 0.27450982, 1)
 shader_parameter/outline_color = Color(0.93333334, 0.5411765, 0.10980392, 1)
 shader_parameter/use_mask = false
+
+[sub_resource type="Animation" id="Animation_xukly"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HealerBot:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-5.219589, 0.65546227, 6.6479645)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraController:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-3, 0, 3)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CameraController:cur_size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [75.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HealerBot:target_position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Trigger/Gradient:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(10, 10, 10)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Room/RuneStone2:speed_rot")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.7853981633974483]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Room/RuneStone2:ray")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Trigger/CircleArranger:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_2hv5x"]
 resource_name = "run"
@@ -227,105 +326,6 @@ tracks/8/keys = {
 "transitions": PackedFloat32Array(4, 0.25, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0.5, 0), Vector3(0, 0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_xukly"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("HealerBot:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-5.219589, 0.65546227, 6.6479645)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CameraController:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-3, 0, 3)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("CameraController:cur_size")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [75.0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("HealerBot:target_position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Trigger/Gradient:scale")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(10, 10, 10)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Room/RuneStone2:speed_rot")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.7853981633974483]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Room/RuneStone2:ray")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.0]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Trigger/CircleArranger:position")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_581dn"]
@@ -593,14 +593,14 @@ skeleton = NodePath("../../../Camera3D")
 surface_material_override/0 = SubResource("ShaderMaterial_2plpr")
 
 [node name="MeshInstance3D11" type="MeshInstance3D" parent="MainViewport/SubViewport/Trigger/CircleArranger" index="1"]
-transform = Transform3D(0.7660442, 0, -0.6427874, 0, 1, 0, 0.6427874, 0, 0.7660442, 3.4472, -0.363227, 2.8925443)
+transform = Transform3D(0.76604414, 0, -0.64278734, 0, 1, 0, 0.64278734, 0, 0.76604414, 3.4472, -0.363227, 2.8925443)
 layers = 17
 mesh = SubResource("BoxMesh_581dn")
 skeleton = NodePath("../../../Camera3D")
 surface_material_override/0 = SubResource("ShaderMaterial_2plpr")
 
 [node name="MeshInstance3D12" type="MeshInstance3D" parent="MainViewport/SubViewport/Trigger/CircleArranger" index="2"]
-transform = Transform3D(0.17364818, 0, -0.98480743, 0, 1, 0, 0.98480743, 0, 0.17364818, 0.7814168, -0.363227, 4.431635)
+transform = Transform3D(0.17364816, 0, -0.9848074, 0, 1, 0, 0.9848074, 0, 0.17364816, 0.7814168, -0.363227, 4.431635)
 layers = 17
 mesh = SubResource("BoxMesh_581dn")
 skeleton = NodePath("../../../Camera3D")
@@ -635,7 +635,7 @@ skeleton = NodePath("../../../Camera3D")
 surface_material_override/0 = SubResource("ShaderMaterial_2plpr")
 
 [node name="MeshInstance3D17" type="MeshInstance3D" parent="MainViewport/SubViewport/Trigger/CircleArranger" index="7"]
-transform = Transform3D(0.1736481, 0, 0.98480743, 0, 1, 0, -0.98480743, 0, 0.1736481, 0.7814168, -0.363227, -4.431635)
+transform = Transform3D(0.17364809, 0, 0.9848074, 0, 1, 0, -0.9848074, 0, 0.17364809, 0.7814168, -0.363227, -4.431635)
 layers = 17
 mesh = SubResource("BoxMesh_581dn")
 skeleton = NodePath("../../../Camera3D")
