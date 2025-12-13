@@ -9,18 +9,19 @@
 [ext_resource type="ArrayMesh" uid="uid://4r5k8qtucs4s" path="res://model/VAT/bladebot/bladebot_exported.res" id="7_5i3f6"]
 [ext_resource type="Script" uid="uid://b0ipfppn458yu" path="res://scenes/entity/vat/animation_track.gd" id="8_mlmg7"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_l2qn5"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ycb4i"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("1_gbtcp")
 shader_parameter/offset_map = ExtResource("3_daxly")
 shader_parameter/normal_map = ExtResource("2_ucred")
 shader_parameter/texture_albedo = ExtResource("6_ju02o")
-shader_parameter/fps = 24.0
+shader_parameter/fps = 96.0
 shader_parameter/outline_color = Color(0.5, 0.5, 0.5, 1)
 shader_parameter/outline_mask = ExtResource("4_k7ino")
 shader_parameter/use_mask = true
 shader_parameter/shaded_mask = ExtResource("5_33j16")
+shader_parameter/pickable_color = Color(0, 0, 0, 1)
 shader_parameter/start_frame = 0.0
 shader_parameter/end_frame = 0.0
 shader_parameter/anim_offset = 0.0
@@ -29,6 +30,9 @@ shader_parameter/anim_offset = 0.0
 resource_local_to_scene = true
 script = ExtResource("8_mlmg7")
 mesh = ExtResource("7_5i3f6")
-material = SubResource("ShaderMaterial_l2qn5")
+material = SubResource("ShaderMaterial_ycb4i")
 tracks = Array[Vector2i]([Vector2i(0, 24), Vector2i(25, 59)])
+forward = Vector3(1, 0, 0)
+idle_anim = 1
+base_move_speed = 4.0
 metadata/_custom_type_script = "uid://b0ipfppn458yu"
