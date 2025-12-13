@@ -1,4 +1,4 @@
-[gd_scene load_steps=132 format=3 uid="uid://boqtgauorybyx"]
+[gd_scene load_steps=141 format=3 uid="uid://boqtgauorybyx"]
 
 [ext_resource type="Script" uid="uid://nje6tyvvpq8b" path="res://scenes/test/new_pipeline.gd" id="1_e07xg"]
 [ext_resource type="Shader" uid="uid://cw4s5m23hur31" path="res://shaders/primal/circle_from_plane.gdshader" id="1_gvkf4"]
@@ -37,10 +37,16 @@
 [ext_resource type="Script" uid="uid://dr8i2irhdjpuy" path="res://scenes/entity/spawner/spawner.gd" id="20_ioc36"]
 [ext_resource type="Resource" uid="uid://ur845d74tohj" path="res://scenes/entity/vat/animation_tracks/bladebot.tres" id="20_ycb4i"]
 [ext_resource type="Script" uid="uid://34jx7s516ea1" path="res://scenes/test/world_input.gd" id="21_6in2w"]
+[ext_resource type="ArrayMesh" uid="uid://bleog4nox0rrf" path="res://model/VAT/sagebot/sagebot_exported.res" id="21_66jml"]
+[ext_resource type="Texture2D" uid="uid://d37gqf4afw8ab" path="res://model/VAT/sagebot/vaexport/normals.png" id="21_v736p"]
 [ext_resource type="ArrayMesh" uid="uid://bctbpe0qjnfts" path="res://model/spike.obj" id="22_aas4t"]
+[ext_resource type="Texture2D" uid="uid://cycyo1ltqv34l" path="res://model/VAT/sagebot/vaexport/offsets.exr" id="22_ccco7"]
 [ext_resource type="ArrayMesh" uid="uid://uc7k2gt3130" path="res://model/sphere_spike.obj" id="23_lcv6h"]
+[ext_resource type="Texture2D" uid="uid://cpy2f6r54rbbl" path="res://model/VAT/sagebot/sagebot_outline.png" id="23_lrkgg"]
+[ext_resource type="Texture2D" uid="uid://jeb033xl1k5i" path="res://model/VAT/sagebot/sagebot_shaded_mask.png" id="24_i1ps2"]
 [ext_resource type="PackedScene" uid="uid://bni427ua3ote2" path="res://scenes/VFX/Cone/cone_encapsuled.tscn" id="24_kqquj"]
 [ext_resource type="PackedScene" uid="uid://cfdijiejbba4r" path="res://scenes/VFX/Beam/Beam.tscn" id="25_0ydtf"]
+[ext_resource type="Texture2D" uid="uid://l8r07mca5lcj" path="res://model/VAT/sagebot/sagebot_albedo.png" id="25_hpgew"]
 [ext_resource type="PackedScene" uid="uid://4f2ootab3hjc" path="res://scenes/VFX/Cube/cube_vfx.tscn" id="27_8j1eq"]
 [ext_resource type="Shader" uid="uid://bwye8r7ehq8mk" path="res://shaders/gradient/circle_gradient.gdshader" id="28_scxka"]
 [ext_resource type="PackedScene" uid="uid://buslmtbcq01xb" path="res://scenes/UI/debug/fps_display.tscn" id="30_kqquj"]
@@ -136,7 +142,7 @@ shader_parameter/original_color = Color(0, 0, 0, 1)
 shader_parameter/outline_color = Color(0, 0, 0.007843138, 1)
 shader_parameter/use_mask = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ycb4i"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i1ps2"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("6_gdstn")
@@ -180,7 +186,7 @@ idle_anim = 1
 base_move_speed = 4.0
 metadata/_custom_type_script = "uid://b0ipfppn458yu"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_66jml"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hpgew"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("6_gdstn")
@@ -197,7 +203,7 @@ shader_parameter/start_frame = 0.0
 shader_parameter/end_frame = 0.0
 shader_parameter/anim_offset = 0.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_f6axc"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i0ufw"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("6_gdstn")
@@ -214,7 +220,7 @@ shader_parameter/start_frame = 0.0
 shader_parameter/end_frame = 0.0
 shader_parameter/anim_offset = 0.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ccco7"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yfrf7"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("6_gdstn")
@@ -230,6 +236,50 @@ shader_parameter/pickable_color = Color(0, 0, 0, 1)
 shader_parameter/start_frame = 0.0
 shader_parameter/end_frame = 0.0
 shader_parameter/anim_offset = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h0hbk"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("6_gdstn")
+shader_parameter/offset_map = ExtResource("22_ccco7")
+shader_parameter/normal_map = ExtResource("21_v736p")
+shader_parameter/texture_albedo = ExtResource("25_hpgew")
+shader_parameter/fps = 24.0
+shader_parameter/outline_color = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/outline_mask = ExtResource("23_lrkgg")
+shader_parameter/use_mask = true
+shader_parameter/shaded_mask = ExtResource("24_i1ps2")
+shader_parameter/pickable_color = Color(0, 0, 0, 1)
+shader_parameter/start_frame = 0.0
+shader_parameter/end_frame = 0.0
+shader_parameter/anim_offset = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lrkgg"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("6_gdstn")
+shader_parameter/offset_map = ExtResource("22_ccco7")
+shader_parameter/normal_map = ExtResource("21_v736p")
+shader_parameter/texture_albedo = ExtResource("25_hpgew")
+shader_parameter/fps = 24.0
+shader_parameter/outline_color = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/outline_mask = ExtResource("23_lrkgg")
+shader_parameter/use_mask = true
+shader_parameter/shaded_mask = ExtResource("24_i1ps2")
+shader_parameter/pickable_color = Color(0, 0, 0, 1)
+shader_parameter/start_frame = 1.0
+shader_parameter/end_frame = 25.0
+shader_parameter/anim_offset = 0.0
+
+[sub_resource type="Resource" id="Resource_i1ps2"]
+resource_local_to_scene = true
+script = ExtResource("14_4c8xg")
+mesh = ExtResource("21_66jml")
+material = SubResource("ShaderMaterial_lrkgg")
+tracks = Array[Vector2i]([Vector2i(1, 24), Vector2i(25, 50), Vector2i(51, 75)])
+idle_anim = 2
+base_move_speed = 3.98
+metadata/_custom_type_script = "uid://b0ipfppn458yu"
 
 [sub_resource type="Curve3D" id="Curve3D_xnfcr"]
 closed = true
@@ -911,7 +961,7 @@ move_speed = 60.0
 [node name="BackCannonBot1" type="MeshInstance3D" parent="MainViewport/SubViewport/Bots"]
 transform = Transform3D(0.34076262, 0, -0.36589628, 0, 0.5, 0, 0.36589628, 0, 0.34076262, 12.6875305, 0.473938, 15.924641)
 layers = 49
-material_override = SubResource("ShaderMaterial_ycb4i")
+material_override = SubResource("ShaderMaterial_i1ps2")
 mesh = ExtResource("12_3hbjw")
 script = ExtResource("14_66jml")
 target_position = Vector3(11.629272, 0.473938, 17.064087)
@@ -923,7 +973,7 @@ metadata/_custom_type_script = "uid://bxgvtdnslma5c"
 [node name="BackCannonBot2" type="MeshInstance3D" parent="MainViewport/SubViewport/Bots"]
 transform = Transform3D(0.4529463, 0, -0.21176325, 0, 0.5, 0, 0.21176325, 0, 0.4529463, 9.420235, 0.45805344, 10.498298)
 layers = 49
-material_override = SubResource("ShaderMaterial_66jml")
+material_override = SubResource("ShaderMaterial_hpgew")
 mesh = ExtResource("12_3hbjw")
 script = ExtResource("14_66jml")
 target_position = Vector3(9.420235, 0.45805344, 10.498298)
@@ -935,7 +985,7 @@ metadata/_custom_type_script = "uid://bxgvtdnslma5c"
 [node name="BladeBot1" type="MeshInstance3D" parent="MainViewport/SubViewport/Bots"]
 transform = Transform3D(0.21315512, 0, -0.211104, 0, 0.3, 0, 0.211104, 0, 0.21315512, 0.20153332, -0.05, 21.28363)
 layers = 49
-material_override = SubResource("ShaderMaterial_f6axc")
+material_override = SubResource("ShaderMaterial_i0ufw")
 mesh = ExtResource("39_l2qn5")
 skeleton = NodePath("")
 script = ExtResource("14_66jml")
@@ -949,7 +999,7 @@ metadata/_custom_type_script = "uid://bxgvtdnslma5c"
 [node name="BladeBot2" type="MeshInstance3D" parent="MainViewport/SubViewport/Bots"]
 transform = Transform3D(0.18481433, 0, -0.23631264, 0, 0.3, 0, 0.23631264, 0, 0.18481433, 1.955349, -0.05, 24.503796)
 layers = 49
-material_override = SubResource("ShaderMaterial_ccco7")
+material_override = SubResource("ShaderMaterial_yfrf7")
 mesh = ExtResource("39_l2qn5")
 skeleton = NodePath("")
 script = ExtResource("14_66jml")
@@ -957,6 +1007,18 @@ target_position = Vector3(7.1158814, -0.05, 33.06066)
 move_speed = 4.0
 turn_speed = 6.283
 animation_tracks = ExtResource("20_ycb4i")
+animation = 1
+metadata/_custom_type_script = "uid://bxgvtdnslma5c"
+
+[node name="SageBot" type="MeshInstance3D" parent="MainViewport/SubViewport/Bots"]
+transform = Transform3D(0.3426235, 0, -0.364155, 0, 0.5, 0, 0.364155, 0, 0.3426235, 1.955349, 0.89213854, 24.503796)
+layers = 49
+material_override = SubResource("ShaderMaterial_h0hbk")
+mesh = ExtResource("21_66jml")
+skeleton = NodePath("../BladeBot2")
+script = ExtResource("14_66jml")
+target_position = Vector3(1.955349, -0.05, 24.503796)
+animation_tracks = SubResource("Resource_i1ps2")
 animation = 1
 metadata/_custom_type_script = "uid://bxgvtdnslma5c"
 

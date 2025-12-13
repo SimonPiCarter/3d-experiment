@@ -13,6 +13,7 @@ func _ready() -> void:
 	Picker.register_new_pickable(Picker.get_next_id(), $MainViewport/SubViewport/Bots/BackCannonBot2)
 	Picker.register_new_pickable(Picker.get_next_id(), $MainViewport/SubViewport/Bots/BladeBot1)
 	Picker.register_new_pickable(Picker.get_next_id(), $MainViewport/SubViewport/Bots/BladeBot2)
+	Picker.register_new_pickable(Picker.get_next_id(), $MainViewport/SubViewport/Bots/SageBot)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.is_pressed() and event.keycode == KEY_C:
