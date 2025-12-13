@@ -17,6 +17,7 @@ uniform vec4 outline_color : source_color = vec4(0.5,0.5,0.5,1.);
 uniform sampler2D outline_mask : filter_nearest;
 uniform bool use_mask = false;
 uniform sampler2D shaded_mask : filter_nearest;
+uniform vec4 pickable_color : source_color;
 
 #ifndef MULTIMESH
 	uniform float start_frame;
@@ -94,7 +95,7 @@ void fragment(){
 		ALPHA = original_color.a;
 		#endif
 	} else if((int(CAMERA_VISIBLE_LAYERS) & pickable_layer_val) != 0) {
-		discard;
+		ALBEDO = pickable_color.rgb;
 	}
 }
 

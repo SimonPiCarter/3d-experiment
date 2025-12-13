@@ -20,7 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://drmqj0a4diofk" path="res://model/VAT/bladebot/vaexport/offsets.exr" id="17_tl2tk"]
 [ext_resource type="Texture2D" uid="uid://dridn3lxjdqjj" path="res://model/VAT/bladebot/bladebot_outline.png" id="18_hydbg"]
 [ext_resource type="Texture2D" uid="uid://csy3cy814op75" path="res://model/VAT/bladebot/bladebot_albedo.png" id="20_y6de5"]
-[ext_resource type="ArrayMesh" uid="uid://dfm6xce4il21d" path="res://model/VAT/bladebot/bladebot_exported.res" id="21_7ld6q"]
+[ext_resource type="ArrayMesh" uid="uid://4r5k8qtucs4s" path="res://model/VAT/bladebot/bladebot_exported.res" id="21_7ld6q"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_7khbq"]
 flip_faces = true
@@ -104,6 +104,7 @@ shader_parameter/outline_color = Color(0.5, 0.5, 0.5, 1)
 shader_parameter/outline_mask = ExtResource("2_bbeef")
 shader_parameter/use_mask = true
 shader_parameter/shaded_mask = SubResource("GradientTexture1D_lv3nk")
+shader_parameter/pickable_color = Color(0, 0, 0, 1)
 shader_parameter/start_frame = 0.0
 shader_parameter/end_frame = 40.0
 shader_parameter/anim_offset = 0.0
@@ -119,6 +120,7 @@ shader_parameter/outline_color = Color(0.5, 0.5, 0.5, 1)
 shader_parameter/outline_mask = ExtResource("2_bbeef")
 shader_parameter/use_mask = true
 shader_parameter/shaded_mask = SubResource("GradientTexture1D_lv3nk")
+shader_parameter/pickable_color = Color(0, 0, 0, 1)
 shader_parameter/start_frame = 41.0
 shader_parameter/end_frame = 60.0
 shader_parameter/anim_offset = 0.0
@@ -134,6 +136,7 @@ shader_parameter/outline_color = Color(0.5, 0.5, 0.5, 1)
 shader_parameter/outline_mask = ExtResource("14_1k18d")
 shader_parameter/use_mask = false
 shader_parameter/shaded_mask = SubResource("GradientTexture1D_lv3nk")
+shader_parameter/pickable_color = Color(0, 0, 0, 1)
 shader_parameter/start_frame = 25.0
 shader_parameter/end_frame = 49.0
 shader_parameter/anim_offset = 0.0
@@ -149,6 +152,7 @@ shader_parameter/outline_color = Color(0.5, 0.5, 0.5, 1)
 shader_parameter/outline_mask = ExtResource("18_hydbg")
 shader_parameter/use_mask = true
 shader_parameter/shaded_mask = SubResource("GradientTexture1D_lv3nk")
+shader_parameter/pickable_color = Color(0, 0, 0, 1)
 shader_parameter/start_frame = 0.0
 shader_parameter/end_frame = 24.0
 shader_parameter/anim_offset = 0.0
