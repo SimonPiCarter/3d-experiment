@@ -1,4 +1,4 @@
-[gd_scene load_steps=133 format=3 uid="uid://boqtgauorybyx"]
+[gd_scene load_steps=132 format=3 uid="uid://boqtgauorybyx"]
 
 [ext_resource type="Script" uid="uid://nje6tyvvpq8b" path="res://scenes/test/new_pipeline.gd" id="1_e07xg"]
 [ext_resource type="Shader" uid="uid://cw4s5m23hur31" path="res://shaders/primal/circle_from_plane.gdshader" id="1_gvkf4"]
@@ -35,6 +35,7 @@
 [ext_resource type="PackedScene" uid="uid://b12sxh8hols1l" path="res://scenes/models/cube_uv.tscn" id="19_voo7p"]
 [ext_resource type="PackedScene" uid="uid://qfg6ip0muxgn" path="res://scenes/models/cup_uv.tscn" id="20_6in2w"]
 [ext_resource type="Script" uid="uid://dr8i2irhdjpuy" path="res://scenes/entity/spawner/spawner.gd" id="20_ioc36"]
+[ext_resource type="Resource" uid="uid://ur845d74tohj" path="res://scenes/entity/vat/animation_tracks/bladebot.tres" id="20_ycb4i"]
 [ext_resource type="Script" uid="uid://34jx7s516ea1" path="res://scenes/test/world_input.gd" id="21_6in2w"]
 [ext_resource type="ArrayMesh" uid="uid://bctbpe0qjnfts" path="res://model/spike.obj" id="22_aas4t"]
 [ext_resource type="ArrayMesh" uid="uid://uc7k2gt3130" path="res://model/sphere_spike.obj" id="23_lcv6h"]
@@ -135,7 +136,7 @@ shader_parameter/original_color = Color(0, 0, 0, 1)
 shader_parameter/outline_color = Color(0, 0, 0.007843138, 1)
 shader_parameter/use_mask = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_m7a8y"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ycb4i"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("6_gdstn")
@@ -212,34 +213,6 @@ shader_parameter/pickable_color = Color(0, 0, 0, 1)
 shader_parameter/start_frame = 0.0
 shader_parameter/end_frame = 0.0
 shader_parameter/anim_offset = 0.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ycb4i"]
-resource_local_to_scene = true
-render_priority = 0
-shader = ExtResource("6_gdstn")
-shader_parameter/offset_map = ExtResource("41_jc7tx")
-shader_parameter/normal_map = ExtResource("40_5yn4o")
-shader_parameter/texture_albedo = ExtResource("44_66jml")
-shader_parameter/fps = 96.0
-shader_parameter/outline_color = Color(0.5, 0.5, 0.5, 1)
-shader_parameter/outline_mask = ExtResource("42_m7a8y")
-shader_parameter/use_mask = true
-shader_parameter/shaded_mask = ExtResource("43_ycb4i")
-shader_parameter/pickable_color = Color(0, 0, 0, 1)
-shader_parameter/start_frame = 0.0
-shader_parameter/end_frame = 0.0
-shader_parameter/anim_offset = 0.0
-
-[sub_resource type="Resource" id="Resource_66jml"]
-resource_local_to_scene = true
-script = ExtResource("14_4c8xg")
-mesh = ExtResource("39_l2qn5")
-material = SubResource("ShaderMaterial_ycb4i")
-tracks = Array[Vector2i]([Vector2i(0, 24), Vector2i(25, 59)])
-forward = Vector3(-1, 0, 0)
-idle_anim = 1
-base_move_speed = 2.0
-metadata/_custom_type_script = "uid://b0ipfppn458yu"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ccco7"]
 resource_local_to_scene = true
@@ -938,7 +911,7 @@ move_speed = 60.0
 [node name="BackCannonBot1" type="MeshInstance3D" parent="MainViewport/SubViewport/Bots"]
 transform = Transform3D(0.34076262, 0, -0.36589628, 0, 0.5, 0, 0.36589628, 0, 0.34076262, 12.6875305, 0.473938, 15.924641)
 layers = 49
-material_override = SubResource("ShaderMaterial_m7a8y")
+material_override = SubResource("ShaderMaterial_ycb4i")
 mesh = ExtResource("12_3hbjw")
 script = ExtResource("14_66jml")
 target_position = Vector3(11.629272, 0.473938, 17.064087)
@@ -967,9 +940,9 @@ mesh = ExtResource("39_l2qn5")
 skeleton = NodePath("")
 script = ExtResource("14_66jml")
 target_position = Vector3(0.20153332, -0.05, 21.28363)
-move_speed = 4.0
+move_speed = 6.0
 turn_speed = 6.283
-animation_tracks = SubResource("Resource_66jml")
+animation_tracks = ExtResource("20_ycb4i")
 animation = 1
 metadata/_custom_type_script = "uid://bxgvtdnslma5c"
 
@@ -983,7 +956,7 @@ script = ExtResource("14_66jml")
 target_position = Vector3(7.1158814, -0.05, 33.06066)
 move_speed = 4.0
 turn_speed = 6.283
-animation_tracks = SubResource("Resource_66jml")
+animation_tracks = ExtResource("20_ycb4i")
 animation = 1
 metadata/_custom_type_script = "uid://bxgvtdnslma5c"
 

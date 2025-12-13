@@ -26,7 +26,7 @@ func color_to_id(color: Color) -> int:
 		return r + g *256 + b *256*256;
 	return -1
 
-func register_new_pickable_next_pass(id:int, node: Node3D) -> void:
+func register_new_pickable(id:int, node: Node3D) -> void:
 	if node in registered_pickables:
 		return
 	if id == registered_pickables.size():
@@ -38,6 +38,10 @@ func register_new_pickable_next_pass(id:int, node: Node3D) -> void:
 			var next_pass = material.next_pass
 			if next_pass is ShaderMaterial:
 				set_up_material(id, next_pass as ShaderMaterial)
+	elif node is VatMeshInstance:
+		var mat = node.material_override
+		if mat is ShaderMaterial:
+			set_up_material(id, mat as ShaderMaterial)
 
 func set_up_material(id:int, mat: ShaderMaterial) -> void:
 	var pickable_color = id_to_color(id)
@@ -47,7 +51,6 @@ func get_node_from_texture(tex: Texture2D, x: int, y: int) -> Node3D:
 	var img : Image = tex.get_image()
 	var color : Color = img.get_pixel(x, y)
 	var id : int = color_to_id(color)
-	print("Picked color: ", color, " id: ", id)
 	if id >= 0 and id < registered_pickables.size():
 		return registered_pickables[id]
 	return null

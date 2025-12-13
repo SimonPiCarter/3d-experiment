@@ -4,7 +4,7 @@ class_name WorldInput extends Control
 @export var ref_camera : CameraSizer = null
 @export var pick_texture : Texture2D = null
 @export var debug : Node3D = null
-@export var ent_moving : Array[QuadEntityTargetMove] = []
+@export var ent_moving : Array[Node3D] = []
 @export var targets : Node3D = null
 @export var box : BoxMouse = null
 
@@ -58,11 +58,10 @@ func _input(event: InputEvent) -> void:
 					ent_moving = []
 					var selected = Picker.get_nodes_from_texture(pick_texture, box.get_rect())
 					for e in selected:
-						if e is QuadEntityTargetMove:
-							ent_moving.append(e as QuadEntityTargetMove)
+						if e is QuadEntityTargetMove or e is VatMeshInstanceTargetMove:
+							ent_moving.append(e)
 				else:
 					var picked = Picker.get_node_from_texture(pick_texture, int(event.position.x), int(event.position.y))
-					print(picked)
 					if picked:
 						ent_moving = [picked]
 		elif event.button_index == MOUSE_BUTTON_MIDDLE:
