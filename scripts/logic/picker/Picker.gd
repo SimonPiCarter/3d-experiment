@@ -26,7 +26,7 @@ func color_to_id(color: Color) -> int:
 		return r + g *256 + b *256*256;
 	return -1
 
-func register_new_pickable(id:int, node: Node3D) -> void:
+func register_new_pickable_next_pass(id:int, node: Node3D) -> void:
 	if node in registered_pickables:
 		return
 	if id == registered_pickables.size():
