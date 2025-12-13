@@ -27,7 +27,6 @@ func _exit_tree() -> void:
 	if agent_rid.is_valid():
 		NavigationServer3D.free_rid(agent_rid)
 
-var current_velocity: Vector3 = Vector3.ZERO
 func on_safe_velocity_computed(safe_velocity: Vector3):
 	_real_handle_movement(safe_velocity.limit_length(move_speed * cur_delta))
 
