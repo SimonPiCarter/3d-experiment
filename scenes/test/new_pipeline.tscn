@@ -849,50 +849,58 @@ mesh = SubResource("PlaneMesh_gvkf4")
 skeleton = NodePath("../Sprite3D")
 surface_material_override/0 = SubResource("ShaderMaterial_6n3pg")
 
-[node name="SmallBot" parent="MainViewport/SubViewport" instance=ExtResource("4_rijnb")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.6380758, -0.04581499, 5.0515814)
-script = ExtResource("5_ioc36")
-target_position = Vector3(0, 0, 0)
+[node name="Bots" type="Node3D" parent="MainViewport/SubViewport"]
 
-[node name="Robot4" type="MeshInstance3D" parent="MainViewport/SubViewport"]
+[node name="Robot4" type="MeshInstance3D" parent="MainViewport/SubViewport/Bots"]
 transform = Transform3D(0.34163055, 0, -0.36508712, 0, 0.5, 0, 0.36508712, 0, 0.34163055, 6.8032227, 0.47686768, 8.3307495)
 layers = 17
 material_override = SubResource("ShaderMaterial_q35h7")
 mesh = ExtResource("12_3hbjw")
+skeleton = NodePath("../..")
 
-[node name="Robot4_2" type="MeshInstance3D" parent="MainViewport/SubViewport"]
+[node name="Robot4_2" type="MeshInstance3D" parent="MainViewport/SubViewport/Bots"]
 transform = Transform3D(0.30141604, 0, -0.3989341, 0, 0.5, 0, 0.3989341, 0, 0.30141604, 6.8032227, 0.6387329, 12.018555)
 layers = 17
 material_override = SubResource("ShaderMaterial_3hbjw")
 mesh = ExtResource("12_3hbjw")
+skeleton = NodePath("../..")
 
-[node name="BladeBot" type="MeshInstance3D" parent="MainViewport/SubViewport"]
+[node name="BladeBot" type="MeshInstance3D" parent="MainViewport/SubViewport/Bots"]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 8.613525, 0, 16.616943)
 layers = 17
 material_override = SubResource("ShaderMaterial_l2qn5")
 mesh = ExtResource("39_l2qn5")
-skeleton = NodePath("../Gradient")
+skeleton = NodePath("../../Gradient")
 
-[node name="BladeBot2" type="MeshInstance3D" parent="MainViewport/SubViewport"]
+[node name="BladeBot2" type="MeshInstance3D" parent="MainViewport/SubViewport/Bots"]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 10.196106, 0, 17.944092)
 layers = 17
 material_override = SubResource("ShaderMaterial_l2qn5")
 mesh = ExtResource("39_l2qn5")
-skeleton = NodePath("../Gradient")
+skeleton = NodePath("../../Gradient")
 
-[node name="BladeBot3" type="MeshInstance3D" parent="MainViewport/SubViewport"]
+[node name="BladeBot3" type="MeshInstance3D" parent="MainViewport/SubViewport/Bots"]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 7.460388, 0, 19.568542)
 layers = 17
 material_override = SubResource("ShaderMaterial_l2qn5")
 mesh = ExtResource("39_l2qn5")
-skeleton = NodePath("../Gradient")
+skeleton = NodePath("../../Gradient")
 
-[node name="BladeBot4" type="MeshInstance3D" parent="MainViewport/SubViewport"]
+[node name="BladeBot4" type="MeshInstance3D" parent="MainViewport/SubViewport/Bots"]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 9.370117, 0, 19.788574)
 layers = 17
 material_override = SubResource("ShaderMaterial_l2qn5")
 mesh = ExtResource("39_l2qn5")
-skeleton = NodePath("../Gradient")
+skeleton = NodePath("../../Gradient")
+
+[node name="TwoSegmentObject" parent="MainViewport/SubViewport/Bots" instance=ExtResource("6_meuj1")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 8.249, 0.3043263, 4.8904324)
+move_speed = 60.0
+
+[node name="SmallBot" parent="MainViewport/SubViewport" instance=ExtResource("4_rijnb")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.6380758, -0.04581499, 5.0515814)
+script = ExtResource("5_ioc36")
+target_position = Vector3(0, 0, 0)
 
 [node name="HealerBot" parent="MainViewport/SubViewport" instance=ExtResource("3_ap201")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -7.962083, 0.62210655, 2.332418)
@@ -935,10 +943,6 @@ source = NodePath("..")
 targets = NodePath("../../Targets")
 root_projectile = NodePath("../..")
 metadata/_custom_type_script = "uid://c0ydmpenhown0"
-
-[node name="TwoSegmentObject" parent="MainViewport/SubViewport" instance=ExtResource("6_meuj1")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 8.249, 0.3043263, 4.8904324)
-move_speed = 60.0
 
 [node name="SimpleRobot" parent="MainViewport/SubViewport" instance=ExtResource("5_6n3pg")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 1.8779516, 0.3043263, 16.23522)
@@ -1256,6 +1260,8 @@ libraries = {
 &"": SubResource("AnimationLibrary_kkt5o")
 }
 autoplay = "run"
+
+[node name="Test" type="Node3D" parent="MainViewport/SubViewport/VFX"]
 
 [node name="Spawner" type="Node3D" parent="MainViewport/SubViewport" node_paths=PackedStringArray("spawn_center", "destination", "target")]
 script = ExtResource("20_ioc36")

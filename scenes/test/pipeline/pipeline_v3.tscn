@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://1llmlua1mh0"]
+[gd_scene load_steps=47 format=3 uid="uid://1llmlua1mh0"]
 
 [ext_resource type="Shader" uid="uid://bwv28xk2js83c" path="res://scenes/test/pipeline/test_shader.gdshader" id="1_7khbq"]
 [ext_resource type="Shader" uid="uid://c0w1ro1a2oi64" path="res://scenes/test/pipeline/offset_plane.gdshader" id="1_r3bhw"]
@@ -10,12 +10,17 @@
 [ext_resource type="Texture2D" uid="uid://ddihy6kbgdbwt" path="res://model/VAT/robot2/vaexport/offsets.exr" id="7_0c5pj"]
 [ext_resource type="Shader" uid="uid://csy8hrgfaxbfu" path="res://shaders/vat/vat_outline_single_mesh.gdshader" id="7_lv3nk"]
 [ext_resource type="ArrayMesh" uid="uid://bblfxviy3ynlt" path="res://model/VAT/robot2/robot2_v2_exported_mesh.res" id="10_lv3nk"]
-[ext_resource type="ArrayMesh" uid="uid://d17uujac403rd" path="res://model/VAT/robot4/robot4_exported.res" id="11_lv3nk"]
+[ext_resource type="ArrayMesh" uid="uid://7f3g8m8rkx70" path="res://model/VAT/robot4/robot4_exported.res" id="11_lv3nk"]
 [ext_resource type="Texture2D" uid="uid://cay3bhnvvdvss" path="res://model/VAT/robot4/vaexport/normals.png" id="12_5o0jw"]
 [ext_resource type="Texture2D" uid="uid://53g0nikg5a2y" path="res://model/VAT/robot4/vaexport/offsets.exr" id="13_g3m6u"]
 [ext_resource type="PackedScene" uid="uid://da2eduothcfya" path="res://scenes/templates/world_scene.tscn" id="14_0c5pj"]
 [ext_resource type="Texture2D" uid="uid://q6om1devfq70" path="res://model/VAT/robot4/outline.png" id="14_1k18d"]
 [ext_resource type="Shader" uid="uid://c4njs3466gxfy" path="res://shaders/2d/pixel_outline_v2.gdshader" id="15_j4xo8"]
+[ext_resource type="Texture2D" uid="uid://dln6sse4kqvvy" path="res://model/VAT/bladebot/vaexport/normals.png" id="16_01270"]
+[ext_resource type="Texture2D" uid="uid://drmqj0a4diofk" path="res://model/VAT/bladebot/vaexport/offsets.exr" id="17_tl2tk"]
+[ext_resource type="Texture2D" uid="uid://dridn3lxjdqjj" path="res://model/VAT/bladebot/bladebot_outline.png" id="18_hydbg"]
+[ext_resource type="Texture2D" uid="uid://csy3cy814op75" path="res://model/VAT/bladebot/bladebot_albedo.png" id="20_y6de5"]
+[ext_resource type="ArrayMesh" uid="uid://dfm6xce4il21d" path="res://model/VAT/bladebot/bladebot_exported.res" id="21_7ld6q"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_7khbq"]
 flip_faces = true
@@ -131,6 +136,21 @@ shader_parameter/use_mask = false
 shader_parameter/shaded_mask = SubResource("GradientTexture1D_lv3nk")
 shader_parameter/start_frame = 25.0
 shader_parameter/end_frame = 49.0
+shader_parameter/anim_offset = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7vntn"]
+render_priority = 0
+shader = ExtResource("7_lv3nk")
+shader_parameter/offset_map = ExtResource("17_tl2tk")
+shader_parameter/normal_map = ExtResource("16_01270")
+shader_parameter/texture_albedo = ExtResource("20_y6de5")
+shader_parameter/fps = 96.0
+shader_parameter/outline_color = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/outline_mask = ExtResource("18_hydbg")
+shader_parameter/use_mask = true
+shader_parameter/shaded_mask = SubResource("GradientTexture1D_lv3nk")
+shader_parameter/start_frame = 0.0
+shader_parameter/end_frame = 24.0
 shader_parameter/anim_offset = 0.0
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_5o0jw"]
@@ -344,6 +364,12 @@ surface_material_override/0 = SubResource("ShaderMaterial_lv3nk")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldScene/MainViewport/SubViewport" index="32"]
 transform = Transform3D(0.9318686, -2.7771849e-08, 0.3627959, -0.17258234, 0.879607, 0.44329086, -0.3191178, -0.475701, 0.81967825, 0, 2.4505267, 4.3702745)
+
+[node name="BladeBot" type="MeshInstance3D" parent="WorldScene/MainViewport/SubViewport" index="33"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -9.948364, -2.9329834, 7.9803467)
+material_override = SubResource("ShaderMaterial_7vntn")
+mesh = ExtResource("21_7ld6q")
+skeleton = NodePath("../Gradient")
 
 [node name="CameraFollower" parent="WorldScene/OutlineViewport/SubViewport" index="0"]
 current = true
