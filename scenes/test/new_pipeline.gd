@@ -4,16 +4,15 @@ extends Node3D
 @onready var healer_bot: QuadEntity = $MainViewport/SubViewport/HealerBot
 
 func _ready() -> void:
-	var id = Picker.get_next_id()
-	Picker.register_new_pickable_next_pass(id, healer_bot)
-	id = Picker.get_next_id()
-	Picker.register_new_pickable_next_pass(id, $MainViewport/SubViewport/HealerBot2)
-	id = Picker.get_next_id()
-	Picker.register_new_pickable_next_pass(id, $MainViewport/SubViewport/HealerBot3)
-	id = Picker.get_next_id()
-	Picker.register_new_pickable_next_pass(id, $MainViewport/SubViewport/SimpleRobot)
-	id = Picker.get_next_id()
-	Picker.register_new_pickable_next_pass(id, $MainViewport/SubViewport/SmallBot)
+	Picker.register_new_pickable(Picker.get_next_id(), healer_bot)
+	Picker.register_new_pickable(Picker.get_next_id(), $MainViewport/SubViewport/HealerBot2)
+	Picker.register_new_pickable(Picker.get_next_id(), $MainViewport/SubViewport/HealerBot3)
+	Picker.register_new_pickable(Picker.get_next_id(), $MainViewport/SubViewport/SimpleRobot)
+	Picker.register_new_pickable(Picker.get_next_id(), $MainViewport/SubViewport/SmallBot)
+	Picker.register_new_pickable(Picker.get_next_id(), $MainViewport/SubViewport/Bots/BackCannonBot1)
+	Picker.register_new_pickable(Picker.get_next_id(), $MainViewport/SubViewport/Bots/BackCannonBot2)
+	Picker.register_new_pickable(Picker.get_next_id(), $MainViewport/SubViewport/Bots/BladeBot1)
+	Picker.register_new_pickable(Picker.get_next_id(), $MainViewport/SubViewport/Bots/BladeBot2)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.is_pressed() and event.keycode == KEY_C:

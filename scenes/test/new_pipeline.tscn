@@ -1,4 +1,4 @@
-[gd_scene load_steps=126 format=3 uid="uid://boqtgauorybyx"]
+[gd_scene load_steps=133 format=3 uid="uid://boqtgauorybyx"]
 
 [ext_resource type="Script" uid="uid://nje6tyvvpq8b" path="res://scenes/test/new_pipeline.gd" id="1_e07xg"]
 [ext_resource type="Shader" uid="uid://cw4s5m23hur31" path="res://shaders/primal/circle_from_plane.gdshader" id="1_gvkf4"]
@@ -26,6 +26,8 @@
 [ext_resource type="PackedScene" uid="uid://vg4v25l817yt" path="res://scenes/test/exocube/exocube.tscn" id="11_rv1hs"]
 [ext_resource type="ArrayMesh" uid="uid://7f3g8m8rkx70" path="res://model/VAT/robot4/robot4_exported.res" id="12_3hbjw"]
 [ext_resource type="PackedScene" uid="uid://bip43til0tsg0" path="res://scenes/env/shrines/red_round_shrine.tscn" id="13_mgpox"]
+[ext_resource type="Script" uid="uid://b0ipfppn458yu" path="res://scenes/entity/vat/animation_track.gd" id="14_4c8xg"]
+[ext_resource type="Script" uid="uid://bxgvtdnslma5c" path="res://scenes/entity/vat/vat_mesh_instance_target_move.gd" id="14_66jml"]
 [ext_resource type="PackedScene" uid="uid://dbxla1me04wl3" path="res://scenes/env/shrines/white_squared_shrine.tscn" id="15_740d2"]
 [ext_resource type="Script" uid="uid://7gobnfnh4r40" path="res://scripts/camera/CameraController.gd" id="17_gdstn"]
 [ext_resource type="PackedScene" uid="uid://dpo4rthvuoh13" path="res://scenes/VFX/Explosion/explo_sphere_dust.tscn" id="17_mgpox"]
@@ -133,7 +135,8 @@ shader_parameter/original_color = Color(0, 0, 0, 1)
 shader_parameter/outline_color = Color(0, 0, 0.007843138, 1)
 shader_parameter/use_mask = false
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_q35h7"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m7a8y"]
+resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("6_gdstn")
 shader_parameter/offset_map = ExtResource("8_l2qn5")
@@ -144,11 +147,13 @@ shader_parameter/outline_color = Color(0.5, 0.5, 0.5, 1)
 shader_parameter/outline_mask = ExtResource("8_q35h7")
 shader_parameter/use_mask = true
 shader_parameter/shaded_mask = ExtResource("9_qa6lk")
+shader_parameter/pickable_color = Color(0, 0, 0, 1)
 shader_parameter/start_frame = 0.0
-shader_parameter/end_frame = 24.0
+shader_parameter/end_frame = 0.0
 shader_parameter/anim_offset = 0.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3hbjw"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v736p"]
+resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("6_gdstn")
 shader_parameter/offset_map = ExtResource("8_l2qn5")
@@ -159,11 +164,40 @@ shader_parameter/outline_color = Color(0.5, 0.5, 0.5, 1)
 shader_parameter/outline_mask = ExtResource("8_q35h7")
 shader_parameter/use_mask = true
 shader_parameter/shaded_mask = ExtResource("9_qa6lk")
-shader_parameter/start_frame = 25.0
-shader_parameter/end_frame = 49.0
+shader_parameter/pickable_color = Color(0, 0, 0, 1)
+shader_parameter/start_frame = 0.0
+shader_parameter/end_frame = 0.0
 shader_parameter/anim_offset = 0.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_l2qn5"]
+[sub_resource type="Resource" id="Resource_ccco7"]
+resource_local_to_scene = true
+script = ExtResource("14_4c8xg")
+mesh = ExtResource("12_3hbjw")
+material = SubResource("ShaderMaterial_v736p")
+tracks = Array[Vector2i]([Vector2i(0, 24), Vector2i(25, 49)])
+idle_anim = 1
+base_move_speed = 4.0
+metadata/_custom_type_script = "uid://b0ipfppn458yu"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_66jml"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("6_gdstn")
+shader_parameter/offset_map = ExtResource("8_l2qn5")
+shader_parameter/normal_map = ExtResource("7_3hbjw")
+shader_parameter/texture_albedo = ExtResource("7_4qyeo")
+shader_parameter/fps = 24.0
+shader_parameter/outline_color = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/outline_mask = ExtResource("8_q35h7")
+shader_parameter/use_mask = true
+shader_parameter/shaded_mask = ExtResource("9_qa6lk")
+shader_parameter/pickable_color = Color(0, 0, 0, 1)
+shader_parameter/start_frame = 0.0
+shader_parameter/end_frame = 0.0
+shader_parameter/anim_offset = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f6axc"]
+resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("6_gdstn")
 shader_parameter/offset_map = ExtResource("41_jc7tx")
@@ -174,8 +208,54 @@ shader_parameter/outline_color = Color(0.5, 0.5, 0.5, 1)
 shader_parameter/outline_mask = ExtResource("42_m7a8y")
 shader_parameter/use_mask = true
 shader_parameter/shaded_mask = ExtResource("43_ycb4i")
-shader_parameter/start_frame = 25.0
-shader_parameter/end_frame = 59.0
+shader_parameter/pickable_color = Color(0, 0, 0, 1)
+shader_parameter/start_frame = 0.0
+shader_parameter/end_frame = 0.0
+shader_parameter/anim_offset = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ycb4i"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("6_gdstn")
+shader_parameter/offset_map = ExtResource("41_jc7tx")
+shader_parameter/normal_map = ExtResource("40_5yn4o")
+shader_parameter/texture_albedo = ExtResource("44_66jml")
+shader_parameter/fps = 96.0
+shader_parameter/outline_color = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/outline_mask = ExtResource("42_m7a8y")
+shader_parameter/use_mask = true
+shader_parameter/shaded_mask = ExtResource("43_ycb4i")
+shader_parameter/pickable_color = Color(0, 0, 0, 1)
+shader_parameter/start_frame = 0.0
+shader_parameter/end_frame = 0.0
+shader_parameter/anim_offset = 0.0
+
+[sub_resource type="Resource" id="Resource_66jml"]
+resource_local_to_scene = true
+script = ExtResource("14_4c8xg")
+mesh = ExtResource("39_l2qn5")
+material = SubResource("ShaderMaterial_ycb4i")
+tracks = Array[Vector2i]([Vector2i(0, 24), Vector2i(25, 59)])
+forward = Vector3(-1, 0, 0)
+idle_anim = 1
+base_move_speed = 2.0
+metadata/_custom_type_script = "uid://b0ipfppn458yu"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ccco7"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("6_gdstn")
+shader_parameter/offset_map = ExtResource("41_jc7tx")
+shader_parameter/normal_map = ExtResource("40_5yn4o")
+shader_parameter/texture_albedo = ExtResource("44_66jml")
+shader_parameter/fps = 24.0
+shader_parameter/outline_color = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/outline_mask = ExtResource("42_m7a8y")
+shader_parameter/use_mask = true
+shader_parameter/shaded_mask = ExtResource("43_ycb4i")
+shader_parameter/pickable_color = Color(0, 0, 0, 1)
+shader_parameter/start_frame = 0.0
+shader_parameter/end_frame = 0.0
 shader_parameter/anim_offset = 0.0
 
 [sub_resource type="Curve3D" id="Curve3D_xnfcr"]
@@ -837,7 +917,7 @@ libraries = {
 autoplay = "test"
 
 [node name="Background" type="MeshInstance3D" parent="MainViewport/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5519742, -0.15574265, -1.581271)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5306119, -0.15574265, -1.6174649)
 mesh = SubResource("PlaneMesh_gvkf4")
 skeleton = NodePath("../Sprite3D")
 surface_material_override/0 = SubResource("StandardMaterial3D_4raox")
@@ -851,51 +931,61 @@ surface_material_override/0 = SubResource("ShaderMaterial_6n3pg")
 
 [node name="Bots" type="Node3D" parent="MainViewport/SubViewport"]
 
-[node name="Robot4" type="MeshInstance3D" parent="MainViewport/SubViewport/Bots"]
-transform = Transform3D(0.34163055, 0, -0.36508712, 0, 0.5, 0, 0.36508712, 0, 0.34163055, 6.8032227, 0.47686768, 8.3307495)
-layers = 17
-material_override = SubResource("ShaderMaterial_q35h7")
-mesh = ExtResource("12_3hbjw")
-skeleton = NodePath("../..")
-
-[node name="Robot4_2" type="MeshInstance3D" parent="MainViewport/SubViewport/Bots"]
-transform = Transform3D(0.30141604, 0, -0.3989341, 0, 0.5, 0, 0.3989341, 0, 0.30141604, 6.8032227, 0.6387329, 12.018555)
-layers = 17
-material_override = SubResource("ShaderMaterial_3hbjw")
-mesh = ExtResource("12_3hbjw")
-skeleton = NodePath("../..")
-
-[node name="BladeBot" type="MeshInstance3D" parent="MainViewport/SubViewport/Bots"]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 8.613525, 0, 16.616943)
-layers = 17
-material_override = SubResource("ShaderMaterial_l2qn5")
-mesh = ExtResource("39_l2qn5")
-skeleton = NodePath("../../Gradient")
-
-[node name="BladeBot2" type="MeshInstance3D" parent="MainViewport/SubViewport/Bots"]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 10.196106, 0, 17.944092)
-layers = 17
-material_override = SubResource("ShaderMaterial_l2qn5")
-mesh = ExtResource("39_l2qn5")
-skeleton = NodePath("../../Gradient")
-
-[node name="BladeBot3" type="MeshInstance3D" parent="MainViewport/SubViewport/Bots"]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 7.460388, 0, 19.568542)
-layers = 17
-material_override = SubResource("ShaderMaterial_l2qn5")
-mesh = ExtResource("39_l2qn5")
-skeleton = NodePath("../../Gradient")
-
-[node name="BladeBot4" type="MeshInstance3D" parent="MainViewport/SubViewport/Bots"]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 9.370117, 0, 19.788574)
-layers = 17
-material_override = SubResource("ShaderMaterial_l2qn5")
-mesh = ExtResource("39_l2qn5")
-skeleton = NodePath("../../Gradient")
-
 [node name="TwoSegmentObject" parent="MainViewport/SubViewport/Bots" instance=ExtResource("6_meuj1")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 8.249, 0.3043263, 4.8904324)
 move_speed = 60.0
+
+[node name="BackCannonBot1" type="MeshInstance3D" parent="MainViewport/SubViewport/Bots"]
+transform = Transform3D(0.34076262, 0, -0.36589628, 0, 0.5, 0, 0.36589628, 0, 0.34076262, 12.6875305, 0.473938, 15.924641)
+layers = 49
+material_override = SubResource("ShaderMaterial_m7a8y")
+mesh = ExtResource("12_3hbjw")
+script = ExtResource("14_66jml")
+target_position = Vector3(11.629272, 0.473938, 17.064087)
+move_speed = 2.0
+animation_tracks = SubResource("Resource_ccco7")
+animation = 1
+metadata/_custom_type_script = "uid://bxgvtdnslma5c"
+
+[node name="BackCannonBot2" type="MeshInstance3D" parent="MainViewport/SubViewport/Bots"]
+transform = Transform3D(0.4529463, 0, -0.21176325, 0, 0.5, 0, 0.21176325, 0, 0.4529463, 9.420235, 0.45805344, 10.498298)
+layers = 49
+material_override = SubResource("ShaderMaterial_66jml")
+mesh = ExtResource("12_3hbjw")
+script = ExtResource("14_66jml")
+target_position = Vector3(9.420235, 0.45805344, 10.498298)
+move_speed = 2.0
+animation_tracks = SubResource("Resource_ccco7")
+animation = 1
+metadata/_custom_type_script = "uid://bxgvtdnslma5c"
+
+[node name="BladeBot1" type="MeshInstance3D" parent="MainViewport/SubViewport/Bots"]
+transform = Transform3D(0.21315512, 0, -0.211104, 0, 0.3, 0, 0.211104, 0, 0.21315512, 0.20153332, -0.05, 21.28363)
+layers = 49
+material_override = SubResource("ShaderMaterial_f6axc")
+mesh = ExtResource("39_l2qn5")
+skeleton = NodePath("")
+script = ExtResource("14_66jml")
+target_position = Vector3(0.20153332, -0.05, 21.28363)
+move_speed = 4.0
+turn_speed = 6.283
+animation_tracks = SubResource("Resource_66jml")
+animation = 1
+metadata/_custom_type_script = "uid://bxgvtdnslma5c"
+
+[node name="BladeBot2" type="MeshInstance3D" parent="MainViewport/SubViewport/Bots"]
+transform = Transform3D(0.18481433, 0, -0.23631264, 0, 0.3, 0, 0.23631264, 0, 0.18481433, 1.955349, -0.05, 24.503796)
+layers = 49
+material_override = SubResource("ShaderMaterial_ccco7")
+mesh = ExtResource("39_l2qn5")
+skeleton = NodePath("")
+script = ExtResource("14_66jml")
+target_position = Vector3(7.1158814, -0.05, 33.06066)
+move_speed = 4.0
+turn_speed = 6.283
+animation_tracks = SubResource("Resource_66jml")
+animation = 1
+metadata/_custom_type_script = "uid://bxgvtdnslma5c"
 
 [node name="SmallBot" parent="MainViewport/SubViewport" instance=ExtResource("4_rijnb")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.6380758, -0.04581499, 5.0515814)
